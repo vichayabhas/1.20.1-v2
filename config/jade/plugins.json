@@ -53,6 +53,16 @@
     "painting": true,
     "chiseled_bookshelf": true
   },
+  "mekanism": {
+    "infuse_type": true,
+    "gas": true,
+    "remove_builtin": true,
+    "pigment": true,
+    "fluid": true,
+    "slurry": true,
+    "energy": true,
+    "tooltip_renderer": true
+  },
   "gtceu": {
     "auto_output_info": true,
     "workable_provider": true,
