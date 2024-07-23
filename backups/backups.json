@@ -1,0 +1,43 @@
+{
+  "backups": [
+    {
+      "worldName": "New World",
+      "createTime": 1721737800221,
+      "backupLocation": "C:\\Users\\arifv\\curseforge\\minecraft\\Instances\\1.20.1 v2\\backups\\2024-7-23_19-30-0.zip",
+      "size": 9871992,
+      "ratio": 0.40126356,
+      "sha1": "f42a81916ef7800d8a29e398b40abdfbda642035",
+      "preview": "",
+      "snapshot": false,
+      "backupName": "automated",
+      "backupFormat": "ZIP",
+      "complete": true
+    },
+    {
+      "worldName": "New World",
+      "createTime": 1721739600179,
+      "backupLocation": "C:\\Users\\arifv\\curseforge\\minecraft\\Instances\\1.20.1 v2\\backups\\2024-7-23_20-0-0.zip",
+      "size": 9918612,
+      "ratio": 0.40145338,
+      "sha1": "d7056c70deea1e7d5a639a3f9dd9d1f5e8f91855",
+      "preview": "",
+      "snapshot": false,
+      "backupName": "automated",
+      "backupFormat": "ZIP",
+      "complete": true
+    },
+    {
+      "worldName": "New World",
+      "createTime": 1721741400192,
+      "backupLocation": "C:\\Users\\arifv\\curseforge\\minecraft\\Instances\\1.20.1 v2\\backups\\2024-7-23_20-30-0.zip",
+      "size": 9925129,
+      "ratio": 0.40169764,
+      "sha1": "83b6219d07f95d5dcd24b26c06203e2b9a65cf03",
+      "preview": "",
+      "snapshot": false,
+      "backupName": "automated",
+      "backupFormat": "ZIP",
+      "complete": true
+    }
+  ]
+}
