@@ -23,6 +23,7 @@
 #24ECAC mekanism:boiler_casing
 #FFC34F mekanism:bounding_block
 #568958 gtceu:bronze_crate
+#7E2BA5 gtceu:bronze_drum
 #208CB0 ae2:cable_bus
 #41258E gtceu:cassiterite_indicator
 #0657F7 gtceu:chalcopyrite_indicator
@@ -69,6 +70,7 @@
 #FBD8AD gtceu:ev_machine_casing
 #DDD70A gtceu:ev_output_bus
 #C3F8CA gtceu:ev_output_hatch
+#9DFCFE gtceu:ev_transformer_1a
 #009B14 minecraft:farmland
 #A17332 mekanismgenerators:fission_fuel_assembly
 #31B4C1 mekanismgenerators:fission_reactor_casing
@@ -89,6 +91,7 @@
 #9D79AA gtceu:heatproof_machine_casing
 #635C5E gtceu:high_power_casing
 #2C2269 gtceu:hssg_double_cable
+#CCD281 gtceu:hv_1a_energy_converter
 #BBCF9F gtceu:hv_energy_input_hatch
 #4C3E54 gtceu:hv_input_hatch
 #9B9720 gtceu:hv_transformer_2a
@@ -103,6 +106,7 @@
 #706606 gtceu:laminated_glass
 #72D77D minecraft:lever
 #9DA81C mekanism:logistical_sorter
+#83F400 gtceu:luv_1a_energy_converter
 #2CA047 gtceu:luv_8a_energy_converter
 #251DD1 gtceu:luv_machine_casing
 #1FA5A3 gtceu:lv_energy_input_hatch
@@ -163,6 +167,7 @@
 #5E72B7 mekanism:structural_glass
 #B12AD5 mekanism:thermal_evaporation_block
 #2F02F6 gtceu:tin_small_item_pipe
+#FBFECE gtceu:tungsten_steel_crate
 #1B2AE6 gtceu:tungsten_steel_normal_fluid_pipe
 #44A92C gtceu:tungsten_steel_quadruple_fluid_pipe
 #505D3A mekanismgenerators:turbine_casing
