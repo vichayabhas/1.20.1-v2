@@ -110,6 +110,7 @@
 #2CA047 gtceu:luv_8a_energy_converter
 #251DD1 gtceu:luv_machine_casing
 #1FA5A3 gtceu:lv_energy_input_hatch
+#70DB65 gtceu:lv_fluid_passthrough_hatch
 #B48C90 gtceu:lv_input_bus
 #C364D0 gtceu:lv_input_hatch
 #730491 gtceu:lv_output_bus
