@@ -16,6 +16,7 @@ ServerEvents.recipes(event => {
         .outputFluids(Fluid.of('gtceu:sulfuric_acid', 500))
         .outputFluids(Fluid.of('gtceu:enriched_naquadah_solution', 350))
         .outputFluids(Fluid.of('gtceu:naquadria_solution', 150))
+        .outputFluids(Fluid.of('minecraft:water',1500))
         .duration(300)
         .EUt(480)
     event.recipes.gtceu.distillation_tower('test2')
@@ -28,6 +29,7 @@ ServerEvents.recipes(event => {
         .outputFluids(Fluid.of('gtceu:sulfuric_acid', 500))
         .outputFluids(Fluid.of('gtceu:naquadria_solution', 350))
         .outputFluids(Fluid.of('gtceu:enriched_naquadah_solution', 150))
+        .outputFluids(Fluid.of('minecraft:water',1500))
         .duration(300)
         .EUt(480)
     event.recipes.gtceu.centrifuge('test3')
@@ -40,6 +42,7 @@ ServerEvents.recipes(event => {
 
 
         .outputFluids(Fluid.of('gtceu:enriched_naquadah_solution', 500))
+        .outputFluids(Fluid.of('minecraft:water',500))
         .itemOutputs(
             '2x gtceu:antimony_trifluoride_dust'
         )
@@ -57,6 +60,7 @@ ServerEvents.recipes(event => {
         )
 
         .outputFluids(Fluid.of('gtceu:naquadria_solution', 500))
+        .outputFluids(Fluid.of('minecraft:water',500))
         .duration(400)
         .EUt(1920)
         event.remove({id:'gtceu:centrifuge/impure_naquadria_solution_separation'})

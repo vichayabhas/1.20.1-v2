@@ -7,6 +7,7 @@
 #090A39 gtceu:assembly_line_casing
 #D875AC gtceu:assembly_line_grating
 #D6A450 gtceu:assembly_line_unit
+#0791FE gtceu:auto_maintenance_hatch
 #189B99 minecraft:barrel
 #18D108 minecraft:basalt
 #F03BD3 gtceu:basaltic_mineral_sand_indicator
@@ -31,6 +32,7 @@
 #1740D6 mekanism:chemical_dissolution_chamber
 #D43B0C mekanism:chemical_oxidizer
 #F522F4 minecraft:chest
+#CACC15 gtceu:clean_machine_casing
 #84EDE1 gtceu:coal_indicator
 #3D8BFC minecraft:cobblestone_stairs
 #F888C9 minecraft:comparator
@@ -57,6 +59,7 @@
 #60995E gtceu:diamond_indicator
 #80497A minecraft:dirt
 #4FA7D0 minecraft:dirt_path
+#637996 gtceu:distillation_tower
 #E432BC ae2:drive
 #006086 gtceu:electrolytic_cell
 #9C5F98 mekanism:electrolytic_separator
@@ -94,6 +97,7 @@
 #CCD281 gtceu:hv_1a_energy_converter
 #BBCF9F gtceu:hv_energy_input_hatch
 #4C3E54 gtceu:hv_input_hatch
+#56378D gtceu:hv_output_hatch
 #9B9720 gtceu:hv_transformer_2a
 #9B975E gtceu:hv_transformer_4a
 #680FC8 mekanism:induction_casing
@@ -102,8 +106,11 @@
 #23066B ae2:interface
 #2E2249 minecraft:iron_block
 #52E3BA gtceu:iv_electrolyzer
+#9F9C73 gtceu:iv_input_bus
+#1CFEF1 gtceu:iv_mixer
 #457521 gtceu:iv_transformer_2a
 #706606 gtceu:laminated_glass
+#B69573 gtceu:large_chemical_reactor
 #72D77D minecraft:lever
 #9DA81C mekanism:logistical_sorter
 #83F400 gtceu:luv_1a_energy_converter
@@ -115,6 +122,7 @@
 #C364D0 gtceu:lv_input_hatch
 #730491 gtceu:lv_output_bus
 #C3E091 gtceu:lv_output_hatch
+#122555 gtceu:lv_packer
 #91B682 gtceu:lv_super_chest
 #F2997D gtceu:lv_super_tank
 #430F05 gtceu:lv_transformer_1a
@@ -122,8 +130,10 @@
 #846DFA gtceu:magnetite_indicator
 #1B388E gtceu:maintenance_hatch
 #D3C882 gtceu:manganese_phosphide_double_wire
+#08726B gtceu:manganese_phosphide_single_wire
 #7A9D58 gtceu:mercury_barium_calcium_cuprate_quadruple_wire
 #B89B24 gtceu:mv_energy_input_hatch
+#9F4AD2 gtceu:mv_output_hatch
 #ECED25 gtceu:mv_transformer_2a
 #C9D316 gtceu:neutronium_quadruple_fluid_pipe
 #EB53D4 gtceu:nickel_indicator
@@ -133,6 +143,7 @@
 #111F32 minecraft:oak_fence_gate
 #F24163 storagedrawers:oak_full_drawers_1
 #F24164 storagedrawers:oak_full_drawers_2
+#F24166 storagedrawers:oak_full_drawers_4
 #AD9EB5 minecraft:oak_leaves
 #BBA6D1 minecraft:oak_log
 #E3886A minecraft:oak_planks
@@ -168,6 +179,7 @@
 #5E72B7 mekanism:structural_glass
 #B12AD5 mekanism:thermal_evaporation_block
 #2F02F6 gtceu:tin_small_item_pipe
+#6B4DEA gtceu:titanium_drum
 #FBFECE gtceu:tungsten_steel_crate
 #1B2AE6 gtceu:tungsten_steel_normal_fluid_pipe
 #44A92C gtceu:tungsten_steel_quadruple_fluid_pipe
@@ -179,9 +191,11 @@
 #7DD0FE mekanism:ultimate_pressurized_tube
 #BB3278 mekanism:ultimate_universal_cable
 #968585 gtceu:ulv_input_bus
+#0AF485 gtceu:ulv_input_hatch
 #EF6730 gtceu:ulv_transformer_1a
 #404E0F gtceu:uranium_triplatinum_quadruple_wire
 #0BE28E gtceu:uv_muffler_hatch
+#B41AAB gtceu:vacuum_freezer
 #D5FF2C gtceu:vibration_safe_casing
 #88A5C6 minecraft:wet_sponge
 #BC20FE minecraft:white_wool
