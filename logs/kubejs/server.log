@@ -1,20 +1,20 @@
-[14:43:16] [INIT] KubeJS 2001.6.5-build.14; MC 2001 forge
-[14:43:16] [INIT] Loaded plugins:
-[14:43:16] [INIT] - dev.latvian.mods.kubejs.forge.BuiltinKubeJSForgePlugin
-[14:43:16] [INIT] - dev.latvian.mods.kubejs.forge.BuiltinKubeJSForgeClientPlugin
-[14:43:16] [INIT] - com.gregtechceu.gtceu.integration.kjs.GregTechKubeJSPlugin
-[14:43:16] [INIT] - com.lowdragmc.lowdraglib.kjs.LDLibKubeJSPlugin
-[14:43:16] [INIT] - dev.ftb.mods.ftbxmodcompat.ftbquests.kubejs.KubeJSIntegration
-[14:43:16] [INIT] - dev.ftb.mods.ftbxmodcompat.ftbchunks.kubejs.FTBChunksKubeJSPlugin
-[14:43:16] [INIT] - dev.ftb.mods.ftbxmodcompat.ftbteams.kubejs.FTBTeamsKubeJSPlugin
-[14:43:16] [INIT] - moe.wolfgirl.probejs.plugin.BuiltinProbeJSPlugin
-[14:43:16] [INFO] example.js#5: Hello, World! (Loaded server scripts)
-[14:43:16] [INFO] Loaded script server_scripts:example.js in 0.001 s
-[14:43:16] [INFO] Loaded 1/1 KubeJS server scripts in 0.006 s with 0 errors and 0 warnings
-[14:43:16] [INFO] Scripts loaded
-[14:43:16] [INFO] Initializing recipe event...
-[14:43:17] [INFO] Processing recipes...
-[14:43:17] [INFO] Found 35778 recipes in 275.8 ms
-[14:43:17] [INFO] Posted recipe events in 6.495 ms
-[14:43:17] [INFO] Added 4 recipes, removed 4 recipes, modified 0 recipes, with 0 failed recipes in 181.1 ms
-[14:43:17] [INFO] Server resource reload complete!
+[08:47:59] [INIT] KubeJS 2001.6.5-build.14; MC 2001 forge
+[08:47:59] [INIT] Loaded plugins:
+[08:47:59] [INIT] - dev.latvian.mods.kubejs.forge.BuiltinKubeJSForgePlugin
+[08:47:59] [INIT] - dev.latvian.mods.kubejs.forge.BuiltinKubeJSForgeClientPlugin
+[08:47:59] [INIT] - com.gregtechceu.gtceu.integration.kjs.GregTechKubeJSPlugin
+[08:47:59] [INIT] - com.lowdragmc.lowdraglib.kjs.LDLibKubeJSPlugin
+[08:47:59] [INIT] - dev.ftb.mods.ftbxmodcompat.ftbquests.kubejs.KubeJSIntegration
+[08:47:59] [INIT] - dev.ftb.mods.ftbxmodcompat.ftbchunks.kubejs.FTBChunksKubeJSPlugin
+[08:47:59] [INIT] - dev.ftb.mods.ftbxmodcompat.ftbteams.kubejs.FTBTeamsKubeJSPlugin
+[08:47:59] [INIT] - moe.wolfgirl.probejs.plugin.BuiltinProbeJSPlugin
+[08:47:59] [INFO] example.js#5: Hello, World! (Loaded server scripts)
+[08:47:59] [INFO] Loaded script server_scripts:example.js in 0.012 s
+[08:47:59] [INFO] Loaded 1/1 KubeJS server scripts in 0.021 s with 0 errors and 0 warnings
+[08:47:59] [INFO] Scripts loaded
+[08:47:59] [INFO] Initializing recipe event...
+[08:48:01] [INFO] Processing recipes...
+[08:48:01] [INFO] Found 35778 recipes in 355.2 ms
+[08:48:01] [INFO] Posted recipe events in 39.91 ms
+[08:48:02] [INFO] Added 4 recipes, removed 4 recipes, modified 0 recipes, with 0 failed recipes in 496.3 ms
+[08:48:03] [INFO] Server resource reload complete!

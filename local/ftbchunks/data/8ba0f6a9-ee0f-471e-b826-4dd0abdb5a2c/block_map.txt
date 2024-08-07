@@ -53,6 +53,7 @@
 #DFC019 mekanism:creative_energy_cube
 #6B35EC mekanism:creative_fluid_tank
 #714BF4 gtceu:creative_tank
+#05EFD1 gtceu:cupronickel_coil_block
 #B2A2E1 minecraft:dandelion
 #E1B917 gtceu:data_transmitter_hatch
 #5A35D5 minecraft:diamond_block
@@ -111,6 +112,7 @@
 #457521 gtceu:iv_transformer_2a
 #706606 gtceu:laminated_glass
 #B69573 gtceu:large_chemical_reactor
+#BEFC6C gtceu:large_electrolyzer
 #72D77D minecraft:lever
 #9DA81C mekanism:logistical_sorter
 #83F400 gtceu:luv_1a_energy_converter
@@ -159,6 +161,7 @@
 #C191FC gtceu:platinum_double_cable
 #343330 gtceu:platinum_octal_cable
 #AFAC0D minecraft:poppy
+#6F3B9C gtceu:ptfe_pipe_casing
 #057101 mekanism:quantum_entangloporter
 #46C364 gtceu:reaction_safe_mixing_casing
 #9FCD7C mekanismgenerators:reactor_glass
