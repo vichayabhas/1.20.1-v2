@@ -6,7 +6,7 @@ recipes:
 
   # Whether to remove Block/Ingot compression and decompression in the Crafting Table.
   # Default: true
-  disableManualCompression: true
+  disableManualCompression: false
 
   # Change the recipe of Rods in the Lathe to 1 Rod and 2 Small Piles of Dust, instead of 2 Rods.
   # Default: false
@@ -446,7 +446,7 @@ compat:
 
   # Whether Gregtech should remove smelting recipes from the vanilla furnace for ingots requiring the Electric Blast Furnace.
   # Default: true
-  removeSmeltingForEBFMetals: true
+  removeSmeltingForEBFMetals: false
 
   # Whether dimension marker should show dimension tier.
   # Default: false

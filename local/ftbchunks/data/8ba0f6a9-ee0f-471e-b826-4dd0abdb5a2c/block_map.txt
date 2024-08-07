@@ -35,6 +35,7 @@
 #CACC15 gtceu:clean_machine_casing
 #84EDE1 gtceu:coal_indicator
 #3D8BFC minecraft:cobblestone_stairs
+#74DB3C minecraft:cobblestone_wall
 #F888C9 minecraft:comparator
 #E2D601 minecraft:composter
 #AF39FA gtceu:computer_heat_vent
@@ -134,6 +135,7 @@
 #D3C882 gtceu:manganese_phosphide_double_wire
 #08726B gtceu:manganese_phosphide_single_wire
 #7A9D58 gtceu:mercury_barium_calcium_cuprate_quadruple_wire
+#38AE7D minecraft:moving_piston
 #B89B24 gtceu:mv_energy_input_hatch
 #9F4AD2 gtceu:mv_output_hatch
 #ECED25 gtceu:mv_transformer_2a
@@ -170,6 +172,7 @@
 #6CFCB6 minecraft:redstone_lamp
 #24BE64 minecraft:redstone_torch
 #721B63 minecraft:redstone_wire
+#21C665 buildinggadgets2:render_block
 #487B7B minecraft:repeater
 #74006B mekanism:resistive_heater
 #879B54 mekanism:rotary_condensentrator
