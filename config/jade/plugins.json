@@ -66,7 +66,6 @@
   "gtceu": {
     "auto_output_info": true,
     "workable_provider": true,
-    "transformer": true,
     "controllable_provider": true,
     "exhaust_vent_info": true,
     "multiblock_structure": true,
@@ -91,6 +90,9 @@
   "expatternprovider": {
     "jade_chamber": true,
     "jade_wireless": true
+  },
+  "gregiceng": {
+    "crafting_io_buffer": true
   },
   "ae2": {
     "part_icon": true,

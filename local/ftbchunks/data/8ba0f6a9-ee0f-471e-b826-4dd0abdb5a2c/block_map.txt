@@ -63,6 +63,7 @@
 #4FA7D0 minecraft:dirt_path
 #637996 gtceu:distillation_tower
 #E432BC ae2:drive
+#4576E9 gtceu:electric_blast_furnace
 #006086 gtceu:electrolytic_cell
 #9C5F98 mekanism:electrolytic_separator
 #CFB4F8 gtceu:electrum_small_item_pipe
@@ -111,6 +112,7 @@
 #9F9C73 gtceu:iv_input_bus
 #1CFEF1 gtceu:iv_mixer
 #457521 gtceu:iv_transformer_2a
+#81A8E2 minecraft:jungle_wood
 #706606 gtceu:laminated_glass
 #B69573 gtceu:large_chemical_reactor
 #BEFC6C gtceu:large_electrolyzer
