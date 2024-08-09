@@ -70,7 +70,6 @@ ServerEvents.recipes(event => {
         .itemOutputs('4x gtceu:inert_metal_mixture_dust')
         .EUt(30)
         .duration(1200)
-    //fluid_solidifier
     event.recipes.gtceu.fluid_solidifier('test8')
         .inputFluids(Fluid.of('gtceu:potassium', 144))
         .notConsumable('gtceu:ingot_casting_mold')
@@ -103,4 +102,4 @@ ServerEvents.recipes(event => {
         .itemOutputs('gtceu:platinum_slag_dust')
         .EUt(30)
         .duration(2250)
-})//centrifuge
+})
