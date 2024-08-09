@@ -63,10 +63,11 @@ ServerEvents.recipes(event => {
     event.recipes.gtceu.large_chemical_reactor('test7')
         .inputFluids(Fluid.of('minecraft:water', 36000))
         .inputFluids(Fluid.of('gtceu:rhodium_sulfate_gas', 39600))
+        .inputFluids(Fluid.of('gtceu:oxygen', 25000))
         .circuit(11)
         .outputFluids(Fluid.of('gtceu:potassium', 7200))
-        .outputFluids(Fluid.of('gtceu:rhodium_sulfate', 39600))
-        .itemOutputs('4x gtceu:platinum_slag_dust')
+        .outputFluids(Fluid.of('gtceu:rhodium_sulfate', 50000))
+        .itemOutputs('4x gtceu:inert_metal_mixture_dust')
         .EUt(30)
         .duration(1200)
     //fluid_solidifier
@@ -76,13 +77,30 @@ ServerEvents.recipes(event => {
         .itemOutputs('kubejs:potassium_ingot')
         .EUt(7)
         .duration(20)
-        event.recipes.gtceu.macerator('test9')
+    event.recipes.gtceu.macerator('test9')
         .itemInputs('kubejs:potassium_ingot')
         .itemOutputs('gtceu:potassium_dust')
         .duration(39)
         .EUt(4)
+    //event.remove({ output: 'gtceu:concentrated_platinum' })
+    event.remove({ id: 'gtceu:chemical_reactor/iridium_chloride_separation' })
+    event.remove({ id: 'gtceu:large_chemical_reactor/iridium_chloride_separation' })
+    //event.remove({id:'gtceu:chemical_reactor/dissolve_platinum_metallic_powder'})'4x gtceu:calcium_chloride_dust', '3x gtceu:calcium_chloride_dust'
+    //event.remove({id:'gtceu:chemical_reactor/dissolve_platinum_metallic_powder9'})
     //gtceu:macerator
     //gtceu:ingot_casting_mold
     //kubejs:potassium_ingot
     //gtceu:potassium_dust
+    event.recipes.gtceu.large_chemical_reactor('test10')
+        .itemInputs('gtceu:iridium_chloride_dust')
+        .itemInputs('gtceu:calcium_dust')
+        .itemOutputs('gtceu:metal_sludge_dust')
+        .itemOutputs('gtceu:iridium_dust')
+        .itemOutputs('3x gtceu:calcium_chloride_dust')
+        .EUt(1920)
+        .duration(300)
+    event.replaceInput({ id: 'gtceu:mixer/nitration_mixture' },Fluid.of('gtceu:sulfuric_acid',1000),Fluid.of('gtceu:diluted_sulfuric_acid',1000))
+    event.remove({ id: 'gtceu:create_mixer/nitration_mixture' })
 })//centrifuge
+//gtceu:chemical_reactor/dissolve_platinum_metallic_powder9
+//gtceu:chemical_reactor/dissolve_platinum_metallic_powder
