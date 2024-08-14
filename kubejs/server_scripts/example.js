@@ -118,6 +118,11 @@ ServerEvents.recipes(event => {
         .outputFluids('minecraft:water 2000') 
         .itemOutputs('gtceu:osmium_dust')
     event.replaceOutput({ id: 'gtceu:electric_blast_furnace/rarest_metal_residue' }, Fluid.of('gtceu:steam', 1000), Fluid.of('gtceu:steam', 4500))
+    event.remove({id:'gtceu:electrolyzer/decomposition_electrolyzing_rock_salt'})
+    event.remove({id:'gtceu:electrolyzer/decomposition_electrolyzing_potassium_hydroxide'})
+    event.remove({id:'gtceu:large_chemical_reactor/potassium_carbonate'})
+    event.remove({id:'gtceu:chemical_reactor/potassium_carbonate'})
+    event.remove({id:'gtceu:electrolyzer/decomposition_electrolyzing_potassium_carbonate'})
 }) 
 
 
