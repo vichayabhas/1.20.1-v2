@@ -92,7 +92,6 @@ ServerEvents.recipes(event => {
         .itemOutputs('3x gtceu:calcium_chloride_dust')
         .EUt(1920)
         .duration(300)
-    //event.replaceInput({ id: 'gtceu:mixer/nitration_mixture' }, 'gtceu:sulfuric_acid 1000', 'gtceu:diluted_sulfuric_acid 1000') 
     event.remove({ id: 'gtceu:mixer/nitration_mixture' })
 
     event.remove({ id: 'gtceu:create_mixer/nitration_mixture' })
@@ -113,14 +112,11 @@ ServerEvents.recipes(event => {
     event.remove({ id: 'gtceu:large_chemical_reactor/osmium_dust_completion' })
     event.remove({ id: 'gtceu:chemical_reactor/osmium_dust_completion' })
     event.recipes.gtceu.large_chemical_reactor('test13')
-    .inputFluids('gtceu:osmium_tetroxide 1000')
-    .inputFluids('gtceu:hydrochloric_acid 6000')
-    .outputFluids('gtceu:chlorine 36000')
-    .outputFluids('minecraft:water 2000')
-    .itemOutputs('gtceu:osmium_dust')
-    //event.remove({id:'gtceu:electric_blast_furnace/rarest_metal_residue'})
-    event.replaceOutput({id:'gtceu:electric_blast_furnace/rarest_metal_residue'},Fluid.of('gtceu:steam',1000),Fluid.of('gtceu:steam',4500))
+        .inputFluids('gtceu:osmium_tetroxide 1000')
+        .inputFluids('gtceu:hydrochloric_acid 6000')
+        .outputFluids('gtceu:chlorine 36000')
+        .outputFluids('minecraft:water 2000')
+        .itemOutputs('gtceu:osmium_dust')
+    event.replaceOutput({ id: 'gtceu:electric_blast_furnace/rarest_metal_residue' }, Fluid.of('gtceu:steam', 1000), Fluid.of('gtceu:steam', 4500))
 })
-//gtceu:nitric_acid
-//gtceu:mixer
 
