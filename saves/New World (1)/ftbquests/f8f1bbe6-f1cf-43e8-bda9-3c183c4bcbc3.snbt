@@ -1,0 +1,12 @@
+{
+	version: 1
+	uuid: "f8f1bbe6f1cf43e8bda93c183c4bcbc3"
+	name: "arifmini64#f8f1bbe6"
+	lock: false
+	rewards_blocked: false
+	task_progress: { }
+	started: { }
+	completed: { }
+	claimed_rewards: { }
+	player_data: { }
+}
