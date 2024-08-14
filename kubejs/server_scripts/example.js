@@ -115,8 +115,11 @@ ServerEvents.recipes(event => {
         .inputFluids('gtceu:osmium_tetroxide 1000')
         .inputFluids('gtceu:hydrochloric_acid 6000')
         .outputFluids('gtceu:chlorine 36000')
-        .outputFluids('minecraft:water 2000')
+        .outputFluids('minecraft:water 2000') 
         .itemOutputs('gtceu:osmium_dust')
     event.replaceOutput({ id: 'gtceu:electric_blast_furnace/rarest_metal_residue' }, Fluid.of('gtceu:steam', 1000), Fluid.of('gtceu:steam', 4500))
-})
+}) 
+
+
+
 
