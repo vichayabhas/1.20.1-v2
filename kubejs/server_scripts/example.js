@@ -115,15 +115,20 @@ ServerEvents.recipes(event => {
         .inputFluids('gtceu:osmium_tetroxide 1000')
         .inputFluids('gtceu:hydrochloric_acid 6000')
         .outputFluids('gtceu:chlorine 36000')
-        .outputFluids('minecraft:water 2000') 
+        .outputFluids('minecraft:water 2000')
         .itemOutputs('gtceu:osmium_dust')
     event.replaceOutput({ id: 'gtceu:electric_blast_furnace/rarest_metal_residue' }, Fluid.of('gtceu:steam', 1000), Fluid.of('gtceu:steam', 4500))
-    event.remove({id:'gtceu:electrolyzer/decomposition_electrolyzing_rock_salt'})
-    event.remove({id:'gtceu:electrolyzer/decomposition_electrolyzing_potassium_hydroxide'})
-    event.remove({id:'gtceu:large_chemical_reactor/potassium_carbonate'})
-    event.remove({id:'gtceu:chemical_reactor/potassium_carbonate'})
-    event.remove({id:'gtceu:electrolyzer/decomposition_electrolyzing_potassium_carbonate'})
-}) 
+    event.remove({ id: 'gtceu:electrolyzer/decomposition_electrolyzing_rock_salt' })
+    event.remove({ id: 'gtceu:electrolyzer/decomposition_electrolyzing_potassium_hydroxide' })
+    event.remove({ id: 'gtceu:large_chemical_reactor/potassium_carbonate' })
+    event.remove({ id: 'gtceu:chemical_reactor/potassium_carbonate' })
+    event.remove({ id: 'gtceu:electrolyzer/decomposition_electrolyzing_potassium_carbonate' })
+    event.remove({ id: 'gtceu:chemical_reactor/potassium_cyanide' })
+    event.replaceOutput({ id: 'gtceu:large_chemical_reactor/potassium_cyanide' }, Fluid.of('minecraft:water', 1000), Fluid.of('minecraft:water', 3000))
+    event.remove({ id: 'gtceu:large_chemical_reactor/potassium_iodide' })
+    event.remove({ id: 'gtceu:chemical_reactor/potassium_iodide' })
+})
+//gtceu:chemical_reactor/potassium_cyanide
 
 
 

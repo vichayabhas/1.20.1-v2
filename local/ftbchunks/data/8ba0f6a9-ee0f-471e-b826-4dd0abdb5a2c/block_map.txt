@@ -153,15 +153,19 @@
 #846DFA gtceu:magnetite_indicator
 #1B388E gtceu:maintenance_hatch
 #D3C882 gtceu:manganese_phosphide_double_wire
+#DA156A gtceu:manganese_phosphide_quadruple_wire
 #08726B gtceu:manganese_phosphide_single_wire
 #7BF754 gtceu:mercury_barium_calcium_cuprate_double_wire
 #7A9D58 gtceu:mercury_barium_calcium_cuprate_quadruple_wire
 #B0A13D gtceu:mercury_barium_calcium_cuprate_single_wire
 #38AE7D minecraft:moving_piston
 #B89B24 gtceu:mv_energy_input_hatch
+#1B1A02 gtceu:mv_fluid_heater
+#6631EF gtceu:mv_input_bus
 #9F4AD2 gtceu:mv_output_hatch
 #759FFE gtceu:mv_super_tank
 #ECED25 gtceu:mv_transformer_2a
+#ECED63 gtceu:mv_transformer_4a
 #C9D316 gtceu:neutronium_quadruple_fluid_pipe
 #EB53D4 gtceu:nickel_indicator
 #8B147B gtceu:nonconducting_casing
@@ -228,6 +232,7 @@
 #EF6730 gtceu:ulv_transformer_1a
 #DFD9FD gtceu:uranium_triplatinum_double_wire
 #404E0F gtceu:uranium_triplatinum_quadruple_wire
+#1483E6 gtceu:uranium_triplatinum_single_wire
 #0BE28E gtceu:uv_muffler_hatch
 #B41AAB gtceu:vacuum_freezer
 #D5FF2C gtceu:vibration_safe_casing
