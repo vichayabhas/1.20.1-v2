@@ -34,6 +34,7 @@
 #F522F4 minecraft:chest
 #CACC15 gtceu:clean_machine_casing
 #84EDE1 gtceu:coal_indicator
+#058353 minecraft:cobblestone
 #3D8BFC minecraft:cobblestone_stairs
 #74DB3C minecraft:cobblestone_wall
 #F888C9 minecraft:comparator
@@ -80,6 +81,7 @@
 #C3F8CA gtceu:ev_output_hatch
 #66818D gtceu:ev_output_hatch_4x
 #9DFCFE gtceu:ev_transformer_1a
+#9DFD5B gtceu:ev_transformer_4a
 #009B14 minecraft:farmland
 #A17332 mekanismgenerators:fission_fuel_assembly
 #31B4C1 mekanismgenerators:fission_reactor_casing
@@ -99,8 +101,11 @@
 #656D96 gtceu:hastelloy_x_frame
 #9D79AA gtceu:heatproof_machine_casing
 #635C5E gtceu:high_power_casing
+#1A0827 minecraft:hopper
 #2C2269 gtceu:hssg_double_cable
+#8CB5A0 gtceu:hssg_single_cable
 #CCD281 gtceu:hv_1a_energy_converter
+#57DB31 gtceu:hv_battery_buffer_16x
 #BBCF9F gtceu:hv_energy_input_hatch
 #4C3E54 gtceu:hv_input_hatch
 #322A74 gtceu:hv_item_passthrough_hatch
@@ -132,8 +137,12 @@
 #9DA81C mekanism:logistical_sorter
 #83F400 gtceu:luv_1a_energy_converter
 #2CA047 gtceu:luv_8a_energy_converter
+#870DD2 gtceu:luv_battery_buffer_16x
+#0AF853 gtceu:luv_diode
+#EB0240 gtceu:luv_energy_input_hatch
 #204ED3 gtceu:luv_input_hatch
 #251DD1 gtceu:luv_machine_casing
+#E8309A gtceu:lv_canner
 #1FA5A3 gtceu:lv_energy_input_hatch
 #DF4A29 gtceu:lv_extractor
 #3FAFC1 gtceu:lv_fluid_heater
@@ -149,15 +158,19 @@
 #F2997D gtceu:lv_super_tank
 #430F05 gtceu:lv_transformer_1a
 #430F24 gtceu:lv_transformer_2a
+#430F62 gtceu:lv_transformer_4a
 #4A682D gtceu:magnesium_diboride_quadruple_wire
+#17CE88 gtceu:magnesium_diboride_single_wire
 #846DFA gtceu:magnetite_indicator
 #1B388E gtceu:maintenance_hatch
 #D3C882 gtceu:manganese_phosphide_double_wire
+#0850FE gtceu:manganese_phosphide_octal_wire
 #DA156A gtceu:manganese_phosphide_quadruple_wire
 #08726B gtceu:manganese_phosphide_single_wire
 #7BF754 gtceu:mercury_barium_calcium_cuprate_double_wire
 #7A9D58 gtceu:mercury_barium_calcium_cuprate_quadruple_wire
 #B0A13D gtceu:mercury_barium_calcium_cuprate_single_wire
+#A4FC4B minecraft:mossy_cobblestone
 #38AE7D minecraft:moving_piston
 #B89B24 gtceu:mv_energy_input_hatch
 #1B1A02 gtceu:mv_fluid_heater
@@ -189,6 +202,8 @@
 #3954D9 minecraft:piston_head
 #C191FC gtceu:platinum_double_cable
 #343330 gtceu:platinum_octal_cable
+#CDF044 gtceu:platinum_quadruple_cable
+#222533 gtceu:platinum_single_cable
 #AFAC0D minecraft:poppy
 #6F3B9C gtceu:ptfe_pipe_casing
 #057101 mekanism:quantum_entangloporter
@@ -196,6 +211,7 @@
 #9FCD7C mekanismgenerators:reactor_glass
 #9FB5AB gtceu:red_alloy_double_cable
 #687A35 gtceu:red_alloy_quadruple_cable
+#8A827E gtceu:redstone_indicator
 #6CFCB6 minecraft:redstone_lamp
 #24BE64 minecraft:redstone_torch
 #721B63 minecraft:redstone_wire
@@ -203,6 +219,7 @@
 #487B7B minecraft:repeater
 #74006B mekanism:resistive_heater
 #879B54 mekanism:rotary_condensentrator
+#10781F gtceu:rtm_alloy_coil_block
 #FEDDE0 gtceu:salt_indicator
 #5B6E65 gtceu:secure_maceration_casing
 #80CB73 gtceu:solid_machine_casing
@@ -212,6 +229,7 @@
 #E197A4 gtceu:steel_pipe_casing
 #A88E8E minecraft:stripped_oak_wood
 #5E72B7 mekanism:structural_glass
+#14CEA9 buildinggadgets2:template_manager
 #B12AD5 mekanism:thermal_evaporation_block
 #2F02F6 gtceu:tin_small_item_pipe
 #6B4DEA gtceu:titanium_drum

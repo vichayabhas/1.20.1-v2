@@ -6,7 +6,7 @@ console.info('Hello, World! (Loaded server scripts)')
 ServerEvents.recipes(event => {
     event.remove({ id: "gtceu:distillation_tower/naquadria_waste_separation" })
     event.remove({ id: "gtceu:distillation_tower/enriched_naquadah_waste_separation" })
-    event.recipes.gtceu.distillation_tower('test1')
+    event.recipes.gtceu.distillation_tower('gtceu:distillation_tower/enriched_naquadah_waste_separation2')
         .inputFluids(Fluid.of('gtceu:enriched_naquadah_waste', 2000))
         .itemOutputs('2x gtceu:small_barium_sulfide_dust')
         .outputFluids(Fluid.of('gtceu:sulfuric_acid', 500))
@@ -15,7 +15,7 @@ ServerEvents.recipes(event => {
         .outputFluids(Fluid.of('minecraft:water', 1500))
         .duration(300)
         .EUt(480)
-    event.recipes.gtceu.distillation_tower('test2')
+    event.recipes.gtceu.distillation_tower('gtceu:distillation_tower/naquadria_waste_separation2')
         .inputFluids(Fluid.of('gtceu:naquadria_waste', 2000))
         .itemOutputs('2x gtceu:small_gallium_sulfide_dust')
         .outputFluids(Fluid.of('gtceu:sulfuric_acid', 500))
@@ -24,7 +24,7 @@ ServerEvents.recipes(event => {
         .outputFluids(Fluid.of('minecraft:water', 1500))
         .duration(300)
         .EUt(480)
-    event.recipes.gtceu.centrifuge('test3')
+    event.recipes.gtceu.centrifuge('gtceu:centrifuge/impure_naquadria_solution_separation2')
         .inputFluids(Fluid.of('gtceu:impure_enriched_naquadah_solution', 2000))
         .itemOutputs('gtceu:trinium_sulfide_dust')
         .outputFluids(Fluid.of('gtceu:enriched_naquadah_solution', 500))
@@ -32,7 +32,7 @@ ServerEvents.recipes(event => {
         .itemOutputs('2x gtceu:antimony_trifluoride_dust')
         .duration(400)
         .EUt(1920)
-    event.recipes.gtceu.centrifuge('test4')
+    event.recipes.gtceu.centrifuge('gtceu:centrifuge/impure_enriched_naquadah_solution_separation2')
         .inputFluids(Fluid.of('gtceu:impure_naquadria_solution', 2000))
         .itemOutputs('gtceu:indium_phosphide_dust')
         .itemOutputs('2x gtceu:antimony_trifluoride_dust')
@@ -127,8 +127,20 @@ ServerEvents.recipes(event => {
     event.replaceOutput({ id: 'gtceu:large_chemical_reactor/potassium_cyanide' }, Fluid.of('minecraft:water', 1000), Fluid.of('minecraft:water', 3000))
     event.remove({ id: 'gtceu:large_chemical_reactor/potassium_iodide' })
     event.remove({ id: 'gtceu:chemical_reactor/potassium_iodide' })
+    event.remove({ id: 'gtceu:electrolyzer/decomposition_electrolyzing_magnesium_chloride' })
+    event.recipes.gtceu.large_chemical_reactor('titanium_line')
+        .itemInputs('2x gtceu:sodium_dust')
+        .itemInputs('3x gtceu:magnesium_chloride_dust')
+        .itemOutputs('gtceu:magnesium_dust')
+        .itemOutputs('4x gtceu:salt_dust')
+        .duration(200)
+        .EUt(300)
 })
+//gtceu:sodium_dust
+//gtceu:salt_dust
+//gtceu:magnesium_chloride_dust
 //gtceu:chemical_reactor/potassium_cyanide
+//gtceu:magnesium_dust
 
 
 
