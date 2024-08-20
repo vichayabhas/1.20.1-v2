@@ -2163,5 +2163,23 @@
     },
     "done": true
   },
+  "framedblocks:recipes/building_blocks/framed_checkered_cube": {
+    "criteria": {
+      "hasFramedSlabCorner": "2024-08-19 13:00:55 +0700"
+    },
+    "done": true
+  },
+  "architects_palette:recipes/warping/moonshale_bricks_from_stone_bricks_warping": {
+    "criteria": {
+      "has_stone_bricks": "2024-08-19 08:57:20 +0700"
+    },
+    "done": true
+  },
+  "framedblocks:recipes/building_blocks/framed_half_pillar": {
+    "criteria": {
+      "hasFramedSlabCorner": "2024-08-19 13:00:55 +0700"
+    },
+    "done": true
+  },
   "DataVersion": 3465
 }

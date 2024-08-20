@@ -39,6 +39,7 @@
 #74DB3C minecraft:cobblestone_wall
 #F888C9 minecraft:comparator
 #E2D601 minecraft:composter
+#DA3E0B gtceu:computer_casing
 #AF39FA gtceu:computer_heat_vent
 #7BC9DD mekanismgenerators:control_rod_assembly
 #2BFCCE ae2:controller
@@ -86,6 +87,11 @@
 #A17332 mekanismgenerators:fission_fuel_assembly
 #31B4C1 mekanismgenerators:fission_reactor_casing
 #EFF841 mekanism:formulaic_assemblicator
+#D9FD28 framedblocks:framed_double_slope
+#28F35F framedblocks:framed_fancy_rail_slope
+#41BC38 framedblocks:framed_mini_cube
+#6E1E24 framedblocks:framed_one_way_window
+#87C115 framedblocks:framed_slab_corner
 #42D87E gtceu:frostproof_machine_casing
 #8BD151 mekanismgenerators:fusion_reactor_controller
 #F7D672 mekanismgenerators:fusion_reactor_frame
@@ -104,6 +110,7 @@
 #1A0827 minecraft:hopper
 #2C2269 gtceu:hssg_double_cable
 #8CB5A0 gtceu:hssg_single_cable
+#546EF1 gtceu:huge_duct_pipe
 #CCD281 gtceu:hv_1a_energy_converter
 #57DB31 gtceu:hv_battery_buffer_16x
 #BBCF9F gtceu:hv_energy_input_hatch
@@ -227,6 +234,7 @@
 #3AEBC1 gtceu:stainless_steel_gearbox
 #AADBFC gtceu:stainless_steel_huge_fluid_pipe
 #E197A4 gtceu:steel_pipe_casing
+#F8955F minecraft:stone_bricks
 #A88E8E minecraft:stripped_oak_wood
 #5E72B7 mekanism:structural_glass
 #14CEA9 buildinggadgets2:template_manager
@@ -258,3 +266,4 @@
 #88A5C6 minecraft:wet_sponge
 #BC20FE minecraft:white_wool
 #97FF93 minecraft:yellow_wool
+#8DE216 gtceu:zpm_energy_input_hatch
