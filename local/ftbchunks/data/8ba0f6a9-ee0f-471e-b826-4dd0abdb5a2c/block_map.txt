@@ -74,6 +74,7 @@
 #A7BAFC mekanism:elite_pressurized_tube
 #09F503 mekanism:elite_smelting_factory
 #0691F4 ae2:energy_acceptor
+#4D789D gtceu:ev_air_scrubber
 #F0EF1C gtceu:ev_energy_input_hatch
 #97072C gregiceng:ev_input_buffer
 #7D3DC0 gtceu:ev_input_hatch_4x
@@ -146,6 +147,7 @@
 #2CA047 gtceu:luv_8a_energy_converter
 #870DD2 gtceu:luv_battery_buffer_16x
 #0AF853 gtceu:luv_diode
+#CC6EB4 gtceu:luv_dual_input_hatch
 #EB0240 gtceu:luv_energy_input_hatch
 #204ED3 gtceu:luv_input_hatch
 #251DD1 gtceu:luv_machine_casing
@@ -174,11 +176,17 @@
 #0850FE gtceu:manganese_phosphide_octal_wire
 #DA156A gtceu:manganese_phosphide_quadruple_wire
 #08726B gtceu:manganese_phosphide_single_wire
+#36531E gtceu:me_input_bus
+#EE59D0 gtceu:me_pattern_buffer
+#7DAEBF gtceu:me_pattern_buffer_proxy
+#F12799 gtceu:me_stocking_input_bus
+#456199 gtceu:me_stocking_input_hatch
 #7BF754 gtceu:mercury_barium_calcium_cuprate_double_wire
 #7A9D58 gtceu:mercury_barium_calcium_cuprate_quadruple_wire
 #B0A13D gtceu:mercury_barium_calcium_cuprate_single_wire
 #A4FC4B minecraft:mossy_cobblestone
 #38AE7D minecraft:moving_piston
+#28CAA5 gtceu:mv_air_scrubber
 #B89B24 gtceu:mv_energy_input_hatch
 #1B1A02 gtceu:mv_fluid_heater
 #6631EF gtceu:mv_input_bus
@@ -264,6 +272,7 @@
 #D5FF2C gtceu:vibration_safe_casing
 #6FED3F gtceu:watertight_casing
 #88A5C6 minecraft:wet_sponge
+#B7775E minecraft:white_bed
 #BC20FE minecraft:white_wool
 #97FF93 minecraft:yellow_wool
 #8DE216 gtceu:zpm_energy_input_hatch
