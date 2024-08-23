@@ -2,6 +2,7 @@
 #A945B7 gtceu:advanced_data_access_hatch
 #19603E mekanism:advanced_mechanical_pipe
 #2FB94D mekanism:advanced_pressurized_tube
+#52B53D minecraft:air
 #17F1FF create:analog_lever
 #DC4327 gtceu:assembly_line
 #090A39 gtceu:assembly_line_casing
@@ -51,6 +52,7 @@
 #FB0D94 mekanism:creative_bin
 #8E0D84 mekanism:creative_chemical_tank
 #E952EB gtceu:creative_chest
+#0DB473 gtceu:creative_computation_provider
 #076404 gtceu:creative_data_access_hatch
 #1CE592 gtceu:creative_energy
 #12BD5B ae2:creative_energy_cell
@@ -151,6 +153,8 @@
 #EB0240 gtceu:luv_energy_input_hatch
 #204ED3 gtceu:luv_input_hatch
 #251DD1 gtceu:luv_machine_casing
+#B58AFA gtceu:luv_muffler_hatch
+#DDAEFA gtceu:luv_quantum_tank
 #E8309A gtceu:lv_canner
 #1FA5A3 gtceu:lv_energy_input_hatch
 #DF4A29 gtceu:lv_extractor
@@ -255,6 +259,7 @@
 #44A92C gtceu:tungsten_steel_quadruple_fluid_pipe
 #505D3A mekanismgenerators:turbine_casing
 #FC5A02 mekanismgenerators:turbine_vent
+#C7E32D architects_palette:twisted_door
 #DA1A4A gtceu:uhv_energy_input_hatch
 #F4CAAD mekanism:ultimate_logistical_transporter
 #C10E6D mekanism:ultimate_mechanical_pipe
@@ -264,10 +269,12 @@
 #968585 gtceu:ulv_input_bus
 #0AF485 gtceu:ulv_input_hatch
 #EF6730 gtceu:ulv_transformer_1a
+#E11220 architects_palette:unobtanium_block
 #DFD9FD gtceu:uranium_triplatinum_double_wire
 #404E0F gtceu:uranium_triplatinum_quadruple_wire
 #1483E6 gtceu:uranium_triplatinum_single_wire
 #0BE28E gtceu:uv_muffler_hatch
+#E6D2DA gtceu:uv_scanner
 #B41AAB gtceu:vacuum_freezer
 #D5FF2C gtceu:vibration_safe_casing
 #6FED3F gtceu:watertight_casing

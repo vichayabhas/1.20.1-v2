@@ -2205,5 +2205,17 @@
     },
     "done": true
   },
+  "minecraft:recipes/misc/orange_dye_from_torchflower": {
+    "criteria": {
+      "has_torchflower": "2024-08-22 15:17:40 +0700"
+    },
+    "done": true
+  },
+  "xnet:recipes/xnet/redstoneproxy_update": {
+    "criteria": {
+      "torch": "2024-08-22 15:17:57 +0700"
+    },
+    "done": true
+  },
   "DataVersion": 3465
 }

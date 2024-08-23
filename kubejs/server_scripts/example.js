@@ -7,22 +7,22 @@ ServerEvents.recipes(event => {
     event.remove({ id: "gtceu:distillation_tower/naquadria_waste_separation" })
     event.remove({ id: "gtceu:distillation_tower/enriched_naquadah_waste_separation" })
     event.recipes.gtceu.distillation_tower('gtceu:distillation_tower/enriched_naquadah_waste_separation2')
-        .inputFluids(Fluid.of('gtceu:enriched_naquadah_waste', 2000))
-        .itemOutputs('2x gtceu:small_barium_sulfide_dust')
-        .outputFluids(Fluid.of('gtceu:sulfuric_acid', 500))
-        .outputFluids(Fluid.of('gtceu:enriched_naquadah_solution', 350))
-        .outputFluids(Fluid.of('gtceu:naquadria_solution', 150))
-        .outputFluids(Fluid.of('minecraft:water', 1500))
-        .duration(300)
+        .inputFluids(Fluid.of('gtceu:enriched_naquadah_waste', 1000))
+        .itemOutputs('gtceu:small_barium_sulfide_dust')
+        .outputFluids(Fluid.of('gtceu:sulfuric_acid', 250))
+        .outputFluids(Fluid.of('gtceu:enriched_naquadah_solution', 170))
+        .outputFluids(Fluid.of('gtceu:naquadria_solution', 80))
+        .outputFluids(Fluid.of('minecraft:water', 750))
+        .duration(150)
         .EUt(480)
     event.recipes.gtceu.distillation_tower('gtceu:distillation_tower/naquadria_waste_separation2')
-        .inputFluids(Fluid.of('gtceu:naquadria_waste', 2000))
-        .itemOutputs('2x gtceu:small_gallium_sulfide_dust')
-        .outputFluids(Fluid.of('gtceu:sulfuric_acid', 500))
-        .outputFluids(Fluid.of('gtceu:naquadria_solution', 350))
-        .outputFluids(Fluid.of('gtceu:enriched_naquadah_solution', 150))
-        .outputFluids(Fluid.of('minecraft:water', 1500))
-        .duration(300)
+        .inputFluids(Fluid.of('gtceu:naquadria_waste', 1000))
+        .itemOutputs('gtceu:small_gallium_sulfide_dust')
+        .outputFluids(Fluid.of('gtceu:sulfuric_acid', 250))
+        .outputFluids(Fluid.of('gtceu:naquadria_solution', 170))
+        .outputFluids(Fluid.of('gtceu:enriched_naquadah_solution', 80))
+        .outputFluids(Fluid.of('minecraft:water', 750))
+        .duration(150)
         .EUt(480)
     event.recipes.gtceu.centrifuge('gtceu:centrifuge/impure_naquadria_solution_separation2')
         .inputFluids(Fluid.of('gtceu:impure_enriched_naquadah_solution', 2000))
@@ -136,12 +136,3 @@ ServerEvents.recipes(event => {
         .duration(200)
         .EUt(300)
 })
-//gtceu:sodium_dust
-//gtceu:salt_dust
-//gtceu:magnesium_chloride_dust
-//gtceu:chemical_reactor/potassium_cyanide
-//gtceu:magnesium_dust
-
-
-
-
