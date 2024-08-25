@@ -14,7 +14,12 @@
 		"{data:{Count:1b,id:\"gtceu:silicon_dioxide_dust\",type:\"minecraft:item\"},type:\"roughlyenoughitems:entry_stack\"}",
 		"{data:{Count:1b,id:\"gtceu:carbon_dust\",type:\"minecraft:item\"},type:\"roughlyenoughitems:entry_stack\"}",
 		"{data:{Amount:1000,FluidName:\"gtceu:oil\",type:\"minecraft:fluid\"},type:\"roughlyenoughitems:entry_stack\"}",
-		"{data:{Amount:1000,FluidName:\"gtceu:heavy_fuel\",type:\"minecraft:fluid\"},type:\"roughlyenoughitems:entry_stack\"}"
+		"{data:{Amount:1000,FluidName:\"gtceu:heavy_fuel\",type:\"minecraft:fluid\"},type:\"roughlyenoughitems:entry_stack\"}",
+		"{data:{Count:1b,id:\"gtceu:stem_cells\",type:\"minecraft:item\"},type:\"roughlyenoughitems:entry_stack\"}",
+		"{data:{Amount:1000,FluidName:\"gtceu:monochloramine\",type:\"minecraft:fluid\"},type:\"roughlyenoughitems:entry_stack\"}",
+		"{data:{Count:1b,id:\"gtceu:indium_phosphide_dust\",type:\"minecraft:item\"},type:\"roughlyenoughitems:entry_stack\"}",
+		"{data:{Count:1b,id:\"gtceu:cyclohexanone_oxime_dust\",type:\"minecraft:item\"},type:\"roughlyenoughitems:entry_stack\"}",
+		"{data:{Count:1b,id:\"gtceu:caprolactam_dust\",type:\"minecraft:item\"},type:\"roughlyenoughitems:entry_stack\"}"
 	],
 	"hiddenFavorites": [],
 	"displays": []

@@ -1,4 +1,5 @@
 #399487 mekanism:advanced_bin
+#E277EE gtceu:advanced_computer_casing
 #A945B7 gtceu:advanced_data_access_hatch
 #19603E mekanism:advanced_mechanical_pipe
 #2FB94D mekanism:advanced_pressurized_tube
@@ -40,6 +41,7 @@
 #74DB3C minecraft:cobblestone_wall
 #F888C9 minecraft:comparator
 #E2D601 minecraft:composter
+#A6D7E2 gtceu:computation_receiver_hatch
 #DA3E0B gtceu:computer_casing
 #AF39FA gtceu:computer_heat_vent
 #7BC9DD mekanismgenerators:control_rod_assembly
@@ -214,6 +216,7 @@
 #72BC63 minecraft:oak_stairs
 #855CF4 minecraft:oak_trapdoor
 #46FB1F minecraft:oak_wall_sign
+#872B26 gtceu:object_holder
 #A396A7 gtceu:oilsands_indicator
 #DCB160 gtceu:olivine_indicator
 #F6678E minecraft:oxeye_daisy
@@ -236,6 +239,7 @@
 #721B63 minecraft:redstone_wire
 #21C665 buildinggadgets2:render_block
 #487B7B minecraft:repeater
+#03F70A gtceu:research_station
 #74006B mekanism:resistive_heater
 #879B54 mekanism:rotary_condensentrator
 #10781F gtceu:rtm_alloy_coil_block
@@ -275,6 +279,7 @@
 #DFD9FD gtceu:uranium_triplatinum_double_wire
 #404E0F gtceu:uranium_triplatinum_quadruple_wire
 #1483E6 gtceu:uranium_triplatinum_single_wire
+#80472C gtceu:uv_energy_input_hatch
 #0BE28E gtceu:uv_muffler_hatch
 #E6D2DA gtceu:uv_scanner
 #B41AAB gtceu:vacuum_freezer
