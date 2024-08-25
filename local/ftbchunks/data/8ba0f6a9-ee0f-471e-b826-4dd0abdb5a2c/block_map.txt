@@ -239,6 +239,7 @@
 #74006B mekanism:resistive_heater
 #879B54 mekanism:rotary_condensentrator
 #10781F gtceu:rtm_alloy_coil_block
+#358037 gtceu:ruthenium_trinium_americium_neutronate_quadruple_wire
 #FEDDE0 gtceu:salt_indicator
 #5B6E65 gtceu:secure_maceration_casing
 #80CB73 gtceu:solid_machine_casing
@@ -260,6 +261,7 @@
 #505D3A mekanismgenerators:turbine_casing
 #FC5A02 mekanismgenerators:turbine_vent
 #C7E32D architects_palette:twisted_door
+#B046EF gtceu:uhv_battery_buffer_4x
 #DA1A4A gtceu:uhv_energy_input_hatch
 #F4CAAD mekanism:ultimate_logistical_transporter
 #C10E6D mekanism:ultimate_mechanical_pipe
