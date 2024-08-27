@@ -27,6 +27,7 @@
 #FFC34F mekanism:bounding_block
 #568958 gtceu:bronze_crate
 #7E2BA5 gtceu:bronze_drum
+#A00EB6 integrateddynamics:cable
 #208CB0 ae2:cable_bus
 #41258E gtceu:cassiterite_indicator
 #0657F7 gtceu:chalcopyrite_indicator
@@ -42,6 +43,7 @@
 #F888C9 minecraft:comparator
 #E2D601 minecraft:composter
 #A6D7E2 gtceu:computation_receiver_hatch
+#35E5F4 gtceu:computation_transmitter_hatch
 #DA3E0B gtceu:computer_casing
 #AF39FA gtceu:computer_heat_vent
 #7BC9DD mekanismgenerators:control_rod_assembly
@@ -78,6 +80,7 @@
 #A7BAFC mekanism:elite_pressurized_tube
 #09F503 mekanism:elite_smelting_factory
 #0691F4 ae2:energy_acceptor
+#DB8F90 gtceu:enriched_naquadah_trinium_europium_duranide_single_wire
 #4D789D gtceu:ev_air_scrubber
 #F0EF1C gtceu:ev_energy_input_hatch
 #97072C gregiceng:ev_input_buffer
@@ -111,8 +114,11 @@
 #32E756 gtceu:grossular_indicator
 #656D96 gtceu:hastelloy_x_frame
 #9D79AA gtceu:heatproof_machine_casing
+#F9DA2F gtceu:high_performance_computation_array
 #635C5E gtceu:high_power_casing
 #1A0827 minecraft:hopper
+#A89C9B gtceu:hpca_advanced_computation_component
+#274AA1 gtceu:hpca_heat_sink_component
 #2C2269 gtceu:hssg_double_cable
 #8CB5A0 gtceu:hssg_single_cable
 #546EF1 gtceu:huge_duct_pipe
@@ -126,6 +132,7 @@
 #9B9701 gtceu:hv_transformer_1a
 #9B9720 gtceu:hv_transformer_2a
 #9B975E gtceu:hv_transformer_4a
+#82CCBC gtceu:indium_tin_barium_titanium_cuprate_quadruple_wire
 #680FC8 mekanism:induction_casing
 #9D871C gtceu:inert_machine_casing
 #D7B7C0 expatternprovider:ingredient_buffer
@@ -157,6 +164,7 @@
 #251DD1 gtceu:luv_machine_casing
 #B58AFA gtceu:luv_muffler_hatch
 #DDAEFA gtceu:luv_quantum_tank
+#4F6C76 gtceu:lv_battery_buffer_4x
 #E8309A gtceu:lv_canner
 #1FA5A3 gtceu:lv_energy_input_hatch
 #DF4A29 gtceu:lv_extractor
@@ -200,9 +208,11 @@
 #759FFE gtceu:mv_super_tank
 #ECED25 gtceu:mv_transformer_2a
 #ECED63 gtceu:mv_transformer_4a
+#FB82DF gtceu:network_switch
 #C9D316 gtceu:neutronium_quadruple_fluid_pipe
 #EB53D4 gtceu:nickel_indicator
 #8B147B gtceu:nonconducting_casing
+#589267 gtceu:normal_optical_pipe
 #1DD5F3 minecraft:note_block
 #73753E minecraft:oak_fence
 #111F32 minecraft:oak_fence_gate
@@ -236,6 +246,7 @@
 #8A827E gtceu:redstone_indicator
 #6CFCB6 minecraft:redstone_lamp
 #24BE64 minecraft:redstone_torch
+#5D17E5 minecraft:redstone_wall_torch
 #721B63 minecraft:redstone_wire
 #21C665 buildinggadgets2:render_block
 #487B7B minecraft:repeater
@@ -243,6 +254,7 @@
 #74006B mekanism:resistive_heater
 #879B54 mekanism:rotary_condensentrator
 #10781F gtceu:rtm_alloy_coil_block
+#14007B gtceu:ruthenium_trinium_americium_neutronate_hex_wire
 #358037 gtceu:ruthenium_trinium_americium_neutronate_quadruple_wire
 #FEDDE0 gtceu:salt_indicator
 #5B6E65 gtceu:secure_maceration_casing
@@ -265,8 +277,10 @@
 #505D3A mekanismgenerators:turbine_casing
 #FC5A02 mekanismgenerators:turbine_vent
 #C7E32D architects_palette:twisted_door
+#7625DC gtceu:uhv_battery_buffer_16x
 #B046EF gtceu:uhv_battery_buffer_4x
 #DA1A4A gtceu:uhv_energy_input_hatch
+#89780A mekanism:ultimate_fluid_tank
 #F4CAAD mekanism:ultimate_logistical_transporter
 #C10E6D mekanism:ultimate_mechanical_pipe
 #7DD0FE mekanism:ultimate_pressurized_tube
