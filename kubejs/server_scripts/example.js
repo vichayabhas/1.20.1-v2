@@ -148,8 +148,7 @@ ServerEvents.recipes(event => {
         .inputFluids(Fluid.of('gtceu:helium',2500))
         .inputFluids(Fluid.of('gtceu:oxygen',8000))
         .duration(2400)
-        .EUt(30)
-        //fix EUt to real
+        .EUt(337208)
     //["scannerResearch(java.util.function.UnaryOperator)"](b => b.researchStack(Item.of('minecraft:coal_block')).EUt(GTValues.VA[GTValues.IV]).duration(420)) //
     event.remove({id:"gtceu:large_chemical_reactor/titanium_tetrachloride"})
     event.recipes.gtceu.large_chemical_reactor('titanium20s')

@@ -19,7 +19,9 @@
 		"{data:{Amount:1000,FluidName:\"gtceu:monochloramine\",type:\"minecraft:fluid\"},type:\"roughlyenoughitems:entry_stack\"}",
 		"{data:{Count:1b,id:\"gtceu:indium_phosphide_dust\",type:\"minecraft:item\"},type:\"roughlyenoughitems:entry_stack\"}",
 		"{data:{Count:1b,id:\"gtceu:cyclohexanone_oxime_dust\",type:\"minecraft:item\"},type:\"roughlyenoughitems:entry_stack\"}",
-		"{data:{Count:1b,id:\"gtceu:caprolactam_dust\",type:\"minecraft:item\"},type:\"roughlyenoughitems:entry_stack\"}"
+		"{data:{Count:1b,id:\"gtceu:caprolactam_dust\",type:\"minecraft:item\"},type:\"roughlyenoughitems:entry_stack\"}",
+		"{data:{Count:1b,id:\"gtceu:naquadah_dust\",type:\"minecraft:item\"},type:\"roughlyenoughitems:entry_stack\"}",
+		"{data:{Count:1b,id:\"gtceu:purple_drink\",type:\"minecraft:item\"},type:\"roughlyenoughitems:entry_stack\"}"
 	],
 	"hiddenFavorites": [],
 	"displays": []

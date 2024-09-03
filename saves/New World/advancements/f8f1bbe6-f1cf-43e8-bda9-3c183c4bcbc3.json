@@ -2379,5 +2379,125 @@
     },
     "done": true
   },
+  "mcwbridges:recipes/balustrade_stone_bricks_bridge": {
+    "criteria": {
+      "has_planks": "2024-08-30 15:06:39 +0700"
+    },
+    "done": true
+  },
+  "mcwbridges:recipes/stone_bridge_pier": {
+    "criteria": {
+      "has_planks": "2024-08-30 15:06:39 +0700"
+    },
+    "done": true
+  },
+  "mcwbridges:recipes/stone_brick_bridge": {
+    "criteria": {
+      "has_planks": "2024-08-30 15:06:39 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/smart_gray": {
+    "criteria": {
+      "has_fluix_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/smart_purple": {
+    "criteria": {
+      "has_fluix_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/smart_lime": {
+    "criteria": {
+      "has_fluix_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/dense_smart_from_smart": {
+    "criteria": {
+      "has_fluix_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/smart_blue": {
+    "criteria": {
+      "has_fluix_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/smart_pink": {
+    "criteria": {
+      "has_fluix_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/smart_orange": {
+    "criteria": {
+      "has_fluix_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/smart_brown": {
+    "criteria": {
+      "has_fluix_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/smart_light_blue": {
+    "criteria": {
+      "has_fluix_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/smart_white": {
+    "criteria": {
+      "has_fluix_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/smart_red": {
+    "criteria": {
+      "has_fluix_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/smart_light_gray": {
+    "criteria": {
+      "has_fluix_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/smart_magenta": {
+    "criteria": {
+      "has_fluix_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/smart_cyan": {
+    "criteria": {
+      "has_fluix_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/smart_fluix_clean": {
+    "criteria": {
+      "has_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/smart_green": {
+    "criteria": {
+      "has_fluix_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
+  "ae2:recipes/misc/network/cables/smart_black": {
+    "criteria": {
+      "has_fluix_smart_cable": "2024-08-31 22:28:12 +0700"
+    },
+    "done": true
+  },
   "DataVersion": 3465
 }

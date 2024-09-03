@@ -3,6 +3,7 @@
 #A945B7 gtceu:advanced_data_access_hatch
 #19603E mekanism:advanced_mechanical_pipe
 #2FB94D mekanism:advanced_pressurized_tube
+#138449 mekanism:advanced_universal_cable
 #52B53D minecraft:air
 #17F1FF create:analog_lever
 #DC4327 gtceu:assembly_line
@@ -66,6 +67,8 @@
 #13ECEA gtceu:crushing_wheels
 #05EFD1 gtceu:cupronickel_coil_block
 #B2A2E1 minecraft:dandelion
+#C7F894 gtceu:data_access_hatch
+#418F9F gtceu:data_receiver_hatch
 #E1B917 gtceu:data_transmitter_hatch
 #5A35D5 minecraft:diamond_block
 #60995E gtceu:diamond_indicator
@@ -82,6 +85,7 @@
 #0691F4 ae2:energy_acceptor
 #DB8F90 gtceu:enriched_naquadah_trinium_europium_duranide_single_wire
 #4D789D gtceu:ev_air_scrubber
+#E28FDD gtceu:ev_battery_buffer_4x
 #F0EF1C gtceu:ev_energy_input_hatch
 #97072C gregiceng:ev_input_buffer
 #7D3DC0 gtceu:ev_input_hatch_4x
@@ -124,6 +128,7 @@
 #546EF1 gtceu:huge_duct_pipe
 #CCD281 gtceu:hv_1a_energy_converter
 #57DB31 gtceu:hv_battery_buffer_16x
+#C812FA gtceu:hv_battery_buffer_4x
 #BBCF9F gtceu:hv_energy_input_hatch
 #4C3E54 gtceu:hv_input_hatch
 #322A74 gtceu:hv_item_passthrough_hatch
@@ -132,7 +137,9 @@
 #9B9701 gtceu:hv_transformer_1a
 #9B9720 gtceu:hv_transformer_2a
 #9B975E gtceu:hv_transformer_4a
+#3CA270 gtceu:indium_tin_barium_titanium_cuprate_double_wire
 #82CCBC gtceu:indium_tin_barium_titanium_cuprate_quadruple_wire
+#714C59 gtceu:indium_tin_barium_titanium_cuprate_single_wire
 #680FC8 mekanism:induction_casing
 #9D871C gtceu:inert_machine_casing
 #D7B7C0 expatternprovider:ingredient_buffer
@@ -164,6 +171,7 @@
 #251DD1 gtceu:luv_machine_casing
 #B58AFA gtceu:luv_muffler_hatch
 #DDAEFA gtceu:luv_quantum_tank
+#C7427F gtceu:luv_transformer_4a
 #4F6C76 gtceu:lv_battery_buffer_4x
 #E8309A gtceu:lv_canner
 #1FA5A3 gtceu:lv_energy_input_hatch
@@ -254,9 +262,11 @@
 #74006B mekanism:resistive_heater
 #879B54 mekanism:rotary_condensentrator
 #10781F gtceu:rtm_alloy_coil_block
+#FC18D5 gtceu:ruthenium_trinium_americium_neutronate_double_wire
 #14007B gtceu:ruthenium_trinium_americium_neutronate_hex_wire
 #358037 gtceu:ruthenium_trinium_americium_neutronate_quadruple_wire
 #FEDDE0 gtceu:salt_indicator
+#4B1575 gtceu:samarium_iron_arsenic_oxide_single_wire
 #5B6E65 gtceu:secure_maceration_casing
 #80CB73 gtceu:solid_machine_casing
 #FC73B3 mekanism:sps_casing
@@ -293,6 +303,7 @@
 #DFD9FD gtceu:uranium_triplatinum_double_wire
 #404E0F gtceu:uranium_triplatinum_quadruple_wire
 #1483E6 gtceu:uranium_triplatinum_single_wire
+#FFF5CD gtceu:uv_battery_buffer_4x
 #80472C gtceu:uv_energy_input_hatch
 #0BE28E gtceu:uv_muffler_hatch
 #E6D2DA gtceu:uv_scanner
@@ -304,3 +315,4 @@
 #BC20FE minecraft:white_wool
 #97FF93 minecraft:yellow_wool
 #8DE216 gtceu:zpm_energy_input_hatch
+#4F7CF8 gtceu:zpm_transformer_1a
