@@ -1,7 +1,7 @@
 {
 	max_claim_chunks: 500
 	max_force_load_chunks: 25
-	last_login_time: 1725378969975L
+	last_login_time: 1725888051757L
 	chunks: {
 		"minecraft:overworld": [
 			{ x: -6, z: -12, time: 1712205909406L }
@@ -27,7 +27,6 @@
 			{ x: 0, z: -6, time: 1711942541653L, force_loaded: 1711942542103L }
 			{ x: 1, z: -8, time: 1712205598948L }
 			{ x: -2, z: -2, time: 1703391663698L, force_loaded: 1704944018363L }
-			{ x: 0, z: 0, time: 1703391655613L, force_loaded: 1704944022219L }
 			{ x: -4, z: -7, time: 1712206004416L }
 			{ x: -3, z: -12, time: 1712205912298L }
 			{ x: -2, z: -6, time: 1712029922093L }
@@ -39,7 +38,6 @@
 			{ x: 2, z: -11, time: 1712205601553L }
 			{ x: -2, z: -3, time: 1712030006590L }
 			{ x: -7, z: -8, time: 1712205907110L }
-			{ x: 0, z: -1, time: 1703391654944L, force_loaded: 1704944022618L }
 			{ x: 1, z: -5, time: 1711942294847L, force_loaded: 1711942296196L }
 			{ x: -4, z: -11, time: 1712205606362L }
 			{ x: -4, z: -10, time: 1712205606665L }
@@ -55,14 +53,12 @@
 			{ x: -1, z: -6, time: 1711942549648L, force_loaded: 1711942550330L }
 			{ x: 1, z: -3, time: 1711942547930L, force_loaded: 1711942548476L }
 			{ x: -7, z: -10, time: 1712205908093L }
-			{ x: -1, z: -1, time: 1703391653849L, force_loaded: 1704944023023L }
 			{ x: -7, z: -12, time: 1712205909057L }
 			{ x: -2, z: -5, time: 1711952968837L, force_loaded: 1711952969352L }
 			{ x: -4, z: -8, time: 1712205607374L }
 			{ x: -2, z: -7, time: 1712206005210L }
 			{ x: 0, z: -11, time: 1712205602910L }
 			{ x: -5, z: -14, time: 1712205911069L }
-			{ x: -1, z: 0, time: 1703391653552L, force_loaded: 1704944023446L }
 			{ x: -3, z: -7, time: 1712206004913L }
 			{ x: 1, z: -1, time: 1703391655913L, force_loaded: 1704944021158L }
 			{ x: -1, z: -2, time: 1703391654393L, force_loaded: 1704944019015L }
