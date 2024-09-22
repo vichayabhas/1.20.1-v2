@@ -1,3 +1,4 @@
+#002750 gtceu:acid_hazard_sign_block
 #0D29DA gtceu:active_transformer
 #399487 mekanism:advanced_bin
 #E277EE gtceu:advanced_computer_casing
@@ -9,6 +10,7 @@
 #138449 mekanism:advanced_universal_cable
 #52B53D minecraft:air
 #17F1FF create:analog_lever
+#A671B6 gtceu:antimatter_hazard_sign_block
 #DC4327 gtceu:assembly_line
 #090A39 gtceu:assembly_line_casing
 #D875AC gtceu:assembly_line_grating
@@ -27,9 +29,11 @@
 #C2A0C8 mekanism:basic_smelting_factory
 #840F59 minecraft:bedrock
 #7F50F6 minecraft:bell
+#0DAEDB gtceu:bio_hazard_sign_block
 #C3053E gtceu:blue_alloy_quadruple_cable
 #24ECAC mekanism:boiler_casing
 #4976CB mekanism:boiler_valve
+#FF7E00 gtceu:boss_hazard_sign_block
 #FFC34F mekanism:bounding_block
 #568958 gtceu:bronze_crate
 #7E2BA5 gtceu:bronze_drum
@@ -37,6 +41,7 @@
 #A00EB6 integrateddynamics:cable
 #208CB0 ae2:cable_bus
 #41258E gtceu:cassiterite_indicator
+#8692BA gtceu:causality_hazard_sign_block
 #0657F7 gtceu:chalcopyrite_indicator
 #5162BE mekanism:chemical_crystallizer
 #1740D6 mekanism:chemical_dissolution_chamber
@@ -45,7 +50,9 @@
 #71D976 mekanism:chemical_washer
 #F522F4 minecraft:chest
 #CACC15 gtceu:clean_machine_casing
+#5C86C8 gtceu:cleaning_maintenance_hatch
 #69431E gtceu:cleanroom
+#0A229B gtceu:cleanroom_glass
 #84EDE1 gtceu:coal_indicator
 #058353 minecraft:cobblestone
 #3D8BFC minecraft:cobblestone_stairs
@@ -95,6 +102,7 @@
 #A7BAFC mekanism:elite_pressurized_tube
 #09F503 mekanism:elite_smelting_factory
 #0691F4 ae2:energy_acceptor
+#7A7B39 gtceu:enriched_naquadah_trinium_europium_duranide_octal_wire
 #66AA25 gtceu:enriched_naquadah_trinium_europium_duranide_quadruple_wire
 #DB8F90 gtceu:enriched_naquadah_trinium_europium_duranide_single_wire
 #4D789D gtceu:ev_air_scrubber
@@ -110,7 +118,9 @@
 #3F3FA2 gtceu:ev_transformer_16a
 #9DFCFE gtceu:ev_transformer_1a
 #9DFD5B gtceu:ev_transformer_4a
+#95DBA8 gtceu:explosion_hazard_sign_block
 #009B14 minecraft:farmland
+#8D7889 gtceu:fire_hazard_sign_block
 #A17332 mekanismgenerators:fission_fuel_assembly
 #31B4C1 mekanismgenerators:fission_reactor_casing
 #895315 mekanismgenerators:fission_reactor_port
@@ -120,6 +130,7 @@
 #41BC38 framedblocks:framed_mini_cube
 #6E1E24 framedblocks:framed_one_way_window
 #87C115 framedblocks:framed_slab_corner
+#C89997 gtceu:frost_hazard_sign_block
 #42D87E gtceu:frostproof_machine_casing
 #EF2902 gtceu:fusion_casing
 #B07A97 gtceu:fusion_casing_mk2
@@ -131,15 +142,21 @@
 #380250 gtceu:galena_indicator
 #0C3C48 gtceu:garnet_sand_indicator
 #AC063E mekanismgenerators:gas_burning_generator
+#BF45EA gtceu:generic_hazard_sign_block
 #2F436F minecraft:glass
 #482EEB minecraft:glowstone
 #080513 gtceu:goethite_indicator
 #3F84B7 minecraft:grass_block
+#2D9BC4 gtceu:gregification_hazard_sign_block
 #32E756 gtceu:grossular_indicator
 #656D96 gtceu:hastelloy_x_frame
+#7762B0 architects_palette:hazard_sign
 #9D79AA gtceu:heatproof_machine_casing
 #F9DA2F gtceu:high_performance_computation_array
 #635C5E gtceu:high_power_casing
+#883795 gtceu:high_pressure_hazard_sign_block
+#4ABA6A gtceu:high_temperature_hazard_sign_block
+#97F354 gtceu:high_voltage_hazard_sign_block
 #1A0827 minecraft:hopper
 #A89C9B gtceu:hpca_advanced_computation_component
 #274AA1 gtceu:hpca_heat_sink_component
@@ -173,11 +190,13 @@
 #99FCFE mekanism:isotopic_centrifuge
 #7323DF gtceu:iv_256a_laser_target_hatch
 #52E3BA gtceu:iv_electrolyzer
+#54C520 gtceu:iv_energy_input_hatch
 #5E8A41 gtceu:iv_energy_output_hatch
 #9F9C73 gtceu:iv_input_bus
 #AE2DD8 gtceu:iv_kinetic_input_box
 #ADA17F gtceu:iv_kinetic_output_box
 #1CFEF1 gtceu:iv_mixer
+#357C1A gtceu:iv_muffler_hatch
 #F02DD4 gtceu:iv_parallel_hatch
 #86C81E gtceu:iv_transformer_16a
 #457502 gtceu:iv_transformer_1a
@@ -192,8 +211,10 @@
 #2A4E9A gtceu:large_extractor
 #FF1E81 gtceu:large_maceration_tower
 #D96A7F gtceu:large_mixer
+#4C2B3B gtnn:large_naquadah_reactor
 #01B07F gtceu:large_scale_assembler_casing
 #7CC955 gtceu:large_sifting_funnel
+#4625DE gtceu:laser_hazard_sign_block
 #72D77D minecraft:lever
 #9DA81C mekanism:logistical_sorter
 #83F400 gtceu:luv_1a_energy_converter
@@ -224,6 +245,7 @@
 #B48C90 gtceu:lv_input_bus
 #C364D0 gtceu:lv_input_hatch
 #F35E78 gtceu:lv_item_passthrough_hatch
+#4C9954 gtceu:lv_machine_hull
 #730491 gtceu:lv_output_bus
 #C3E091 gtceu:lv_output_hatch
 #122555 gtceu:lv_packer
@@ -232,6 +254,7 @@
 #430F05 gtceu:lv_transformer_1a
 #430F24 gtceu:lv_transformer_2a
 #430F62 gtceu:lv_transformer_4a
+#D7DC40 gtceu:magic_hazard_sign_block
 #4A682D gtceu:magnesium_diboride_quadruple_wire
 #17CE88 gtceu:magnesium_diboride_single_wire
 #846DFA gtceu:magnetite_indicator
@@ -248,6 +271,8 @@
 #7BF754 gtceu:mercury_barium_calcium_cuprate_double_wire
 #7A9D58 gtceu:mercury_barium_calcium_cuprate_quadruple_wire
 #B0A13D gtceu:mercury_barium_calcium_cuprate_single_wire
+#BF72E4 gtceu:mob_infestation_hazard_sign_block
+#5BA6BC gtceu:mob_spawner_hazard_sign_block
 #A4FC4B minecraft:mossy_cobblestone
 #38AE7D minecraft:moving_piston
 #28CAA5 gtceu:mv_air_scrubber
@@ -259,9 +284,11 @@
 #759FFE gtceu:mv_super_tank
 #ECED25 gtceu:mv_transformer_2a
 #ECED63 gtceu:mv_transformer_4a
+#2EDB35 gtceu:naquadah_coil_block
 #FB82DF gtceu:network_switch
 #C9D316 gtceu:neutronium_quadruple_fluid_pipe
 #EB53D4 gtceu:nickel_indicator
+#32B86D gtceu:noise_hazard_sign_block
 #8B147B gtceu:nonconducting_casing
 #08AD74 gtceu:normal_laser_pipe
 #589267 gtceu:normal_optical_pipe
@@ -295,6 +322,8 @@
 #5F0D54 mekanism:pressurized_reaction_chamber
 #6F3B9C gtceu:ptfe_pipe_casing
 #057101 mekanism:quantum_entangloporter
+#A70271 gtnn:radiation_proof_machine_casing
+#B10054 gtceu:radioactive_hazard_sign_block
 #46C364 gtceu:reaction_safe_mixing_casing
 #9FCD7C mekanismgenerators:reactor_glass
 #9FB5AB gtceu:red_alloy_double_cable
@@ -321,6 +350,7 @@
 #5B6E65 gtceu:secure_maceration_casing
 #7F6970 mekanism:solar_neutron_activator
 #80CB73 gtceu:solid_machine_casing
+#479613 gtceu:spatial_storage_hazard_sign_block
 #FC73B3 mekanism:sps_casing
 #881687 mekanism:sps_port
 #3AEBC1 gtceu:stainless_steel_gearbox
@@ -337,8 +367,10 @@
 #B12AD5 mekanism:thermal_evaporation_block
 #C5F7D8 mekanism:thermal_evaporation_valve
 #2F02F6 gtceu:tin_small_item_pipe
+#2F5CAD ae2:tiny_tnt
 #6B4DEA gtceu:titanium_drum
 #A3C30E gtceu:titanium_pipe_casing
+#52FD2D minecraft:tnt
 #CE2C78 gtceu:trinium_coil_block
 #FBFECE gtceu:tungsten_steel_crate
 #1B2AE6 gtceu:tungsten_steel_normal_fluid_pipe
@@ -347,10 +379,12 @@
 #C05067 mekanismgenerators:turbine_rotor
 #F233FD mekanismgenerators:turbine_valve
 #FC5A02 mekanismgenerators:turbine_vent
+#5678C3 gtceu:turret_hazard_sign_block
 #C7E32D architects_palette:twisted_door
 #7625DC gtceu:uhv_battery_buffer_16x
 #B046EF gtceu:uhv_battery_buffer_4x
 #DA1A4A gtceu:uhv_energy_input_hatch
+#89573B gtceu:uhv_machine_hull
 #D2C55A gtceu:uhv_substation_input_hatch_64a
 #51DF8F gtceu:uhv_substation_output_hatch_64a
 #89780A mekanism:ultimate_fluid_tank
@@ -371,7 +405,9 @@
 #DFD9FD gtceu:uranium_triplatinum_double_wire
 #404E0F gtceu:uranium_triplatinum_quadruple_wire
 #1483E6 gtceu:uranium_triplatinum_single_wire
+#1C52BE gtceu:uv_battery_buffer_16x
 #FFF5CD gtceu:uv_battery_buffer_4x
+#46BACD gtceu:uv_chemical_reactor
 #80472C gtceu:uv_energy_input_hatch
 #D18C49 gtceu:uv_energy_input_hatch_16a
 #0BE28E gtceu:uv_muffler_hatch
@@ -379,6 +415,7 @@
 #5D6192 gtceu:uv_transformer_16a
 #B41AAB gtceu:vacuum_freezer
 #D5FF2C gtceu:vibration_safe_casing
+#23F867 gtceu:void_hazard_sign_block
 #6FED3F gtceu:watertight_casing
 #88A5C6 minecraft:wet_sponge
 #B7775E minecraft:white_bed

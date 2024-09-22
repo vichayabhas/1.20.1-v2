@@ -27,6 +27,7 @@
 	],
 	"hiddenFavorites": [],
 	"displays": [
+		"{DisplayHistoryCategory:\"gtceu:large_chemical_reactor\",DisplayHistoryContains:0b,DisplayHistoryUUID:\"586ee5ba-cd7f-4612-a441-ab37095c71fa\"}",
 		"{DisplayHistoryCategory:\"gtceu:fusion_reactor\",DisplayHistoryContains:0b,DisplayHistoryUUID:\"acfae361-71a4-4460-8f42-9cd183bbd76f\"}",
 		"{DisplayHistoryCategory:\"gtceu:fusion_reactor\",DisplayHistoryContains:0b,DisplayHistoryUUID:\"3d51f902-bc95-4afa-bc5f-abd8b7f84f2a\"}",
 		"{DisplayHistoryCategory:\"gtceu:fusion_reactor\",DisplayHistoryContains:0b,DisplayHistoryUUID:\"437e69d8-7cbd-41d8-be6d-46e1081ebc1c\"}",
