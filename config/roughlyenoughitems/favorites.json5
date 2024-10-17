@@ -23,7 +23,8 @@
 		"{data:{Count:1b,id:\"gtceu:naquadah_dust\",type:\"minecraft:item\"},type:\"roughlyenoughitems:entry_stack\"}",
 		"{data:{Count:1b,id:\"gtceu:purple_drink\",type:\"minecraft:item\"},type:\"roughlyenoughitems:entry_stack\"}",
 		"{data:{Amount:1000,FluidName:\"gtceu:americium\",type:\"minecraft:fluid\"},type:\"roughlyenoughitems:entry_stack\"}",
-		"{data:{Amount:1000,FluidName:\"gtceu:lutetium\",type:\"minecraft:fluid\"},type:\"roughlyenoughitems:entry_stack\"}"
+		"{data:{Amount:1000,FluidName:\"gtceu:lutetium\",type:\"minecraft:fluid\"},type:\"roughlyenoughitems:entry_stack\"}",
+		"{data:{Count:1b,id:\"minecraft:crimson_nylium\",type:\"minecraft:item\"},type:\"roughlyenoughitems:entry_stack\"}"
 	],
 	"hiddenFavorites": [],
 	"displays": [

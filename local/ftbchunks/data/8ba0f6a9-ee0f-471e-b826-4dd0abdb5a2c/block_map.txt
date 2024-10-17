@@ -9,6 +9,7 @@
 #2FB94D mekanism:advanced_pressurized_tube
 #138449 mekanism:advanced_universal_cable
 #52B53D minecraft:air
+#7E2471 gtceu:americium_huge_item_pipe
 #17F1FF create:analog_lever
 #A671B6 gtceu:antimatter_hazard_sign_block
 #DC4327 gtceu:assembly_line
@@ -316,6 +317,7 @@
 #343330 gtceu:platinum_octal_cable
 #CDF044 gtceu:platinum_quadruple_cable
 #222533 gtceu:platinum_single_cable
+#547E89 gtceu:platinum_small_item_pipe
 #AFAC0D minecraft:poppy
 #399C19 gtceu:powderbarrel
 #111BD4 mekanism:pressure_disperser
@@ -397,6 +399,7 @@
 #0AF485 gtceu:ulv_input_hatch
 #F7003F gtceu:ulv_machine_hull
 #EF6730 gtceu:ulv_transformer_1a
+#EF674F gtceu:ulv_transformer_2a
 #E11220 architects_palette:unobtanium_block
 #142DE8 gtceu:uranium_rhodium_dinaquadide_hex_wire
 #E5B078 gtceu:uranium_rhodium_dinaquadide_octal_wire
