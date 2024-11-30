@@ -137,8 +137,8 @@ declare global {
 export type $SecureJar$ModuleDataProvider_ = $SecureJar$ModuleDataProvider$Type;
 }}
 declare module "packages/cpw/mods/jarhandling/$SecureJar" {
-import {$Path, $Path$Type} from "packages/java/nio/file/$Path"
 import {$BiPredicate, $BiPredicate$Type} from "packages/java/util/function/$BiPredicate"
+import {$Path, $Path$Type} from "packages/java/nio/file/$Path"
 import {$CodeSigner, $CodeSigner$Type} from "packages/java/security/$CodeSigner"
 import {$Attributes, $Attributes$Type} from "packages/java/util/jar/$Attributes"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
@@ -147,9 +147,9 @@ import {$Set, $Set$Type} from "packages/java/util/$Set"
 import {$SecureJar$ModuleDataProvider, $SecureJar$ModuleDataProvider$Type} from "packages/cpw/mods/jarhandling/$SecureJar$ModuleDataProvider"
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$SecureJar$Status, $SecureJar$Status$Type} from "packages/cpw/mods/jarhandling/$SecureJar$Status"
+import {$JarMetadata, $JarMetadata$Type} from "packages/cpw/mods/jarhandling/$JarMetadata"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$Manifest, $Manifest$Type} from "packages/java/util/jar/$Manifest"
-import {$JarMetadata, $JarMetadata$Type} from "packages/cpw/mods/jarhandling/$JarMetadata"
 
 export interface $SecureJar {
 
@@ -157,23 +157,23 @@ export interface $SecureJar {
  "getPackages"(): $Set<(string)>
  "getPath"(arg0: string, ...arg1: (string)[]): $Path
  "getTrustedManifestEntries"(arg0: string): $Attributes
- "getManifestSigners"(): ($CodeSigner)[]
+ "verifyPath"(arg0: $Path$Type): $SecureJar$Status
  "getPrimaryPath"(): $Path
+ "getManifestSigners"(): ($CodeSigner)[]
  "moduleDataProvider"(): $SecureJar$ModuleDataProvider
- "getProviders"(): $List<($SecureJar$Provider)>
  "getRootPath"(): $Path
  "getFileStatus"(arg0: string): $SecureJar$Status
  "hasSecurityData"(): boolean
- "verifyPath"(arg0: $Path$Type): $SecureJar$Status
+ "getProviders"(): $List<($SecureJar$Provider)>
 }
 
 export namespace $SecureJar {
-function from(arg0: $Supplier$Type<($Manifest$Type)>, arg1: $Function$Type<($SecureJar$Type), ($JarMetadata$Type)>, ...arg2: ($Path$Type)[]): $SecureJar
-function from(...arg0: ($Path$Type)[]): $SecureJar
 function from(arg0: $BiPredicate$Type<(string), (string)>, ...arg1: ($Path$Type)[]): $SecureJar
-function from(arg0: $Function$Type<($SecureJar$Type), ($JarMetadata$Type)>, ...arg1: ($Path$Type)[]): $SecureJar
-function from(arg0: $Supplier$Type<($Manifest$Type)>, arg1: $Function$Type<($SecureJar$Type), ($JarMetadata$Type)>, arg2: $BiPredicate$Type<(string), (string)>, ...arg3: ($Path$Type)[]): $SecureJar
+function from(...arg0: ($Path$Type)[]): $SecureJar
 function from(arg0: $Function$Type<($SecureJar$Type), ($JarMetadata$Type)>, arg1: $BiPredicate$Type<(string), (string)>, ...arg2: ($Path$Type)[]): $SecureJar
+function from(arg0: $Function$Type<($SecureJar$Type), ($JarMetadata$Type)>, ...arg1: ($Path$Type)[]): $SecureJar
+function from(arg0: $Supplier$Type<($Manifest$Type)>, arg1: $Function$Type<($SecureJar$Type), ($JarMetadata$Type)>, ...arg2: ($Path$Type)[]): $SecureJar
+function from(arg0: $Supplier$Type<($Manifest$Type)>, arg1: $Function$Type<($SecureJar$Type), ($JarMetadata$Type)>, arg2: $BiPredicate$Type<(string), (string)>, ...arg3: ($Path$Type)[]): $SecureJar
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_

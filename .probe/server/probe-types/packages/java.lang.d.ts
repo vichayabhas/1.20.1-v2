@@ -1555,8 +1555,8 @@ export class $VarHandle$VarHandleDesc extends $DynamicConstantDesc<($VarHandle)>
 public "toString"(): string
 public static "ofField"(arg0: $ClassDesc$Type, arg1: string, arg2: $ClassDesc$Type): $VarHandle$VarHandleDesc
 public "varType"(): $ClassDesc
-public static "ofStaticField"(arg0: $ClassDesc$Type, arg1: string, arg2: $ClassDesc$Type): $VarHandle$VarHandleDesc
 public static "ofArray"(arg0: $ClassDesc$Type): $VarHandle$VarHandleDesc
+public static "ofStaticField"(arg0: $ClassDesc$Type, arg1: string, arg2: $ClassDesc$Type): $VarHandle$VarHandleDesc
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_

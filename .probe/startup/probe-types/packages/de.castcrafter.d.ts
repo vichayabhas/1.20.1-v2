@@ -8,11 +8,11 @@ readonly "category": $EnchantmentCategory
 
 constructor()
 
+public "canApplyAtEnchantingTable"(arg0: $ItemStack$Type): boolean
 public "getMaxLevel"(): integer
-public "getMaxCost"(arg0: integer): integer
 public "getMinCost"(arg0: integer): integer
 public "canEnchant"(arg0: $ItemStack$Type): boolean
-public "canApplyAtEnchantingTable"(arg0: $ItemStack$Type): boolean
+public "getMaxCost"(arg0: integer): integer
 get "maxLevel"(): integer
 }
 /**
@@ -41,21 +41,21 @@ constructor(arg0: $BlockEntityType$Type<(any)>, arg1: $BlockPos$Type, arg2: $Blo
 
 public "getName"(): string
 public "setName"(arg0: string): void
-public "getMimic"(): $BlockState
-public "setMimic"(arg0: $BlockState$Type): void
-public "onLoad"(): void
-public "setLocked"(arg0: boolean): void
 public "load"(arg0: $CompoundTag$Type): void
 public "m_183515_"(arg0: $CompoundTag$Type): void
 public "getUpdateTag"(): $CompoundTag
 public "handleUpdateTag"(arg0: $CompoundTag$Type): void
+public "onLoad"(): void
+public "setLocked"(arg0: boolean): void
+public "getMimic"(): $BlockState
+public "setMimic"(arg0: $BlockState$Type): void
 public "isLocked"(): boolean
 get "name"(): string
 set "name"(value: string)
+get "updateTag"(): $CompoundTag
+set "locked"(value: boolean)
 get "mimic"(): $BlockState
 set "mimic"(value: $BlockState$Type)
-set "locked"(value: boolean)
-get "updateTag"(): $CompoundTag
 get "locked"(): boolean
 }
 /**
@@ -118,9 +118,9 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor(arg0: $ModX$Type, arg1: $Item$Properties$Type)
 
+public "getEnchantmentValue"(arg0: $ItemStack$Type): integer
 public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "isEnchantable"(arg0: $ItemStack$Type): boolean
-public "getEnchantmentValue"(arg0: $ItemStack$Type): integer
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -235,14 +235,14 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $ModX$Type, arg1: $Class$Type<($TileTravelAnchor$Type)>, arg2: $MenuType$Type<($MenuTravelAnchor$Type)>, arg3: $BlockBehaviour$Properties$Type)
 constructor(arg0: $ModX$Type, arg1: $Class$Type<($TileTravelAnchor$Type)>, arg2: $MenuType$Type<($MenuTravelAnchor$Type)>, arg3: $BlockBehaviour$Properties$Type, arg4: $Item$Properties$Type)
 
-public "registerClient"(arg0: $SetupContext$Type): void
+public "appendHoverText"(arg0: $ItemStack$Type, arg1: $BlockGetter$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
+public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "getRenderShape"(arg0: $BlockState$Type): $RenderShape
-public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "getLightBlock"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "appendHoverText"(arg0: $ItemStack$Type, arg1: $BlockGetter$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
+public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "registerClient"(arg0: $SetupContext$Type): void
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_

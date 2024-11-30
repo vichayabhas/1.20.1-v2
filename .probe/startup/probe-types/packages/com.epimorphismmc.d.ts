@@ -28,8 +28,8 @@ export type $IMOItemRendererProvider_ = $IMOItemRendererProvider$Type;
 declare module "packages/com/epimorphismmc/monomorphism/block/tier/$ITierType" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -41,9 +41,9 @@ export interface $ITierType extends $StringRepresentable {
 }
 
 export namespace $ITierType {
-function keys(arg0: ($StringRepresentable$Type)[]): $Keyable
 function fromEnum<E>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 function fromEnumWithMapping<E>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+function keys(arg0: ($StringRepresentable$Type)[]): $Keyable
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_

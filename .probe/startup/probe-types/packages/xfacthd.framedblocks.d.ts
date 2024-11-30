@@ -36,9 +36,9 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -94,10 +94,10 @@ constructor(arg0: $BlockType$Type)
 
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -335,27 +335,27 @@ public "getName"(): string
 public static "values"(): ($BlockType)[]
 public "compareTo"(arg0: $IBlockType$Type): integer
 public static "valueOf"(arg0: string): $BlockType
+public "supportsConnectedTextures"(): boolean
+public "allowMakingIntangible"(): boolean
+public "getFullFacePredicate"(): $FullFacePredicate
+public "getSideSkipPredicate"(): $SideSkipPredicate
+public "getMinimumConTexMode"(): $ConTexMode
+public "supportsWaterLogging"(): boolean
+public "getConnectionPredicate"(): $ConnectionPredicate
+public "generateOcclusionShapes"(arg0: $ImmutableList$Type<($BlockState$Type)>, arg1: $ShapeProvider$Type): $ShapeProvider
+public "canOccludeWithSolidCamo"(): boolean
 public "hasBlockItem"(): boolean
 public "isDoubleBlock"(): boolean
 public "hasSpecialTile"(): boolean
-public "getConnectionPredicate"(): $ConnectionPredicate
-public "getFullFacePredicate"(): $FullFacePredicate
-public "supportsConnectedTextures"(): boolean
-public "getSideSkipPredicate"(): $SideSkipPredicate
-public "getMinimumConTexMode"(): $ConTexMode
-public "allowMakingIntangible"(): boolean
-public "generateOcclusionShapes"(arg0: $ImmutableList$Type<($BlockState$Type)>, arg1: $ShapeProvider$Type): $ShapeProvider
-public "supportsWaterLogging"(): boolean
-public "canOccludeWithSolidCamo"(): boolean
 public "hasSpecialHitbox"(): boolean
 public "generateShapes"(arg0: $ImmutableList$Type<($BlockState$Type)>): $ShapeProvider
 public "canLockState"(): boolean
 get "name"(): string
-get "doubleBlock"(): boolean
-get "connectionPredicate"(): $ConnectionPredicate
 get "fullFacePredicate"(): $FullFacePredicate
 get "sideSkipPredicate"(): $SideSkipPredicate
 get "minimumConTexMode"(): $ConTexMode
+get "connectionPredicate"(): $ConnectionPredicate
+get "doubleBlock"(): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -407,10 +407,10 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -434,8 +434,8 @@ import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Directio
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
-import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$SolidityCheck, $SolidityCheck$Type} from "packages/xfacthd/framedblocks/common/data/doubleblock/$SolidityCheck"
+import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$AbstractFramedDoubleBlock, $AbstractFramedDoubleBlock$Type} from "packages/xfacthd/framedblocks/common/block/$AbstractFramedDoubleBlock"
 import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
 import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
@@ -470,18 +470,18 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getCloneItemStack"(arg0: $BlockState$Type, arg1: $HitResult$Type, arg2: $BlockGetter$Type, arg3: $BlockPos$Type, arg4: $Player$Type): $ItemStack
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "getCloneItemStack"(arg0: $BlockState$Type, arg1: $HitResult$Type, arg2: $BlockGetter$Type, arg3: $BlockPos$Type, arg4: $Player$Type): $ItemStack
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -510,9 +510,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
@@ -578,78 +577,76 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "getBlockType"(): $BlockType
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
-public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getCollisionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
 public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
+public "getCollisionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-get "blockType"(): $BlockType
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -667,8 +664,8 @@ declare module "packages/xfacthd/framedblocks/common/block/slopeslab/$FramedComp
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packages/net/minecraft/world/level/block/state/$BlockBehaviour$Properties"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
-import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$Rotation, $Rotation$Type} from "packages/net/minecraft/world/level/block/$Rotation"
+import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$IBlockType, $IBlockType$Type} from "packages/xfacthd/framedblocks/api/type/$IBlockType"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
@@ -699,11 +696,11 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -768,23 +765,23 @@ constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public static "itemModelSourceInner"(): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public static "itemModelSourceInner"(): $BlockState
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -813,8 +810,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
@@ -876,75 +873,75 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "getBlockType"(): $IBlockType
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
+public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
 public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "useShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
 public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "getVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "getBlockType"(): $IBlockType
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
@@ -989,8 +986,8 @@ public static "values"(): ($FramingSawRecipeMatchResult)[]
 public static "valueOf"(arg0: integer): $FramingSawRecipeMatchResult
 public static "valueOf"(arg0: string): $FramingSawRecipeMatchResult
 public "success"(): boolean
-public "additiveSlot"(): integer
 public "translation"(): $Component
+public "additiveSlot"(): integer
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1018,8 +1015,8 @@ import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
@@ -1084,69 +1081,69 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "getBlockType"(): $BlockType
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
 public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
+public "getBlockType"(): $BlockType
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
@@ -1204,10 +1201,10 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "isPathfindable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $PathComputationType$Type): boolean
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -1237,8 +1234,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
@@ -1302,75 +1299,75 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "getBlockType"(): $IBlockType
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
+public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
 public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "useShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
 public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "getVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "getBlockType"(): $IBlockType
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
@@ -1428,12 +1425,12 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(arg0: $BlockType$Type)
 
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "hasAnalogOutputSignal"(arg0: $BlockState$Type): boolean
 public "getAnalogOutputSignal"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): integer
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -1453,6 +1450,13 @@ export type $FramedStorageBlock_ = $FramedStorageBlock$Type;
 declare module "packages/xfacthd/framedblocks/common/block/torch/$FramedWallTorchBlock" {
 import {$LevelAccessor, $LevelAccessor$Type} from "packages/net/minecraft/world/level/$LevelAccessor"
 import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$CompoundTag"
+import {$MapColor, $MapColor$Type} from "packages/net/minecraft/world/level/material/$MapColor"
+import {$IFramedBlock, $IFramedBlock$Type} from "packages/xfacthd/framedblocks/api/block/$IFramedBlock"
+import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packages/net/minecraft/world/level/block/state/$BlockBehaviour$Properties"
+import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
+import {$SideSkipPredicate, $SideSkipPredicate$Type} from "packages/xfacthd/framedblocks/api/predicate/cull/$SideSkipPredicate"
+import {$WallTorchBlock, $WallTorchBlock$Type} from "packages/net/minecraft/world/level/block/$WallTorchBlock"
+import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/entity/$LivingEntity"
 import {$MutableComponent, $MutableComponent$Type} from "packages/net/minecraft/network/chat/$MutableComponent"
@@ -1462,43 +1466,35 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
+import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/world/phys/$BlockHitResult"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
+import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
+import {$ShapeProvider, $ShapeProvider$Type} from "packages/xfacthd/framedblocks/api/shapes/$ShapeProvider"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
-import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
-import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
-import {$BlockEntityType, $BlockEntityType$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityType"
-import {$BlockItem, $BlockItem$Type} from "packages/net/minecraft/world/item/$BlockItem"
-import {$LootParams$Builder, $LootParams$Builder$Type} from "packages/net/minecraft/world/level/storage/loot/$LootParams$Builder"
-import {$Optional, $Optional$Type} from "packages/java/util/$Optional"
-import {$IPlantable, $IPlantable$Type} from "packages/net/minecraftforge/common/$IPlantable"
-import {$Explosion, $Explosion$Type} from "packages/net/minecraft/world/level/$Explosion"
-import {$GameEventListener, $GameEventListener$Type} from "packages/net/minecraft/world/level/gameevent/$GameEventListener"
-import {$BlockAndTintGetter, $BlockAndTintGetter$Type} from "packages/net/minecraft/world/level/$BlockAndTintGetter"
-import {$MapColor, $MapColor$Type} from "packages/net/minecraft/world/level/material/$MapColor"
-import {$IFramedBlock, $IFramedBlock$Type} from "packages/xfacthd/framedblocks/api/block/$IFramedBlock"
-import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packages/net/minecraft/world/level/block/state/$BlockBehaviour$Properties"
-import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
-import {$SideSkipPredicate, $SideSkipPredicate$Type} from "packages/xfacthd/framedblocks/api/predicate/cull/$SideSkipPredicate"
-import {$WallTorchBlock, $WallTorchBlock$Type} from "packages/net/minecraft/world/level/block/$WallTorchBlock"
-import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
-import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/world/phys/$BlockHitResult"
-import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
-import {$ShapeProvider, $ShapeProvider$Type} from "packages/xfacthd/framedblocks/api/shapes/$ShapeProvider"
 import {$ModelData, $ModelData$Type} from "packages/net/minecraftforge/client/model/data/$ModelData"
 import {$VoxelShape, $VoxelShape$Type} from "packages/net/minecraft/world/phys/shapes/$VoxelShape"
 import {$CollisionContext, $CollisionContext$Type} from "packages/net/minecraft/world/phys/shapes/$CollisionContext"
 import {$InteractionResult, $InteractionResult$Type} from "packages/net/minecraft/world/$InteractionResult"
+import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
+import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
+import {$BlockEntityType, $BlockEntityType$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityType"
 import {$StateCache, $StateCache$Type} from "packages/xfacthd/framedblocks/api/block/cache/$StateCache"
 import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
+import {$BlockItem, $BlockItem$Type} from "packages/net/minecraft/world/item/$BlockItem"
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
+import {$LootParams$Builder, $LootParams$Builder$Type} from "packages/net/minecraft/world/level/storage/loot/$LootParams$Builder"
 import {$SoundType, $SoundType$Type} from "packages/net/minecraft/world/level/block/$SoundType"
+import {$Optional, $Optional$Type} from "packages/java/util/$Optional"
+import {$IPlantable, $IPlantable$Type} from "packages/net/minecraftforge/common/$IPlantable"
 import {$Rotation, $Rotation$Type} from "packages/net/minecraft/world/level/block/$Rotation"
 import {$IBlockType, $IBlockType$Type} from "packages/xfacthd/framedblocks/api/type/$IBlockType"
+import {$Explosion, $Explosion$Type} from "packages/net/minecraft/world/level/$Explosion"
 import {$BlockEntityTicker, $BlockEntityTicker$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityTicker"
+import {$GameEventListener, $GameEventListener$Type} from "packages/net/minecraft/world/level/gameevent/$GameEventListener"
+import {$BlockAndTintGetter, $BlockAndTintGetter$Type} from "packages/net/minecraft/world/level/$BlockAndTintGetter"
 
 export class $FramedWallTorchBlock extends $WallTorchBlock implements $IFramedBlock {
 static readonly "FACING": $DirectionProperty
@@ -1525,72 +1521,70 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "getBlockType"(): $BlockType
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
 public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
 public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-get "blockType"(): $BlockType
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1639,8 +1633,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -1668,6 +1662,7 @@ import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/leve
 import {$BlockItem, $BlockItem$Type} from "packages/net/minecraft/world/item/$BlockItem"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$IPlantable, $IPlantable$Type} from "packages/net/minecraftforge/common/$IPlantable"
+import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
 import {$IBlockType, $IBlockType$Type} from "packages/xfacthd/framedblocks/api/type/$IBlockType"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 
@@ -1694,11 +1689,13 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getBlockType"(): $BlockType
 public "createBlockItem"(): $BlockItem
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
+get "blockType"(): $BlockType
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1718,8 +1715,8 @@ import {$InteractionResult, $InteractionResult$Type} from "packages/net/minecraf
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
-import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
+import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
 import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/entity/$LivingEntity"
 import {$FramedBlock, $FramedBlock$Type} from "packages/xfacthd/framedblocks/common/block/$FramedBlock"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
@@ -1754,15 +1751,15 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
-public "hasAnalogOutputSignal"(arg0: $BlockState$Type): boolean
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
+public "hasAnalogOutputSignal"(arg0: $BlockState$Type): boolean
 public "getAnalogOutputSignal"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): integer
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -1822,13 +1819,13 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "getFacing"(arg0: $BlockState$Type): $Direction
 public "getSlopeType"(arg0: $BlockState$Type): $SlopeType
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -1857,11 +1854,11 @@ constructor(arg0: $BlockState$Type, arg1: $IBlockType$Type)
 
 public "equals"(arg0: any): boolean
 public "hashCode"(): integer
-public "hasAnyDetailedConnections"(): boolean
-public "isFullFace"(arg0: $Direction$Type): boolean
+public "hasAnyFullFace"(): boolean
 public "canConnectFullEdge"(arg0: $Direction$Type, arg1: $Direction$Type): boolean
 public "canConnectDetailed"(arg0: $Direction$Type, arg1: $Direction$Type): boolean
-public "hasAnyFullFace"(): boolean
+public "isFullFace"(arg0: $Direction$Type): boolean
+public "hasAnyDetailedConnections"(): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1916,75 +1913,75 @@ constructor(arg0: $BlockPos$Type, arg1: $BlockState$Type)
 constructor(arg0: $BlockEntityType$Type<(any)>, arg1: $BlockPos$Type, arg2: $BlockState$Type)
 
 public "getBlock"(): $IFramedBlock
+public static "canSustainPlant"(arg0: $FramedBlockEntity$Type, arg1: $CamoContainer$Type, arg2: $Direction$Type, arg3: $IPlantable$Type): boolean
 public "getMapColor"(): $MapColor
-public "handleInteraction"(arg0: $Player$Type, arg1: $InteractionHand$Type, arg2: $BlockHitResult$Type): $InteractionResult
-public "isGlowing"(): boolean
-public "setGlowing"(arg0: boolean): void
-public "doesCamoPreventDestructionByEntity"(arg0: $Entity$Type): boolean
-public "shouldCamoDisplayFluidOverlay"(arg0: $BlockAndTintGetter$Type, arg1: $BlockPos$Type, arg2: $FluidState$Type): boolean
-public "getCamoBeaconColorMultiplier"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockPos$Type): (float)[]
-public "getCamoShadeBrightness"(arg0: float): float
-public "getCamoFireSpreadSpeed"(arg0: $Direction$Type): integer
-/**
- * 
- * @deprecated
- */
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockState$Type, arg2: $Direction$Type): $BlockState
-public "canCamoSustainPlant"(arg0: $Direction$Type, arg1: $IPlantable$Type): boolean
-public "getCamoExplosionResistance"(arg0: $Explosion$Type): float
-public "getCamoFlammability"(arg0: $Direction$Type): integer
-public "canAutoApplyCamoOnPlacement"(): boolean
-public "getBlockType"(): $IBlockType
-public "onLoad"(): void
-public "isReinforced"(): boolean
-public "getCamo"(): $CamoContainer
-public "getCamo"(arg0: $Direction$Type): $CamoContainer
-public "getCamo"(arg0: $BlockState$Type): $CamoContainer
-public "getCamo"(arg0: $Direction$Type, arg1: $Direction$Type): $CamoContainer
-public "getCamo"(arg0: $BlockHitResult$Type): $CamoContainer
-public "isIntangible"(arg0: $CollisionContext$Type): boolean
-public "setCamo"(arg0: $CamoContainer$Type, arg1: boolean): void
-public "setIntangible"(arg0: boolean): void
-public "setReinforced"(arg0: boolean): void
 public "load"(arg0: $CompoundTag$Type): void
 public "m_183515_"(arg0: $CompoundTag$Type): void
 public "setLevel"(arg0: $Level$Type): void
 public "setBlockState"(arg0: $BlockState$Type): void
 public "getUpdateTag"(): $CompoundTag
 public "onDataPacket"(arg0: $Connection$Type, arg1: $ClientboundBlockEntityDataPacket$Type): void
-public "handleUpdateTag"(arg0: $CompoundTag$Type): void
+public "getModelData"(): $ModelData
 /**
  * 
  * @deprecated
  */
 public "getModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type): $ModelData
-public "getModelData"(): $ModelData
-public "getCamoFriction"(arg0: $BlockState$Type, arg1: $Entity$Type): float
-public "checkCamoSolid"(): void
+public "handleUpdateTag"(arg0: $CompoundTag$Type): void
+public "onLoad"(): void
+public "handleInteraction"(arg0: $Player$Type, arg1: $InteractionHand$Type, arg2: $BlockHitResult$Type): $InteractionResult
+public "getCamo"(arg0: $Direction$Type, arg1: $Direction$Type): $CamoContainer
+public "getCamo"(): $CamoContainer
+public "getCamo"(arg0: $Direction$Type): $CamoContainer
+public "getCamo"(arg0: $BlockState$Type): $CamoContainer
+public "getCamo"(arg0: $BlockHitResult$Type): $CamoContainer
+public "isIntangible"(arg0: $CollisionContext$Type): boolean
+public "setCamo"(arg0: $CamoContainer$Type, arg1: boolean): void
+public "isReinforced"(): boolean
+public "setReinforced"(arg0: boolean): void
+public "setIntangible"(arg0: boolean): void
+public "getLightValue"(): integer
+public "getBlockType"(): $IBlockType
+public "addAdditionalDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: boolean): void
+public "getUpdatePacket"(): $ClientboundBlockEntityDataPacket
 public "updateCulling"(arg0: $Direction$Type, arg1: boolean): boolean
 public "updateCulling"(arg0: boolean, arg1: boolean): void
-public "addAdditionalDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: boolean): void
-public "getLightValue"(): integer
+public "getCamoFriction"(arg0: $BlockState$Type, arg1: $Entity$Type): float
 public "isCamoFlammable"(arg0: $Direction$Type): boolean
-public "getUpdatePacket"(): $ClientboundBlockEntityDataPacket
-public static "canSustainPlant"(arg0: $FramedBlockEntity$Type, arg1: $CamoContainer$Type, arg2: $Direction$Type, arg3: $IPlantable$Type): boolean
+public "checkCamoSolid"(): void
+public "setGlowing"(arg0: boolean): void
+public "isGlowing"(): boolean
 public "isSolidSide"(arg0: $Direction$Type): boolean
 public "writeToBlueprint"(): $CompoundTag
+public "getCamoShadeBrightness"(arg0: float): float
+public "getCamoFlammability"(arg0: $Direction$Type): integer
+public "getCamoFireSpreadSpeed"(arg0: $Direction$Type): integer
+public "getCamoBeaconColorMultiplier"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockPos$Type): (float)[]
+public "canAutoApplyCamoOnPlacement"(): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockState$Type, arg2: $Direction$Type): $BlockState
+public "getCamoExplosionResistance"(arg0: $Explosion$Type): float
+public "canCamoSustainPlant"(arg0: $Direction$Type, arg1: $IPlantable$Type): boolean
+public "doesCamoPreventDestructionByEntity"(arg0: $Entity$Type): boolean
+public "shouldCamoDisplayFluidOverlay"(arg0: $BlockAndTintGetter$Type, arg1: $BlockPos$Type, arg2: $FluidState$Type): boolean
 get "block"(): $IFramedBlock
 get "mapColor"(): $MapColor
-get "glowing"(): boolean
-set "glowing"(value: boolean)
-get "blockType"(): $IBlockType
-get "reinforced"(): boolean
-get "camo"(): $CamoContainer
-set "intangible"(value: boolean)
-set "reinforced"(value: boolean)
 set "level"(value: $Level$Type)
 set "blockState"(value: $BlockState$Type)
 get "updateTag"(): $CompoundTag
 get "modelData"(): $ModelData
+get "camo"(): $CamoContainer
+get "reinforced"(): boolean
+set "reinforced"(value: boolean)
+set "intangible"(value: boolean)
 get "lightValue"(): integer
+get "blockType"(): $IBlockType
 get "updatePacket"(): $ClientboundBlockEntityDataPacket
+set "glowing"(value: boolean)
+get "glowing"(): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2044,23 +2041,23 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public static "itemModelSourceInner"(): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public static "itemModelSourceInner"(): $BlockState
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -2114,16 +2111,16 @@ readonly "properties": $BlockBehaviour$Properties
 
 
 public static "standard"(): $FramedAdjustableDoubleSlabBlock
-public static "copycat"(): $FramedAdjustableDoubleSlabBlock
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public static "copycat"(): $FramedAdjustableDoubleSlabBlock
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -2144,16 +2141,16 @@ import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packa
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
-import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
+import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
 import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/entity/$LivingEntity"
 import {$FramedBlock, $FramedBlock$Type} from "packages/xfacthd/framedblocks/common/block/$FramedBlock"
 import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
 import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
-import {$Rotation, $Rotation$Type} from "packages/net/minecraft/world/level/block/$Rotation"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Rotation, $Rotation$Type} from "packages/net/minecraft/world/level/block/$Rotation"
 import {$IBlockType, $IBlockType$Type} from "packages/xfacthd/framedblocks/api/type/$IBlockType"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
@@ -2183,16 +2180,16 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public static "isOwnedBy"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $Player$Type): boolean
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -2286,50 +2283,50 @@ static readonly "MAX_ADDITIVE_COUNT": integer
 
 
 public "getResult"(): $ItemStack
-public "getMaterialAmount"(): integer
-public "isSpecial"(): boolean
 public "assemble"(arg0: $Container$Type, arg1: $RegistryAccess$Type): $ItemStack
 public "matches"(arg0: $Container$Type, arg1: $Level$Type): boolean
-public "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
-public "getSerializer"(): $RecipeSerializer<(any)>
-public "getToastSymbol"(): $ItemStack
 public "getId"(): $ResourceLocation
+public "isSpecial"(): boolean
+public "getSerializer"(): $RecipeSerializer<(any)>
+public "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
+public "getToastSymbol"(): $ItemStack
+public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
+public "getMaterialAmount"(): integer
 public "matchWithResult"(arg0: $Container$Type, arg1: $Level$Type): $FramingSawRecipeMatchResult
 public "getAdditives"(): $List<($FramingSawRecipeAdditive)>
-public "makeCraftingCalculation"(arg0: $Container$Type, arg1: boolean): $FramingSawRecipeCalculation
-public "getResultType"(): $IBlockType
-public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
 public "isDisabled"(): boolean
-public "getIngredients"(): $NonNullList<($Ingredient)>
-public "showNotification"(): boolean
-public "getRemainingItems"(arg0: $Container$Type): $NonNullList<($ItemStack)>
+public "getResultType"(): $IBlockType
+public "makeCraftingCalculation"(arg0: $Container$Type, arg1: boolean): $FramingSawRecipeCalculation
 public "isIncomplete"(): boolean
-public "getGroup"(): string
-public "getOrCreateId"(): $ResourceLocation
-public "hasOutput"(match: $ReplacementMatch$Type): boolean
-public "getSchema"(): $RecipeSchema
-public "hasInput"(match: $ReplacementMatch$Type): boolean
-public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
-public "setGroup"(group: string): void
-public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
+public "getRemainingItems"(arg0: $Container$Type): $NonNullList<($ItemStack)>
+public "showNotification"(): boolean
+public "getIngredients"(): $NonNullList<($Ingredient)>
 public "getMod"(): string
+public "getSchema"(): $RecipeSchema
+public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
+public "hasInput"(match: $ReplacementMatch$Type): boolean
+public "hasOutput"(match: $ReplacementMatch$Type): boolean
+public "getOrCreateId"(): $ResourceLocation
+public "setGroup"(group: string): void
+public "getGroup"(): string
+public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
 public "getType"(): $ResourceLocation
 get "result"(): $ItemStack
-get "materialAmount"(): integer
+get "id"(): $ResourceLocation
 get "special"(): boolean
 get "serializer"(): $RecipeSerializer<(any)>
 get "toastSymbol"(): $ItemStack
-get "id"(): $ResourceLocation
+get "materialAmount"(): integer
 get "additives"(): $List<($FramingSawRecipeAdditive)>
-get "resultType"(): $IBlockType
 get "disabled"(): boolean
-get "ingredients"(): $NonNullList<($Ingredient)>
+get "resultType"(): $IBlockType
 get "incomplete"(): boolean
-get "group"(): string
-get "orCreateId"(): $ResourceLocation
-get "schema"(): $RecipeSchema
-set "group"(value: string)
+get "ingredients"(): $NonNullList<($Ingredient)>
 get "mod"(): string
+get "schema"(): $RecipeSchema
+get "orCreateId"(): $ResourceLocation
+set "group"(value: string)
+get "group"(): string
 get "type"(): $ResourceLocation
 }
 /**
@@ -2349,8 +2346,8 @@ import {$StateCache, $StateCache$Type} from "packages/xfacthd/framedblocks/api/b
 
 export interface $IStateCacheAccessor {
 
- "framedblocks$initCache"(arg0: $StateCache$Type): void
  "framedblocks$getCache"(): $StateCache
+ "framedblocks$initCache"(arg0: $StateCache$Type): void
 }
 
 export namespace $IStateCacheAccessor {
@@ -2409,10 +2406,10 @@ constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -2465,9 +2462,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -2529,22 +2526,22 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -2605,22 +2602,22 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public static "itemModelSourceSlab"(): $BlockState
-public static "itemModelSourcePanel"(): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSourceSlab"(): $BlockState
+public static "itemModelSourcePanel"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -2674,10 +2671,10 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -2739,22 +2736,22 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -2816,22 +2813,22 @@ constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public static "itemSource"(): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public static "itemSource"(): $BlockState
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -2884,10 +2881,10 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -3020,23 +3017,23 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
+public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "isHorizontalSlope"(arg0: $BlockState$Type): boolean
 public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
-public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
-public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -3073,44 +3070,44 @@ static readonly "MSG_NON_SOLID": $Component
  "blockState": $BlockState
 
 
-public "updateTextFromPacket"(arg0: $Player$Type, arg1: boolean, arg2: $List$Type<($FilteredText$Type)>): void
 public "setText"(arg0: $SignText$Type, arg1: boolean): boolean
 public static "normalSign"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $FramedSignBlockEntity
 public static "hangingSign"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $FramedSignBlockEntity
+public "getRenderBoundingBox"(): $AABB
 public "load"(arg0: $CompoundTag$Type): void
 public "m_183515_"(arg0: $CompoundTag$Type): void
 public "onlyOpCanSetNbt"(): boolean
 public "setBlockState"(arg0: $BlockState$Type): void
 public "getUpdateTag"(): $CompoundTag
 public "handleUpdateTag"(arg0: $CompoundTag$Type): void
+public "getText"(arg0: boolean): $SignText
 public static "tick"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $FramedSignBlockEntity$Type): void
-public "canExecuteCommands"(arg0: boolean, arg1: $Player$Type): boolean
-public "isWaxed"(): boolean
-public "isFacingFrontText"(arg0: $Player$Type): boolean
-public "tryExecuteCommands"(arg0: $Player$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: boolean): boolean
-public "getEditingPlayer"(): $UUID
-public "setEditingPlayer"(arg0: $UUID$Type): void
+public "updateTextFromPacket"(arg0: $Player$Type, arg1: boolean, arg2: $List$Type<($FilteredText$Type)>): void
+public "getBackText"(): $SignText
+public "setFrontText"(arg0: $SignText$Type): boolean
+public "getFrontText"(): $SignText
 public "setBackText"(arg0: $SignText$Type): boolean
 public "setWaxed"(arg0: boolean): boolean
-public "setFrontText"(arg0: $SignText$Type): boolean
 public "isTooFarAwayToEdit"(arg0: $Player$Type): boolean
-public "getFrontText"(): $SignText
-public "getBackText"(): $SignText
-public "getText"(arg0: boolean): $SignText
-public "getRenderBoundingBox"(): $AABB
+public "setEditingPlayer"(arg0: $UUID$Type): void
+public "tryExecuteCommands"(arg0: $Player$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: boolean): boolean
+public "isFacingFrontText"(arg0: $Player$Type): boolean
+public "canExecuteCommands"(arg0: boolean, arg1: $Player$Type): boolean
+public "isWaxed"(): boolean
+public "getEditingPlayer"(): $UUID
 public "updateText"(arg0: $UnaryOperator$Type<($SignText$Type)>, arg1: boolean): boolean
 public "writeToBlueprint"(): $CompoundTag
+get "renderBoundingBox"(): $AABB
 set "blockState"(value: $BlockState$Type)
 get "updateTag"(): $CompoundTag
-get "waxed"(): boolean
-get "editingPlayer"(): $UUID
-set "editingPlayer"(value: $UUID$Type)
-set "backText"(value: $SignText$Type)
-set "waxed"(value: boolean)
+get "backText"(): $SignText
 set "frontText"(value: $SignText$Type)
 get "frontText"(): $SignText
-get "backText"(): $SignText
-get "renderBoundingBox"(): $AABB
+set "backText"(value: $SignText$Type)
+set "waxed"(value: boolean)
+set "editingPlayer"(value: $UUID$Type)
+get "waxed"(): boolean
+get "editingPlayer"(): $UUID
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3171,22 +3168,22 @@ constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -3214,9 +3211,9 @@ export class $FramingSawRecipeSerializer implements $RecipeSerializer<($FramingS
 
 constructor()
 
-public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $FramingSawRecipe$Type): void
-public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $FramingSawRecipe
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type): $FramingSawRecipe
+public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $FramingSawRecipe
+public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $FramingSawRecipe$Type): void
 public static "register"<S extends $RecipeSerializer<(T)>, T extends $Recipe<(any)>>(arg0: string, arg1: S): S
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type, arg2: $ICondition$IContext$Type): $FramingSawRecipe
 }
@@ -3278,13 +3275,13 @@ static readonly "UPDATE_LIMIT": integer
 readonly "properties": $BlockBehaviour$Properties
 
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "getFluidState"(arg0: $BlockState$Type): $FluidState
 public "getCloneItemStack"(arg0: $BlockState$Type, arg1: $HitResult$Type, arg2: $BlockGetter$Type, arg3: $BlockPos$Type, arg4: $Player$Type): $ItemStack
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "canPlaceLiquid"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Fluid$Type): boolean
-public "placeLiquid"(arg0: $LevelAccessor$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $FluidState$Type): boolean
 public "pickupBlock"(arg0: $LevelAccessor$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): $ItemStack
+public "placeLiquid"(arg0: $LevelAccessor$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $FluidState$Type): boolean
 public "getPickupSound"(): $Optional<($SoundEvent)>
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
@@ -3319,8 +3316,8 @@ import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
@@ -3385,70 +3382,70 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "getBlockType"(): $BlockType
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
-public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
 public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
 public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
+public "getBlockType"(): $BlockType
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
@@ -3486,8 +3483,8 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor(arg0: $Block$Type, arg1: $Block$Type, arg2: $Item$Properties$Type)
 
-public "registerBlocks"(arg0: $Map$Type<($Block$Type), ($Item$Type)>, arg1: $Item$Type): void
 public "removeFromBlockToItemMap"(arg0: $Map$Type<($Block$Type), ($Item$Type)>, arg1: $Item$Type): void
+public "registerBlocks"(arg0: $Map$Type<($Block$Type), ($Item$Type)>, arg1: $Item$Type): void
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3540,10 +3537,10 @@ constructor(arg0: $BlockType$Type)
 
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -3597,12 +3594,12 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "isHorizontalSlope"(arg0: $BlockState$Type): boolean
 public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -3661,12 +3658,12 @@ constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public static "getStateForPlacement"(arg0: $Block$Type, arg1: boolean, arg2: $BlockPlaceContext$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public static "mirrorCorner"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public static "getStateForPlacement"(arg0: $Block$Type, arg1: boolean, arg2: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -3731,23 +3728,23 @@ constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public "createBlockItem"(): $BlockItem
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -3796,8 +3793,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 
 public "getMaxTextLineWidth"(): integer
-public "getTextLineHeight"(): integer
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "getTextLineHeight"(): integer
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -3854,9 +3851,9 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -3886,8 +3883,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
@@ -3950,77 +3947,77 @@ static readonly "UPDATE_LIMIT": integer
 readonly "properties": $BlockBehaviour$Properties
 
 
-public "getBlockType"(): $IBlockType
+public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
 public static "activator"(): $FramedFancyPoweredRailBlock
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "useShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
 public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "getVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "getBlockType"(): $IBlockType
 public static "powered"(): $FramedFancyPoweredRailBlock
-public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
@@ -4080,9 +4077,9 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "isPathfindable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $PathComputationType$Type): boolean
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -4102,8 +4099,8 @@ export type $FramedSlabBlock_ = $FramedSlabBlock$Type;
 declare module "packages/xfacthd/framedblocks/common/data/property/$SlopeType" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -4115,13 +4112,13 @@ static readonly "TOP": $SlopeType
 
 public static "values"(): ($SlopeType)[]
 public static "valueOf"(arg0: string): $SlopeType
-public "getSerializedName"(): string
 public "getOpposite"(): $SlopeType
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
+public "getSerializedName"(): string
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
-get "serializedName"(): string
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "opposite"(): $SlopeType
+get "serializedName"(): string
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -4150,8 +4147,8 @@ static readonly "SECOND": $CamoGetter
 
 public static "values"(): ($CamoGetter)[]
 public static "valueOf"(arg0: string): $CamoGetter
-public "getComponent"(arg0: $Tuple$Type<($BlockState$Type), ($BlockState$Type)>): $BlockState
 public "getCamo"(arg0: $FramedDoubleBlockEntity$Type): $CamoContainer
+public "getComponent"(arg0: $Tuple$Type<($BlockState$Type), ($BlockState$Type)>): $BlockState
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -4204,10 +4201,10 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -4273,24 +4270,24 @@ constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public "createBlockItem"(): $BlockItem
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public static "itemModelSourceInner"(): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public static "itemModelSourceInner"(): $BlockState
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -4319,8 +4316,8 @@ import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
@@ -4384,79 +4381,77 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(arg0: $BlockType$Type)
 
-public "getBlockType"(): $BlockType
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
-public "skipRendering"(arg0: $BlockState$Type, arg1: $BlockState$Type, arg2: $Direction$Type): boolean
-public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getCollisionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
 public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
+public "skipRendering"(arg0: $BlockState$Type, arg1: $BlockState$Type, arg2: $Direction$Type): boolean
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
+public "getCollisionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-get "blockType"(): $BlockType
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -4506,9 +4501,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -4570,21 +4565,21 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -4636,8 +4631,8 @@ import {$BlockAndTintGetter, $BlockAndTintGetter$Type} from "packages/net/minecr
 import {$DoubleBlockStateCache, $DoubleBlockStateCache$Type} from "packages/xfacthd/framedblocks/common/data/doubleblock/$DoubleBlockStateCache"
 import {$MapColor, $MapColor$Type} from "packages/net/minecraft/world/level/material/$MapColor"
 import {$IFramedBlock, $IFramedBlock$Type} from "packages/xfacthd/framedblocks/api/block/$IFramedBlock"
-import {$SideSkipPredicate, $SideSkipPredicate$Type} from "packages/xfacthd/framedblocks/api/predicate/cull/$SideSkipPredicate"
 import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
+import {$SideSkipPredicate, $SideSkipPredicate$Type} from "packages/xfacthd/framedblocks/api/predicate/cull/$SideSkipPredicate"
 import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packages/net/minecraft/world/level/block/state/$BlockBehaviour$Properties"
 import {$TreeConfiguration, $TreeConfiguration$Type} from "packages/net/minecraft/world/level/levelgen/feature/configurations/$TreeConfiguration"
 import {$Mob, $Mob$Type} from "packages/net/minecraft/world/entity/$Mob"
@@ -4665,108 +4660,108 @@ export interface $IFramedDoubleBlock extends $IFramedBlock {
 
  "initCache"(arg0: $BlockState$Type): $StateCache
  "getCache"(arg0: $BlockState$Type): $DoubleBlockStateCache
- "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
- "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
- "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
- "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
  "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
  "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
- "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
- "getTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
- "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
  "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+ "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
+ "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
+ "getTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
+ "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
  "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
  "getBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
  "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
  "getSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
  "getCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
- "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+ "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+ "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
+ "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
  "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+ "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+ "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+ "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+ "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+ "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+ "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+ "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+ "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+ "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+ "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
  "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
  "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
- "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
- "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
+ "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+ "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+ "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+ "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+ "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+ "getBlockType"(): $IBlockType
+ "createBlockItem"(): $BlockItem
+ "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+ "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+ "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+ "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+ "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+ "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+ "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+ "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
+ "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+ "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+ "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
  "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
  "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
- "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
- "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
  "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
  "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
- "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+ "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
  "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
- "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
- "createBlockItem"(): $BlockItem
- "getBlockType"(): $IBlockType
- "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
- "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
- "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
- "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
- "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
- "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
- "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
- "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
- "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
- "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
- "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
- "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
- "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
- "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
- "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
- "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
- "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
- "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
- "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
- "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
- "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+ "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
  "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
  "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
  "rotate"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Rotation$Type): $BlockState
- "canBeHydrated"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type, arg4: $BlockPos$Type): boolean
- "isScaffolding"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $LivingEntity$Type): boolean
- "canConnectRedstone"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
- "onCaughtFire"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $LivingEntity$Type): void
- "isFireSource"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
- "onBlockExploded"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): void
- "isSlimeBlock"(arg0: $BlockState$Type): boolean
- "canStickTo"(arg0: $BlockState$Type, arg1: $BlockState$Type): boolean
- "isStickyBlock"(arg0: $BlockState$Type): boolean
- "supportsExternalFaceHiding"(arg0: $BlockState$Type): boolean
- "onDestroyedByPlayer"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: boolean, arg5: $FluidState$Type): boolean
- "getEnchantPowerBonus"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): float
- "getAdjacentBlockPathType"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Mob$Type, arg4: $BlockPathTypes$Type): $BlockPathTypes
- "shouldCheckWeakPower"(arg0: $BlockState$Type, arg1: $SignalGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
- "getToolModifiedState"(arg0: $BlockState$Type, arg1: $UseOnContext$Type, arg2: $ToolAction$Type, arg3: boolean): $BlockState
- "collisionExtendsVertically"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
- "makesOpenTrapdoorAboveClimbable"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type): boolean
- "canDropFromExplosion"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): boolean
- "getStateAtViewpoint"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Vec3$Type): $BlockState
- "getPistonPushReaction"(arg0: $BlockState$Type): $PushReaction
- "getCloneItemStack"(arg0: $BlockState$Type, arg1: $HitResult$Type, arg2: $BlockGetter$Type, arg3: $BlockPos$Type, arg4: $Player$Type): $ItemStack
- "isPortalFrame"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
- "isFertile"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
- "isConduitFrame"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): boolean
- "getExpDrop"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $RandomSource$Type, arg3: $BlockPos$Type, arg4: integer, arg5: integer): integer
- "onTreeGrow"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BiConsumer$Type<($BlockPos$Type), ($BlockState$Type)>, arg3: $RandomSource$Type, arg4: $BlockPos$Type, arg5: $TreeConfiguration$Type): boolean
- "onNeighborChange"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): void
- "getBlockPathType"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Mob$Type): $BlockPathTypes
- "getWeakChanges"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
  "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
  "isLadder"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $LivingEntity$Type): boolean
- "isBurning"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
- "canHarvestBlock"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
- "setBedOccupied"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $LivingEntity$Type, arg4: boolean): void
- "isBed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
- "isValidSpawn"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $SpawnPlacements$Type$Type, arg4: $EntityType$Type<(any)>): boolean
  "getBedDirection"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): $Direction
+ "canHarvestBlock"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+ "isBed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+ "isBurning"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
  "getRespawnPosition"(arg0: $BlockState$Type, arg1: $EntityType$Type<(any)>, arg2: $LevelReader$Type, arg3: $BlockPos$Type, arg4: float, arg5: $LivingEntity$Type): $Optional<($Vec3)>
+ "setBedOccupied"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $LivingEntity$Type, arg4: boolean): void
+ "isValidSpawn"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $SpawnPlacements$Type$Type, arg4: $EntityType$Type<(any)>): boolean
+ "isConduitFrame"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): boolean
+ "onTreeGrow"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BiConsumer$Type<($BlockPos$Type), ($BlockState$Type)>, arg3: $RandomSource$Type, arg4: $BlockPos$Type, arg5: $TreeConfiguration$Type): boolean
+ "isPortalFrame"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+ "getExpDrop"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $RandomSource$Type, arg3: $BlockPos$Type, arg4: integer, arg5: integer): integer
+ "isFertile"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+ "onNeighborChange"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): void
+ "isStickyBlock"(arg0: $BlockState$Type): boolean
+ "getWeakChanges"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+ "getBlockPathType"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Mob$Type): $BlockPathTypes
+ "isSlimeBlock"(arg0: $BlockState$Type): boolean
+ "canStickTo"(arg0: $BlockState$Type, arg1: $BlockState$Type): boolean
+ "onCaughtFire"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $LivingEntity$Type): void
+ "onBlockExploded"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): void
+ "isFireSource"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+ "canConnectRedstone"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+ "isScaffolding"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $LivingEntity$Type): boolean
+ "canBeHydrated"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type, arg4: $BlockPos$Type): boolean
+ "getPistonPushReaction"(arg0: $BlockState$Type): $PushReaction
+ "canDropFromExplosion"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): boolean
+ "collisionExtendsVertically"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+ "onDestroyedByPlayer"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: boolean, arg5: $FluidState$Type): boolean
+ "getEnchantPowerBonus"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): float
+ "shouldCheckWeakPower"(arg0: $BlockState$Type, arg1: $SignalGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+ "getToolModifiedState"(arg0: $BlockState$Type, arg1: $UseOnContext$Type, arg2: $ToolAction$Type, arg3: boolean): $BlockState
+ "getAdjacentBlockPathType"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Mob$Type, arg4: $BlockPathTypes$Type): $BlockPathTypes
+ "getStateAtViewpoint"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Vec3$Type): $BlockState
+ "getCloneItemStack"(arg0: $BlockState$Type, arg1: $HitResult$Type, arg2: $BlockGetter$Type, arg3: $BlockPos$Type, arg4: $Player$Type): $ItemStack
+ "makesOpenTrapdoorAboveClimbable"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type): boolean
+ "supportsExternalFaceHiding"(arg0: $BlockState$Type): boolean
 }
 
 export namespace $IFramedDoubleBlock {
@@ -4833,23 +4828,23 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public static "itemModelSourceInner"(): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public static "itemModelSourceInner"(): $BlockState
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -4909,22 +4904,22 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -5021,11 +5016,11 @@ export {} // Mark the file as a module, do not remove unless there are other imp
 export class $FramingSawRecipeCalculation {
 
 
+public "getOutputCount"(): integer
 public "getAdditiveCount"(arg0: integer): integer
 public "getInputCount"(): integer
-public "getOutputCount"(): integer
-get "inputCount"(): integer
 get "outputCount"(): integer
+get "inputCount"(): integer
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -5127,9 +5122,9 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -5152,8 +5147,8 @@ import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packa
 import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
 import {$InteractionResult, $InteractionResult$Type} from "packages/net/minecraft/world/$InteractionResult"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
-import {$Vec3, $Vec3$Type} from "packages/net/minecraft/world/phys/$Vec3"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
+import {$Vec3, $Vec3$Type} from "packages/net/minecraft/world/phys/$Vec3"
 import {$BlockEntityType, $BlockEntityType$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityType"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$PathComputationType, $PathComputationType$Type} from "packages/net/minecraft/world/level/pathfinder/$PathComputationType"
@@ -5190,17 +5185,17 @@ static readonly "UPDATE_LIMIT": integer
 readonly "properties": $BlockBehaviour$Properties
 
 
+public "isPossibleToRespawnInThis"(arg0: $BlockState$Type): boolean
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
+public "isPathfindable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $PathComputationType$Type): boolean
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getMaxTextLineWidth"(): integer
 public "getYRotationDegrees"(arg0: $BlockState$Type): float
 public "getSignHitboxCenterPosition"(arg0: $BlockState$Type): $Vec3
-public "getMaxTextLineWidth"(): integer
-public "isPathfindable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $PathComputationType$Type): boolean
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public static "openEditScreen"(arg0: $Player$Type, arg1: $FramedSignBlockEntity$Type, arg2: boolean): void
-public "getTextLineHeight"(): integer
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "getTextLineHeight"(): integer
+public static "openEditScreen"(arg0: $Player$Type, arg1: $FramedSignBlockEntity$Type, arg2: boolean): void
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
-public "isPossibleToRespawnInThis"(arg0: $BlockState$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -5264,22 +5259,22 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -5335,10 +5330,10 @@ constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -5397,12 +5392,12 @@ constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public static "getStateForPlacement"(arg0: $Block$Type, arg1: $BlockPlaceContext$Type, arg2: boolean): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
+public static "getStateForPlacement"(arg0: $Block$Type, arg1: $BlockPlaceContext$Type, arg2: boolean): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "mirrorCornerPanel"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -5457,16 +5452,16 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public static "itemModelSourcePrism"(): $BlockState
 public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public static "itemModelSourcePrism"(): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -5487,8 +5482,8 @@ import {$BooleanProperty, $BooleanProperty$Type} from "packages/net/minecraft/wo
 import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$CompoundTag"
 import {$DoubleBlockTopInteractionMode, $DoubleBlockTopInteractionMode$Type} from "packages/xfacthd/framedblocks/common/util/$DoubleBlockTopInteractionMode"
 import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packages/net/minecraft/world/level/block/state/$BlockBehaviour$Properties"
-import {$SideSkipPredicate, $SideSkipPredicate$Type} from "packages/xfacthd/framedblocks/api/predicate/cull/$SideSkipPredicate"
 import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
+import {$SideSkipPredicate, $SideSkipPredicate$Type} from "packages/xfacthd/framedblocks/api/predicate/cull/$SideSkipPredicate"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$SolidityCheck, $SolidityCheck$Type} from "packages/xfacthd/framedblocks/common/data/doubleblock/$SolidityCheck"
 import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/entity/$LivingEntity"
@@ -5497,8 +5492,8 @@ import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/leve
 import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
-import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
+import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$FramedPoweredRailSlopeBlock, $FramedPoweredRailSlopeBlock$Type} from "packages/xfacthd/framedblocks/common/block/rail/$FramedPoweredRailSlopeBlock"
 import {$ModelData, $ModelData$Type} from "packages/net/minecraftforge/client/model/data/$ModelData"
@@ -5540,20 +5535,20 @@ static readonly "UPDATE_LIMIT": integer
 readonly "properties": $BlockBehaviour$Properties
 
 
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $DoubleBlockStateCache
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
 public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
 public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
 public "getTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
 public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
 public "getBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
@@ -5648,8 +5643,8 @@ import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/world/phys/$BlockHitResult"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$ShapeProvider, $ShapeProvider$Type} from "packages/xfacthd/framedblocks/api/shapes/$ShapeProvider"
@@ -5699,77 +5694,77 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "getBlockType"(): $IBlockType
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
+public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
 public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "useShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
 public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "getVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "getBlockType"(): $IBlockType
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 get "blockType"(): $IBlockType
@@ -5792,8 +5787,8 @@ import {$BooleanProperty, $BooleanProperty$Type} from "packages/net/minecraft/wo
 import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$CompoundTag"
 import {$SlopeType, $SlopeType$Type} from "packages/xfacthd/framedblocks/common/data/property/$SlopeType"
 import {$BaseRailBlock, $BaseRailBlock$Type} from "packages/net/minecraft/world/level/block/$BaseRailBlock"
-import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
+import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
 import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/entity/$LivingEntity"
 import {$MutableComponent, $MutableComponent$Type} from "packages/net/minecraft/network/chat/$MutableComponent"
 import {$FluidState, $FluidState$Type} from "packages/net/minecraft/world/level/material/$FluidState"
@@ -5802,9 +5797,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
@@ -5867,91 +5861,89 @@ readonly "properties": $BlockBehaviour$Properties
 
 
 public static "normal"(): $FramedRailSlopeBlock
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public "getBlockType"(): $BlockType
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
+public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
 public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "useShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCollisionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "canSurvive"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
+public "getCollisionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "getVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public static "fancy"(): $FramedRailSlopeBlock
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSourceFancy"(): $BlockState
 public "getShapeProperty"(): $Property<($RailShape)>
 public "isValidRailShape"(arg0: $RailShape$Type): boolean
-public static "fancy"(): $FramedRailSlopeBlock
-public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
-public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
-public static "itemModelSourceFancy"(): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getFacing"(arg0: $BlockState$Type): $Direction
 public "getSlopeType"(arg0: $BlockState$Type): $SlopeType
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-get "blockType"(): $BlockType
 get "shapeProperty"(): $Property<($RailShape)>
 }
 /**
@@ -6059,21 +6051,21 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -6123,8 +6115,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(arg0: $BlockType$Type)
 
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -6210,14 +6202,14 @@ static readonly "UPDATE_LIMIT": integer
 readonly "properties": $BlockBehaviour$Properties
 
 
-public static "wood"(): $FramedGateBlock
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "iron"(): $FramedGateBlock
-public "isPathfindable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $PathComputationType$Type): boolean
 public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "isPathfindable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $PathComputationType$Type): boolean
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public static "wood"(): $FramedGateBlock
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -6275,10 +6267,10 @@ constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -6371,24 +6363,24 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public "createBlockItem"(): $BlockItem
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public static "itemModelSourceInner"(): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public static "itemModelSourceInner"(): $BlockState
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -6416,9 +6408,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
@@ -6482,76 +6473,74 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "getBlockType"(): $BlockType
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
-public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
 public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-get "blockType"(): $BlockType
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -6580,8 +6569,8 @@ static readonly "BOTH": $SolidityCheck
 
 public static "values"(): ($SolidityCheck)[]
 public static "valueOf"(arg0: string): $SolidityCheck
-public "isSolid"(arg0: $FramedDoubleBlockEntity$Type): boolean
 public "canSustainPlant"(arg0: $FramedDoubleBlockEntity$Type, arg1: $Direction$Type, arg2: $IPlantable$Type): boolean
+public "isSolid"(arg0: $FramedDoubleBlockEntity$Type): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -6639,21 +6628,21 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -6714,21 +6703,21 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -6756,9 +6745,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
@@ -6825,81 +6813,79 @@ static readonly "UPDATE_LIMIT": integer
 readonly "properties": $BlockBehaviour$Properties
 
 
-public "getBlockType"(): $BlockType
-public static "wood"(): $FramedDoorBlock
+public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
 public static "iron"(): $FramedDoorBlock
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "useShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
 public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "getVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public static "wood"(): $FramedDoorBlock
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-get "blockType"(): $BlockType
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -6954,10 +6940,10 @@ constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -7012,10 +6998,10 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -7070,9 +7056,9 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -7133,21 +7119,21 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -7198,9 +7184,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -7261,20 +7247,20 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -7364,10 +7350,10 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -7421,17 +7407,17 @@ readonly "properties": $BlockBehaviour$Properties
 
 
 public static "standard"(): $FramedAdjustableDoublePanelBlock
-public static "copycat"(): $FramedAdjustableDoublePanelBlock
 public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public static "copycat"(): $FramedAdjustableDoublePanelBlock
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -7522,22 +7508,22 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -7593,12 +7579,12 @@ constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "isHorizontalSlope"(arg0: $BlockState$Type): boolean
 public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -7654,12 +7640,12 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -7716,11 +7702,11 @@ constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -7785,23 +7771,23 @@ constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public static "itemModelSourceInner"(): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public static "itemModelSourceInner"(): $BlockState
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -7828,8 +7814,8 @@ import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
 import {$SolidityCheck, $SolidityCheck$Type} from "packages/xfacthd/framedblocks/common/data/doubleblock/$SolidityCheck"
 import {$AbstractFramedDoubleBlock, $AbstractFramedDoubleBlock$Type} from "packages/xfacthd/framedblocks/common/block/$AbstractFramedDoubleBlock"
-import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
 import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
+import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$CamoGetter, $CamoGetter$Type} from "packages/xfacthd/framedblocks/common/data/doubleblock/$CamoGetter"
@@ -7863,18 +7849,18 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public "getBlockType"(): $IBlockType
@@ -7939,22 +7925,22 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public static "itemSource"(): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public static "itemSource"(): $BlockState
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -7976,8 +7962,8 @@ import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Directio
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
-import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$SolidityCheck, $SolidityCheck$Type} from "packages/xfacthd/framedblocks/common/data/doubleblock/$SolidityCheck"
+import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$AbstractFramedDoubleBlock, $AbstractFramedDoubleBlock$Type} from "packages/xfacthd/framedblocks/common/block/$AbstractFramedDoubleBlock"
 import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
 import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
@@ -8014,20 +8000,20 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getCloneItemStack"(arg0: $BlockState$Type, arg1: $HitResult$Type, arg2: $BlockGetter$Type, arg3: $BlockPos$Type, arg4: $Player$Type): $ItemStack
 public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "getCloneItemStack"(arg0: $BlockState$Type, arg1: $HitResult$Type, arg2: $BlockGetter$Type, arg3: $BlockPos$Type, arg4: $Player$Type): $ItemStack
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -8080,9 +8066,9 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -8115,8 +8101,8 @@ import {$ToolAction, $ToolAction$Type} from "packages/net/minecraftforge/common/
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$RandomSource, $RandomSource$Type} from "packages/net/minecraft/util/$RandomSource"
 import {$IForgeBlock, $IForgeBlock$Type} from "packages/net/minecraftforge/common/extensions/$IForgeBlock"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
@@ -8160,102 +8146,102 @@ import {$BlockEntityTicker, $BlockEntityTicker$Type} from "packages/net/minecraf
 
 export interface $IFramedBlock extends $EntityBlock, $IForgeBlock {
 
- "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
  "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+ "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
  "initCache"(arg0: $BlockState$Type): $StateCache
  "getCache"(arg0: $BlockState$Type): $StateCache
+ "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+ "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+ "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+ "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+ "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+ "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+ "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+ "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+ "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+ "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+ "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
  "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
  "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
- "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
- "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
- "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
- "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
- "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+ "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+ "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+ "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+ "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+ "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+ "getBlockType"(): $IBlockType
+ "createBlockItem"(): $BlockItem
+ "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+ "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+ "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+ "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+ "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+ "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+ "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+ "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+ "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+ "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
  "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
- "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+ "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+ "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
  "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+ "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+ "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+ "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+ "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
  "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
  "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
- "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
- "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
+ "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
  "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
- "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
- "createBlockItem"(): $BlockItem
- "getBlockType"(): $IBlockType
- "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
- "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
- "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
- "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
- "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
- "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
- "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
- "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
- "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
- "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
- "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
- "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
- "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
- "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
- "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
- "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
- "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
- "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
- "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
- "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
- "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
- "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
- "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
- "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
- "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+/**
+ * 
+ * @deprecated
+ */
+ "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
  "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
  "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
  "rotate"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Rotation$Type): $BlockState
- "canBeHydrated"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type, arg4: $BlockPos$Type): boolean
- "isScaffolding"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $LivingEntity$Type): boolean
- "canConnectRedstone"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
- "onCaughtFire"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $LivingEntity$Type): void
- "isFireSource"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
- "onBlockExploded"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): void
- "isSlimeBlock"(arg0: $BlockState$Type): boolean
- "canStickTo"(arg0: $BlockState$Type, arg1: $BlockState$Type): boolean
- "isStickyBlock"(arg0: $BlockState$Type): boolean
- "supportsExternalFaceHiding"(arg0: $BlockState$Type): boolean
- "onDestroyedByPlayer"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: boolean, arg5: $FluidState$Type): boolean
- "getEnchantPowerBonus"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): float
- "getAdjacentBlockPathType"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Mob$Type, arg4: $BlockPathTypes$Type): $BlockPathTypes
- "shouldCheckWeakPower"(arg0: $BlockState$Type, arg1: $SignalGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
- "getToolModifiedState"(arg0: $BlockState$Type, arg1: $UseOnContext$Type, arg2: $ToolAction$Type, arg3: boolean): $BlockState
- "collisionExtendsVertically"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
- "makesOpenTrapdoorAboveClimbable"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type): boolean
- "canDropFromExplosion"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): boolean
- "getStateAtViewpoint"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Vec3$Type): $BlockState
- "getPistonPushReaction"(arg0: $BlockState$Type): $PushReaction
- "getCloneItemStack"(arg0: $BlockState$Type, arg1: $HitResult$Type, arg2: $BlockGetter$Type, arg3: $BlockPos$Type, arg4: $Player$Type): $ItemStack
- "isPortalFrame"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
- "isFertile"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
- "isConduitFrame"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): boolean
- "getExpDrop"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $RandomSource$Type, arg3: $BlockPos$Type, arg4: integer, arg5: integer): integer
- "onTreeGrow"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BiConsumer$Type<($BlockPos$Type), ($BlockState$Type)>, arg3: $RandomSource$Type, arg4: $BlockPos$Type, arg5: $TreeConfiguration$Type): boolean
- "onNeighborChange"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): void
- "getBlockPathType"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Mob$Type): $BlockPathTypes
- "getWeakChanges"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
  "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
  "isLadder"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $LivingEntity$Type): boolean
- "isBurning"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
- "canHarvestBlock"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
- "setBedOccupied"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $LivingEntity$Type, arg4: boolean): void
- "isBed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
- "isValidSpawn"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $SpawnPlacements$Type$Type, arg4: $EntityType$Type<(any)>): boolean
  "getBedDirection"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): $Direction
+ "canHarvestBlock"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+ "isBed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+ "isBurning"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
  "getRespawnPosition"(arg0: $BlockState$Type, arg1: $EntityType$Type<(any)>, arg2: $LevelReader$Type, arg3: $BlockPos$Type, arg4: float, arg5: $LivingEntity$Type): $Optional<($Vec3)>
+ "setBedOccupied"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $LivingEntity$Type, arg4: boolean): void
+ "isValidSpawn"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $SpawnPlacements$Type$Type, arg4: $EntityType$Type<(any)>): boolean
+ "isConduitFrame"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): boolean
+ "onTreeGrow"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BiConsumer$Type<($BlockPos$Type), ($BlockState$Type)>, arg3: $RandomSource$Type, arg4: $BlockPos$Type, arg5: $TreeConfiguration$Type): boolean
+ "isPortalFrame"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+ "getExpDrop"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $RandomSource$Type, arg3: $BlockPos$Type, arg4: integer, arg5: integer): integer
+ "isFertile"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+ "onNeighborChange"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): void
+ "isStickyBlock"(arg0: $BlockState$Type): boolean
+ "getWeakChanges"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+ "getBlockPathType"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Mob$Type): $BlockPathTypes
+ "isSlimeBlock"(arg0: $BlockState$Type): boolean
+ "canStickTo"(arg0: $BlockState$Type, arg1: $BlockState$Type): boolean
+ "onCaughtFire"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $LivingEntity$Type): void
+ "onBlockExploded"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): void
+ "isFireSource"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+ "canConnectRedstone"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+ "isScaffolding"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $LivingEntity$Type): boolean
+ "canBeHydrated"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type, arg4: $BlockPos$Type): boolean
+ "getPistonPushReaction"(arg0: $BlockState$Type): $PushReaction
+ "canDropFromExplosion"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): boolean
+ "collisionExtendsVertically"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+ "onDestroyedByPlayer"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: boolean, arg5: $FluidState$Type): boolean
+ "getEnchantPowerBonus"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): float
+ "shouldCheckWeakPower"(arg0: $BlockState$Type, arg1: $SignalGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+ "getToolModifiedState"(arg0: $BlockState$Type, arg1: $UseOnContext$Type, arg2: $ToolAction$Type, arg3: boolean): $BlockState
+ "getAdjacentBlockPathType"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Mob$Type, arg4: $BlockPathTypes$Type): $BlockPathTypes
+ "getStateAtViewpoint"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Vec3$Type): $BlockState
+ "getCloneItemStack"(arg0: $BlockState$Type, arg1: $HitResult$Type, arg2: $BlockGetter$Type, arg3: $BlockPos$Type, arg4: $Player$Type): $ItemStack
+ "makesOpenTrapdoorAboveClimbable"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type): boolean
+ "supportsExternalFaceHiding"(arg0: $BlockState$Type): boolean
 }
 
 export namespace $IFramedBlock {
@@ -8319,18 +8305,18 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -8384,11 +8370,11 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public "createBlockItem"(): $BlockItem
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "createBlockItem"(): $BlockItem
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -8450,20 +8436,20 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(arg0: $BlockType$Type)
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -8488,8 +8474,8 @@ import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/entity/$LivingEntity"
 import {$FramedBlock, $FramedBlock$Type} from "packages/xfacthd/framedblocks/common/block/$FramedBlock"
-import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
 import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
+import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$IBlockType, $IBlockType$Type} from "packages/xfacthd/framedblocks/api/type/$IBlockType"
@@ -8520,13 +8506,13 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -8547,7 +8533,13 @@ declare module "packages/xfacthd/framedblocks/common/block/interactive/$FramedPr
 import {$LevelAccessor, $LevelAccessor$Type} from "packages/net/minecraft/world/level/$LevelAccessor"
 import {$BooleanProperty, $BooleanProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$BooleanProperty"
 import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$CompoundTag"
+import {$MapColor, $MapColor$Type} from "packages/net/minecraft/world/level/material/$MapColor"
+import {$IFramedBlock, $IFramedBlock$Type} from "packages/xfacthd/framedblocks/api/block/$IFramedBlock"
+import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packages/net/minecraft/world/level/block/state/$BlockBehaviour$Properties"
+import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
+import {$SideSkipPredicate, $SideSkipPredicate$Type} from "packages/xfacthd/framedblocks/api/predicate/cull/$SideSkipPredicate"
 import {$PressurePlateBlock, $PressurePlateBlock$Type} from "packages/net/minecraft/world/level/block/$PressurePlateBlock"
+import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/entity/$LivingEntity"
 import {$MutableComponent, $MutableComponent$Type} from "packages/net/minecraft/network/chat/$MutableComponent"
@@ -8557,41 +8549,34 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
-import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
-import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
-import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
-import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
-import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
-import {$BlockEntityType, $BlockEntityType$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityType"
-import {$BlockItem, $BlockItem$Type} from "packages/net/minecraft/world/item/$BlockItem"
-import {$LootParams$Builder, $LootParams$Builder$Type} from "packages/net/minecraft/world/level/storage/loot/$LootParams$Builder"
-import {$Optional, $Optional$Type} from "packages/java/util/$Optional"
-import {$IPlantable, $IPlantable$Type} from "packages/net/minecraftforge/common/$IPlantable"
-import {$Explosion, $Explosion$Type} from "packages/net/minecraft/world/level/$Explosion"
-import {$GameEventListener, $GameEventListener$Type} from "packages/net/minecraft/world/level/gameevent/$GameEventListener"
-import {$BlockAndTintGetter, $BlockAndTintGetter$Type} from "packages/net/minecraft/world/level/$BlockAndTintGetter"
-import {$MapColor, $MapColor$Type} from "packages/net/minecraft/world/level/material/$MapColor"
-import {$IFramedBlock, $IFramedBlock$Type} from "packages/xfacthd/framedblocks/api/block/$IFramedBlock"
-import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packages/net/minecraft/world/level/block/state/$BlockBehaviour$Properties"
-import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
-import {$SideSkipPredicate, $SideSkipPredicate$Type} from "packages/xfacthd/framedblocks/api/predicate/cull/$SideSkipPredicate"
-import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/world/phys/$BlockHitResult"
+import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$ShapeProvider, $ShapeProvider$Type} from "packages/xfacthd/framedblocks/api/shapes/$ShapeProvider"
+import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$ModelData, $ModelData$Type} from "packages/net/minecraftforge/client/model/data/$ModelData"
 import {$VoxelShape, $VoxelShape$Type} from "packages/net/minecraft/world/phys/shapes/$VoxelShape"
 import {$CollisionContext, $CollisionContext$Type} from "packages/net/minecraft/world/phys/shapes/$CollisionContext"
 import {$InteractionResult, $InteractionResult$Type} from "packages/net/minecraft/world/$InteractionResult"
+import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
+import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
+import {$BlockEntityType, $BlockEntityType$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityType"
 import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
 import {$StateCache, $StateCache$Type} from "packages/xfacthd/framedblocks/api/block/cache/$StateCache"
+import {$BlockItem, $BlockItem$Type} from "packages/net/minecraft/world/item/$BlockItem"
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
+import {$LootParams$Builder, $LootParams$Builder$Type} from "packages/net/minecraft/world/level/storage/loot/$LootParams$Builder"
 import {$SoundType, $SoundType$Type} from "packages/net/minecraft/world/level/block/$SoundType"
+import {$Optional, $Optional$Type} from "packages/java/util/$Optional"
+import {$IPlantable, $IPlantable$Type} from "packages/net/minecraftforge/common/$IPlantable"
 import {$IBlockType, $IBlockType$Type} from "packages/xfacthd/framedblocks/api/type/$IBlockType"
 import {$Rotation, $Rotation$Type} from "packages/net/minecraft/world/level/block/$Rotation"
+import {$Explosion, $Explosion$Type} from "packages/net/minecraft/world/level/$Explosion"
 import {$BlockEntityTicker, $BlockEntityTicker$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityTicker"
+import {$GameEventListener, $GameEventListener$Type} from "packages/net/minecraft/world/level/gameevent/$GameEventListener"
+import {$BlockAndTintGetter, $BlockAndTintGetter$Type} from "packages/net/minecraft/world/level/$BlockAndTintGetter"
 
 export class $FramedPressurePlateBlock extends $PressurePlateBlock implements $IFramedBlock {
 static readonly "POWERED": $BooleanProperty
@@ -8616,80 +8601,78 @@ static readonly "UPDATE_LIMIT": integer
 readonly "properties": $BlockBehaviour$Properties
 
 
-public static "stone"(): $FramedPressurePlateBlock
-public static "obsidian"(): $FramedPressurePlateBlock
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public "getBlockType"(): $BlockType
-public static "wood"(): $FramedPressurePlateBlock
-public static "woodWaterloggable"(): $FramedPressurePlateBlock
-public static "stoneWaterloggable"(): $FramedPressurePlateBlock
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
-public static "obsidianWaterloggable"(): $FramedPressurePlateBlock
 public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
 public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
+public static "stone"(): $FramedPressurePlateBlock
+public static "obsidian"(): $FramedPressurePlateBlock
+public static "obsidianWaterloggable"(): $FramedPressurePlateBlock
+public static "stoneWaterloggable"(): $FramedPressurePlateBlock
+public static "wood"(): $FramedPressurePlateBlock
+public static "woodWaterloggable"(): $FramedPressurePlateBlock
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-get "blockType"(): $BlockType
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -8705,8 +8688,8 @@ export type $FramedPressurePlateBlock_ = $FramedPressurePlateBlock$Type;
 }}
 declare module "packages/xfacthd/framedblocks/api/blueprint/$BlueprintCopyBehaviour" {
 import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$CompoundTag"
-import {$CamoContainer, $CamoContainer$Type} from "packages/xfacthd/framedblocks/api/camo/$CamoContainer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
+import {$CamoContainer, $CamoContainer$Type} from "packages/xfacthd/framedblocks/api/camo/$CamoContainer"
 import {$Set, $Set$Type} from "packages/java/util/$Set"
 import {$Optional, $Optional$Type} from "packages/java/util/$Optional"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
@@ -8717,13 +8700,13 @@ import {$FramedBlockEntity, $FramedBlockEntity$Type} from "packages/xfacthd/fram
 
 export interface $BlueprintCopyBehaviour {
 
+ "getReinforcementCount"(arg0: $CompoundTag$Type): integer
+ "writeToBlueprint"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $FramedBlockEntity$Type, arg4: $CompoundTag$Type): boolean
+ "postProcessPaste"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $CompoundTag$Type, arg4: $ItemStack$Type): void
  "getGlowstoneCount"(arg0: $CompoundTag$Type): integer
  "getIntangibleCount"(arg0: $CompoundTag$Type): integer
  "getBlockItem"(): $Optional<($ItemStack)>
  "getCamos"(arg0: $CompoundTag$Type): $Optional<($Set<($CamoContainer)>)>
- "postProcessPaste"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $CompoundTag$Type, arg4: $ItemStack$Type): void
- "getReinforcementCount"(arg0: $CompoundTag$Type): integer
- "writeToBlueprint"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $FramedBlockEntity$Type, arg4: $CompoundTag$Type): boolean
 }
 
 export namespace $BlueprintCopyBehaviour {
@@ -8884,18 +8867,18 @@ export interface $IBlockType {
 
  "getName"(): string
  "compareTo"(arg0: $IBlockType$Type): integer
+ "supportsConnectedTextures"(): boolean
+ "allowMakingIntangible"(): boolean
+ "getFullFacePredicate"(): $FullFacePredicate
+ "getSideSkipPredicate"(): $SideSkipPredicate
+ "getMinimumConTexMode"(): $ConTexMode
+ "supportsWaterLogging"(): boolean
+ "getConnectionPredicate"(): $ConnectionPredicate
+ "generateOcclusionShapes"(arg0: $ImmutableList$Type<($BlockState$Type)>, arg1: $ShapeProvider$Type): $ShapeProvider
+ "canOccludeWithSolidCamo"(): boolean
  "hasBlockItem"(): boolean
  "isDoubleBlock"(): boolean
  "hasSpecialTile"(): boolean
- "getConnectionPredicate"(): $ConnectionPredicate
- "getFullFacePredicate"(): $FullFacePredicate
- "supportsConnectedTextures"(): boolean
- "getSideSkipPredicate"(): $SideSkipPredicate
- "getMinimumConTexMode"(): $ConTexMode
- "allowMakingIntangible"(): boolean
- "generateOcclusionShapes"(arg0: $ImmutableList$Type<($BlockState$Type)>, arg1: $ShapeProvider$Type): $ShapeProvider
- "supportsWaterLogging"(): boolean
- "canOccludeWithSolidCamo"(): boolean
  "hasSpecialHitbox"(): boolean
  "generateShapes"(arg0: $ImmutableList$Type<($BlockState$Type)>): $ShapeProvider
  "canLockState"(): boolean
@@ -8962,13 +8945,13 @@ static readonly "UPDATE_LIMIT": integer
 readonly "properties": $BlockBehaviour$Properties
 
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "getFluidState"(arg0: $BlockState$Type): $FluidState
 public "getCloneItemStack"(arg0: $BlockState$Type, arg1: $HitResult$Type, arg2: $BlockGetter$Type, arg3: $BlockPos$Type, arg4: $Player$Type): $ItemStack
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "canPlaceLiquid"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Fluid$Type): boolean
-public "placeLiquid"(arg0: $LevelAccessor$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $FluidState$Type): boolean
 public "pickupBlock"(arg0: $LevelAccessor$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): $ItemStack
+public "placeLiquid"(arg0: $LevelAccessor$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $FluidState$Type): boolean
 public "getPickupSound"(): $Optional<($SoundEvent)>
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
@@ -8993,6 +8976,12 @@ declare module "packages/xfacthd/framedblocks/common/block/torch/$FramedRedstone
 import {$LevelAccessor, $LevelAccessor$Type} from "packages/net/minecraft/world/level/$LevelAccessor"
 import {$BooleanProperty, $BooleanProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$BooleanProperty"
 import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$CompoundTag"
+import {$MapColor, $MapColor$Type} from "packages/net/minecraft/world/level/material/$MapColor"
+import {$IFramedBlock, $IFramedBlock$Type} from "packages/xfacthd/framedblocks/api/block/$IFramedBlock"
+import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packages/net/minecraft/world/level/block/state/$BlockBehaviour$Properties"
+import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
+import {$SideSkipPredicate, $SideSkipPredicate$Type} from "packages/xfacthd/framedblocks/api/predicate/cull/$SideSkipPredicate"
+import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/entity/$LivingEntity"
 import {$MutableComponent, $MutableComponent$Type} from "packages/net/minecraft/network/chat/$MutableComponent"
@@ -9003,41 +8992,34 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
-import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
-import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
-import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
-import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
-import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
-import {$BlockEntityType, $BlockEntityType$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityType"
-import {$BlockItem, $BlockItem$Type} from "packages/net/minecraft/world/item/$BlockItem"
-import {$LootParams$Builder, $LootParams$Builder$Type} from "packages/net/minecraft/world/level/storage/loot/$LootParams$Builder"
-import {$Optional, $Optional$Type} from "packages/java/util/$Optional"
-import {$IPlantable, $IPlantable$Type} from "packages/net/minecraftforge/common/$IPlantable"
-import {$Explosion, $Explosion$Type} from "packages/net/minecraft/world/level/$Explosion"
-import {$GameEventListener, $GameEventListener$Type} from "packages/net/minecraft/world/level/gameevent/$GameEventListener"
-import {$BlockAndTintGetter, $BlockAndTintGetter$Type} from "packages/net/minecraft/world/level/$BlockAndTintGetter"
-import {$MapColor, $MapColor$Type} from "packages/net/minecraft/world/level/material/$MapColor"
-import {$IFramedBlock, $IFramedBlock$Type} from "packages/xfacthd/framedblocks/api/block/$IFramedBlock"
-import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packages/net/minecraft/world/level/block/state/$BlockBehaviour$Properties"
-import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
-import {$SideSkipPredicate, $SideSkipPredicate$Type} from "packages/xfacthd/framedblocks/api/predicate/cull/$SideSkipPredicate"
-import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/world/phys/$BlockHitResult"
+import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$ShapeProvider, $ShapeProvider$Type} from "packages/xfacthd/framedblocks/api/shapes/$ShapeProvider"
+import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$ModelData, $ModelData$Type} from "packages/net/minecraftforge/client/model/data/$ModelData"
 import {$VoxelShape, $VoxelShape$Type} from "packages/net/minecraft/world/phys/shapes/$VoxelShape"
 import {$CollisionContext, $CollisionContext$Type} from "packages/net/minecraft/world/phys/shapes/$CollisionContext"
 import {$InteractionResult, $InteractionResult$Type} from "packages/net/minecraft/world/$InteractionResult"
+import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
+import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
+import {$BlockEntityType, $BlockEntityType$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityType"
 import {$StateCache, $StateCache$Type} from "packages/xfacthd/framedblocks/api/block/cache/$StateCache"
 import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
+import {$BlockItem, $BlockItem$Type} from "packages/net/minecraft/world/item/$BlockItem"
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
+import {$LootParams$Builder, $LootParams$Builder$Type} from "packages/net/minecraft/world/level/storage/loot/$LootParams$Builder"
 import {$SoundType, $SoundType$Type} from "packages/net/minecraft/world/level/block/$SoundType"
+import {$Optional, $Optional$Type} from "packages/java/util/$Optional"
+import {$IPlantable, $IPlantable$Type} from "packages/net/minecraftforge/common/$IPlantable"
 import {$IBlockType, $IBlockType$Type} from "packages/xfacthd/framedblocks/api/type/$IBlockType"
 import {$Rotation, $Rotation$Type} from "packages/net/minecraft/world/level/block/$Rotation"
+import {$Explosion, $Explosion$Type} from "packages/net/minecraft/world/level/$Explosion"
 import {$BlockEntityTicker, $BlockEntityTicker$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityTicker"
+import {$GameEventListener, $GameEventListener$Type} from "packages/net/minecraft/world/level/gameevent/$GameEventListener"
+import {$BlockAndTintGetter, $BlockAndTintGetter$Type} from "packages/net/minecraft/world/level/$BlockAndTintGetter"
 
 export class $FramedRedstoneTorchBlock extends $RedstoneTorchBlock implements $IFramedBlock {
 static readonly "LIT": $BooleanProperty
@@ -9066,75 +9048,73 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockItem"(): $BlockItem
-public "getBlockType"(): $BlockType
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
-public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
 public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
 public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
+public "createBlockItem"(): $BlockItem
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-get "blockType"(): $BlockType
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -9188,10 +9168,10 @@ constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -9213,8 +9193,8 @@ import {$LevelAccessor, $LevelAccessor$Type} from "packages/net/minecraft/world/
 import {$BooleanProperty, $BooleanProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$BooleanProperty"
 import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$CompoundTag"
 import {$SlopeType, $SlopeType$Type} from "packages/xfacthd/framedblocks/common/data/property/$SlopeType"
-import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
+import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
 import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/entity/$LivingEntity"
 import {$MutableComponent, $MutableComponent$Type} from "packages/net/minecraft/network/chat/$MutableComponent"
 import {$FluidState, $FluidState$Type} from "packages/net/minecraft/world/level/material/$FluidState"
@@ -9223,8 +9203,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
@@ -9260,8 +9240,8 @@ import {$StateCache, $StateCache$Type} from "packages/xfacthd/framedblocks/api/b
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
 import {$SoundType, $SoundType$Type} from "packages/net/minecraft/world/level/block/$SoundType"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
-import {$IBlockType, $IBlockType$Type} from "packages/xfacthd/framedblocks/api/type/$IBlockType"
 import {$Rotation, $Rotation$Type} from "packages/net/minecraft/world/level/block/$Rotation"
+import {$IBlockType, $IBlockType$Type} from "packages/xfacthd/framedblocks/api/type/$IBlockType"
 import {$ISlopeBlock$IRailSlopeBlock, $ISlopeBlock$IRailSlopeBlock$Type} from "packages/xfacthd/framedblocks/common/block/$ISlopeBlock$IRailSlopeBlock"
 import {$BlockEntityTicker, $BlockEntityTicker$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityTicker"
 
@@ -9290,89 +9270,89 @@ static readonly "UPDATE_LIMIT": integer
 readonly "properties": $BlockBehaviour$Properties
 
 
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public "getBlockType"(): $IBlockType
+public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
 public static "activator"(): $FramedPoweredRailSlopeBlock
-public static "activatorFancy"(): $FramedPoweredRailSlopeBlock
 public static "poweredFancy"(): $FramedPoweredRailSlopeBlock
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
+public static "activatorFancy"(): $FramedPoweredRailSlopeBlock
 public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "useShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCollisionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "canSurvive"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
+public "getCollisionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "getVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public static "itemModelSourceFancyActivator"(): $BlockState
-public static "itemModelSourceFancyPowered"(): $BlockState
-public static "powered"(): $FramedPoweredRailSlopeBlock
+public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "getBlockType"(): $IBlockType
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSourceFancyPowered"(): $BlockState
+public static "itemModelSourceFancyActivator"(): $BlockState
+public static "powered"(): $FramedPoweredRailSlopeBlock
 public "getShapeProperty"(): $Property<($RailShape)>
 public "isValidRailShape"(arg0: $RailShape$Type): boolean
-public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
-public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getFacing"(arg0: $BlockState$Type): $Direction
 public "getSlopeType"(arg0: $BlockState$Type): $SlopeType
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
@@ -9439,23 +9419,23 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(arg0: $BlockType$Type)
 
-public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -9483,8 +9463,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
@@ -9548,70 +9528,70 @@ readonly "properties": $BlockBehaviour$Properties
 
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public static "stone"(): $FramedButtonBlock
-public static "wood"(): $FramedButtonBlock
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
 public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
+public static "stone"(): $FramedButtonBlock
+public static "wood"(): $FramedButtonBlock
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
@@ -9668,12 +9648,12 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "getYRotationDegrees"(arg0: $BlockState$Type): float
-public "getSignHitboxCenterPosition"(arg0: $BlockState$Type): $Vec3
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "canSurvive"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "getYRotationDegrees"(arg0: $BlockState$Type): float
+public "getSignHitboxCenterPosition"(arg0: $BlockState$Type): $Vec3
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -9834,21 +9814,21 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -9879,12 +9859,12 @@ import {$InteractionResult, $InteractionResult$Type} from "packages/net/minecraf
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$Item, $Item$Type} from "packages/net/minecraft/world/item/$Item"
 import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
-import {$BlockItem, $BlockItem$Type} from "packages/net/minecraft/world/item/$BlockItem"
-import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
 import {$InteractionResultHolder, $InteractionResultHolder$Type} from "packages/net/minecraft/world/$InteractionResultHolder"
+import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
+import {$BlockItem, $BlockItem$Type} from "packages/net/minecraft/world/item/$BlockItem"
 import {$CamoContainer, $CamoContainer$Type} from "packages/xfacthd/framedblocks/api/camo/$CamoContainer"
-import {$Set, $Set$Type} from "packages/java/util/$Set"
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
+import {$Set, $Set$Type} from "packages/java/util/$Set"
 import {$BlueprintCopyBehaviour, $BlueprintCopyBehaviour$Type} from "packages/xfacthd/framedblocks/api/blueprint/$BlueprintCopyBehaviour"
 import {$FramedToolItem, $FramedToolItem$Type} from "packages/xfacthd/framedblocks/common/item/$FramedToolItem"
 import {$Map, $Map$Type} from "packages/java/util/$Map"
@@ -9912,13 +9892,13 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor(arg0: $FramedToolType$Type)
 
 public static "lockRegistration"(): void
-public static "getCamoContainers"(arg0: $BlockItem$Type, arg1: $CompoundTag$Type): $Set<($CamoContainer)>
-public static "registerBehaviour"(arg0: $BlueprintCopyBehaviour$Type, ...arg1: ($Block$Type)[]): void
-public static "getTargetBlock"(arg0: $ItemStack$Type): $Block
-public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
 public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
+public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public static "getTargetBlock"(arg0: $ItemStack$Type): $Block
 public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "doesSneakBypassUse"(arg0: $ItemStack$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public static "getCamoContainers"(arg0: $BlockItem$Type, arg1: $CompoundTag$Type): $Set<($CamoContainer)>
+public static "registerBehaviour"(arg0: $BlueprintCopyBehaviour$Type, ...arg1: ($Block$Type)[]): void
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -9993,8 +9973,8 @@ constructor()
 
 public "getId"(): string
 public "fromNetwork"(arg0: $CompoundTag$Type): $CamoContainer
-public "fromNbt"(arg0: $CompoundTag$Type): $CamoContainer
 public "getSyncId"(): integer
+public "fromNbt"(arg0: $CompoundTag$Type): $CamoContainer
 public "fromItem"(arg0: $ItemStack$Type): $CamoContainer
 get "id"(): string
 get "syncId"(): integer
@@ -10074,8 +10054,8 @@ import {$DoubleBlockStateCache, $DoubleBlockStateCache$Type} from "packages/xfac
 import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$CompoundTag"
 import {$DoubleBlockTopInteractionMode, $DoubleBlockTopInteractionMode$Type} from "packages/xfacthd/framedblocks/common/util/$DoubleBlockTopInteractionMode"
 import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packages/net/minecraft/world/level/block/state/$BlockBehaviour$Properties"
-import {$SideSkipPredicate, $SideSkipPredicate$Type} from "packages/xfacthd/framedblocks/api/predicate/cull/$SideSkipPredicate"
 import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
+import {$SideSkipPredicate, $SideSkipPredicate$Type} from "packages/xfacthd/framedblocks/api/predicate/cull/$SideSkipPredicate"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$SolidityCheck, $SolidityCheck$Type} from "packages/xfacthd/framedblocks/common/data/doubleblock/$SolidityCheck"
 import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/entity/$LivingEntity"
@@ -10087,8 +10067,8 @@ import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
-import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
+import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$ModelData, $ModelData$Type} from "packages/net/minecraftforge/client/model/data/$ModelData"
 import {$IFramedDoubleBlock, $IFramedDoubleBlock$Type} from "packages/xfacthd/framedblocks/common/block/$IFramedDoubleBlock"
@@ -10125,34 +10105,34 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(arg0: $BlockType$Type)
 
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
 public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
 public static "getStatePair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $DoubleBlockStateCache
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
 public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
 public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
-public "getTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
 public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
+public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
+public "getTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
 public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
 public "getBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public "getSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "getCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -10209,11 +10189,11 @@ constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public "createBlockItem"(): $BlockItem
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "createBlockItem"(): $BlockItem
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -10277,22 +10257,22 @@ constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -10337,8 +10317,8 @@ import {$BooleanProperty, $BooleanProperty$Type} from "packages/net/minecraft/wo
 import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$CompoundTag"
 import {$DoubleBlockTopInteractionMode, $DoubleBlockTopInteractionMode$Type} from "packages/xfacthd/framedblocks/common/util/$DoubleBlockTopInteractionMode"
 import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packages/net/minecraft/world/level/block/state/$BlockBehaviour$Properties"
-import {$SideSkipPredicate, $SideSkipPredicate$Type} from "packages/xfacthd/framedblocks/api/predicate/cull/$SideSkipPredicate"
 import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
+import {$SideSkipPredicate, $SideSkipPredicate$Type} from "packages/xfacthd/framedblocks/api/predicate/cull/$SideSkipPredicate"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$SolidityCheck, $SolidityCheck$Type} from "packages/xfacthd/framedblocks/common/data/doubleblock/$SolidityCheck"
 import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/entity/$LivingEntity"
@@ -10348,8 +10328,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$FramedDetectorRailSlopeBlock, $FramedDetectorRailSlopeBlock$Type} from "packages/xfacthd/framedblocks/common/block/rail/$FramedDetectorRailSlopeBlock"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
-import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
+import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$ModelData, $ModelData$Type} from "packages/net/minecraftforge/client/model/data/$ModelData"
 import {$RailShape, $RailShape$Type} from "packages/net/minecraft/world/level/block/state/properties/$RailShape"
@@ -10390,20 +10370,20 @@ static readonly "UPDATE_LIMIT": integer
 readonly "properties": $BlockBehaviour$Properties
 
 
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $DoubleBlockStateCache
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
 public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
 public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
 public "getTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
 public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
 public "getBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
@@ -10512,10 +10492,10 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -10553,8 +10533,8 @@ import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/world/phys/$BlockHitResult"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$ShapeProvider, $ShapeProvider$Type} from "packages/xfacthd/framedblocks/api/shapes/$ShapeProvider"
@@ -10604,77 +10584,77 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "getBlockType"(): $IBlockType
+public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
+public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
 public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "skipRendering"(arg0: $BlockState$Type, arg1: $BlockState$Type, arg2: $Direction$Type): boolean
-public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "useShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
 public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "getVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "getBlockType"(): $IBlockType
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 get "blockType"(): $IBlockType
@@ -10736,22 +10716,22 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public static "itemSource"(): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public static "itemSource"(): $BlockState
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -10862,21 +10842,21 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -10896,8 +10876,8 @@ import {$LevelAccessor, $LevelAccessor$Type} from "packages/net/minecraft/world/
 import {$BooleanProperty, $BooleanProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$BooleanProperty"
 import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$CompoundTag"
 import {$SlopeType, $SlopeType$Type} from "packages/xfacthd/framedblocks/common/data/property/$SlopeType"
-import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
+import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
 import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/entity/$LivingEntity"
 import {$MutableComponent, $MutableComponent$Type} from "packages/net/minecraft/network/chat/$MutableComponent"
 import {$FluidState, $FluidState$Type} from "packages/net/minecraft/world/level/material/$FluidState"
@@ -10906,8 +10886,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
@@ -10943,8 +10923,8 @@ import {$StateCache, $StateCache$Type} from "packages/xfacthd/framedblocks/api/b
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
 import {$SoundType, $SoundType$Type} from "packages/net/minecraft/world/level/block/$SoundType"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
-import {$IBlockType, $IBlockType$Type} from "packages/xfacthd/framedblocks/api/type/$IBlockType"
 import {$Rotation, $Rotation$Type} from "packages/net/minecraft/world/level/block/$Rotation"
+import {$IBlockType, $IBlockType$Type} from "packages/xfacthd/framedblocks/api/type/$IBlockType"
 import {$ISlopeBlock$IRailSlopeBlock, $ISlopeBlock$IRailSlopeBlock$Type} from "packages/xfacthd/framedblocks/common/block/$ISlopeBlock$IRailSlopeBlock"
 import {$BlockEntityTicker, $BlockEntityTicker$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityTicker"
 
@@ -10974,85 +10954,85 @@ readonly "properties": $BlockBehaviour$Properties
 
 
 public static "normal"(): $FramedDetectorRailSlopeBlock
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public "getBlockType"(): $IBlockType
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
+public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
 public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "useShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCollisionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "canSurvive"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
+public "getCollisionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "getVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public static "fancy"(): $FramedDetectorRailSlopeBlock
+public "getBlockType"(): $IBlockType
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSourceFancy"(): $BlockState
 public "getShapeProperty"(): $Property<($RailShape)>
 public "isValidRailShape"(arg0: $RailShape$Type): boolean
-public static "fancy"(): $FramedDetectorRailSlopeBlock
-public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
-public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
-public static "itemModelSourceFancy"(): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getFacing"(arg0: $BlockState$Type): $Direction
 public "getSlopeType"(arg0: $BlockState$Type): $SlopeType
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
@@ -11087,8 +11067,8 @@ import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
@@ -11155,77 +11135,77 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "getBlockType"(): $BlockType
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
+public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
 public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "useShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
 public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "getVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "getBlockType"(): $BlockType
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 get "blockType"(): $BlockType
@@ -11248,8 +11228,8 @@ import {$BooleanProperty, $BooleanProperty$Type} from "packages/net/minecraft/wo
 import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$CompoundTag"
 import {$DoubleBlockTopInteractionMode, $DoubleBlockTopInteractionMode$Type} from "packages/xfacthd/framedblocks/common/util/$DoubleBlockTopInteractionMode"
 import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packages/net/minecraft/world/level/block/state/$BlockBehaviour$Properties"
-import {$SideSkipPredicate, $SideSkipPredicate$Type} from "packages/xfacthd/framedblocks/api/predicate/cull/$SideSkipPredicate"
 import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
+import {$SideSkipPredicate, $SideSkipPredicate$Type} from "packages/xfacthd/framedblocks/api/predicate/cull/$SideSkipPredicate"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$SolidityCheck, $SolidityCheck$Type} from "packages/xfacthd/framedblocks/common/data/doubleblock/$SolidityCheck"
 import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/entity/$LivingEntity"
@@ -11258,8 +11238,8 @@ import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/leve
 import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
-import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
+import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$ModelData, $ModelData$Type} from "packages/net/minecraftforge/client/model/data/$ModelData"
 import {$IFramedDoubleBlock, $IFramedDoubleBlock$Type} from "packages/xfacthd/framedblocks/common/block/$IFramedDoubleBlock"
@@ -11297,20 +11277,20 @@ static readonly "UPDATE_LIMIT": integer
 readonly "properties": $BlockBehaviour$Properties
 
 
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $DoubleBlockStateCache
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
 public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
 public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
 public "getTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
 public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
 public "getBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
@@ -11349,8 +11329,8 @@ import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/leve
 import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/world/phys/$BlockHitResult"
 import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
-import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
+import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$InteractionResult, $InteractionResult$Type} from "packages/net/minecraft/world/$InteractionResult"
@@ -11389,20 +11369,20 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
 public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "canSurvive"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "getCloneItemStack"(arg0: $BlockState$Type, arg1: $HitResult$Type, arg2: $BlockGetter$Type, arg3: $BlockPos$Type, arg4: $Player$Type): $ItemStack
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
-public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -11466,22 +11446,22 @@ constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -11540,19 +11520,19 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
 public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -11607,11 +11587,11 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public static "getPropFromAxis"(arg0: $Direction$Type): $BooleanProperty
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public static "itemModelSourceThin"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public static "getPropFromAxis"(arg0: $Direction$Type): $BooleanProperty
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -11723,20 +11703,20 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -11788,8 +11768,8 @@ import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$BlockEntityType, $BlockEntityType$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityType"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
-import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
 import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
+import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
 import {$BlockItem, $BlockItem$Type} from "packages/net/minecraft/world/item/$BlockItem"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
@@ -11824,15 +11804,15 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "getYRotationDegrees"(arg0: $BlockState$Type): float
-public "createBlockItem"(): $BlockItem
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getBlockSupportShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 public "canSurvive"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "getBlockSupportShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
+public "getYRotationDegrees"(arg0: $BlockState$Type): float
+public "createBlockItem"(): $BlockItem
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -11860,8 +11840,8 @@ import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$It
 import {$FluidState, $FluidState$Type} from "packages/net/minecraft/world/level/material/$FluidState"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/world/phys/$BlockHitResult"
 import {$DoubleBlockSoundType, $DoubleBlockSoundType$Type} from "packages/xfacthd/framedblocks/common/util/$DoubleBlockSoundType"
+import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/world/phys/$BlockHitResult"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$ModelProperty, $ModelProperty$Type} from "packages/net/minecraftforge/client/model/data/$ModelProperty"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
@@ -11889,48 +11869,48 @@ static readonly "MSG_NON_SOLID": $Component
 constructor(arg0: $BlockEntityType$Type<(any)>, arg1: $BlockPos$Type, arg2: $BlockState$Type)
 
 public "getBlock"(): $IFramedDoubleBlock
+public "getSoundType"(): $DoubleBlockSoundType
 public "getMapColor"(): $MapColor
-public "doesCamoPreventDestructionByEntity"(arg0: $Entity$Type): boolean
-public "shouldCamoDisplayFluidOverlay"(arg0: $BlockAndTintGetter$Type, arg1: $BlockPos$Type, arg2: $FluidState$Type): boolean
-public "getCamoBeaconColorMultiplier"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockPos$Type): (float)[]
-public "getCamoShadeBrightness"(arg0: float): float
-public "getCamoFireSpreadSpeed"(arg0: $Direction$Type): integer
-public "canCamoSustainPlant"(arg0: $Direction$Type, arg1: $IPlantable$Type): boolean
-public "getCamoExplosionResistance"(arg0: $Explosion$Type): float
-public "getCamoFlammability"(arg0: $Direction$Type): integer
-public "canAutoApplyCamoOnPlacement"(): boolean
-public "getCamo"(arg0: $Direction$Type): $CamoContainer
-public "getCamo"(arg0: $Direction$Type, arg1: $Direction$Type): $CamoContainer
-public "getCamo"(arg0: $BlockState$Type): $CamoContainer
-public "setCamo"(arg0: $CamoContainer$Type, arg1: boolean): void
 public "load"(arg0: $CompoundTag$Type): void
 public "m_183515_"(arg0: $CompoundTag$Type): void
 public "getUpdateTag"(): $CompoundTag
-public "handleUpdateTag"(arg0: $CompoundTag$Type): void
 public "getModelData"(): $ModelData
-public "getCamoFriction"(arg0: $BlockState$Type, arg1: $Entity$Type): float
-public "updateCulling"(arg0: $Direction$Type, arg1: boolean): boolean
-public "debugHitSecondary"(arg0: $BlockHitResult$Type): boolean
-public "addAdditionalDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: boolean): void
-public "getLightValue"(): integer
-public "isCamoFlammable"(arg0: $Direction$Type): boolean
-public "getSoundType"(): $DoubleBlockSoundType
-public "hasCustomOutlineRendering"(arg0: $Player$Type): boolean
+public "handleUpdateTag"(arg0: $CompoundTag$Type): void
+public "getCamo"(arg0: $BlockState$Type): $CamoContainer
+public "getCamo"(arg0: $Direction$Type): $CamoContainer
+public "getCamo"(arg0: $Direction$Type, arg1: $Direction$Type): $CamoContainer
+public "setCamo"(arg0: $CamoContainer$Type, arg1: boolean): void
 public "getTopInteractionMode"(): $DoubleBlockTopInteractionMode
-public "isSolidSide"(arg0: $Direction$Type): boolean
-public "getStateCache"(): $DoubleBlockStateCache
+public "getLightValue"(): integer
+public "addAdditionalDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: boolean): void
+public "debugHitSecondary"(arg0: $BlockHitResult$Type): boolean
+public "hasCustomOutlineRendering"(arg0: $Player$Type): boolean
+public "updateCulling"(arg0: $Direction$Type, arg1: boolean): boolean
+public "getCamoFriction"(arg0: $BlockState$Type, arg1: $Entity$Type): float
+public "isCamoFlammable"(arg0: $Direction$Type): boolean
 public "getCamoTwo"(): $CamoContainer
 public "getBlockPair"(): $Tuple<($BlockState), ($BlockState)>
+public "getStateCache"(): $DoubleBlockStateCache
+public "isSolidSide"(arg0: $Direction$Type): boolean
+public "getCamoShadeBrightness"(arg0: float): float
+public "getCamoFlammability"(arg0: $Direction$Type): integer
+public "getCamoFireSpreadSpeed"(arg0: $Direction$Type): integer
+public "getCamoBeaconColorMultiplier"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockPos$Type): (float)[]
+public "canAutoApplyCamoOnPlacement"(): boolean
+public "getCamoExplosionResistance"(arg0: $Explosion$Type): float
+public "canCamoSustainPlant"(arg0: $Direction$Type, arg1: $IPlantable$Type): boolean
+public "doesCamoPreventDestructionByEntity"(arg0: $Entity$Type): boolean
+public "shouldCamoDisplayFluidOverlay"(arg0: $BlockAndTintGetter$Type, arg1: $BlockPos$Type, arg2: $FluidState$Type): boolean
 get "block"(): $IFramedDoubleBlock
+get "soundType"(): $DoubleBlockSoundType
 get "mapColor"(): $MapColor
 get "updateTag"(): $CompoundTag
 get "modelData"(): $ModelData
-get "lightValue"(): integer
-get "soundType"(): $DoubleBlockSoundType
 get "topInteractionMode"(): $DoubleBlockTopInteractionMode
-get "stateCache"(): $DoubleBlockStateCache
+get "lightValue"(): integer
 get "camoTwo"(): $CamoContainer
 get "blockPair"(): $Tuple<($BlockState), ($BlockState)>
+get "stateCache"(): $DoubleBlockStateCache
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -11964,8 +11944,8 @@ import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/world/phys/$BlockHitResult"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$ShapeProvider, $ShapeProvider$Type} from "packages/xfacthd/framedblocks/api/shapes/$ShapeProvider"
@@ -12015,69 +11995,69 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockItem"(): $BlockItem
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
 public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
 public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
+public "createBlockItem"(): $BlockItem
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
@@ -12132,9 +12112,9 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -12190,12 +12170,12 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public static "mirrorPanel"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
-public static "getStateForPlacement"(arg0: $Block$Type, arg1: $BlockPlaceContext$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public static "getStateForPlacement"(arg0: $Block$Type, arg1: $BlockPlaceContext$Type): $BlockState
+public static "mirrorPanel"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -12234,9 +12214,9 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor(arg0: $FramedToolType$Type)
 
 public "getType"(): $FramedToolType
-public "doesSneakBypassUse"(arg0: $ItemStack$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public "hasCraftingRemainingItem"(arg0: $ItemStack$Type): boolean
 public "getCraftingRemainingItem"(arg0: $ItemStack$Type): $ItemStack
+public "doesSneakBypassUse"(arg0: $ItemStack$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 get "type"(): $FramedToolType
 }
 /**
@@ -12365,20 +12345,20 @@ readonly "pitch": float
 
 constructor(arg0: $FramedDoubleBlockEntity$Type)
 
-public "getPlaceSound"(): $SoundEvent
+public "getFallSound"(): $SoundEvent
 public "getBreakSound"(): $SoundEvent
 public "getHitSound"(): $SoundEvent
-public "getPitch"(): float
 public "getStepSound"(): $SoundEvent
 public "getVolume"(): float
-public "getFallSound"(): $SoundEvent
-get "placeSound"(): $SoundEvent
+public "getPitch"(): float
+public "getPlaceSound"(): $SoundEvent
+get "fallSound"(): $SoundEvent
 get "breakSound"(): $SoundEvent
 get "hitSound"(): $SoundEvent
-get "pitch"(): float
 get "stepSound"(): $SoundEvent
 get "volume"(): float
-get "fallSound"(): $SoundEvent
+get "pitch"(): float
+get "placeSound"(): $SoundEvent
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -12437,20 +12417,20 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -12478,9 +12458,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
@@ -12544,77 +12523,75 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "getBlockType"(): $BlockType
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
+public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
 public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
 public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public static "itemModelSource"(): $BlockState
-public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-get "blockType"(): $BlockType
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -12637,8 +12614,8 @@ import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
-import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
 import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
+import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$AbstractFramedHangingSignBlock, $AbstractFramedHangingSignBlock$Type} from "packages/xfacthd/framedblocks/common/block/sign/$AbstractFramedHangingSignBlock"
 import {$Rotation, $Rotation$Type} from "packages/net/minecraft/world/level/block/$Rotation"
@@ -12670,16 +12647,16 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "getYRotationDegrees"(arg0: $BlockState$Type): float
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public static "canPlace"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getBlockSupportShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
+public "getBlockSupportShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 public "getCollisionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "getYRotationDegrees"(arg0: $BlockState$Type): float
+public static "canPlace"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -12743,24 +12720,24 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public "createBlockItem"(): $BlockItem
-public static "itemModelSourceLarge"(): $BlockState
-public static "itemModelSourceSmall"(): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public static "itemModelSourceSmall"(): $BlockState
+public static "itemModelSourceLarge"(): $BlockState
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -12811,9 +12788,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -12875,23 +12852,23 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -13022,10 +12999,10 @@ constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -13086,22 +13063,22 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -13137,8 +13114,8 @@ import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/leve
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$WeightedPressurePlateBlock, $WeightedPressurePlateBlock$Type} from "packages/net/minecraft/world/level/block/$WeightedPressurePlateBlock"
 import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/world/phys/$BlockHitResult"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$ShapeProvider, $ShapeProvider$Type} from "packages/xfacthd/framedblocks/api/shapes/$ShapeProvider"
@@ -13188,74 +13165,74 @@ static readonly "UPDATE_LIMIT": integer
 readonly "properties": $BlockBehaviour$Properties
 
 
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public static "iron"(): $FramedWeightedPressurePlateBlock
-public static "gold"(): $FramedWeightedPressurePlateBlock
-public static "goldWaterloggable"(): $FramedWeightedPressurePlateBlock
-public static "ironWaterloggable"(): $FramedWeightedPressurePlateBlock
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
 public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public static "iron"(): $FramedWeightedPressurePlateBlock
+public static "gold"(): $FramedWeightedPressurePlateBlock
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
+public static "goldWaterloggable"(): $FramedWeightedPressurePlateBlock
+public static "ironWaterloggable"(): $FramedWeightedPressurePlateBlock
 public static "mergeWeightedState"(arg0: $BlockState$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
@@ -13317,21 +13294,21 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(arg0: $BlockType$Type)
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -13382,9 +13359,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public static "itemModelSource"(): $BlockState
 public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "isLadder"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $LivingEntity$Type): boolean
+public static "itemModelSource"(): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -13447,22 +13424,22 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public static "itemModelSourceThreeway"(): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public static "itemModelSourceThreeway"(): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -13518,15 +13495,15 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "isLadder"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $LivingEntity$Type): boolean
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 public "getCollisionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "makesOpenTrapdoorAboveClimbable"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type): boolean
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
-public "isLadder"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $LivingEntity$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -13583,10 +13560,10 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "isPathfindable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $PathComputationType$Type): boolean
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -13651,23 +13628,23 @@ constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
+public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "isHorizontalSlope"(arg0: $BlockState$Type): boolean
 public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
-public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
-public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -13720,9 +13697,9 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -13784,21 +13761,21 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public static "itemSource"(): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public static "itemSource"(): $BlockState
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -13857,22 +13834,22 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -13896,8 +13873,8 @@ import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Directio
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
-import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
 import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
+import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
 import {$EnumProperty, $EnumProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$EnumProperty"
 import {$AttachFace, $AttachFace$Type} from "packages/net/minecraft/world/level/block/state/properties/$AttachFace"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
@@ -13933,10 +13910,10 @@ readonly "properties": $BlockBehaviour$Properties
 
 
 public static "getShape"(arg0: $BlockState$Type): $VoxelShape
-public static "stone"(): $FramedLargeButtonBlock
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public static "wood"(): $FramedLargeButtonBlock
 public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public static "stone"(): $FramedLargeButtonBlock
+public static "wood"(): $FramedLargeButtonBlock
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -13994,10 +13971,10 @@ constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -14052,11 +14029,11 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(arg0: $BlockType$Type)
 
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public static "getStateForPlacement"(arg0: $BlockPlaceContext$Type, arg1: $Block$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public static "getStateForPlacement"(arg0: $BlockPlaceContext$Type, arg1: $Block$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -14083,8 +14060,8 @@ import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
-import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
 import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
+import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
 import {$BlockItem, $BlockItem$Type} from "packages/net/minecraft/world/item/$BlockItem"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$Rotation, $Rotation$Type} from "packages/net/minecraft/world/level/block/$Rotation"
@@ -14117,16 +14094,16 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "getYRotationDegrees"(arg0: $BlockState$Type): float
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "createBlockItem"(): $BlockItem
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 public "canSurvive"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "getYRotationDegrees"(arg0: $BlockState$Type): float
+public "createBlockItem"(): $BlockItem
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -14182,10 +14159,10 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -14248,23 +14225,23 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public static "itemSource"(): $BlockState
-public "createBlockItem"(): $BlockItem
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public static "itemSource"(): $BlockState
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -14348,10 +14325,10 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -14405,16 +14382,16 @@ static readonly "UPDATE_LIMIT": integer
 readonly "properties": $BlockBehaviour$Properties
 
 
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public "getFacing"(arg0: $BlockState$Type): $Direction
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -14467,9 +14444,9 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public static "itemModelSourcePost"(): $BlockState
-public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
+public static "itemModelSourcePost"(): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -14533,22 +14510,22 @@ constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -14608,20 +14585,20 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -14672,9 +14649,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -14705,8 +14682,8 @@ import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
@@ -14772,78 +14749,78 @@ static readonly "UPDATE_LIMIT": integer
 readonly "properties": $BlockBehaviour$Properties
 
 
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "getBlockType"(): $BlockType
-public static "wood"(): $FramedTrapDoorBlock
+public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
 public static "iron"(): $FramedTrapDoorBlock
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "useShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
 public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "getVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "getBlockType"(): $BlockType
+public static "wood"(): $FramedTrapDoorBlock
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 get "blockType"(): $BlockType
@@ -14881,8 +14858,8 @@ import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/leve
 import {$TargetBlock, $TargetBlock$Type} from "packages/net/minecraft/world/level/block/$TargetBlock"
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/world/phys/$BlockHitResult"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$ShapeProvider, $ShapeProvider$Type} from "packages/xfacthd/framedblocks/api/shapes/$ShapeProvider"
@@ -14932,77 +14909,77 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "getBlockType"(): $IBlockType
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
+public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
 public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "useShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
 public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "getVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "getBlockType"(): $IBlockType
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 get "blockType"(): $IBlockType
@@ -15062,12 +15039,12 @@ constructor(arg0: $BlockType$Type)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public static "getStateForPlacement"(arg0: $Block$Type, arg1: $BlockPlaceContext$Type, arg2: boolean, arg3: boolean): $BlockState
-public "createBlockItem"(): $BlockItem
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "createBlockItem"(): $BlockItem
+public static "getStateForPlacement"(arg0: $Block$Type, arg1: $BlockPlaceContext$Type, arg2: boolean, arg3: boolean): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -15131,24 +15108,24 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public static "itemSource"(): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "getFacing"(arg0: $BlockState$Type): $Direction
-public "getSlopeType"(arg0: $BlockState$Type): $SlopeType
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "getSlopeType"(arg0: $BlockState$Type): $SlopeType
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public static "itemSource"(): $BlockState
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -15174,8 +15151,8 @@ import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$Block, $Block$Type} from "packages/net/minecraft/world/level/block/$Block"
 import {$PathComputationType, $PathComputationType$Type} from "packages/net/minecraft/world/level/pathfinder/$PathComputationType"
 import {$FramedBlock, $FramedBlock$Type} from "packages/xfacthd/framedblocks/common/block/$FramedBlock"
-import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
 import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
+import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
@@ -15207,14 +15184,14 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "isPathfindable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $PathComputationType$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
+public "isPathfindable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $PathComputationType$Type): boolean
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "canSurvive"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public static "getFlowerPotState"(arg0: $Block$Type): $BlockState
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public static "getFlowerPotState"(arg0: $Block$Type): $BlockState
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -15244,8 +15221,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
+import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$IClientBlockExtensions, $IClientBlockExtensions$Type} from "packages/net/minecraftforge/client/extensions/common/$IClientBlockExtensions"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
@@ -15305,81 +15282,81 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(arg0: $IBlockType$Type, arg1: $BlockBehaviour$Properties$Type)
 
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "getBlockType"(): $IBlockType
-public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
+public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
 public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "useShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
 public "getFluidState"(arg0: $BlockState$Type): $FluidState
 public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "getVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "getBlockType"(): $IBlockType
 public "canPlaceLiquid"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Fluid$Type): boolean
-public "placeLiquid"(arg0: $LevelAccessor$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $FluidState$Type): boolean
 public "pickupBlock"(arg0: $LevelAccessor$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): $ItemStack
-public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "canSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "initializeClient"(arg0: $Consumer$Type<($IClientBlockExtensions$Type)>): void
+public "placeLiquid"(arg0: $LevelAccessor$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $FluidState$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $BlockHitResult$Type, arg2: $Rotation$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
 public "initCache"(arg0: $BlockState$Type): $StateCache
 public "getCache"(arg0: $BlockState$Type): $StateCache
+public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
+public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
+public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
+public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
+public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
+public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
+public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
 public "onBlockStateChange"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
 public "getMapColor"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $MapColor$Type): $MapColor
-public "getAppearance"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $BlockState$Type, arg5: $BlockPos$Type): $BlockState
-/**
- * 
- * @deprecated
- */
-public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
-public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
-public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
-public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
+public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
+public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
+public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
+public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
+public "createBlockItem"(): $BlockItem
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
+public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
+public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
+public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
+public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
+public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
+public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
+public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
 public "runOcclusionTestAndGetLookupState"(arg0: $SideSkipPredicate$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type, arg5: $Direction$Type): $BlockState
+public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
+public "unpackNestedModelData"(arg0: $ModelData$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): $ModelData
 public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
+public "tryApplyCamoImmediately"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $LivingEntity$Type, arg3: $ItemStack$Type): void
+public "shouldPreventNeighborCulling"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockPos$Type, arg4: $BlockState$Type): boolean
+public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $ShapeProvider$Type): $VoxelShape
 /**
  * 
  * @deprecated
  */
 public "getCamoOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCamoShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: float): float
-public "getComponentBySkipPredicate"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): $BlockState
 public "canCamoSustainPlant"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type, arg4: $IPlantable$Type): boolean
-public "updateShapeLockable"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Supplier$Type<($BlockState$Type)>): $BlockState
-public "createBlockItem"(): $BlockItem
-public "isIntangible"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): boolean
-public "isSuffocating"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
-public "lockState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Player$Type, arg3: $ItemStack$Type): boolean
-public "getComponentAtEdge"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Direction$Type, arg4: $Direction$Type): $BlockState
-public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
-public "updateCulling"(arg0: $LevelReader$Type, arg1: $BlockPos$Type): void
-public "handleUse"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "getCamoVisualShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getCamoDrops"(arg0: $List$Type<($ItemStack$Type)>, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
-public "getFireSpreadSpeed"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getFlammability"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "isFlammable"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
-public "getExplosionResistance"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Explosion$Type): float
-public "shouldDisplayFluidOverlay"(arg0: $BlockState$Type, arg1: $BlockAndTintGetter$Type, arg2: $BlockPos$Type, arg3: $FluidState$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): (float)[]
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "useCamoOcclusionShapeForLightOcclusion"(arg0: $BlockState$Type): boolean
-public "addRunningEffects"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "getSoundType"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): $SoundType
-public "hidesNeighborFace"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
-public "getFriction"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): float
-public "getLightEmission"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
-public "addLandingEffects"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $LivingEntity$Type, arg5: integer): boolean
-public "playBreakSound"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type): boolean
-public "printCamoBlock"(arg0: $CompoundTag$Type): $Optional<($MutableComponent)>
-public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "needCullingUpdateAfterStateChange"(arg0: $LevelReader$Type, arg1: $BlockState$Type, arg2: $BlockState$Type): boolean
 public "getPickupSound"(): $Optional<($SoundEvent)>
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
@@ -15409,8 +15386,8 @@ import {$Block, $Block$Type} from "packages/net/minecraft/world/level/block/$Blo
 import {$FramedBlock, $FramedBlock$Type} from "packages/xfacthd/framedblocks/common/block/$FramedBlock"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
-import {$IBlockType, $IBlockType$Type} from "packages/xfacthd/framedblocks/api/type/$IBlockType"
 import {$Rotation, $Rotation$Type} from "packages/net/minecraft/world/level/block/$Rotation"
+import {$IBlockType, $IBlockType$Type} from "packages/xfacthd/framedblocks/api/type/$IBlockType"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 
@@ -15437,11 +15414,11 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(arg0: $BlockType$Type)
 
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public static "getStateForPlacement"(arg0: $BlockPlaceContext$Type, arg1: $Block$Type, arg2: $IBlockType$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public static "getStateForPlacement"(arg0: $BlockPlaceContext$Type, arg1: $Block$Type, arg2: $IBlockType$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -15482,24 +15459,24 @@ public "getState"(): $BlockState
 public "save"(arg0: $CompoundTag$Type): void
 public static "save"(arg0: $CamoContainer$Type): $CompoundTag
 public "getType"(): $ContainerType
-public "toNetwork"(arg0: $CompoundTag$Type): void
+public "getSoundType"(): $SoundType
 public "getMapColor"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type): $MapColor
-public "canRotateCamo"(): boolean
+public "getBeaconColorMultiplier"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockPos$Type): (float)[]
 public "rotateCamo"(): boolean
 public static "writeToNetwork"(arg0: $CamoContainer$Type): $CompoundTag
-public "toItemStack"(arg0: $ItemStack$Type): $ItemStack
 public static "readFromNetwork"(arg0: $CompoundTag$Type): $CamoContainer
+public "toItemStack"(arg0: $ItemStack$Type): $ItemStack
+public "canRotateCamo"(): boolean
+public "toNetwork"(arg0: $CompoundTag$Type): void
 public "isSolid"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type): boolean
-public "getBeaconColorMultiplier"(arg0: $LevelReader$Type, arg1: $BlockPos$Type, arg2: $BlockPos$Type): (float)[]
 public "getFluid"(): $Fluid
-public "getSoundType"(): $SoundType
 public "getColor"(arg0: $BlockAndTintGetter$Type, arg1: $BlockPos$Type, arg2: integer): integer
 get "empty"(): boolean
 get "factory"(): $CamoContainer$Factory
 get "state"(): $BlockState
 get "type"(): $ContainerType
-get "fluid"(): $Fluid
 get "soundType"(): $SoundType
+get "fluid"(): $Fluid
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -15558,22 +15535,22 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
-public static "itemSource"(): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public static "itemSource"(): $BlockState
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**
@@ -15630,8 +15607,8 @@ import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/entity/$LivingEntity"
 import {$FramedBlock, $FramedBlock$Type} from "packages/xfacthd/framedblocks/common/block/$FramedBlock"
-import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
 import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
+import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$BlockType, $BlockType$Type} from "packages/xfacthd/framedblocks/common/data/$BlockType"
@@ -15662,13 +15639,13 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(arg0: $BlockType$Type)
 
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
-public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "handleBlockLeftClick"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
@@ -15698,14 +15675,14 @@ import {$AbstractFramedDoubleBlock, $AbstractFramedDoubleBlock$Type} from "packa
 import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
 import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
-import {$ImmutableList, $ImmutableList$Type} from "packages/com/google/common/collect/$ImmutableList"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
+import {$ImmutableList, $ImmutableList$Type} from "packages/com/google/common/collect/$ImmutableList"
 import {$CamoGetter, $CamoGetter$Type} from "packages/xfacthd/framedblocks/common/data/doubleblock/$CamoGetter"
 import {$Rotation, $Rotation$Type} from "packages/net/minecraft/world/level/block/$Rotation"
 import {$Tuple, $Tuple$Type} from "packages/net/minecraft/util/$Tuple"
 import {$IBlockType, $IBlockType$Type} from "packages/xfacthd/framedblocks/api/type/$IBlockType"
-import {$ShapeProvider, $ShapeProvider$Type} from "packages/xfacthd/framedblocks/api/shapes/$ShapeProvider"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$ShapeProvider, $ShapeProvider$Type} from "packages/xfacthd/framedblocks/api/shapes/$ShapeProvider"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 
 export class $FramedVerticalDoubleHalfStairsBlock extends $AbstractFramedDoubleBlock {
@@ -15732,22 +15709,22 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "mirror"(arg0: $BlockState$Type, arg1: $Mirror$Type): $BlockState
 public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public static "generateShapes"(arg0: $ImmutableList$Type<($BlockState$Type)>): $ShapeProvider
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public static "itemModelSource"(): $BlockState
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
 public "calculateSolidityCheck"(arg0: $BlockState$Type, arg1: $Direction$Type): $SolidityCheck
 public "calculateTopInteractionMode"(arg0: $BlockState$Type): $DoubleBlockTopInteractionMode
-public "calculateCamoGetter"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $Direction$Type): $CamoGetter
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "itemModelSource"(): $BlockState
+public static "generateShapes"(arg0: $ImmutableList$Type<($BlockState$Type)>): $ShapeProvider
 public "calculateBlockPair"(arg0: $BlockState$Type): $Tuple<($BlockState), ($BlockState)>
 public static "testComponent"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type, arg4: $Direction$Type): boolean
 public static "createProperties"(arg0: $IBlockType$Type): $BlockBehaviour$Properties
-public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 public "getBlockType"(): $IBlockType
 public static "playCamoBreakSound"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public static "toggleYSlope"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
+public "doesBlockOccludeBeaconBeam"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type): boolean
 get "blockType"(): $IBlockType
 }
 /**

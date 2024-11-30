@@ -24,43 +24,43 @@ readonly "result": $Item
 
 constructor(arg0: $ResourceLocation$Type, arg1: $Ingredient$Type, arg2: $Item$Type)
 
-public "getIngredient"(): $Ingredient
 public "assemble"(arg0: $Container$Type, arg1: $RegistryAccess$Type): $ItemStack
 public "matches"(arg0: $Container$Type, arg1: $Level$Type): boolean
+public "getId"(): $ResourceLocation
+public "getIngredient"(): $Ingredient
+public "getSerializer"(): $RecipeSerializer<(any)>
 public "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
 public "getIngredients"(): $NonNullList<($Ingredient)>
-public "getSerializer"(): $RecipeSerializer<(any)>
-public "getId"(): $ResourceLocation
 public "getResultItem"(): $ItemStack
 public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
 public "isSpecial"(): boolean
-public "showNotification"(): boolean
-public "getRemainingItems"(arg0: $Container$Type): $NonNullList<($ItemStack)>
 public "isIncomplete"(): boolean
+public "getRemainingItems"(arg0: $Container$Type): $NonNullList<($ItemStack)>
+public "showNotification"(): boolean
 public "getToastSymbol"(): $ItemStack
-public "getGroup"(): string
-public "getOrCreateId"(): $ResourceLocation
-public "hasOutput"(match: $ReplacementMatch$Type): boolean
-public "getSchema"(): $RecipeSchema
-public "hasInput"(match: $ReplacementMatch$Type): boolean
-public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
-public "setGroup"(group: string): void
-public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
 public "getMod"(): string
+public "getSchema"(): $RecipeSchema
+public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
+public "hasInput"(match: $ReplacementMatch$Type): boolean
+public "hasOutput"(match: $ReplacementMatch$Type): boolean
+public "getOrCreateId"(): $ResourceLocation
+public "setGroup"(group: string): void
+public "getGroup"(): string
+public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
 public "getType"(): $ResourceLocation
-get "ingredient"(): $Ingredient
-get "ingredients"(): $NonNullList<($Ingredient)>
-get "serializer"(): $RecipeSerializer<(any)>
 get "id"(): $ResourceLocation
+get "ingredient"(): $Ingredient
+get "serializer"(): $RecipeSerializer<(any)>
+get "ingredients"(): $NonNullList<($Ingredient)>
 get "resultItem"(): $ItemStack
 get "special"(): boolean
 get "incomplete"(): boolean
 get "toastSymbol"(): $ItemStack
-get "group"(): string
-get "orCreateId"(): $ResourceLocation
-get "schema"(): $RecipeSchema
-set "group"(value: string)
 get "mod"(): string
+get "schema"(): $RecipeSchema
+get "orCreateId"(): $ResourceLocation
+set "group"(value: string)
+get "group"(): string
 get "type"(): $ResourceLocation
 }
 /**
@@ -78,8 +78,8 @@ export type $ChargerRecipe_ = $ChargerRecipe$Type;
 declare module "packages/appeng/recipes/entropy/$EntropyRecipe" {
 import {$InputReplacement, $InputReplacement$Type} from "packages/dev/latvian/mods/kubejs/recipe/$InputReplacement"
 import {$Fluid, $Fluid$Type} from "packages/net/minecraft/world/level/material/$Fluid"
-import {$NonNullList, $NonNullList$Type} from "packages/net/minecraft/core/$NonNullList"
 import {$RecipeSerializer, $RecipeSerializer$Type} from "packages/net/minecraft/world/item/crafting/$RecipeSerializer"
+import {$NonNullList, $NonNullList$Type} from "packages/net/minecraft/core/$NonNullList"
 import {$RecipeSchema, $RecipeSchema$Type} from "packages/dev/latvian/mods/kubejs/recipe/schema/$RecipeSchema"
 import {$Ingredient, $Ingredient$Type} from "packages/net/minecraft/world/item/crafting/$Ingredient"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
@@ -107,56 +107,56 @@ constructor(arg0: $ResourceLocation$Type, arg1: $EntropyMode$Type, arg2: $Block$
 
 public "matches"(arg0: $EntropyMode$Type, arg1: $BlockState$Type, arg2: $FluidState$Type): boolean
 public "getMode"(): $EntropyMode
-public "getDrops"(): $List<($ItemStack)>
 public "assemble"(arg0: $Container$Type, arg1: $RegistryAccess$Type): $ItemStack
 public "matches"(arg0: $Container$Type, arg1: $Level$Type): boolean
+public "getId"(): $ResourceLocation
+public "getDrops"(): $List<($ItemStack)>
+public "getOutputFluidKeep"(): boolean
+public "getOutputBlockKeep"(): boolean
+public "getOutputFluid"(): $Fluid
+public "getOutputBlock"(): $Block
+public "getInputBlock"(): $Block
+public "getInputFluid"(): $Fluid
+public "getSerializer"(): $RecipeSerializer<(any)>
 public "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
 public "getIngredients"(): $NonNullList<($Ingredient)>
-public "getSerializer"(): $RecipeSerializer<(any)>
-public "getInputFluid"(): $Fluid
-public "getId"(): $ResourceLocation
-public "getOutputFluid"(): $Fluid
-public "getInputBlock"(): $Block
-public "getOutputBlockKeep"(): boolean
-public "getOutputBlock"(): $Block
-public "getOutputFluidKeep"(): boolean
+public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
 public "getOutputFluidState"(arg0: $FluidState$Type): $FluidState
 public "getOutputBlockState"(arg0: $BlockState$Type): $BlockState
-public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
 public "isSpecial"(): boolean
-public "showNotification"(): boolean
-public "getRemainingItems"(arg0: $Container$Type): $NonNullList<($ItemStack)>
 public "isIncomplete"(): boolean
+public "getRemainingItems"(arg0: $Container$Type): $NonNullList<($ItemStack)>
+public "showNotification"(): boolean
 public "getToastSymbol"(): $ItemStack
-public "getGroup"(): string
-public "getOrCreateId"(): $ResourceLocation
-public "hasOutput"(match: $ReplacementMatch$Type): boolean
-public "getSchema"(): $RecipeSchema
-public "hasInput"(match: $ReplacementMatch$Type): boolean
-public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
-public "setGroup"(group: string): void
-public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
 public "getMod"(): string
+public "getSchema"(): $RecipeSchema
+public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
+public "hasInput"(match: $ReplacementMatch$Type): boolean
+public "hasOutput"(match: $ReplacementMatch$Type): boolean
+public "getOrCreateId"(): $ResourceLocation
+public "setGroup"(group: string): void
+public "getGroup"(): string
+public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
 public "getType"(): $ResourceLocation
 get "mode"(): $EntropyMode
-get "drops"(): $List<($ItemStack)>
-get "ingredients"(): $NonNullList<($Ingredient)>
-get "serializer"(): $RecipeSerializer<(any)>
-get "inputFluid"(): $Fluid
 get "id"(): $ResourceLocation
-get "outputFluid"(): $Fluid
-get "inputBlock"(): $Block
-get "outputBlockKeep"(): boolean
-get "outputBlock"(): $Block
+get "drops"(): $List<($ItemStack)>
 get "outputFluidKeep"(): boolean
+get "outputBlockKeep"(): boolean
+get "outputFluid"(): $Fluid
+get "outputBlock"(): $Block
+get "inputBlock"(): $Block
+get "inputFluid"(): $Fluid
+get "serializer"(): $RecipeSerializer<(any)>
+get "ingredients"(): $NonNullList<($Ingredient)>
 get "special"(): boolean
 get "incomplete"(): boolean
 get "toastSymbol"(): $ItemStack
-get "group"(): string
-get "orCreateId"(): $ResourceLocation
-get "schema"(): $RecipeSchema
-set "group"(value: string)
 get "mod"(): string
+get "schema"(): $RecipeSchema
+get "orCreateId"(): $ResourceLocation
+set "group"(value: string)
+get "group"(): string
 get "type"(): $ResourceLocation
 }
 /**
@@ -184,10 +184,10 @@ export class $EntropyRecipeSerializer implements $RecipeSerializer<($EntropyReci
 static readonly "INSTANCE": $EntropyRecipeSerializer
 
 
-public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $EntropyRecipe$Type): void
-public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $EntropyRecipe
-public "toJson"(arg0: $EntropyRecipe$Type, arg1: $JsonObject$Type): void
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type): $EntropyRecipe
+public "toJson"(arg0: $EntropyRecipe$Type, arg1: $JsonObject$Type): void
+public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $EntropyRecipe
+public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $EntropyRecipe$Type): void
 public static "register"<S extends $RecipeSerializer<(T)>, T extends $Recipe<(any)>>(arg0: string, arg1: S): S
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type, arg2: $ICondition$IContext$Type): $EntropyRecipe
 }
@@ -216,9 +216,9 @@ export class $MatterCannonAmmoSerializer implements $RecipeSerializer<($MatterCa
 static readonly "INSTANCE": $MatterCannonAmmoSerializer
 
 
-public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $MatterCannonAmmo$Type): void
-public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $MatterCannonAmmo
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type): $MatterCannonAmmo
+public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $MatterCannonAmmo
+public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $MatterCannonAmmo$Type): void
 public static "register"<S extends $RecipeSerializer<(T)>, T extends $Recipe<(any)>>(arg0: string, arg1: S): S
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type, arg2: $ICondition$IContext$Type): $MatterCannonAmmo
 }
@@ -247,9 +247,9 @@ export class $TransformRecipeSerializer implements $RecipeSerializer<($Transform
 static readonly "INSTANCE": $TransformRecipeSerializer
 
 
-public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $TransformRecipe$Type): void
-public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $TransformRecipe
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type): $TransformRecipe
+public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $TransformRecipe
+public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $TransformRecipe$Type): void
 public static "register"<S extends $RecipeSerializer<(T)>, T extends $Recipe<(any)>>(arg0: string, arg1: S): S
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type, arg2: $ICondition$IContext$Type): $TransformRecipe
 }
@@ -278,9 +278,9 @@ export class $InscriberRecipeSerializer implements $RecipeSerializer<($Inscriber
 static readonly "INSTANCE": $InscriberRecipeSerializer
 
 
-public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $InscriberRecipe$Type): void
-public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $InscriberRecipe
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type): $InscriberRecipe
+public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $InscriberRecipe
+public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $InscriberRecipe$Type): void
 public static "register"<S extends $RecipeSerializer<(T)>, T extends $Recipe<(any)>>(arg0: string, arg1: S): S
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type, arg2: $ICondition$IContext$Type): $InscriberRecipe
 }
@@ -420,41 +420,41 @@ readonly "circumstance": $TransformCircumstance
 
 constructor(arg0: $ResourceLocation$Type, arg1: $NonNullList$Type<($Ingredient$Type)>, arg2: $ItemStack$Type, arg3: $TransformCircumstance$Type)
 
-public "isSpecial"(): boolean
 public "assemble"(arg0: $Container$Type, arg1: $RegistryAccess$Type): $ItemStack
 public "matches"(arg0: $Container$Type, arg1: $Level$Type): boolean
+public "getId"(): $ResourceLocation
+public "isSpecial"(): boolean
+public "getSerializer"(): $RecipeSerializer<(any)>
 public "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
 public "getIngredients"(): $NonNullList<($Ingredient)>
-public "getSerializer"(): $RecipeSerializer<(any)>
-public "getId"(): $ResourceLocation
 public "getResultItem"(): $ItemStack
 public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
-public "showNotification"(): boolean
-public "getRemainingItems"(arg0: $Container$Type): $NonNullList<($ItemStack)>
 public "isIncomplete"(): boolean
+public "getRemainingItems"(arg0: $Container$Type): $NonNullList<($ItemStack)>
+public "showNotification"(): boolean
 public "getToastSymbol"(): $ItemStack
-public "getGroup"(): string
-public "getOrCreateId"(): $ResourceLocation
-public "hasOutput"(match: $ReplacementMatch$Type): boolean
-public "getSchema"(): $RecipeSchema
-public "hasInput"(match: $ReplacementMatch$Type): boolean
-public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
-public "setGroup"(group: string): void
-public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
 public "getMod"(): string
+public "getSchema"(): $RecipeSchema
+public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
+public "hasInput"(match: $ReplacementMatch$Type): boolean
+public "hasOutput"(match: $ReplacementMatch$Type): boolean
+public "getOrCreateId"(): $ResourceLocation
+public "setGroup"(group: string): void
+public "getGroup"(): string
+public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
 public "getType"(): $ResourceLocation
-get "special"(): boolean
-get "ingredients"(): $NonNullList<($Ingredient)>
-get "serializer"(): $RecipeSerializer<(any)>
 get "id"(): $ResourceLocation
+get "special"(): boolean
+get "serializer"(): $RecipeSerializer<(any)>
+get "ingredients"(): $NonNullList<($Ingredient)>
 get "resultItem"(): $ItemStack
 get "incomplete"(): boolean
 get "toastSymbol"(): $ItemStack
-get "group"(): string
-get "orCreateId"(): $ResourceLocation
-get "schema"(): $RecipeSchema
-set "group"(value: string)
 get "mod"(): string
+get "schema"(): $RecipeSchema
+get "orCreateId"(): $ResourceLocation
+set "group"(value: string)
+get "group"(): string
 get "type"(): $ResourceLocation
 }
 /**
@@ -483,9 +483,9 @@ static readonly "INSTANCE": $ChargerRecipeSerializer
 
 constructor()
 
-public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $ChargerRecipe$Type): void
-public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $ChargerRecipe
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type): $ChargerRecipe
+public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $ChargerRecipe
+public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $ChargerRecipe$Type): void
 public static "register"<S extends $RecipeSerializer<(T)>, T extends $Recipe<(any)>>(arg0: string, arg1: S): S
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type, arg2: $ICondition$IContext$Type): $ChargerRecipe
 }
@@ -503,8 +503,8 @@ export type $ChargerRecipeSerializer_ = $ChargerRecipeSerializer$Type;
 }}
 declare module "packages/appeng/recipes/mattercannon/$MatterCannonAmmo" {
 import {$InputReplacement, $InputReplacement$Type} from "packages/dev/latvian/mods/kubejs/recipe/$InputReplacement"
-import {$NonNullList, $NonNullList$Type} from "packages/net/minecraft/core/$NonNullList"
 import {$RecipeSerializer, $RecipeSerializer$Type} from "packages/net/minecraft/world/item/crafting/$RecipeSerializer"
+import {$NonNullList, $NonNullList$Type} from "packages/net/minecraft/core/$NonNullList"
 import {$RecipeSchema, $RecipeSchema$Type} from "packages/dev/latvian/mods/kubejs/recipe/schema/$RecipeSchema"
 import {$Ingredient, $Ingredient$Type} from "packages/net/minecraft/world/item/crafting/$Ingredient"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
@@ -528,45 +528,45 @@ static readonly "TYPE": $RecipeType<($MatterCannonAmmo)>
 
 constructor(arg0: $ResourceLocation$Type, arg1: $Ingredient$Type, arg2: float)
 
-public "getAmmo"(): $Ingredient
 public "assemble"(arg0: $Container$Type, arg1: $RegistryAccess$Type): $ItemStack
 public "matches"(arg0: $Container$Type, arg1: $Level$Type): boolean
+public "getId"(): $ResourceLocation
+public "getAmmo"(): $Ingredient
+public "getWeight"(): float
+public "getSerializer"(): $RecipeSerializer<(any)>
 public "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
 public "getIngredients"(): $NonNullList<($Ingredient)>
-public "getSerializer"(): $RecipeSerializer<(any)>
-public "getId"(): $ResourceLocation
-public "getWeight"(): float
+public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
+public static "ammo"(arg0: $Consumer$Type<($FinishedRecipe$Type)>, arg1: $ResourceLocation$Type, arg2: $Ingredient$Type, arg3: float): void
 public static "ammo"(arg0: $Consumer$Type<($FinishedRecipe$Type)>, arg1: $ResourceLocation$Type, arg2: $TagKey$Type<($Item$Type)>, arg3: float): void
 public static "ammo"(arg0: $Consumer$Type<($FinishedRecipe$Type)>, arg1: $ResourceLocation$Type, arg2: $ItemLike$Type, arg3: float): void
-public static "ammo"(arg0: $Consumer$Type<($FinishedRecipe$Type)>, arg1: $ResourceLocation$Type, arg2: $Ingredient$Type, arg3: float): void
-public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
 public "isSpecial"(): boolean
-public "showNotification"(): boolean
-public "getRemainingItems"(arg0: $Container$Type): $NonNullList<($ItemStack)>
 public "isIncomplete"(): boolean
+public "getRemainingItems"(arg0: $Container$Type): $NonNullList<($ItemStack)>
+public "showNotification"(): boolean
 public "getToastSymbol"(): $ItemStack
-public "getGroup"(): string
-public "getOrCreateId"(): $ResourceLocation
-public "hasOutput"(match: $ReplacementMatch$Type): boolean
-public "getSchema"(): $RecipeSchema
-public "hasInput"(match: $ReplacementMatch$Type): boolean
-public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
-public "setGroup"(group: string): void
-public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
 public "getMod"(): string
+public "getSchema"(): $RecipeSchema
+public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
+public "hasInput"(match: $ReplacementMatch$Type): boolean
+public "hasOutput"(match: $ReplacementMatch$Type): boolean
+public "getOrCreateId"(): $ResourceLocation
+public "setGroup"(group: string): void
+public "getGroup"(): string
+public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
 public "getType"(): $ResourceLocation
-get "ingredients"(): $NonNullList<($Ingredient)>
-get "serializer"(): $RecipeSerializer<(any)>
 get "id"(): $ResourceLocation
 get "weight"(): float
+get "serializer"(): $RecipeSerializer<(any)>
+get "ingredients"(): $NonNullList<($Ingredient)>
 get "special"(): boolean
 get "incomplete"(): boolean
 get "toastSymbol"(): $ItemStack
-get "group"(): string
-get "orCreateId"(): $ResourceLocation
-get "schema"(): $RecipeSchema
-set "group"(value: string)
 get "mod"(): string
+get "schema"(): $RecipeSchema
+get "orCreateId"(): $ResourceLocation
+set "group"(value: string)
+get "group"(): string
 get "type"(): $ResourceLocation
 }
 /**
@@ -582,8 +582,8 @@ declare global {
 export type $MatterCannonAmmo_ = $MatterCannonAmmo$Type;
 }}
 declare module "packages/appeng/recipes/transform/$TransformCircumstance" {
-import {$JsonObject, $JsonObject$Type} from "packages/com/google/gson/$JsonObject"
 import {$Fluid, $Fluid$Type} from "packages/net/minecraft/world/level/material/$Fluid"
+import {$JsonObject, $JsonObject$Type} from "packages/com/google/gson/$JsonObject"
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$TagKey, $TagKey$Type} from "packages/net/minecraft/tags/$TagKey"
 import {$FluidState, $FluidState$Type} from "packages/net/minecraft/world/level/material/$FluidState"
@@ -595,15 +595,15 @@ constructor(arg0: string)
 
 public "equals"(arg0: any): boolean
 public "hashCode"(): integer
+public static "explosion"(): $TransformCircumstance
+public "isFluidTag"(arg0: $TagKey$Type<($Fluid$Type)>): boolean
 public "toJson"(): $JsonObject
 public "getFluidsForRendering"(): $List<($Fluid)>
 public static "fluid"(arg0: $TagKey$Type<($Fluid$Type)>): $TransformCircumstance
 public "isExplosion"(): boolean
 public "isFluid"(arg0: $Fluid$Type): boolean
-public "isFluid"(arg0: $FluidState$Type): boolean
 public "isFluid"(): boolean
-public "isFluidTag"(arg0: $TagKey$Type<($Fluid$Type)>): boolean
-public static "explosion"(): $TransformCircumstance
+public "isFluid"(arg0: $FluidState$Type): boolean
 get "fluidsForRendering"(): $List<($Fluid)>
 }
 /**
@@ -620,8 +620,8 @@ export type $TransformCircumstance_ = $TransformCircumstance$Type;
 }}
 declare module "packages/appeng/recipes/handlers/$InscriberRecipe" {
 import {$InputReplacement, $InputReplacement$Type} from "packages/dev/latvian/mods/kubejs/recipe/$InputReplacement"
-import {$NonNullList, $NonNullList$Type} from "packages/net/minecraft/core/$NonNullList"
 import {$RecipeSerializer, $RecipeSerializer$Type} from "packages/net/minecraft/world/item/crafting/$RecipeSerializer"
+import {$NonNullList, $NonNullList$Type} from "packages/net/minecraft/core/$NonNullList"
 import {$RecipeSchema, $RecipeSchema$Type} from "packages/dev/latvian/mods/kubejs/recipe/schema/$RecipeSchema"
 import {$Ingredient, $Ingredient$Type} from "packages/net/minecraft/world/item/crafting/$Ingredient"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
@@ -641,49 +641,49 @@ static readonly "TYPE": $RecipeType<($InscriberRecipe)>
 
 constructor(arg0: $ResourceLocation$Type, arg1: $Ingredient$Type, arg2: $ItemStack$Type, arg3: $Ingredient$Type, arg4: $Ingredient$Type, arg5: $InscriberProcessType$Type)
 
-public "isSpecial"(): boolean
-public "getMiddleInput"(): $Ingredient
-public "getBottomOptional"(): $Ingredient
-public "getTopOptional"(): $Ingredient
 public "assemble"(arg0: $Container$Type, arg1: $RegistryAccess$Type): $ItemStack
 public "matches"(arg0: $Container$Type, arg1: $Level$Type): boolean
+public "getId"(): $ResourceLocation
+public "isSpecial"(): boolean
+public "getSerializer"(): $RecipeSerializer<(any)>
 public "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
 public "getIngredients"(): $NonNullList<($Ingredient)>
-public "getSerializer"(): $RecipeSerializer<(any)>
-public "getId"(): $ResourceLocation
 public "getResultItem"(): $ItemStack
 public "getProcessType"(): $InscriberProcessType
+public "getTopOptional"(): $Ingredient
+public "getBottomOptional"(): $Ingredient
+public "getMiddleInput"(): $Ingredient
 public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
-public "showNotification"(): boolean
-public "getRemainingItems"(arg0: $Container$Type): $NonNullList<($ItemStack)>
 public "isIncomplete"(): boolean
+public "getRemainingItems"(arg0: $Container$Type): $NonNullList<($ItemStack)>
+public "showNotification"(): boolean
 public "getToastSymbol"(): $ItemStack
-public "getGroup"(): string
-public "getOrCreateId"(): $ResourceLocation
-public "hasOutput"(match: $ReplacementMatch$Type): boolean
-public "getSchema"(): $RecipeSchema
-public "hasInput"(match: $ReplacementMatch$Type): boolean
-public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
-public "setGroup"(group: string): void
-public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
 public "getMod"(): string
+public "getSchema"(): $RecipeSchema
+public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
+public "hasInput"(match: $ReplacementMatch$Type): boolean
+public "hasOutput"(match: $ReplacementMatch$Type): boolean
+public "getOrCreateId"(): $ResourceLocation
+public "setGroup"(group: string): void
+public "getGroup"(): string
+public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
 public "getType"(): $ResourceLocation
-get "special"(): boolean
-get "middleInput"(): $Ingredient
-get "bottomOptional"(): $Ingredient
-get "topOptional"(): $Ingredient
-get "ingredients"(): $NonNullList<($Ingredient)>
-get "serializer"(): $RecipeSerializer<(any)>
 get "id"(): $ResourceLocation
+get "special"(): boolean
+get "serializer"(): $RecipeSerializer<(any)>
+get "ingredients"(): $NonNullList<($Ingredient)>
 get "resultItem"(): $ItemStack
 get "processType"(): $InscriberProcessType
+get "topOptional"(): $Ingredient
+get "bottomOptional"(): $Ingredient
+get "middleInput"(): $Ingredient
 get "incomplete"(): boolean
 get "toastSymbol"(): $ItemStack
-get "group"(): string
-get "orCreateId"(): $ResourceLocation
-get "schema"(): $RecipeSchema
-set "group"(value: string)
 get "mod"(): string
+get "schema"(): $RecipeSchema
+get "orCreateId"(): $ResourceLocation
+set "group"(value: string)
+get "group"(): string
 get "type"(): $ResourceLocation
 }
 /**

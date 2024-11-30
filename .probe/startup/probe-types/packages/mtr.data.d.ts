@@ -23,14 +23,14 @@ export interface $IPIDS extends $IBlock {
 
 export namespace $IPIDS {
 function isReplaceable(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-function getStatePropertySafe<T>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-function getStatePropertySafe<T>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-function getVoxelShapeByDirection(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-function checkHoldingItem(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 function getSideDirection(state: $BlockState$Type): $Direction
-function checkHoldingBrush(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 function checkHoldingBrush(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+function checkHoldingBrush(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+function checkHoldingItem(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 function onBreakCreative(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+function getVoxelShapeByDirection(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+function getStatePropertySafe<T>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+function getStatePropertySafe<T>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -47,8 +47,8 @@ export type $IPIDS_ = $IPIDS$Type;
 declare module "packages/mtr/data/$TicketSystem$EnumTicketBarrierOpen" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -62,9 +62,9 @@ public static "values"(): ($TicketSystem$EnumTicketBarrierOpen)[]
 public static "valueOf"(name: string): $TicketSystem$EnumTicketBarrierOpen
 public "isOpen"(): boolean
 public "getSerializedName"(): string
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "open"(): boolean
 get "serializedName"(): string
 }
@@ -116,13 +116,13 @@ readonly "railSlopeStyle": $RailType$RailSlopeStyle
 public static "values"(): ($RailType)[]
 public static "valueOf"(name: string): $RailType
 public static "getDefaultMaxBlocksPerTick"(transportMode: $TransportMode$Type): float
-public static "formatStationName"(name: string): string
 public static "textOrUntitled"(text: string): string
-public static "isCjk"(text: string): boolean
-public static "mergeStations"(stations: $List$Type<(string)>, separatorCjk: string, separator: string): string
-public static "mergeStations"(stations: $List$Type<(string)>): string
 public static "insertTranslation"(keyCJK: string, key: string, overrideFirst: string, expectedArguments: integer, ...arg4: (string)[]): string
 public static "insertTranslation"(keyCJK: string, key: string, expectedArguments: integer, ...arg3: (string)[]): string
+public static "mergeStations"(stations: $List$Type<(string)>): string
+public static "mergeStations"(stations: $List$Type<(string)>, separatorCjk: string, separator: string): string
+public static "isCjk"(text: string): boolean
+public static "formatStationName"(name: string): string
 public static "formatVerticalChinese"(text: string): string
 public static "mergeStationsWithCommas"(stations: $List$Type<(string)>): string
 }
@@ -195,13 +195,13 @@ const ARGB_GRAY: integer
 const ARGB_BACKGROUND: integer
 const MAX_LIGHT_INTERIOR: integer
 const MAX_LIGHT_GLOWING: integer
-function formatStationName(name: string): string
 function textOrUntitled(text: string): string
-function isCjk(text: string): boolean
-function mergeStations(stations: $List$Type<(string)>, separatorCjk: string, separator: string): string
-function mergeStations(stations: $List$Type<(string)>): string
 function insertTranslation(keyCJK: string, key: string, overrideFirst: string, expectedArguments: integer, ...arg4: (string)[]): string
 function insertTranslation(keyCJK: string, key: string, expectedArguments: integer, ...arg3: (string)[]): string
+function mergeStations(stations: $List$Type<(string)>): string
+function mergeStations(stations: $List$Type<(string)>, separatorCjk: string, separator: string): string
+function isCjk(text: string): boolean
+function formatStationName(name: string): string
 function formatVerticalChinese(text: string): string
 function mergeStationsWithCommas(stations: $List$Type<(string)>): string
 }

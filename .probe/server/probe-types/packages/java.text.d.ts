@@ -11,17 +11,17 @@ public "equals"(arg0: any): boolean
 public "toString"(): string
 public "hashCode"(): integer
 public "getField"(): integer
-public "getBeginIndex"(): integer
-public "getEndIndex"(): integer
 public "setBeginIndex"(arg0: integer): void
 public "setEndIndex"(arg0: integer): void
 public "getFieldAttribute"(): $Format$Field
+public "getBeginIndex"(): integer
+public "getEndIndex"(): integer
 get "field"(): integer
-get "beginIndex"(): integer
-get "endIndex"(): integer
 set "beginIndex"(value: integer)
 set "endIndex"(value: integer)
 get "fieldAttribute"(): $Format$Field
+get "beginIndex"(): integer
+get "endIndex"(): integer
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -40,8 +40,8 @@ import {$FieldPosition, $FieldPosition$Type} from "packages/java/text/$FieldPosi
 import {$DecimalFormatSymbols, $DecimalFormatSymbols$Type} from "packages/java/text/$DecimalFormatSymbols"
 import {$StringBuffer, $StringBuffer$Type} from "packages/java/lang/$StringBuffer"
 import {$NumberFormat, $NumberFormat$Type} from "packages/java/text/$NumberFormat"
-import {$AttributedCharacterIterator, $AttributedCharacterIterator$Type} from "packages/java/text/$AttributedCharacterIterator"
 import {$RoundingMode, $RoundingMode$Type} from "packages/java/math/$RoundingMode"
+import {$AttributedCharacterIterator, $AttributedCharacterIterator$Type} from "packages/java/text/$AttributedCharacterIterator"
 import {$Currency, $Currency$Type} from "packages/java/util/$Currency"
 import {$ParsePosition, $ParsePosition$Type} from "packages/java/text/$ParsePosition"
 
@@ -56,20 +56,10 @@ constructor()
 public "equals"(arg0: any): boolean
 public "hashCode"(): integer
 public "clone"(): any
-public "format"(arg0: any, arg1: $StringBuffer$Type, arg2: $FieldPosition$Type): $StringBuffer
 public "format"(arg0: double, arg1: $StringBuffer$Type, arg2: $FieldPosition$Type): $StringBuffer
+public "format"(arg0: any, arg1: $StringBuffer$Type, arg2: $FieldPosition$Type): $StringBuffer
 public "format"(arg0: long, arg1: $StringBuffer$Type, arg2: $FieldPosition$Type): $StringBuffer
 public "parse"(arg0: string, arg1: $ParsePosition$Type): number
-public "getGroupingSize"(): integer
-public "formatToCharacterIterator"(arg0: any): $AttributedCharacterIterator
-public "setGroupingUsed"(arg0: boolean): void
-public "getDecimalFormatSymbols"(): $DecimalFormatSymbols
-public "setMinimumIntegerDigits"(arg0: integer): void
-public "setMaximumIntegerDigits"(arg0: integer): void
-public "toPattern"(): string
-public "toLocalizedPattern"(): string
-public "applyPattern"(arg0: string): void
-public "applyLocalizedPattern"(arg0: string): void
 public "getMaximumIntegerDigits"(): integer
 public "getMinimumIntegerDigits"(): integer
 public "getMaximumFractionDigits"(): integer
@@ -96,11 +86,16 @@ public "setGroupingSize"(arg0: integer): void
 public "isDecimalSeparatorAlwaysShown"(): boolean
 public "setParseBigDecimal"(arg0: boolean): void
 public "getRoundingMode"(): $RoundingMode
-get "groupingSize"(): integer
-set "groupingUsed"(value: boolean)
-get "decimalFormatSymbols"(): $DecimalFormatSymbols
-set "minimumIntegerDigits"(value: integer)
-set "maximumIntegerDigits"(value: integer)
+public "getGroupingSize"(): integer
+public "formatToCharacterIterator"(arg0: any): $AttributedCharacterIterator
+public "setGroupingUsed"(arg0: boolean): void
+public "getDecimalFormatSymbols"(): $DecimalFormatSymbols
+public "setMinimumIntegerDigits"(arg0: integer): void
+public "setMaximumIntegerDigits"(arg0: integer): void
+public "toPattern"(): string
+public "toLocalizedPattern"(): string
+public "applyPattern"(arg0: string): void
+public "applyLocalizedPattern"(arg0: string): void
 get "maximumIntegerDigits"(): integer
 get "minimumIntegerDigits"(): integer
 get "maximumFractionDigits"(): integer
@@ -127,6 +122,11 @@ set "groupingSize"(value: integer)
 get "decimalSeparatorAlwaysShown"(): boolean
 set "parseBigDecimal"(value: boolean)
 get "roundingMode"(): $RoundingMode
+get "groupingSize"(): integer
+set "groupingUsed"(value: boolean)
+get "decimalFormatSymbols"(): $DecimalFormatSymbols
+set "minimumIntegerDigits"(value: integer)
+set "maximumIntegerDigits"(value: integer)
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -158,12 +158,7 @@ public static "getInstance"(arg0: $Locale$Type): $DateFormatSymbols
 public static "getAvailableLocales"(): ($Locale)[]
 public "getEras"(): (string)[]
 public "setEras"(arg0: (string)[]): void
-public "getMonths"(): (string)[]
-public "getShortMonths"(): (string)[]
-public "getWeekdays"(): (string)[]
-public "getShortWeekdays"(): (string)[]
-public "getAmPmStrings"(): (string)[]
-public "getLocalPatternChars"(): string
+public "getZoneStrings"(): ((string)[])[]
 public "setMonths"(arg0: (string)[]): void
 public "setShortMonths"(arg0: (string)[]): void
 public "setWeekdays"(arg0: (string)[]): void
@@ -171,17 +166,17 @@ public "setShortWeekdays"(arg0: (string)[]): void
 public "setAmPmStrings"(arg0: (string)[]): void
 public "setZoneStrings"(arg0: ((string)[])[]): void
 public "setLocalPatternChars"(arg0: string): void
-public "getZoneStrings"(): ((string)[])[]
+public "getMonths"(): (string)[]
+public "getShortMonths"(): (string)[]
+public "getWeekdays"(): (string)[]
+public "getShortWeekdays"(): (string)[]
+public "getAmPmStrings"(): (string)[]
+public "getLocalPatternChars"(): string
 get "instance"(): $DateFormatSymbols
 get "availableLocales"(): ($Locale)[]
 get "eras"(): (string)[]
 set "eras"(value: (string)[])
-get "months"(): (string)[]
-get "shortMonths"(): (string)[]
-get "weekdays"(): (string)[]
-get "shortWeekdays"(): (string)[]
-get "amPmStrings"(): (string)[]
-get "localPatternChars"(): string
+get "zoneStrings"(): ((string)[])[]
 set "months"(value: (string)[])
 set "shortMonths"(value: (string)[])
 set "weekdays"(value: (string)[])
@@ -189,7 +184,12 @@ set "shortWeekdays"(value: (string)[])
 set "amPmStrings"(value: (string)[])
 set "zoneStrings"(value: ((string)[])[])
 set "localPatternChars"(value: string)
-get "zoneStrings"(): ((string)[])[]
+get "months"(): (string)[]
+get "shortMonths"(): (string)[]
+get "weekdays"(): (string)[]
+get "shortWeekdays"(): (string)[]
+get "amPmStrings"(): (string)[]
+get "localPatternChars"(): string
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -217,13 +217,9 @@ constructor(arg0: $Locale$Type)
 public "equals"(arg0: any): boolean
 public "hashCode"(): integer
 public "clone"(): any
-public static "getInstance"(arg0: $Locale$Type): $DecimalFormatSymbols
 public static "getInstance"(): $DecimalFormatSymbols
+public static "getInstance"(arg0: $Locale$Type): $DecimalFormatSymbols
 public static "getAvailableLocales"(): ($Locale)[]
-public "getDecimalSeparator"(): character
-public "getGroupingSeparator"(): character
-public "getZeroDigit"(): character
-public "getMinusSign"(): character
 public "getNaN"(): string
 public "getInfinity"(): string
 public "getMonetaryGroupingSeparator"(): character
@@ -252,12 +248,12 @@ public "setInternationalCurrencySymbol"(arg0: string): void
 public "setMonetaryDecimalSeparator"(arg0: character): void
 public "setExponentSeparator"(arg0: string): void
 public "setMonetaryGroupingSeparator"(arg0: character): void
+public "getDecimalSeparator"(): character
+public "getGroupingSeparator"(): character
+public "getZeroDigit"(): character
+public "getMinusSign"(): character
 get "instance"(): $DecimalFormatSymbols
 get "availableLocales"(): ($Locale)[]
-get "decimalSeparator"(): character
-get "groupingSeparator"(): character
-get "zeroDigit"(): character
-get "minusSign"(): character
 get "naN"(): string
 get "infinity"(): string
 get "monetaryGroupingSeparator"(): character
@@ -286,6 +282,10 @@ set "internationalCurrencySymbol"(value: string)
 set "monetaryDecimalSeparator"(value: character)
 set "exponentSeparator"(value: string)
 set "monetaryGroupingSeparator"(value: character)
+get "decimalSeparator"(): character
+get "groupingSeparator"(): character
+get "zeroDigit"(): character
+get "minusSign"(): character
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -310,12 +310,12 @@ public "toString"(): string
 public "hashCode"(): integer
 public "getIndex"(): integer
 public "setIndex"(arg0: integer): void
-public "setErrorIndex"(arg0: integer): void
 public "getErrorIndex"(): integer
+public "setErrorIndex"(arg0: integer): void
 get "index"(): integer
 set "index"(value: integer)
-set "errorIndex"(value: integer)
 get "errorIndex"(): integer
+set "errorIndex"(value: integer)
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -407,24 +407,9 @@ public "format"(arg0: double): string
 public "format"(arg0: long): string
 public static "getInstance"(): $NumberFormat
 public static "getInstance"(arg0: $Locale$Type): $NumberFormat
-public "parse"(arg0: string): number
 public "parse"(arg0: string, arg1: $ParsePosition$Type): number
+public "parse"(arg0: string): number
 public static "getAvailableLocales"(): ($Locale)[]
-public "isGroupingUsed"(): boolean
-public "parseObject"(arg0: string, arg1: $ParsePosition$Type): any
-public static "getIntegerInstance"(): $NumberFormat
-public static "getIntegerInstance"(arg0: $Locale$Type): $NumberFormat
-public "setGroupingUsed"(arg0: boolean): void
-public "setMinimumIntegerDigits"(arg0: integer): void
-public "setMaximumIntegerDigits"(arg0: integer): void
-public static "getCurrencyInstance"(): $NumberFormat
-public static "getCurrencyInstance"(arg0: $Locale$Type): $NumberFormat
-public static "getNumberInstance"(arg0: $Locale$Type): $NumberFormat
-public static "getNumberInstance"(): $NumberFormat
-public static "getPercentInstance"(arg0: $Locale$Type): $NumberFormat
-public static "getPercentInstance"(): $NumberFormat
-public static "getCompactNumberInstance"(): $NumberFormat
-public static "getCompactNumberInstance"(arg0: $Locale$Type, arg1: $NumberFormat$Style$Type): $NumberFormat
 public "getMaximumIntegerDigits"(): integer
 public "getMinimumIntegerDigits"(): integer
 public "getMaximumFractionDigits"(): integer
@@ -436,18 +421,24 @@ public "getCurrency"(): $Currency
 public "setCurrency"(arg0: $Currency$Type): void
 public "setRoundingMode"(arg0: $RoundingMode$Type): void
 public "setParseIntegerOnly"(arg0: boolean): void
+public static "getCurrencyInstance"(): $NumberFormat
+public static "getCurrencyInstance"(arg0: $Locale$Type): $NumberFormat
+public static "getNumberInstance"(arg0: $Locale$Type): $NumberFormat
+public static "getNumberInstance"(): $NumberFormat
+public static "getPercentInstance"(): $NumberFormat
+public static "getPercentInstance"(arg0: $Locale$Type): $NumberFormat
+public static "getCompactNumberInstance"(): $NumberFormat
+public static "getCompactNumberInstance"(arg0: $Locale$Type, arg1: $NumberFormat$Style$Type): $NumberFormat
 public "getRoundingMode"(): $RoundingMode
+public "isGroupingUsed"(): boolean
+public "parseObject"(arg0: string, arg1: $ParsePosition$Type): any
+public static "getIntegerInstance"(): $NumberFormat
+public static "getIntegerInstance"(arg0: $Locale$Type): $NumberFormat
+public "setGroupingUsed"(arg0: boolean): void
+public "setMinimumIntegerDigits"(arg0: integer): void
+public "setMaximumIntegerDigits"(arg0: integer): void
 get "instance"(): $NumberFormat
 get "availableLocales"(): ($Locale)[]
-get "groupingUsed"(): boolean
-get "integerInstance"(): $NumberFormat
-set "groupingUsed"(value: boolean)
-set "minimumIntegerDigits"(value: integer)
-set "maximumIntegerDigits"(value: integer)
-get "currencyInstance"(): $NumberFormat
-get "numberInstance"(): $NumberFormat
-get "percentInstance"(): $NumberFormat
-get "compactNumberInstance"(): $NumberFormat
 get "maximumIntegerDigits"(): integer
 get "minimumIntegerDigits"(): integer
 get "maximumFractionDigits"(): integer
@@ -459,7 +450,16 @@ get "currency"(): $Currency
 set "currency"(value: $Currency$Type)
 set "roundingMode"(value: $RoundingMode$Type)
 set "parseIntegerOnly"(value: boolean)
+get "currencyInstance"(): $NumberFormat
+get "numberInstance"(): $NumberFormat
+get "percentInstance"(): $NumberFormat
+get "compactNumberInstance"(): $NumberFormat
 get "roundingMode"(): $RoundingMode
+get "groupingUsed"(): boolean
+get "integerInstance"(): $NumberFormat
+set "groupingUsed"(value: boolean)
+set "minimumIntegerDigits"(value: integer)
+set "maximumIntegerDigits"(value: integer)
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -517,19 +517,19 @@ public "format"(arg0: any, arg1: $StringBuffer$Type, arg2: $FieldPosition$Type):
 public "format"(arg0: $Date$Type): string
 public "format"(arg0: $Date$Type, arg1: $StringBuffer$Type, arg2: $FieldPosition$Type): $StringBuffer
 public static "getInstance"(): $DateFormat
-public "parse"(arg0: string, arg1: $ParsePosition$Type): $Date
 public "parse"(arg0: string): $Date
+public "parse"(arg0: string, arg1: $ParsePosition$Type): $Date
+public static "getAvailableLocales"(): ($Locale)[]
+public static "getDateTimeInstance"(arg0: integer, arg1: integer, arg2: $Locale$Type): $DateFormat
+public static "getDateTimeInstance"(arg0: integer, arg1: integer): $DateFormat
+public static "getDateTimeInstance"(): $DateFormat
 public "getTimeZone"(): $TimeZone
 public "setTimeZone"(arg0: $TimeZone$Type): void
-public static "getAvailableLocales"(): ($Locale)[]
-public static "getDateTimeInstance"(arg0: integer, arg1: integer): $DateFormat
-public static "getDateTimeInstance"(arg0: integer, arg1: integer, arg2: $Locale$Type): $DateFormat
-public static "getDateTimeInstance"(): $DateFormat
 public "setLenient"(arg0: boolean): void
 public "isLenient"(): boolean
 public static "getDateInstance"(arg0: integer): $DateFormat
-public static "getDateInstance"(arg0: integer, arg1: $Locale$Type): $DateFormat
 public static "getDateInstance"(): $DateFormat
+public static "getDateInstance"(arg0: integer, arg1: $Locale$Type): $DateFormat
 public static "getTimeInstance"(arg0: integer, arg1: $Locale$Type): $DateFormat
 public static "getTimeInstance"(arg0: integer): $DateFormat
 public static "getTimeInstance"(): $DateFormat
@@ -539,10 +539,10 @@ public "getCalendar"(): $Calendar
 public "setNumberFormat"(arg0: $NumberFormat$Type): void
 public "getNumberFormat"(): $NumberFormat
 get "instance"(): $DateFormat
-get "timeZone"(): $TimeZone
-set "timeZone"(value: $TimeZone$Type)
 get "availableLocales"(): ($Locale)[]
 get "dateTimeInstance"(): $DateFormat
+get "timeZone"(): $TimeZone
+set "timeZone"(value: $TimeZone$Type)
 set "lenient"(value: boolean)
 get "lenient"(): boolean
 get "dateInstance"(): $DateFormat
@@ -724,12 +724,12 @@ export interface $AttributedCharacterIterator extends $CharacterIterator {
 
  "getAttributes"(): $Map<($AttributedCharacterIterator$Attribute), (any)>
  "getAttribute"(arg0: $AttributedCharacterIterator$Attribute$Type): any
- "getRunStart"(): integer
- "getRunStart"(arg0: $Set$Type<(any)>): integer
- "getRunStart"(arg0: $AttributedCharacterIterator$Attribute$Type): integer
+ "getRunLimit"(): integer
  "getRunLimit"(arg0: $Set$Type<(any)>): integer
  "getRunLimit"(arg0: $AttributedCharacterIterator$Attribute$Type): integer
- "getRunLimit"(): integer
+ "getRunStart"(arg0: $AttributedCharacterIterator$Attribute$Type): integer
+ "getRunStart"(arg0: $Set$Type<(any)>): integer
+ "getRunStart"(): integer
  "getAllAttributeKeys"(): $Set<($AttributedCharacterIterator$Attribute)>
  "clone"(): any
  "next"(): character

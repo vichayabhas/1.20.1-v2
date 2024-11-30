@@ -26,8 +26,8 @@ declare module "packages/malte0811/ferritecore/mixin/mrl/$ResourceLocationAccess
 export {} // Mark the file as a module, do not remove unless there are other import/exports!
 export interface $ResourceLocationAccess {
 
- "setPath"(arg0: string): void
  "setNamespace"(arg0: string): void
+ "setPath"(arg0: string): void
 }
 
 export namespace $ResourceLocationAccess {
@@ -49,8 +49,8 @@ declare module "packages/malte0811/ferritecore/mixin/blockstatecache/$DiscreteVS
 export {} // Mark the file as a module, do not remove unless there are other import/exports!
 export interface $DiscreteVSAccess {
 
- "getXSize"(): integer
  "getYSize"(): integer
+ "getXSize"(): integer
  "getZSize"(): integer
 }
 
@@ -76,9 +76,9 @@ import {$DiscreteVoxelShape, $DiscreteVoxelShape$Type} from "packages/net/minecr
 export interface $VoxelShapeAccess {
 
  "getShape"(): $DiscreteVoxelShape
- "setShape"(arg0: $DiscreteVoxelShape$Type): void
  "setFaces"(arg0: ($VoxelShape$Type)[]): void
  "getFaces"(): ($VoxelShape)[]
+ "setShape"(arg0: $DiscreteVoxelShape$Type): void
 }
 
 export namespace $VoxelShapeAccess {
@@ -109,18 +109,18 @@ export class $FastMap<Value> {
 
 constructor(arg0: $Collection$Type<($Property$Type<(any)>)>, arg1: $Map$Type<($Map$Type<($Property$Type<(any)>), ($Comparable$Type<(any)>)>), (Value)>, arg2: boolean)
 
-public "getValue"<T extends $Comparable<(T)>>(arg0: integer, arg1: $Property$Type<(T)>): T
 public "getValue"(arg0: integer, arg1: any): $Comparable<(any)>
+public "getValue"<T extends $Comparable<(T)>>(arg0: integer, arg1: $Property$Type<(T)>): T
 public "getKey"(arg0: integer): $FastMapKey<(any)>
 public "getEntry"(arg0: integer, arg1: integer): $Map$Entry<($Property<(any)>), ($Comparable<(any)>)>
-public "with"<T extends $Comparable<(T)>>(arg0: integer, arg1: $Property$Type<(T)>, arg2: T): Value
 public "getIndexOf"(arg0: $Map$Type<($Property$Type<(any)>), ($Comparable$Type<(any)>)>): integer
+public "with"<T extends $Comparable<(T)>>(arg0: integer, arg1: $Property$Type<(T)>, arg2: T): Value
+public "getPropertySet"(): $ImmutableSet<($Property<(any)>)>
 public "numProperties"(): integer
 public "isSingleState"(): boolean
-public "getPropertySet"(): $ImmutableSet<($Property<(any)>)>
 public "withUnsafe"<T extends $Comparable<(T)>>(arg0: integer, arg1: $Property$Type<(T)>, arg2: any): Value
-get "singleState"(): boolean
 get "propertySet"(): $ImmutableSet<($Property<(any)>)>
+get "singleState"(): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -145,12 +145,12 @@ export interface $FastMapStateHolder<S> {
 
  "getVanillaPropertyMap"(): $ImmutableMap<($Property<(any)>), ($Comparable<(any)>)>
  "replacePropertyMap"(arg0: $ImmutableMap$Type<($Property$Type<(any)>), ($Comparable$Type<(any)>)>): void
- "setStateMap"(arg0: $FastMap$Type<(S)>): void
  "getStateMap"(): $FastMap<(S)>
- "getStateIndex"(): integer
- "setStateIndex"(arg0: integer): void
- "setNeighborTable"(arg0: $Table$Type<($Property$Type<(any)>), ($Comparable$Type<(any)>), (S)>): void
  "getNeighborTable"(): $Table<($Property<(any)>), ($Comparable<(any)>), (S)>
+ "getStateIndex"(): integer
+ "setStateMap"(arg0: $FastMap$Type<(S)>): void
+ "setNeighborTable"(arg0: $Table$Type<($Property$Type<(any)>), ($Comparable$Type<(any)>), (S)>): void
+ "setStateIndex"(arg0: integer): void
 }
 
 export namespace $FastMapStateHolder {

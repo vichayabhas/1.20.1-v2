@@ -10,8 +10,8 @@ import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$Block, $Block$Type} from "packages/net/minecraft/world/level/block/$Block"
 import {$Item, $Item$Type} from "packages/net/minecraft/world/item/$Item"
-import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
 import {$InteractionResultHolder, $InteractionResultHolder$Type} from "packages/net/minecraft/world/$InteractionResultHolder"
+import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
 import {$TooltipFlag, $TooltipFlag$Type} from "packages/net/minecraft/world/item/$TooltipFlag"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
@@ -33,27 +33,27 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor()
 
-public "getMaxEnergyStoredL"(arg0: $ItemStack$Type): long
 public "initCapabilities"(arg0: $ItemStack$Type, arg1: $CompoundTag$Type): $ICapabilityProvider
-public "getEnergyStoredL"(arg0: $ItemStack$Type): long
-public "extractEnergyNoMax"(arg0: $ItemStack$Type, arg1: integer, arg2: boolean): integer
-public "extractEnergyL"(arg0: $ItemStack$Type, arg1: long, arg2: boolean): long
-public "receiveEnergyL"(arg0: $ItemStack$Type, arg1: long, arg2: boolean): long
-public "getTagsToPreserve"(): $Collection<(string)>
-public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
-public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
-public "inventoryTick"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $Entity$Type, arg3: integer, arg4: boolean): void
-public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
-public static "initOverrides"(arg0: $ChargedPorterItem$Type): void
-public "getManualEntry"(): $ManualEntry
 public "shouldCauseReequipAnimation"(arg0: $ItemStack$Type, arg1: $ItemStack$Type, arg2: boolean): boolean
+public "getManualEntry"(): $ManualEntry
+public "getTagsToPreserve"(): $Collection<(string)>
+public static "initOverrides"(arg0: $ChargedPorterItem$Type): void
+public "inventoryTick"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $Entity$Type, arg3: integer, arg4: boolean): void
+public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
+public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
+public "getEnergyStoredL"(arg0: $ItemStack$Type): long
+public "receiveEnergyL"(arg0: $ItemStack$Type, arg1: long, arg2: boolean): long
+public "extractEnergyL"(arg0: $ItemStack$Type, arg1: long, arg2: boolean): long
+public "extractEnergyNoMax"(arg0: $ItemStack$Type, arg1: integer, arg2: boolean): integer
+public "getMaxEnergyStoredL"(arg0: $ItemStack$Type): long
 public "receiveEnergy"(arg0: $ItemStack$Type, arg1: integer, arg2: boolean): integer
+public "getEnergyStored"(arg0: $ItemStack$Type): integer
 public "getMaxEnergyStored"(arg0: $ItemStack$Type): integer
 public "extractEnergy"(arg0: $ItemStack$Type, arg1: integer, arg2: boolean): integer
-public "getEnergyStored"(arg0: $ItemStack$Type): integer
 public "getMaxWidth"(): integer
-get "tagsToPreserve"(): $Collection<(string)>
 get "manualEntry"(): $ManualEntry
+get "tagsToPreserve"(): $Collection<(string)>
 get "maxWidth"(): integer
 }
 /**
@@ -108,9 +108,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public static "setDestinationInfo"(arg0: integer, arg1: string): void
-public "getRotationType"(): $RotationType
 public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "getRotationType"(): $RotationType
+public static "setDestinationInfo"(arg0: integer, arg1: string): void
 get "rotationType"(): $RotationType
 }
 /**
@@ -144,17 +144,17 @@ export class $TextClientScreenModule implements $IClientScreenModule<($IModuleDa
 constructor()
 
 public "setColor"(arg0: integer): void
+public "getHeight"(): integer
 public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleData$Type, arg6: $ModuleRenderInfo$Type): void
 public "setLine"(arg0: string): void
-public "getHeight"(): integer
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
 public "setLarge"(arg0: boolean): void
 public "setupFromNBT"(arg0: $CompoundTag$Type, arg1: $ResourceKey$Type<($Level$Type)>, arg2: $BlockPos$Type): void
 set "color"(value: integer)
-set "line"(value: string)
 get "height"(): integer
+set "line"(value: string)
 get "transformMode"(): $IClientScreenModule$TransformMode
 set "large"(value: boolean)
 }
@@ -287,13 +287,13 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($EnergyPlusBarScreenModule)>
-public "getClientScreenModule"(): $Class<($EnergyPlusBarClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($EnergyPlusBarClientScreenModule)>
+public "getServerScreenModule"(): $Class<($EnergyPlusBarScreenModule)>
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($EnergyPlusBarScreenModule)>
 get "clientScreenModule"(): $Class<($EnergyPlusBarClientScreenModule)>
+get "serverScreenModule"(): $Class<($EnergyPlusBarScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -326,8 +326,8 @@ import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/worl
 import {$Rotation, $Rotation$Type} from "packages/net/minecraft/world/level/block/$Rotation"
 import {$Explosion, $Explosion$Type} from "packages/net/minecraft/world/level/$Explosion"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
-import {$RenderShape, $RenderShape$Type} from "packages/net/minecraft/world/level/block/$RenderShape"
 import {$Entity, $Entity$Type} from "packages/net/minecraft/world/entity/$Entity"
+import {$RenderShape, $RenderShape$Type} from "packages/net/minecraft/world/level/block/$RenderShape"
 
 export class $ScreenHitBlock extends $BaseBlock {
 static readonly "HORIZ_PROPERTIES": ($Property<(any)>)[]
@@ -356,14 +356,14 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "rotate"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Rotation$Type): $BlockState
+public "activate"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "wasExploded"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Explosion$Type): void
+public "getCloneItemStack"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): $ItemStack
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "getRenderShape"(arg0: $BlockState$Type): $RenderShape
 public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "attack"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): void
-public "activate"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
-public "wasExploded"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Explosion$Type): void
-public "getCloneItemStack"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): $ItemStack
 public "getScreenBlockPos"(arg0: $BlockGetter$Type, arg1: $BlockPos$Type): $BlockPos
 }
 /**
@@ -383,8 +383,8 @@ import {$Item, $Item$Type} from "packages/net/minecraft/world/item/$Item"
 import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
 import {$Class, $Class$Type} from "packages/java/lang/$Class"
 import {$ClockScreenModule, $ClockScreenModule$Type} from "packages/mcjty/rftoolsutility/modules/screen/modules/$ClockScreenModule"
-import {$ClockClientScreenModule, $ClockClientScreenModule$Type} from "packages/mcjty/rftoolsutility/modules/screen/modulesclient/$ClockClientScreenModule"
 import {$IModuleGuiBuilder, $IModuleGuiBuilder$Type} from "packages/mcjty/rftoolsbase/api/screens/$IModuleGuiBuilder"
+import {$ClockClientScreenModule, $ClockClientScreenModule$Type} from "packages/mcjty/rftoolsutility/modules/screen/modulesclient/$ClockClientScreenModule"
 import {$Block, $Block$Type} from "packages/net/minecraft/world/level/block/$Block"
 import {$GenericModuleItem, $GenericModuleItem$Type} from "packages/mcjty/rftoolsbase/tools/$GenericModuleItem"
 import {$Map, $Map$Type} from "packages/java/util/$Map"
@@ -400,12 +400,12 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($ClockScreenModule)>
-public "getClientScreenModule"(): $Class<($ClockClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
+public "getClientScreenModule"(): $Class<($ClockClientScreenModule)>
+public "getServerScreenModule"(): $Class<($ClockScreenModule)>
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($ClockScreenModule)>
 get "clientScreenModule"(): $Class<($ClockClientScreenModule)>
+get "serverScreenModule"(): $Class<($ClockScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -497,8 +497,8 @@ export class $CounterClientScreenModule implements $IClientScreenModule<($IModul
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleDataInteger$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleDataInteger$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -544,15 +544,15 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($EnergyBarScreenModule)>
-public "getClientScreenModule"(): $Class<($EnergyBarClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "getTagsToPreserve"(): $Collection<(string)>
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($EnergyBarClientScreenModule)>
+public "getServerScreenModule"(): $Class<($EnergyBarScreenModule)>
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($EnergyBarScreenModule)>
-get "clientScreenModule"(): $Class<($EnergyBarClientScreenModule)>
 get "tagsToPreserve"(): $Collection<(string)>
+get "clientScreenModule"(): $Class<($EnergyBarClientScreenModule)>
+get "serverScreenModule"(): $Class<($EnergyBarScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -626,16 +626,16 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor()
 
-public static "getEntityLivingFromClickedEntity"(arg0: $Entity$Type): $LivingEntity
-public static "getMobId"(arg0: $ItemStack$Type): string
-public static "createMobSyringe"(arg0: $ResourceLocation$Type): $ItemStack
-public "getItemsForTab"(): $List<($ItemStack)>
 public static "getLevel"(arg0: $ItemStack$Type): integer
+public "getItemsForTab"(): $List<($ItemStack)>
 public static "getMobName"(arg0: $ItemStack$Type): string
+public static "initOverrides"(arg0: $SyringeItem$Type): void
+public static "createMobSyringe"(arg0: $ResourceLocation$Type): $ItemStack
+public static "getMobId"(arg0: $ItemStack$Type): string
 public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
 public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "onLeftClickEntity"(arg0: $ItemStack$Type, arg1: $Player$Type, arg2: $Entity$Type): boolean
-public static "initOverrides"(arg0: $SyringeItem$Type): void
+public static "getEntityLivingFromClickedEntity"(arg0: $Entity$Type): $LivingEntity
 get "itemsForTab"(): $List<($ItemStack)>
 }
 /**
@@ -668,8 +668,8 @@ export class $FluidBarClientScreenModule implements $IClientScreenModule<($IModu
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleDataContents$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleDataContents$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -809,10 +809,10 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
-public "getRotationType"(): $RotationType
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "getRotationType"(): $RotationType
+public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
 get "rotationType"(): $RotationType
 }
 /**
@@ -845,8 +845,8 @@ export class $MachineInformationClientScreenModule implements $IClientScreenModu
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleDataString$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleDataString$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -901,12 +901,12 @@ export type $TextScreenModule_ = $TextScreenModule$Type;
 }}
 declare module "packages/mcjty/rftoolsutility/modules/screen/items/modules/$FluidPlusModuleItem" {
 import {$Item, $Item$Type} from "packages/net/minecraft/world/item/$Item"
-import {$FluidPlusBarScreenModule, $FluidPlusBarScreenModule$Type} from "packages/mcjty/rftoolsutility/modules/screen/modules/$FluidPlusBarScreenModule"
 import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
+import {$FluidPlusBarScreenModule, $FluidPlusBarScreenModule$Type} from "packages/mcjty/rftoolsutility/modules/screen/modules/$FluidPlusBarScreenModule"
 import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
 import {$Class, $Class$Type} from "packages/java/lang/$Class"
-import {$FluidPlusBarClientScreenModule, $FluidPlusBarClientScreenModule$Type} from "packages/mcjty/rftoolsutility/modules/screen/modulesclient/$FluidPlusBarClientScreenModule"
 import {$InteractionResult, $InteractionResult$Type} from "packages/net/minecraft/world/$InteractionResult"
+import {$FluidPlusBarClientScreenModule, $FluidPlusBarClientScreenModule$Type} from "packages/mcjty/rftoolsutility/modules/screen/modulesclient/$FluidPlusBarClientScreenModule"
 import {$IModuleGuiBuilder, $IModuleGuiBuilder$Type} from "packages/mcjty/rftoolsbase/api/screens/$IModuleGuiBuilder"
 import {$Block, $Block$Type} from "packages/net/minecraft/world/level/block/$Block"
 import {$GenericModuleItem, $GenericModuleItem$Type} from "packages/mcjty/rftoolsbase/tools/$GenericModuleItem"
@@ -923,13 +923,13 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($FluidPlusBarScreenModule)>
-public "getClientScreenModule"(): $Class<($FluidPlusBarClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($FluidPlusBarClientScreenModule)>
+public "getServerScreenModule"(): $Class<($FluidPlusBarScreenModule)>
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($FluidPlusBarScreenModule)>
 get "clientScreenModule"(): $Class<($FluidPlusBarClientScreenModule)>
+get "serverScreenModule"(): $Class<($FluidPlusBarScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1040,8 +1040,8 @@ export class $SyringeRecipeType implements $RecipeType<($SyringeBasedRecipe)> {
 
 constructor()
 
-public static "register"<T extends $Recipe<(any)>>(arg0: string): $RecipeType<($SyringeBasedRecipe)>
 public static "simple"<T extends $Recipe<(any)>>(arg0: $ResourceLocation$Type): $RecipeType<($SyringeBasedRecipe)>
+public static "register"<T extends $Recipe<(any)>>(arg0: string): $RecipeType<($SyringeBasedRecipe)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1155,8 +1155,8 @@ export class $EnergyBarClientScreenModule implements $IClientScreenModule<($IMod
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleDataContents$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleDataContents$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -1223,8 +1223,8 @@ export class $ComputerClientScreenModule implements $IClientScreenModule<($Compu
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $ComputerScreenModule$ModuleComputerInfo$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $ComputerScreenModule$ModuleComputerInfo$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -1266,12 +1266,12 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($ComputerScreenModule)>
-public "getClientScreenModule"(): $Class<($ComputerClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
+public "getClientScreenModule"(): $Class<($ComputerClientScreenModule)>
+public "getServerScreenModule"(): $Class<($ComputerScreenModule)>
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($ComputerScreenModule)>
 get "clientScreenModule"(): $Class<($ComputerClientScreenModule)>
+get "serverScreenModule"(): $Class<($ComputerScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1312,13 +1312,13 @@ constructor()
 
 public "getModuleName"(): string
 public static "getChannel"(arg0: $ItemStack$Type): integer
-public "getServerScreenModule"(): $Class<($ButtonScreenModule)>
-public "getClientScreenModule"(): $Class<($ButtonClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
+public "getClientScreenModule"(): $Class<($ButtonClientScreenModule)>
+public "getServerScreenModule"(): $Class<($ButtonScreenModule)>
 public "doesSneakBypassUse"(arg0: $ItemStack$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $Player$Type): boolean
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($ButtonScreenModule)>
 get "clientScreenModule"(): $Class<($ButtonClientScreenModule)>
+get "serverScreenModule"(): $Class<($ButtonScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1396,8 +1396,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public static "getFacingFromEntity"(arg0: $BlockPos$Type, arg1: $LivingEntity$Type): $Direction
 public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public static "getFacingFromEntity"(arg0: $BlockPos$Type, arg1: $LivingEntity$Type): $Direction
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1436,13 +1436,13 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($MachineInformationScreenModule)>
-public "getClientScreenModule"(): $Class<($MachineInformationClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($MachineInformationClientScreenModule)>
+public "getServerScreenModule"(): $Class<($MachineInformationScreenModule)>
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($MachineInformationScreenModule)>
 get "clientScreenModule"(): $Class<($MachineInformationClientScreenModule)>
+get "serverScreenModule"(): $Class<($MachineInformationScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1474,8 +1474,8 @@ export class $ClockClientScreenModule implements $IClientScreenModule<($IModuleD
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleData$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleData$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -1513,8 +1513,8 @@ export class $ButtonClientScreenModule implements $IClientScreenModule<($IModule
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleDataBoolean$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleDataBoolean$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -1591,15 +1591,15 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($ItemStackScreenModule)>
-public "getClientScreenModule"(): $Class<($ItemStackClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "getTagsToPreserve"(): $Collection<(string)>
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($ItemStackClientScreenModule)>
+public "getServerScreenModule"(): $Class<($ItemStackScreenModule)>
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($ItemStackScreenModule)>
-get "clientScreenModule"(): $Class<($ItemStackClientScreenModule)>
 get "tagsToPreserve"(): $Collection<(string)>
+get "clientScreenModule"(): $Class<($ItemStackClientScreenModule)>
+get "serverScreenModule"(): $Class<($ItemStackScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1625,8 +1625,8 @@ import {$Item, $Item$Type} from "packages/net/minecraft/world/item/$Item"
 import {$InteractionResultHolder, $InteractionResultHolder$Type} from "packages/net/minecraft/world/$InteractionResultHolder"
 import {$TooltipFlag, $TooltipFlag$Type} from "packages/net/minecraft/world/item/$TooltipFlag"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
-import {$Set, $Set$Type} from "packages/java/util/$Set"
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
+import {$Set, $Set$Type} from "packages/java/util/$Set"
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$Map, $Map$Type} from "packages/java/util/$Map"
 import {$ITooltipSettings, $ITooltipSettings$Type} from "packages/mcjty/lib/tooltips/$ITooltipSettings"
@@ -1642,17 +1642,17 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor()
 
-public "getInstalledTablet"(): $Item
-public static "getChannels"(arg0: $ItemStack$Type): $Set<(integer)>
+public "getManualEntry"(): $ManualEntry
 public "openGui"(arg0: $Player$Type, arg1: $ItemStack$Type, arg2: $ItemStack$Type): void
+public static "addChannel"(arg0: $ItemStack$Type, arg1: integer): boolean
 public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
 public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
-public static "addChannel"(arg0: $ItemStack$Type, arg1: integer): boolean
-public "getManualEntry"(): $ManualEntry
+public static "getChannels"(arg0: $ItemStack$Type): $Set<(integer)>
 public static "removeChannel"(arg0: $ItemStack$Type, arg1: integer): void
+public "getInstalledTablet"(): $Item
 public "getMaxWidth"(): integer
-get "installedTablet"(): $Item
 get "manualEntry"(): $ManualEntry
+get "installedTablet"(): $Item
 get "maxWidth"(): integer
 }
 /**
@@ -1693,15 +1693,15 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($CounterScreenModule)>
-public "getClientScreenModule"(): $Class<($CounterClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "getTagsToPreserve"(): $Collection<(string)>
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($CounterClientScreenModule)>
+public "getServerScreenModule"(): $Class<($CounterScreenModule)>
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($CounterScreenModule)>
-get "clientScreenModule"(): $Class<($CounterClientScreenModule)>
 get "tagsToPreserve"(): $Collection<(string)>
+get "clientScreenModule"(): $Class<($CounterClientScreenModule)>
+get "serverScreenModule"(): $Class<($CounterScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1752,8 +1752,8 @@ import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$It
 import {$ITabletSupport, $ITabletSupport$Type} from "packages/mcjty/rftoolsbase/api/various/$ITabletSupport"
 import {$Block, $Block$Type} from "packages/net/minecraft/world/level/block/$Block"
 import {$Item, $Item$Type} from "packages/net/minecraft/world/item/$Item"
-import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
 import {$InteractionResultHolder, $InteractionResultHolder$Type} from "packages/net/minecraft/world/$InteractionResultHolder"
+import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
 import {$TooltipFlag, $TooltipFlag$Type} from "packages/net/minecraft/world/item/$TooltipFlag"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
@@ -1770,11 +1770,11 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor()
 
-public "getInstalledTablet"(): $Item
 public "openGui"(arg0: $Player$Type, arg1: $ItemStack$Type, arg2: $ItemStack$Type): void
-public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
 public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
+public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
 public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
+public "getInstalledTablet"(): $Item
 get "installedTablet"(): $Item
 }
 /**
@@ -1855,14 +1855,14 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($RedstoneScreenModule)>
-public "getClientScreenModule"(): $Class<($RedstoneClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($RedstoneClientScreenModule)>
+public "getServerScreenModule"(): $Class<($RedstoneScreenModule)>
 public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($RedstoneScreenModule)>
 get "clientScreenModule"(): $Class<($RedstoneClientScreenModule)>
+get "serverScreenModule"(): $Class<($RedstoneScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1974,13 +1974,13 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($ItemStackPlusScreenModule)>
-public "getClientScreenModule"(): $Class<($ItemStackPlusClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($ItemStackPlusClientScreenModule)>
+public "getServerScreenModule"(): $Class<($ItemStackPlusScreenModule)>
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($ItemStackPlusScreenModule)>
 get "clientScreenModule"(): $Class<($ItemStackPlusClientScreenModule)>
+get "serverScreenModule"(): $Class<($ItemStackPlusScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2012,8 +2012,8 @@ export class $RedstoneClientScreenModule implements $IClientScreenModule<($IModu
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleDataInteger$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleDataInteger$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -2059,15 +2059,15 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($FluidBarScreenModule)>
-public "getClientScreenModule"(): $Class<($FluidBarClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "getTagsToPreserve"(): $Collection<(string)>
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($FluidBarClientScreenModule)>
+public "getServerScreenModule"(): $Class<($FluidBarScreenModule)>
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($FluidBarScreenModule)>
-get "clientScreenModule"(): $Class<($FluidBarClientScreenModule)>
 get "tagsToPreserve"(): $Collection<(string)>
+get "clientScreenModule"(): $Class<($FluidBarClientScreenModule)>
+get "serverScreenModule"(): $Class<($FluidBarScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2147,9 +2147,9 @@ export class $ComputerScreenModule implements $IScreenModule<($ComputerScreenMod
 constructor()
 
 public "getTag"(): string
+public "addText"(arg0: string, arg1: integer): void
 public "getRfPerTick"(): integer
 public "clearText"(): void
-public "addText"(arg0: string, arg1: integer): void
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean, arg4: $Player$Type): void
 public "setupFromNBT"(arg0: $CompoundTag$Type, arg1: $ResourceKey$Type<($Level$Type)>, arg2: $BlockPos$Type): void
 public "needsController"(): boolean
@@ -2209,13 +2209,13 @@ readonly "result": $ItemStack
 constructor(arg0: $ResourceLocation$Type, arg1: string, arg2: integer, arg3: integer, arg4: $NonNullList$Type<($Ingredient$Type)>, arg5: $ItemStack$Type, arg6: $ResourceLocation$Type, arg7: integer)
 constructor(arg0: $ShapedRecipe$Type, arg1: $ResourceLocation$Type, arg2: integer, arg3: $ItemStack$Type)
 
-public "getSyringeIndex"(): integer
 public "matches"(arg0: $CraftingContainer$Type, arg1: $Level$Type): boolean
 public "getSerializer"(): $RecipeSerializer<(any)>
 public "getMobId"(): $ResourceLocation
-get "syringeIndex"(): integer
+public "getSyringeIndex"(): integer
 get "serializer"(): $RecipeSerializer<(any)>
 get "mobId"(): $ResourceLocation
+get "syringeIndex"(): integer
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2251,51 +2251,51 @@ export class $SpawnerRecipe implements $BaseRecipe<($Container)> {
 
 constructor(arg0: $ResourceLocation$Type, arg1: $SpawnerRecipes$MobSpawnAmount$Type, arg2: $SpawnerRecipes$MobSpawnAmount$Type, arg3: $SpawnerRecipes$MobSpawnAmount$Type, arg4: integer, arg5: $ResourceLocation$Type)
 
-public "getItem2"(): $SpawnerRecipes$MobSpawnAmount
-public "getItem3"(): $SpawnerRecipes$MobSpawnAmount
-public "getItem1"(): $SpawnerRecipes$MobSpawnAmount
-public "getSpawnRf"(): integer
+public "getEntity"(): $ResourceLocation
 public "assemble"(arg0: $Container$Type, arg1: $RegistryAccess$Type): $ItemStack
 public "matches"(arg0: $Container$Type, arg1: $Level$Type): boolean
-public "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
-public "getSerializer"(): $RecipeSerializer<(any)>
 public "getId"(): $ResourceLocation
-public "getEntity"(): $ResourceLocation
+public "getSerializer"(): $RecipeSerializer<(any)>
+public "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
 public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
+public "getSpawnRf"(): integer
+public "getItem3"(): $SpawnerRecipes$MobSpawnAmount
+public "getItem1"(): $SpawnerRecipes$MobSpawnAmount
+public "getItem2"(): $SpawnerRecipes$MobSpawnAmount
 public static "getResultItem"(arg0: $Recipe$Type<(any)>, arg1: $Level$Type): $ItemStack
 public static "assemble"(arg0: $Recipe$Type<(any)>, arg1: $CraftingContainer$Type, arg2: $Level$Type): $ItemStack
 public "isSpecial"(): boolean
-public "getIngredients"(): $NonNullList<($Ingredient)>
-public "showNotification"(): boolean
-public "getRemainingItems"(arg0: $Container$Type): $NonNullList<($ItemStack)>
 public "isIncomplete"(): boolean
+public "getRemainingItems"(arg0: $Container$Type): $NonNullList<($ItemStack)>
+public "showNotification"(): boolean
 public "getToastSymbol"(): $ItemStack
-public "getGroup"(): string
-public "getOrCreateId"(): $ResourceLocation
-public "hasOutput"(match: $ReplacementMatch$Type): boolean
-public "getSchema"(): $RecipeSchema
-public "hasInput"(match: $ReplacementMatch$Type): boolean
-public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
-public "setGroup"(group: string): void
-public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
+public "getIngredients"(): $NonNullList<($Ingredient)>
 public "getMod"(): string
+public "getSchema"(): $RecipeSchema
+public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
+public "hasInput"(match: $ReplacementMatch$Type): boolean
+public "hasOutput"(match: $ReplacementMatch$Type): boolean
+public "getOrCreateId"(): $ResourceLocation
+public "setGroup"(group: string): void
+public "getGroup"(): string
+public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
 public "getType"(): $ResourceLocation
-get "item2"(): $SpawnerRecipes$MobSpawnAmount
+get "entity"(): $ResourceLocation
+get "id"(): $ResourceLocation
+get "serializer"(): $RecipeSerializer<(any)>
+get "spawnRf"(): integer
 get "item3"(): $SpawnerRecipes$MobSpawnAmount
 get "item1"(): $SpawnerRecipes$MobSpawnAmount
-get "spawnRf"(): integer
-get "serializer"(): $RecipeSerializer<(any)>
-get "id"(): $ResourceLocation
-get "entity"(): $ResourceLocation
+get "item2"(): $SpawnerRecipes$MobSpawnAmount
 get "special"(): boolean
-get "ingredients"(): $NonNullList<($Ingredient)>
 get "incomplete"(): boolean
 get "toastSymbol"(): $ItemStack
-get "group"(): string
-get "orCreateId"(): $ResourceLocation
-get "schema"(): $RecipeSchema
-set "group"(value: string)
+get "ingredients"(): $NonNullList<($Ingredient)>
 get "mod"(): string
+get "schema"(): $RecipeSchema
+get "orCreateId"(): $ResourceLocation
+set "group"(value: string)
+get "group"(): string
 get "type"(): $ResourceLocation
 }
 /**
@@ -2328,8 +2328,8 @@ export class $ItemStackClientScreenModule implements $IClientScreenModule<($Item
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $ItemStackScreenModule$ModuleDataStacks$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $ItemStackScreenModule$ModuleDataStacks$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -2378,14 +2378,14 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($CounterPlusScreenModule)>
-public "getClientScreenModule"(): $Class<($CounterPlusClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($CounterPlusClientScreenModule)>
+public "getServerScreenModule"(): $Class<($CounterPlusScreenModule)>
 public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($CounterPlusScreenModule)>
 get "clientScreenModule"(): $Class<($CounterPlusClientScreenModule)>
+get "serverScreenModule"(): $Class<($CounterPlusScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2477,8 +2477,8 @@ export class $SpawnerRecipeType implements $RecipeType<($SpawnerRecipe)> {
 
 constructor()
 
-public static "register"<T extends $Recipe<(any)>>(arg0: string): $RecipeType<($SpawnerRecipe)>
 public static "simple"<T extends $Recipe<(any)>>(arg0: $ResourceLocation$Type): $RecipeType<($SpawnerRecipe)>
+public static "register"<T extends $Recipe<(any)>>(arg0: string): $RecipeType<($SpawnerRecipe)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2505,9 +2505,9 @@ export class $SpawnerRecipeSerializer implements $RecipeSerializer<($SpawnerReci
 
 constructor()
 
-public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $SpawnerRecipe$Type): void
-public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $SpawnerRecipe
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type): $SpawnerRecipe
+public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $SpawnerRecipe
+public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $SpawnerRecipe$Type): void
 public static "register"<S extends $RecipeSerializer<(T)>, T extends $Recipe<(any)>>(arg0: string, arg1: S): S
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type, arg2: $ICondition$IContext$Type): $SpawnerRecipe
 }
@@ -2550,13 +2550,13 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($TextScreenModule)>
-public "getClientScreenModule"(): $Class<($TextClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
+public "getClientScreenModule"(): $Class<($TextClientScreenModule)>
+public "getServerScreenModule"(): $Class<($TextScreenModule)>
 public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($TextScreenModule)>
 get "clientScreenModule"(): $Class<($TextClientScreenModule)>
+get "serverScreenModule"(): $Class<($TextScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2618,8 +2618,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
 public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2646,9 +2646,9 @@ export class $SyringeRecipeSerializer implements $RecipeSerializer<($SyringeBase
 
 constructor()
 
-public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $SyringeBasedRecipe$Type): void
-public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $SyringeBasedRecipe
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type): $SyringeBasedRecipe
+public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $SyringeBasedRecipe
+public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $SyringeBasedRecipe$Type): void
 public static "register"<S extends $RecipeSerializer<(T)>, T extends $Recipe<(any)>>(arg0: string, arg1: S): S
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type, arg2: $ICondition$IContext$Type): $SyringeBasedRecipe
 }
@@ -2801,19 +2801,19 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $BlockEntityType$BlockEntitySupplier$Type<($BlockEntity$Type)>, arg1: boolean)
 
 public "rotate"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Rotation$Type): $BlockState
-public "cycleSizeTranspMode"(arg0: $Level$Type, arg1: $BlockPos$Type): void
-public "getRenderShape"(arg0: $BlockState$Type): $RenderShape
+public "activate"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
+public "getRenderShape"(arg0: $BlockState$Type): $RenderShape
 public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "attack"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): void
-public "activate"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "isCreative"(): boolean
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public static "getModuleProvider"(arg0: $ItemStack$Type): $LazyOptional<($IModuleProvider)>
 public static "hasModuleProvider"(arg0: $ItemStack$Type): boolean
 public "cycleSizeMode"(arg0: $Level$Type, arg1: $BlockPos$Type): void
 public "cycleTranspMode"(arg0: $Level$Type, arg1: $BlockPos$Type): void
+public "cycleSizeTranspMode"(arg0: $Level$Type, arg1: $BlockPos$Type): void
 get "creative"(): boolean
 }
 /**
@@ -2935,8 +2935,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public static "getFacingFromEntity"(arg0: $BlockPos$Type, arg1: $LivingEntity$Type): $Direction
 public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public static "getFacingFromEntity"(arg0: $BlockPos$Type, arg1: $LivingEntity$Type): $Direction
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_

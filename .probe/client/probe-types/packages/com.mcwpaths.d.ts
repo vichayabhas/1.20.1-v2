@@ -116,8 +116,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(arg0: $BlockBehaviour$Properties$Type)
 
-public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_

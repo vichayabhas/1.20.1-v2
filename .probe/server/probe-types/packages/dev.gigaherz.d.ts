@@ -1,17 +1,17 @@
 declare module "packages/dev/gigaherz/toolbelt/customslots/$IExtensionSlotItem" {
-import {$IExtensionSlot, $IExtensionSlot$Type} from "packages/dev/gigaherz/toolbelt/customslots/$IExtensionSlot"
 import {$ImmutableSet, $ImmutableSet$Type} from "packages/com/google/common/collect/$ImmutableSet"
+import {$IExtensionSlot, $IExtensionSlot$Type} from "packages/dev/gigaherz/toolbelt/customslots/$IExtensionSlot"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$ResourceLocation, $ResourceLocation$Type} from "packages/net/minecraft/resources/$ResourceLocation"
 
 export interface $IExtensionSlotItem {
 
- "canEquip"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): boolean
- "onEquipped"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): void
- "onUnequipped"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): void
- "canUnequip"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): boolean
  "getAcceptableSlots"(arg0: $ItemStack$Type): $ImmutableSet<($ResourceLocation)>
  "onWornTick"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): void
+ "onUnequipped"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): void
+ "canUnequip"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): boolean
+ "onEquipped"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): void
+ "canEquip"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): boolean
 }
 
 export namespace $IExtensionSlotItem {
@@ -38,12 +38,12 @@ import {$IExtensionContainer, $IExtensionContainer$Type} from "packages/dev/giga
 export interface $IExtensionSlot {
 
  "getType"(): $ResourceLocation
+ "onContentsChanged"(): void
+ "getContents"(): $ItemStack
  "getContainer"(): $IExtensionContainer
  "setContents"(arg0: $ItemStack$Type): void
- "getContents"(): $ItemStack
- "canEquip"(arg0: $ItemStack$Type): boolean
  "canUnequip"(arg0: $ItemStack$Type): boolean
- "onContentsChanged"(): void
+ "canEquip"(arg0: $ItemStack$Type): boolean
 }
 
 export namespace $IExtensionSlot {
@@ -83,8 +83,8 @@ import {$IItemHandler, $IItemHandler$Type} from "packages/net/minecraftforge/ite
 import {$Capability, $Capability$Type} from "packages/net/minecraftforge/common/capabilities/$Capability"
 import {$Item, $Item$Type} from "packages/net/minecraft/world/item/$Item"
 import {$IExtensionSlot, $IExtensionSlot$Type} from "packages/dev/gigaherz/toolbelt/customslots/$IExtensionSlot"
-import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
 import {$InteractionResultHolder, $InteractionResultHolder$Type} from "packages/net/minecraft/world/$InteractionResultHolder"
+import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
 import {$ICapabilityProvider, $ICapabilityProvider$Type} from "packages/net/minecraftforge/common/capabilities/$ICapabilityProvider"
 import {$Map, $Map$Type} from "packages/java/util/$Map"
@@ -104,27 +104,27 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor(arg0: $Item$Properties$Type)
 
 public "of"(arg0: integer): $ItemStack
-public static "getUpgradeXP"(arg0: $ItemStack$Type): integer
-public "initCapabilities"(arg0: $ItemStack$Type, arg1: $CompoundTag$Type): $ICapabilityProvider
 public "getLevel"(arg0: $ItemStack$Type): integer
+public "initCapabilities"(arg0: $ItemStack$Type, arg1: $CompoundTag$Type): $ICapabilityProvider
+public "shouldCauseReequipAnimation"(arg0: $ItemStack$Type, arg1: $ItemStack$Type, arg2: boolean): boolean
 public static "upgrade"(arg0: $ItemStack$Type): $ItemStack
-public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
-public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
-public "inventoryTick"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $Entity$Type, arg3: integer, arg4: boolean): void
-public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
+public static "getUpgradeXP"(arg0: $ItemStack$Type): integer
 public "getAcceptableSlots"(arg0: $ItemStack$Type): $ImmutableSet<($ResourceLocation)>
+public "onWornTick"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): void
 public static "getSlotsCount"(arg0: $ItemStack$Type): integer
 public static "setSlotsCount"(arg0: $ItemStack$Type, arg1: integer): void
-public "onWornTick"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): void
-public "shouldCauseReequipAnimation"(arg0: $ItemStack$Type, arg1: $ItemStack$Type, arg2: boolean): boolean
-public "canEquip"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): boolean
-public "onEquipped"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): void
+public "inventoryTick"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $Entity$Type, arg3: integer, arg4: boolean): void
+public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
+public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "onUnequipped"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): void
 public "canUnequip"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): boolean
+public "onEquipped"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): void
+public "canEquip"(arg0: $ItemStack$Type, arg1: $IExtensionSlot$Type): boolean
 public "clearColor"(arg0: $ItemStack$Type): void
 public "hasCustomColor"(arg0: $ItemStack$Type): boolean
-public "getColor"(arg0: $ItemStack$Type): integer
 public "setColor"(arg0: $ItemStack$Type, arg1: integer): void
+public "getColor"(arg0: $ItemStack$Type): integer
 public static "dyeArmor"(arg0: $ItemStack$Type, arg1: $List$Type<($DyeItem$Type)>): $ItemStack
 }
 /**
@@ -146,8 +146,8 @@ import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/en
 
 export interface $IExtensionContainer {
 
- "getSlots"(): $ImmutableList<($IExtensionSlot)>
  "onContentsChanged"(arg0: $IExtensionSlot$Type): void
+ "getSlots"(): $ImmutableList<($IExtensionSlot)>
  "getOwner"(): $LivingEntity
 }
 

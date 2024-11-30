@@ -68,10 +68,10 @@ public "equals"(arg0: any): boolean
 public "toString"(): string
 public "hashCode"(): integer
 public "factory"(): $BiFunction<(T), ($Ingredient), (S)>
-public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: S): void
-public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): S
-public "serializer"(): $RecipeSerializer<(T)>
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type): S
+public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): S
+public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: S): void
+public "serializer"(): $RecipeSerializer<(T)>
 public static "register"<S extends $RecipeSerializer<(T)>, T extends $Recipe<(any)>>(arg0: string, arg1: S): S
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type, arg2: $ICondition$IContext$Type): S
 }
@@ -173,8 +173,8 @@ import {$CraftingContainer, $CraftingContainer$Type} from "packages/net/minecraf
 
 export interface $CopyTagRecipe {
 
- "tryCopyTagToResult"(arg0: $ItemStack$Type, arg1: $CraftingContainer$Type): void
  "getCopyTagSource"(): $Ingredient
+ "tryCopyTagToResult"(arg0: $ItemStack$Type, arg1: $CraftingContainer$Type): void
 
 (arg0: $BiConsumer$Type<(string), ($Supplier$Type<($RecipeSerializer$Type<(any)>)>)>): void
 }
@@ -234,11 +234,11 @@ import {$AmbientAdditionsSettings, $AmbientAdditionsSettings$Type} from "package
 
 export interface $BiomeSpecialEffectsBuilderForgeAccessor {
 
+ "puzzleslib$setBackgroundMusic"(arg0: $Optional$Type<($Music$Type)>): void
  "puzzleslib$setGrassColorOverride"(arg0: $Optional$Type<(integer)>): void
  "puzzleslib$setAmbientParticle"(arg0: $Optional$Type<($AmbientParticleSettings$Type)>): void
  "puzzleslib$setAmbientMoodSettings"(arg0: $Optional$Type<($AmbientMoodSettings$Type)>): void
  "puzzleslib$setFoliageColorOverride"(arg0: $Optional$Type<(integer)>): void
- "puzzleslib$setBackgroundMusic"(arg0: $Optional$Type<($Music$Type)>): void
  "puzzleslib$setAmbientLoopSoundEvent"(arg0: $Optional$Type<($Holder$Type<($SoundEvent$Type)>)>): void
  "puzzleslib$setAmbientAdditionsSettings"(arg0: $Optional$Type<($AmbientAdditionsSettings$Type)>): void
 }
@@ -414,8 +414,8 @@ declare module "packages/fuzs/puzzleslib/mixin/client/accessor/$ItemForgeAccesso
 export {} // Mark the file as a module, do not remove unless there are other import/exports!
 export interface $ItemForgeAccessor {
 
- "puzzleslib$getRenderProperties"(): any
  "puzzleslib$setRenderProperties"(arg0: any): void
+ "puzzleslib$getRenderProperties"(): any
 }
 
 export namespace $ItemForgeAccessor {

@@ -2,8 +2,8 @@ declare module "packages/mcjty/rftoolsbuilder/modules/mover/items/$VehicleCard" 
 import {$Component, $Component$Type} from "packages/net/minecraft/network/chat/$Component"
 import {$ManualEntry, $ManualEntry$Type} from "packages/mcjty/lib/gui/$ManualEntry"
 import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
-import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
+import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$Block, $Block$Type} from "packages/net/minecraft/world/level/block/$Block"
 import {$Item, $Item$Type} from "packages/net/minecraft/world/item/$Item"
@@ -23,16 +23,16 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor()
 
+public static "getBlocks"(arg0: $ItemStack$Type, arg1: $BlockPos$Type): $Map<($BlockState), ($List<($BlockPos)>)>
 public static "getVehicleName"(arg0: $ItemStack$Type): string
 public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
-public static "getDesiredDestination"(arg0: $ItemStack$Type): $BlockPos
-public static "getDesiredDestinationName"(arg0: $ItemStack$Type): string
-public static "setDesiredDestination"(arg0: $ItemStack$Type, arg1: $BlockPos$Type, arg2: string): void
 public static "clearDesiredDestination"(arg0: $ItemStack$Type): void
-public static "getBlocks"(arg0: $ItemStack$Type, arg1: $BlockPos$Type): $Map<($BlockState), ($List<($BlockPos)>)>
 public static "storeVehicleInCard"(arg0: $ItemStack$Type, arg1: $Map$Type<($BlockState$Type), ($List$Type<(integer)>)>, arg2: string): void
 public static "convertPosToInt"(arg0: $BlockPos$Type, arg1: $BlockPos$Type): integer
 public static "convertIntToPos"(arg0: $BlockPos$Type, arg1: integer): $BlockPos
+public static "getDesiredDestination"(arg0: $ItemStack$Type): $BlockPos
+public static "getDesiredDestinationName"(arg0: $ItemStack$Type): string
+public static "setDesiredDestination"(arg0: $ItemStack$Type, arg1: $BlockPos$Type, arg2: string): void
 public "getMaxWidth"(): integer
 public "getManualEntry"(): $ManualEntry
 get "maxWidth"(): integer
@@ -65,10 +65,10 @@ export class $VehicleStatusScreenModule implements $IScreenModule<($IModuleDataS
 
 constructor()
 
-public static "getMoverController"(arg0: $Level$Type, arg1: $ResourceKey$Type<($Level$Type)>, arg2: $BlockPos$Type): $Optional<($MoverControllerTileEntity)>
 public "getRfPerTick"(): integer
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean, arg4: $Player$Type): void
 public "setupFromNBT"(arg0: $CompoundTag$Type, arg1: $ResourceKey$Type<($Level$Type)>, arg2: $BlockPos$Type): void
+public static "getMoverController"(arg0: $Level$Type, arg1: $ResourceKey$Type<($Level$Type)>, arg2: $BlockPos$Type): $Optional<($MoverControllerTileEntity)>
 public "needsController"(): boolean
 get "rfPerTick"(): integer
 }
@@ -106,15 +106,15 @@ static readonly "SHAPE_SCAN": $Shape
 
 public static "values"(): ($Shape)[]
 public static "valueOf"(arg0: string): $Shape
-public "getDescription"(): string
 public static "getShape"(arg0: string): $Shape
+public "getDescription"(): string
 public "getFormulaFactory"(): $Supplier<($IFormula)>
-public "isComposition"(): boolean
 public "isScan"(): boolean
+public "isComposition"(): boolean
 get "description"(): string
 get "formulaFactory"(): $Supplier<($IFormula)>
-get "composition"(): boolean
 get "scan"(): boolean
+get "composition"(): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -162,16 +162,16 @@ static readonly "CMD_RSMODE": $Command<(any)>
 
 constructor(arg0: $BlockPos$Type, arg1: $BlockState$Type)
 
-public "traverseBreadthFirst"<T>(arg0: $BiFunction$Type<($BlockPos$Type), ($MoverTileEntity$Type), (T)>): T
+public static "createBlock"(): $BaseBlock
 public "hasEnoughPower"(): boolean
 public "setupMovement"(arg0: string, arg1: string): void
-public static "createBlock"(): $BaseBlock
-public "setSelectedVehicle"(arg0: string): void
+public "traverseBreadthFirst"<T>(arg0: $BiFunction$Type<($BlockPos$Type), ($MoverTileEntity$Type), (T)>): T
 public "getSelectedVehicle"(): string
-public "getMovers"(): $List<(string)>
+public "setSelectedVehicle"(arg0: string): void
 public "findVehicle"(arg0: string): $MoverTileEntity
-set "selectedVehicle"(value: string)
+public "getMovers"(): $List<(string)>
 get "selectedVehicle"(): string
+set "selectedVehicle"(value: string)
 get "movers"(): $List<(string)>
 }
 /**
@@ -373,79 +373,79 @@ public static "isEmpty"(arg0: $BlockState$Type, arg1: $Block$Type): boolean
 public "suspend"(arg0: integer, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): boolean
 public "setMode"(arg0: $BuilderMode$Type): void
 public "getMode"(): $BuilderMode
-public "isHilightMode"(): boolean
-public "clearSupportBlocks"(): void
-public "isWaitMode"(): boolean
-public "hasLoopMode"(): boolean
-public "setHilightMode"(arg0: boolean): void
-public "setWaitMode"(arg0: boolean): void
-public "hasSupportMode"(): boolean
-public "setEntityMode"(arg0: boolean): void
-public "setSilent"(arg0: boolean): void
-public "resetBox"(): void
-public "isSilent"(): boolean
-public "getRotate"(): $RotateMode
-public "setRotate"(arg0: $RotateMode$Type): void
-public "hasEntityMode"(): boolean
-public "setLoopMode"(arg0: boolean): void
-public "setAnchor"(arg0: $AnchorMode$Type): void
-public "setSupportMode"(arg0: boolean): void
-public "buildBlock"(arg0: integer, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): boolean
-public "silkQuarryBlock"(arg0: integer, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): boolean
-public "quarryBlock"(arg0: integer, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): boolean
-public "voidBlock"(arg0: integer, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): boolean
-public "pumpBlock"(arg0: integer, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): boolean
-public "placeLiquidBlock"(arg0: integer, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): boolean
-public static "getScanLocClient"(): $Map<($BlockPos), ($Pair<(long), ($BlockPos)>)>
-public "getCurrentLevel"(): integer
-public static "isEmptyOrReplacable"(arg0: $Level$Type, arg1: $BlockPos$Type): boolean
-public static "setScanLocationClient"(arg0: $BlockPos$Type, arg1: $BlockPos$Type): void
-public static "getCurrentLevelClientSide"(): integer
+public "rotateBlock"(arg0: $Rotation$Type): void
+public "onReplaced"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
+public "getRenderBoundingBox"(): $AABB
+public "load"(arg0: $CompoundTag$Type): void
+public "m_183515_"(arg0: $CompoundTag$Type): void
+public "setRemoved"(): void
+public static "createBlock"(): $BaseBlock
 public static "getBlockInformation"(arg0: $Player$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockEntity$Type): $BlockInformation
+public static "isEmptyOrReplacable"(arg0: $Level$Type, arg1: $BlockPos$Type): boolean
+public static "getCurrentLevelClientSide"(): integer
+public static "setScanLocationClient"(arg0: $BlockPos$Type, arg1: $BlockPos$Type): void
+public "getHudLog"(): $List<(string)>
+public "pumpBlock"(arg0: integer, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): boolean
+public "silkQuarryBlock"(arg0: integer, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): boolean
+public "placeLiquidBlock"(arg0: integer, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): boolean
+public "voidBlock"(arg0: integer, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): boolean
+public "quarryBlock"(arg0: integer, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): boolean
+public "hasLoopMode"(): boolean
+public "setEntityMode"(arg0: boolean): void
+public "setSupportMode"(arg0: boolean): void
+public "setAnchor"(arg0: $AnchorMode$Type): void
+public "isHilightMode"(): boolean
+public "hasEntityMode"(): boolean
+public "hasSupportMode"(): boolean
+public "getRotate"(): $RotateMode
+public "setLoopMode"(arg0: boolean): void
+public "clearSupportBlocks"(): void
+public "isSilent"(): boolean
+public "setHilightMode"(arg0: boolean): void
+public "isWaitMode"(): boolean
+public "setSilent"(arg0: boolean): void
+public "setWaitMode"(arg0: boolean): void
+public "resetBox"(): void
+public "setRotate"(arg0: $RotateMode$Type): void
+public "buildBlock"(arg0: integer, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): boolean
 public "getLastUpdateTime"(): long
 public "tickServer"(): void
 public "getAnchor"(): $AnchorMode
 public "setPowerInput"(arg0: integer): void
-public static "createBlock"(): $BaseBlock
-public "load"(arg0: $CompoundTag$Type): void
-public "m_183515_"(arg0: $CompoundTag$Type): void
-public "setRemoved"(): void
-public "isBlockAboveAir"(): boolean
-public "getHudPos"(): $BlockPos
 public "getClientLog"(): $List<(string)>
 public "setLastUpdateTime"(arg0: long): void
+public "isBlockAboveAir"(): boolean
+public "getHudPos"(): $BlockPos
 public "getBlockOrientation"(): $Direction
-public "getRenderBoundingBox"(): $AABB
-public "onReplaced"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
-public "rotateBlock"(arg0: $Rotation$Type): void
-public "getHudLog"(): $List<(string)>
+public static "getScanLocClient"(): $Map<($BlockPos), ($Pair<(long), ($BlockPos)>)>
+public "getCurrentLevel"(): integer
 set "mode"(value: $BuilderMode$Type)
 get "mode"(): $BuilderMode
-get "hilightMode"(): boolean
-get "waitMode"(): boolean
-set "hilightMode"(value: boolean)
-set "waitMode"(value: boolean)
-set "entityMode"(value: boolean)
-set "silent"(value: boolean)
-get "silent"(): boolean
-get "rotate"(): $RotateMode
-set "rotate"(value: $RotateMode$Type)
-set "loopMode"(value: boolean)
-set "anchor"(value: $AnchorMode$Type)
-set "supportMode"(value: boolean)
-get "scanLocClient"(): $Map<($BlockPos), ($Pair<(long), ($BlockPos)>)>
-get "currentLevel"(): integer
+get "renderBoundingBox"(): $AABB
 get "currentLevelClientSide"(): integer
+get "hudLog"(): $List<(string)>
+set "entityMode"(value: boolean)
+set "supportMode"(value: boolean)
+set "anchor"(value: $AnchorMode$Type)
+get "hilightMode"(): boolean
+get "rotate"(): $RotateMode
+set "loopMode"(value: boolean)
+get "silent"(): boolean
+set "hilightMode"(value: boolean)
+get "waitMode"(): boolean
+set "silent"(value: boolean)
+set "waitMode"(value: boolean)
+set "rotate"(value: $RotateMode$Type)
 get "lastUpdateTime"(): long
 get "anchor"(): $AnchorMode
 set "powerInput"(value: integer)
-get "blockAboveAir"(): boolean
-get "hudPos"(): $BlockPos
 get "clientLog"(): $List<(string)>
 set "lastUpdateTime"(value: long)
+get "blockAboveAir"(): boolean
+get "hudPos"(): $BlockPos
 get "blockOrientation"(): $Direction
-get "renderBoundingBox"(): $AABB
-get "hudLog"(): $List<(string)>
+get "scanLocClient"(): $Map<($BlockPos), ($Pair<(long), ($BlockPos)>)>
+get "currentLevel"(): integer
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -494,74 +494,74 @@ constructor(arg0: $BlockPos$Type, arg1: $BlockState$Type)
 public "getName"(): string
 public "getOffset"(): $BlockPos
 public "setOffset"(arg0: integer, arg1: integer, arg2: integer): void
-public "isValid"(): boolean
-public "canConnect"(arg0: $Direction$Type): boolean
 public "isAvailable"(): boolean
-public "hasDirectContectionTo"(arg0: $BlockPos$Type): boolean
-public "traverseBreadthFirst"<T>(arg0: $BiFunction$Type<($BlockPos$Type), ($MoverTileEntity$Type), (T)>): T
-public "traverseBreadthFirstWithPath"<T>(arg0: $BiFunction$Type<($List$Type<($BlockPos$Type)>), ($MoverTileEntity$Type), (T)>): T
-public "setHighlightedMover"(arg0: string): void
-public "arriveAtDestination"(): void
-public "getPlatformsFromServer"(): $List<(string)>
-public "setClientRenderInfo"(arg0: $List$Type<(string)>, arg1: string, arg2: boolean, arg3: boolean): void
+public "isValid"(): boolean
 public "setSource"(arg0: $BlockPos$Type): void
-public "getNetwork"(): $Map<($Direction), ($BlockPos)>
-public "setController"(arg0: $MoverControllerTileEntity$Type): void
-public "getController"(): $MoverControllerTileEntity
-public "getCursorY"(): double
-public "getCard"(): $ItemStack
-public "hasEnoughPower"(): boolean
-public "traverseAndCollect"(): $Map<($BlockPos), ($MoverTileEntity)>
-public "getLastDestination"(): $BlockPos
-public "isMoverValid"(): boolean
-public "setLastDestination"(arg0: $BlockPos$Type): void
-public "getCursorBlock"(): $BlockPos
-public "getCursorX"(): double
-public "traverseDepthFirst"<T>(arg0: $BiFunction$Type<($BlockPos$Type), ($MoverTileEntity$Type), (T)>): T
-public "getConnectionCount"(): string
-public "clearNetwork"(): void
-public "setConnectionCount"(arg0: string): void
-public "addConnection"(arg0: $Direction$Type, arg1: $BlockPos$Type): void
-public "startMove"(arg0: string): void
-public static "createBlock"(): $BaseBlock
-public "saveClientDataToNBT"(arg0: $CompoundTag$Type): void
-public "loadClientDataFromNBT"(arg0: $CompoundTag$Type): void
-public "isMoving"(): boolean
+public "canConnect"(arg0: $Direction$Type): boolean
 public "load"(arg0: $CompoundTag$Type): void
 public "m_183515_"(arg0: $CompoundTag$Type): void
 public "setRemoved"(): void
 public "handleUpdateTag"(arg0: $CompoundTag$Type): void
-public "getCurrentPage"(): integer
-public "setCurrentPage"(arg0: integer): void
-public "getCurrentPlatform"(): string
+public "setController"(arg0: $MoverControllerTileEntity$Type): void
+public "getController"(): $MoverControllerTileEntity
+public static "createBlock"(): $BaseBlock
+public "isMoving"(): boolean
 public "getLogic"(): $EntityMovementLogic
-public "loadInfo"(arg0: $CompoundTag$Type): void
-public "saveInfo"(arg0: $CompoundTag$Type): void
+public "getCard"(): $ItemStack
+public "getCursorY"(): double
+public "getLastDestination"(): $BlockPos
+public "isMoverValid"(): boolean
+public "traverseAndCollect"(): $Map<($BlockPos), ($MoverTileEntity)>
+public "getCursorX"(): double
+public "getCursorBlock"(): $BlockPos
+public "hasEnoughPower"(): boolean
+public "setLastDestination"(arg0: $BlockPos$Type): void
+public "traverseDepthFirst"<T>(arg0: $BiFunction$Type<($BlockPos$Type), ($MoverTileEntity$Type), (T)>): T
+public "addConnection"(arg0: $Direction$Type, arg1: $BlockPos$Type): void
+public "startMove"(arg0: string): void
+public "setConnectionCount"(arg0: string): void
+public "clearNetwork"(): void
+public "getConnectionCount"(): string
+public "getNetwork"(): $Map<($Direction), ($BlockPos)>
+public "getCurrentPlatform"(): string
 public "hitScreenClient"(arg0: $BlockPos$Type, arg1: double, arg2: double, arg3: double, arg4: $Direction$Type, arg5: $Direction$Type, arg6: $Direction$Type): void
+public "setCurrentPage"(arg0: integer): void
+public "getCurrentPage"(): integer
+public "setClientRenderInfo"(arg0: $List$Type<(string)>, arg1: string, arg2: boolean, arg3: boolean): void
+public "getPlatformsFromServer"(): $List<(string)>
+public "arriveAtDestination"(): void
+public "setHighlightedMover"(arg0: string): void
+public "traverseBreadthFirstWithPath"<T>(arg0: $BiFunction$Type<($List$Type<($BlockPos$Type)>), ($MoverTileEntity$Type), (T)>): T
+public "hasDirectContectionTo"(arg0: $BlockPos$Type): boolean
+public "traverseBreadthFirst"<T>(arg0: $BiFunction$Type<($BlockPos$Type), ($MoverTileEntity$Type), (T)>): T
+public "saveClientDataToNBT"(arg0: $CompoundTag$Type): void
+public "loadClientDataFromNBT"(arg0: $CompoundTag$Type): void
+public "saveInfo"(arg0: $CompoundTag$Type): void
+public "loadInfo"(arg0: $CompoundTag$Type): void
 get "name"(): string
 get "offset"(): $BlockPos
-get "valid"(): boolean
 get "available"(): boolean
-set "highlightedMover"(value: string)
-get "platformsFromServer"(): $List<(string)>
+get "valid"(): boolean
 set "source"(value: $BlockPos$Type)
-get "network"(): $Map<($Direction), ($BlockPos)>
 set "controller"(value: $MoverControllerTileEntity$Type)
 get "controller"(): $MoverControllerTileEntity
-get "cursorY"(): double
+get "moving"(): boolean
+get "logic"(): $EntityMovementLogic
 get "card"(): $ItemStack
+get "cursorY"(): double
 get "lastDestination"(): $BlockPos
 get "moverValid"(): boolean
-set "lastDestination"(value: $BlockPos$Type)
-get "cursorBlock"(): $BlockPos
 get "cursorX"(): double
-get "connectionCount"(): string
+get "cursorBlock"(): $BlockPos
+set "lastDestination"(value: $BlockPos$Type)
 set "connectionCount"(value: string)
-get "moving"(): boolean
-get "currentPage"(): integer
-set "currentPage"(value: integer)
+get "connectionCount"(): string
+get "network"(): $Map<($Direction), ($BlockPos)>
 get "currentPlatform"(): string
-get "logic"(): $EntityMovementLogic
+set "currentPage"(value: integer)
+get "currentPage"(): integer
+get "platformsFromServer"(): $List<(string)>
+set "highlightedMover"(value: string)
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -578,8 +578,8 @@ export type $MoverTileEntity_ = $MoverTileEntity$Type;
 declare module "packages/mcjty/rftoolsbuilder/modules/builder/blocks/$SupportBlock$SupportStatus" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -594,9 +594,9 @@ public static "values"(): ($SupportBlock$SupportStatus)[]
 public static "max"(arg0: $SupportBlock$SupportStatus$Type, arg1: $SupportBlock$SupportStatus$Type): $SupportBlock$SupportStatus
 public static "valueOf"(arg0: string): $SupportBlock$SupportStatus
 public "getSerializedName"(): string
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "name"(): string
 get "serializedName"(): string
 }
@@ -729,21 +729,21 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public static "isItem"(arg0: $Entity$Type): boolean
-public static "isPassive"(arg0: $Entity$Type): boolean
-public static "isHostile"(arg0: $Entity$Type): boolean
+public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
 public "skipRendering"(arg0: $BlockState$Type, arg1: $BlockState$Type, arg2: $Direction$Type): boolean
 public "getRenderShape"(arg0: $BlockState$Type): $RenderShape
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getCollisionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getInteractionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "getLightBlock"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): integer
 public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
+public "getInteractionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
+public "getCollisionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
+public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "entityInside"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): void
-public "handleDamage"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): void
-public "canEntityDestroy"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): boolean
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public static "isHostile"(arg0: $Entity$Type): boolean
+public static "isItem"(arg0: $Entity$Type): boolean
+public static "isPassive"(arg0: $Entity$Type): boolean
+public "handleDamage"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Entity$Type): void
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 }
@@ -770,14 +770,14 @@ export interface $IFormula {
 
  "setup"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type, arg4: $CompoundTag$Type): void
  "isClear"(arg0: integer, arg1: integer, arg2: integer): boolean
- "isCustom"(): boolean
- "isInsideSafe"(arg0: integer, arg1: integer, arg2: integer): boolean
- "isBorder"(arg0: integer, arg1: integer, arg2: integer): boolean
  "isVisible"(arg0: integer, arg1: integer, arg2: integer): boolean
+ "isBorder"(arg0: integer, arg1: integer, arg2: integer): boolean
+ "isInsideSafe"(arg0: integer, arg1: integer, arg2: integer): boolean
+ "isCustom"(): boolean
  "getCheckSumClient"(arg0: $CompoundTag$Type, arg1: $Check32$Type): void
- "correctFormula"(arg0: boolean): $IFormula
  "isInside"(arg0: integer, arg1: integer, arg2: integer): boolean
  "getLastState"(): $BlockState
+ "correctFormula"(arg0: boolean): $IFormula
 }
 
 export namespace $IFormula {
@@ -878,8 +878,8 @@ import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
 import {$IFormula, $IFormula$Type} from "packages/mcjty/rftoolsbuilder/shapes/$IFormula"
 import {$Item, $Item$Type} from "packages/net/minecraft/world/item/$Item"
-import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
 import {$InteractionResultHolder, $InteractionResultHolder$Type} from "packages/net/minecraft/world/$InteractionResultHolder"
+import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
 import {$Set, $Set$Type} from "packages/java/util/$Set"
 import {$GlobalPos, $GlobalPos$Type} from "packages/net/minecraft/core/$GlobalPos"
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
@@ -907,54 +907,54 @@ public static "getOffset"(arg0: $ItemStack$Type): $BlockPos
 public static "setOffset"(arg0: $ItemStack$Type, arg1: integer, arg2: integer, arg3: integer): void
 public static "getShape"(arg0: $CompoundTag$Type): $Shape
 public static "getShape"(arg0: $ItemStack$Type): $Shape
-public static "setChildren"(arg0: $ItemStack$Type, arg1: $ListTag$Type): void
 public static "setMode"(arg0: $ItemStack$Type, arg1: integer): void
 public static "getMode"(arg0: $ItemStack$Type): integer
+public static "setData"(arg0: $CompoundTag$Type, arg1: integer): void
+public static "getDimension"(arg0: $ItemStack$Type): $BlockPos
+public static "getDimension"(arg0: $CompoundTag$Type): $BlockPos
+public static "getClampedDimension"(arg0: $ItemStack$Type, arg1: integer): $BlockPos
+public static "getClampedDimension"(arg0: $CompoundTag$Type, arg1: integer): $BlockPos
 public static "composeFormula"(arg0: $ItemStack$Type, arg1: $IFormula$Type, arg2: $Level$Type, arg3: $BlockPos$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type, arg6: $Map$Type<($BlockPos$Type), ($BlockState$Type)>, arg7: integer, arg8: boolean, arg9: boolean, arg10: $ChunkPos$Type): void
 public static "getClampedOffset"(arg0: $CompoundTag$Type, arg1: integer): $BlockPos
 public static "getClampedOffset"(arg0: $ItemStack$Type, arg1: integer): $BlockPos
-public static "getMinCorner"(arg0: $BlockPos$Type, arg1: $BlockPos$Type, arg2: $BlockPos$Type): $BlockPos
 public static "getMaxCorner"(arg0: $BlockPos$Type, arg1: $BlockPos$Type, arg2: $BlockPos$Type): $BlockPos
-public static "isNormalShapeCard"(arg0: $ItemStack$Type): boolean
+public static "getMinCorner"(arg0: $BlockPos$Type, arg1: $BlockPos$Type, arg2: $BlockPos$Type): $BlockPos
 public static "getVoidedBlocks"(arg0: $ItemStack$Type): $Set<($Block)>
-public static "setData"(arg0: $CompoundTag$Type, arg1: integer): void
-public static "setCurrentBlock"(arg0: $ItemStack$Type, arg1: $GlobalPos$Type): void
-public static "getClampedDimension"(arg0: $CompoundTag$Type, arg1: integer): $BlockPos
-public static "getClampedDimension"(arg0: $ItemStack$Type, arg1: integer): $BlockPos
-public "getShapeDescription"(arg0: $ItemStack$Type): string
-public static "getFormulaCheckClient"(arg0: $ItemStack$Type, arg1: $Check32$Type): void
-public static "getFormulaCheckClient"(arg0: $ItemStack$Type): integer
-public static "createCorrectFormula"(arg0: $CompoundTag$Type): $IFormula
-public "getShapeOffset"(arg0: $ItemStack$Type): string
-public "isDisabledInConfig"(): boolean
-public static "getCorner1"(arg0: $ItemStack$Type): $BlockPos
-public "getShapeDimension"(arg0: $ItemStack$Type): string
-public static "setCorner1"(arg0: $ItemStack$Type, arg1: $BlockPos$Type): void
-public static "setDimension"(arg0: $ItemStack$Type, arg1: integer, arg2: integer, arg3: integer): void
-public static "setGhostMaterial"(arg0: $CompoundTag$Type, arg1: $ItemStack$Type): void
-public static "isVoiding"(arg0: $ItemStack$Type, arg1: string): boolean
-public static "getLocalChecksum"(arg0: $CompoundTag$Type, arg1: $Check32$Type): void
-public static "isTagMatching"(arg0: $ItemStack$Type): boolean
-public static "getScanId"(arg0: $ItemStack$Type): integer
-public static "getScanIdRecursive"(arg0: $ItemStack$Type): integer
-public static "getRenderPositions"(arg0: $ItemStack$Type, arg1: boolean, arg2: $RLE$Type, arg3: $StatePalette$Type, arg4: $IFormula$Type, arg5: integer): integer
-public static "xInChunk"(arg0: integer, arg1: $ChunkPos$Type): boolean
-public static "zInChunk"(arg0: integer, arg1: $ChunkPos$Type): boolean
-public static "getDataPositions"(arg0: $Level$Type, arg1: $ItemStack$Type, arg2: $Shape$Type, arg3: boolean, arg4: $RLE$Type, arg5: $StatePalette$Type): integer
-public static "getDimension"(arg0: $CompoundTag$Type): $BlockPos
-public static "getDimension"(arg0: $ItemStack$Type): $BlockPos
+public static "isNormalShapeCard"(arg0: $ItemStack$Type): boolean
 public static "isSolid"(arg0: $ItemStack$Type): boolean
 public static "isSolid"(arg0: $CompoundTag$Type): boolean
-public "getTagsToPreserve"(): $Collection<(string)>
-public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
-public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
-public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
+public static "setCurrentBlock"(arg0: $ItemStack$Type, arg1: $GlobalPos$Type): void
+public static "setChildren"(arg0: $ItemStack$Type, arg1: $ListTag$Type): void
 public static "setShape"(arg0: $ItemStack$Type, arg1: $Shape$Type, arg2: boolean): void
+public "getTagsToPreserve"(): $Collection<(string)>
+public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
+public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
+public "getShapeDescription"(arg0: $ItemStack$Type): string
+public static "createCorrectFormula"(arg0: $CompoundTag$Type): $IFormula
+public static "getFormulaCheckClient"(arg0: $ItemStack$Type): integer
+public static "getFormulaCheckClient"(arg0: $ItemStack$Type, arg1: $Check32$Type): void
+public "getShapeDimension"(arg0: $ItemStack$Type): string
+public static "setCorner1"(arg0: $ItemStack$Type, arg1: $BlockPos$Type): void
+public "getShapeOffset"(arg0: $ItemStack$Type): string
+public "isDisabledInConfig"(): boolean
+public static "isTagMatching"(arg0: $ItemStack$Type): boolean
+public static "setDimension"(arg0: $ItemStack$Type, arg1: integer, arg2: integer, arg3: integer): void
+public static "getCorner1"(arg0: $ItemStack$Type): $BlockPos
+public static "setGhostMaterial"(arg0: $CompoundTag$Type, arg1: $ItemStack$Type): void
 public static "setModifier"(arg0: $CompoundTag$Type, arg1: $ShapeModifier$Type): void
+public static "zInChunk"(arg0: integer, arg1: $ChunkPos$Type): boolean
+public static "isVoiding"(arg0: $ItemStack$Type, arg1: string): boolean
+public static "xInChunk"(arg0: integer, arg1: $ChunkPos$Type): boolean
+public static "getRenderPositions"(arg0: $ItemStack$Type, arg1: boolean, arg2: $RLE$Type, arg3: $StatePalette$Type, arg4: $IFormula$Type, arg5: integer): integer
+public static "getLocalChecksum"(arg0: $CompoundTag$Type, arg1: $Check32$Type): void
+public static "getScanId"(arg0: $ItemStack$Type): integer
+public static "getScanIdRecursive"(arg0: $ItemStack$Type): integer
+public static "getDataPositions"(arg0: $Level$Type, arg1: $ItemStack$Type, arg2: $Shape$Type, arg3: boolean, arg4: $RLE$Type, arg5: $StatePalette$Type): integer
 public "getMaxWidth"(): integer
 public "getManualEntry"(): $ManualEntry
-get "disabledInConfig"(): boolean
 get "tagsToPreserve"(): $Collection<(string)>
+get "disabledInConfig"(): boolean
 get "maxWidth"(): integer
 get "manualEntry"(): $ManualEntry
 }
@@ -1007,9 +1007,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(arg0: integer)
 
-public "getPage"(): integer
-public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
+public "getPage"(): integer
 get "page"(): integer
 }
 /**
@@ -1042,8 +1042,8 @@ export class $VehicleControlClientScreenModule implements $IClientScreenModule<(
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $VehicleControlScreenModule$EmptyData$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $VehicleControlScreenModule$EmptyData$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -1128,15 +1128,15 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($VehicleStatusScreenModule)>
-public "getClientScreenModule"(): $Class<($VehicleStatusClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "getTagsToPreserve"(): $Collection<(string)>
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($VehicleStatusClientScreenModule)>
+public "getServerScreenModule"(): $Class<($VehicleStatusScreenModule)>
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($VehicleStatusScreenModule)>
-get "clientScreenModule"(): $Class<($VehicleStatusClientScreenModule)>
 get "tagsToPreserve"(): $Collection<(string)>
+get "clientScreenModule"(): $Class<($VehicleStatusClientScreenModule)>
+get "serverScreenModule"(): $Class<($VehicleStatusScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1200,12 +1200,12 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "getData"(arg0: $BlockPos$Type): $List<($InvisibleMoverBlock$MoverData)>
-public "removeData"(arg0: $BlockPos$Type): void
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "getRenderShape"(arg0: $BlockState$Type): $RenderShape
 public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "tick"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $RandomSource$Type): void
 public "attack"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): void
+public "tick"(arg0: $BlockState$Type, arg1: $ServerLevel$Type, arg2: $BlockPos$Type, arg3: $RandomSource$Type): void
+public "removeData"(arg0: $BlockPos$Type): void
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "registerData"(arg0: $BlockPos$Type, arg1: $BlockPos$Type, arg2: $Direction$Type, arg3: $Direction$Type): void
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
@@ -1235,8 +1235,8 @@ constructor(mover: $BlockPos$Type, controlPos: $BlockPos$Type, horizDirection: $
 public "equals"(arg0: any): boolean
 public "toString"(): string
 public "hashCode"(): integer
-public "horizDirection"(): $Direction
 public "controlPos"(): $BlockPos
+public "horizDirection"(): $Direction
 public "mover"(): $BlockPos
 public "direction"(): $Direction
 }
@@ -1301,8 +1301,8 @@ export class $VehicleStatusClientScreenModule implements $IClientScreenModule<($
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleDataString$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleDataString$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -1330,12 +1330,12 @@ export class $ShapeModifier {
 
 constructor(arg0: $ShapeOperation$Type, arg1: boolean, arg2: $ShapeRotation$Type)
 
-public "isFlipY"(): boolean
 public "getOperation"(): $ShapeOperation
 public "getRotation"(): $ShapeRotation
-get "flipY"(): boolean
+public "isFlipY"(): boolean
 get "operation"(): $ShapeOperation
 get "rotation"(): $ShapeRotation
+get "flipY"(): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1362,20 +1362,20 @@ static readonly "INVALID": $BlockInformation
 static readonly "OK": $BlockInformation
 static readonly "FREE": $BlockInformation
 
-constructor(arg0: $ResourceLocation$Type, arg1: $SupportBlock$SupportStatus$Type, arg2: double, arg3: integer)
+constructor(arg0: $BlockInformation$Type, arg1: string)
 constructor(arg0: $ResourceLocation$Type, arg1: $SupportBlock$SupportStatus$Type, arg2: double)
 constructor(arg0: $BlockInformation$Type, arg1: $ResourceLocation$Type, arg2: $SupportBlock$SupportStatus$Type, arg3: double)
-constructor(arg0: $BlockInformation$Type, arg1: string)
+constructor(arg0: $ResourceLocation$Type, arg1: $SupportBlock$SupportStatus$Type, arg2: double, arg3: integer)
 
-public "getBlockLevel"(): $SupportBlock$SupportStatus
-public "getCostFactor"(): double
 public static "getBlockInformation"(arg0: $Block$Type): $BlockInformation
 public "getBlockName"(): $ResourceLocation
 public "getRotateInfo"(): integer
-get "blockLevel"(): $SupportBlock$SupportStatus
-get "costFactor"(): double
+public "getBlockLevel"(): $SupportBlock$SupportStatus
+public "getCostFactor"(): double
 get "blockName"(): $ResourceLocation
 get "rotateInfo"(): integer
+get "blockLevel"(): $SupportBlock$SupportStatus
+get "costFactor"(): double
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1425,9 +1425,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "onPlace"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
-public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
 public "getRotationType"(): $RotationType
+public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
+public "onPlace"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
 get "rotationType"(): $RotationType
 }
 /**
@@ -1477,8 +1477,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1495,8 +1495,8 @@ export type $MoverStatusBlock_ = $MoverStatusBlock$Type;
 declare module "packages/mcjty/rftoolsbuilder/modules/shield/$ShieldRenderingMode" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -1510,16 +1510,16 @@ static readonly "SOLID": $ShieldRenderingMode
 
 public static "values"(): ($ShieldRenderingMode)[]
 public static "valueOf"(arg0: string): $ShieldRenderingMode
-public "getDescription"(): string
 public static "getMode"(arg0: string): $ShieldRenderingMode
-public "getSerializedName"(): string
+public "getDescription"(): string
 public "isTranslucent"(): boolean
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
+public "getSerializedName"(): string
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "description"(): string
-get "serializedName"(): string
 get "translucent"(): boolean
+get "serializedName"(): string
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1548,10 +1548,10 @@ export class $VehicleControlScreenModule implements $IScreenModule<($VehicleCont
 
 constructor()
 
-public static "getMoverController"(arg0: $Level$Type, arg1: $ResourceKey$Type<($Level$Type)>, arg2: $BlockPos$Type): $Optional<($MoverControllerTileEntity)>
 public "getRfPerTick"(): integer
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean, arg4: $Player$Type): void
 public "setupFromNBT"(arg0: $CompoundTag$Type, arg1: $ResourceKey$Type<($Level$Type)>, arg2: $BlockPos$Type): void
+public static "getMoverController"(arg0: $Level$Type, arg1: $ResourceKey$Type<($Level$Type)>, arg2: $BlockPos$Type): $Optional<($MoverControllerTileEntity)>
 public "needsController"(): boolean
 get "rfPerTick"(): integer
 }
@@ -1619,21 +1619,21 @@ static readonly "CARD_PUMP_LIQUID": $ShapeCardType
 
 public static "values"(): ($ShapeCardType)[]
 public static "valueOf"(arg0: string): $ShapeCardType
-public "addHudLog"(arg0: $List$Type<(string)>, arg1: $IItemHandler$Type): void
-public "handleSingleBlock"(arg0: $BuilderTileEntity$Type, arg1: integer, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type): boolean
-public "getRfNeeded"(): integer
-public "isFortune"(): boolean
-public "isClearing"(): boolean
-public "isItem"(): boolean
-public "isQuarry"(): boolean
 public "addInformation"(arg0: $List$Type<($Component$Type)>): void
+public "isClearing"(): boolean
+public "isFortune"(): boolean
+public "addHudLog"(arg0: $List$Type<(string)>, arg1: $IItemHandler$Type): void
+public "getRfNeeded"(): integer
+public "handleSingleBlock"(arg0: $BuilderTileEntity$Type, arg1: integer, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: $BlockState$Type): boolean
+public "isItem"(): boolean
 public "getResourceSuffix"(): string
-get "rfNeeded"(): integer
-get "fortune"(): boolean
+public "isQuarry"(): boolean
 get "clearing"(): boolean
+get "fortune"(): boolean
+get "rfNeeded"(): integer
 get "item"(): boolean
-get "quarry"(): boolean
 get "resourceSuffix"(): string
+get "quarry"(): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1661,37 +1661,37 @@ constructor(arg0: $MoverTileEntity$Type)
 public "load"(arg0: $CompoundTag$Type): void
 public "save"(arg0: $CompoundTag$Type): void
 public "getSource"(): $BlockPos
-public "clearGrabbedEntities"(): void
-public "tryMoveVehicleClientEntities"(arg0: float): void
-public "tryMoveVehicleServer"(): void
-public "tryMoveVehicleThisPlayer"(arg0: float): $Vec3
 public "setSource"(arg0: $BlockPos$Type): void
+public "doGrab"(arg0: double, arg1: double, arg2: double): void
+public "getGrabTimeout"(): integer
+public "grabEntities"(): void
+public "setupMovementTo"(arg0: $BlockPos$Type): void
+public "setGrabTimeout"(arg0: integer): void
+public "syncGrabbedToClient"(): void
+public "setDestination"(arg0: $BlockPos$Type): void
+public "getDestination"(): $BlockPos
+public "getTotalTicks"(): long
 public "getStarttick"(): long
 public "getMovingPosition"(arg0: float, arg1: long): $Vec3
 public "endMoveServer"(): void
 public "setWaitABit"(arg0: integer): void
+public "setGrabbedEntitiesClient"(arg0: $Set$Type<(integer)>): void
+public "clearGrabbedEntities"(): void
+public "tryMoveVehicleServer"(): void
+public "tryMoveVehicleClientEntities"(arg0: float): void
 public "saveClientDataToNBT"(arg0: $CompoundTag$Type): void
 public "loadClientDataFromNBT"(arg0: $CompoundTag$Type): void
-public "setDestination"(arg0: $BlockPos$Type): void
-public "getDestination"(): $BlockPos
-public "getGrabTimeout"(): integer
-public "doGrab"(arg0: double, arg1: double, arg2: double): void
-public "setGrabTimeout"(arg0: integer): void
-public "setupMovementTo"(arg0: $BlockPos$Type): void
-public "grabEntities"(): void
-public "getTotalTicks"(): long
-public "syncGrabbedToClient"(): void
-public "setGrabbedEntitiesClient"(arg0: $Set$Type<(integer)>): void
+public "tryMoveVehicleThisPlayer"(arg0: float): $Vec3
 get "source"(): $BlockPos
 set "source"(value: $BlockPos$Type)
-get "starttick"(): long
-set "waitABit"(value: integer)
+get "grabTimeout"(): integer
+set "upMovementTo"(value: $BlockPos$Type)
+set "grabTimeout"(value: integer)
 set "destination"(value: $BlockPos$Type)
 get "destination"(): $BlockPos
-get "grabTimeout"(): integer
-set "grabTimeout"(value: integer)
-set "upMovementTo"(value: $BlockPos$Type)
 get "totalTicks"(): long
+get "starttick"(): long
+set "waitABit"(value: integer)
 set "grabbedEntitiesClient"(value: $Set$Type<(integer)>)
 }
 /**
@@ -1709,8 +1709,8 @@ export type $EntityMovementLogic_ = $EntityMovementLogic$Type;
 declare module "packages/mcjty/rftoolsbuilder/modules/mover/items/$VehicleControlModuleItem" {
 import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
 import {$VehicleControlScreenModule, $VehicleControlScreenModule$Type} from "packages/mcjty/rftoolsbuilder/modules/mover/items/$VehicleControlScreenModule"
-import {$VehicleControlClientScreenModule, $VehicleControlClientScreenModule$Type} from "packages/mcjty/rftoolsbuilder/modules/mover/items/$VehicleControlClientScreenModule"
 import {$Collection, $Collection$Type} from "packages/java/util/$Collection"
+import {$VehicleControlClientScreenModule, $VehicleControlClientScreenModule$Type} from "packages/mcjty/rftoolsbuilder/modules/mover/items/$VehicleControlClientScreenModule"
 import {$Class, $Class$Type} from "packages/java/lang/$Class"
 import {$InteractionResult, $InteractionResult$Type} from "packages/net/minecraft/world/$InteractionResult"
 import {$IModuleGuiBuilder, $IModuleGuiBuilder$Type} from "packages/mcjty/rftoolsbase/api/screens/$IModuleGuiBuilder"
@@ -1732,15 +1732,15 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($VehicleControlScreenModule)>
-public "getClientScreenModule"(): $Class<($VehicleControlClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "getTagsToPreserve"(): $Collection<(string)>
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($VehicleControlClientScreenModule)>
+public "getServerScreenModule"(): $Class<($VehicleControlScreenModule)>
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($VehicleControlScreenModule)>
-get "clientScreenModule"(): $Class<($VehicleControlClientScreenModule)>
 get "tagsToPreserve"(): $Collection<(string)>
+get "clientScreenModule"(): $Class<($VehicleControlClientScreenModule)>
+get "serverScreenModule"(): $Class<($VehicleControlScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1765,8 +1765,8 @@ import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$BaseBlock, $BaseBlock$Type} from "packages/mcjty/lib/blocks/$BaseBlock"
 import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/entity/$LivingEntity"
-import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$RotationType, $RotationType$Type} from "packages/mcjty/lib/blocks/$RotationType"
+import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
@@ -1800,15 +1800,15 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(arg0: $BlockEntityType$BlockEntitySupplier$Type<($BlockEntity$Type)>, arg1: $Supplier$Type<(integer)>)
 
-public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
-public "attack"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): void
-public "getTagsToPreserve"(): $Collection<(string)>
-public "getRotationType"(): $RotationType
 public "destroy"(arg0: $LevelAccessor$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): void
 public "wasExploded"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Explosion$Type): void
 public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-get "tagsToPreserve"(): $Collection<(string)>
+public "getRotationType"(): $RotationType
+public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
+public "attack"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type): void
+public "getTagsToPreserve"(): $Collection<(string)>
 get "rotationType"(): $RotationType
+get "tagsToPreserve"(): $Collection<(string)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1861,8 +1861,8 @@ import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$Block, $Block$Type} from "packages/net/minecraft/world/level/block/$Block"
 import {$Item, $Item$Type} from "packages/net/minecraft/world/item/$Item"
-import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
 import {$InteractionResultHolder, $InteractionResultHolder$Type} from "packages/net/minecraft/world/$InteractionResultHolder"
+import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
 import {$TooltipFlag, $TooltipFlag$Type} from "packages/net/minecraft/world/item/$TooltipFlag"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
@@ -1880,8 +1880,8 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor()
 
-public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
 public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
+public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
 public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "getMaxWidth"(): integer
 public "getManualEntry"(): $ManualEntry

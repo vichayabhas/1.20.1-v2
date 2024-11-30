@@ -81,8 +81,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(settings: $BlockBehaviour$Properties$Type)
 
-public "softenLanding"(): boolean
 public "fallOn"(world: $Level$Type, state: $BlockState$Type, pos: $BlockPos$Type, entity: $Entity$Type, distance: float): void
+public "softenLanding"(): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -108,10 +108,10 @@ export class $BlockEntityMapper extends $BlockEntity {
 
 constructor(type: $BlockEntityType$Type<(any)>, pos: $BlockPos$Type, state: $BlockState$Type)
 
-public "writeCompoundTag"(compoundTag: $CompoundTag$Type): void
-public "readCompoundTag"(compoundTag: $CompoundTag$Type): void
 public "load"(compoundTag: $CompoundTag$Type): void
 public "m_183515_"(compoundTag: $CompoundTag$Type): void
+public "readCompoundTag"(compoundTag: $CompoundTag$Type): void
+public "writeCompoundTag"(compoundTag: $CompoundTag$Type): void
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_

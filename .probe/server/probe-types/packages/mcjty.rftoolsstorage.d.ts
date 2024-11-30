@@ -118,8 +118,8 @@ export class $StorageControlClientScreenModule implements $IClientScreenModule<(
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $StorageControlScreenModule$ModuleDataStacks$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $StorageControlScreenModule$ModuleDataStacks$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -151,8 +151,8 @@ constructor(arg0: $ByteBuf$Type)
 constructor(...arg0: (integer)[])
 
 public "getId"(): string
-public "getAmount"(arg0: integer): integer
 public "writeToBuf"(arg0: $FriendlyByteBuf$Type): void
+public "getAmount"(arg0: integer): integer
 get "id"(): string
 }
 /**
@@ -201,8 +201,8 @@ export type $StorageInfo_ = $StorageInfo$Type;
 declare module "packages/mcjty/rftoolsstorage/modules/modularstorage/$ModularTypeModule" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -216,9 +216,9 @@ public "toString"(): string
 public static "values"(): ($ModularTypeModule)[]
 public static "valueOf"(arg0: string): $ModularTypeModule
 public "getSerializedName"(): string
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "serializedName"(): string
 }
 /**
@@ -237,8 +237,8 @@ declare module "packages/mcjty/rftoolsstorage/modules/scanner/items/$StorageCont
 import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
 import {$Collection, $Collection$Type} from "packages/java/util/$Collection"
 import {$Class, $Class$Type} from "packages/java/lang/$Class"
-import {$StorageControlScreenModule, $StorageControlScreenModule$Type} from "packages/mcjty/rftoolsstorage/modules/scanner/items/$StorageControlScreenModule"
 import {$InteractionResult, $InteractionResult$Type} from "packages/net/minecraft/world/$InteractionResult"
+import {$StorageControlScreenModule, $StorageControlScreenModule$Type} from "packages/mcjty/rftoolsstorage/modules/scanner/items/$StorageControlScreenModule"
 import {$StorageControlClientScreenModule, $StorageControlClientScreenModule$Type} from "packages/mcjty/rftoolsstorage/modules/scanner/items/$StorageControlClientScreenModule"
 import {$IModuleGuiBuilder, $IModuleGuiBuilder$Type} from "packages/mcjty/rftoolsbase/api/screens/$IModuleGuiBuilder"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
@@ -262,18 +262,18 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($StorageControlScreenModule)>
-public "getClientScreenModule"(): $Class<($StorageControlClientScreenModule)>
-public "getInstalledTablet"(): $Item
+public "openGui"(arg0: $Player$Type, arg1: $ItemStack$Type, arg2: $ItemStack$Type): void
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "getTagsToPreserve"(): $Collection<(string)>
-public "openGui"(arg0: $Player$Type, arg1: $ItemStack$Type, arg2: $ItemStack$Type): void
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($StorageControlClientScreenModule)>
+public "getServerScreenModule"(): $Class<($StorageControlScreenModule)>
+public "getInstalledTablet"(): $Item
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($StorageControlScreenModule)>
-get "clientScreenModule"(): $Class<($StorageControlClientScreenModule)>
-get "installedTablet"(): $Item
 get "tagsToPreserve"(): $Collection<(string)>
+get "clientScreenModule"(): $Class<($StorageControlClientScreenModule)>
+get "serverScreenModule"(): $Class<($StorageControlScreenModule)>
+get "installedTablet"(): $Item
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -326,10 +326,10 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getRotationType"(): $RotationType
 public "skipRendering"(arg0: $BlockState$Type, arg1: $BlockState$Type, arg2: $Direction$Type): boolean
 public "getRenderShape"(arg0: $BlockState$Type): $RenderShape
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
-public "getRotationType"(): $RotationType
 get "rotationType"(): $RotationType
 }
 /**
@@ -347,8 +347,8 @@ export type $CraftingManagerBlock_ = $CraftingManagerBlock$Type;
 declare module "packages/mcjty/rftoolsstorage/modules/modularstorage/blocks/$ModularAmountOverlay" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -377,9 +377,9 @@ public "toString"(): string
 public static "values"(): ($ModularAmountOverlay)[]
 public static "valueOf"(arg0: string): $ModularAmountOverlay
 public "getSerializedName"(): string
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "serializedName"(): string
 }
 /**
@@ -410,8 +410,8 @@ static readonly "ROWS": integer
 
 constructor()
 
-public "getRfPerTick"(): integer
 public "isItemEqual"(arg0: $ItemStack$Type, arg1: $ItemStack$Type): boolean
+public "getRfPerTick"(): integer
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean, arg4: $Player$Type): void
 public "setupFromNBT"(arg0: $CompoundTag$Type, arg1: $ResourceKey$Type<($Level$Type)>, arg2: $BlockPos$Type): void
 public "needsController"(): boolean
@@ -435,8 +435,8 @@ import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/it
 import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
 import {$Class, $Class$Type} from "packages/java/lang/$Class"
 import {$InteractionResult, $InteractionResult$Type} from "packages/net/minecraft/world/$InteractionResult"
-import {$DumpClientScreenModule, $DumpClientScreenModule$Type} from "packages/mcjty/rftoolsstorage/modules/scanner/items/$DumpClientScreenModule"
 import {$IModuleGuiBuilder, $IModuleGuiBuilder$Type} from "packages/mcjty/rftoolsbase/api/screens/$IModuleGuiBuilder"
+import {$DumpClientScreenModule, $DumpClientScreenModule$Type} from "packages/mcjty/rftoolsstorage/modules/scanner/items/$DumpClientScreenModule"
 import {$Block, $Block$Type} from "packages/net/minecraft/world/level/block/$Block"
 import {$DumpScreenModule, $DumpScreenModule$Type} from "packages/mcjty/rftoolsstorage/modules/scanner/items/$DumpScreenModule"
 import {$GenericModuleItem, $GenericModuleItem$Type} from "packages/mcjty/rftoolsbase/tools/$GenericModuleItem"
@@ -453,13 +453,13 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($DumpScreenModule)>
-public "getClientScreenModule"(): $Class<($DumpClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($DumpClientScreenModule)>
+public "getServerScreenModule"(): $Class<($DumpScreenModule)>
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($DumpScreenModule)>
 get "clientScreenModule"(): $Class<($DumpClientScreenModule)>
+get "serverScreenModule"(): $Class<($DumpScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -491,8 +491,8 @@ export class $DumpClientScreenModule implements $IClientScreenModule<($IModuleDa
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleData$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleData$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -532,9 +532,9 @@ constructor()
 
 public "update"(arg0: $CompoundTag$Type, arg1: $Level$Type, arg2: $Player$Type): $CompoundTag
 public "getInfo"(arg0: $Level$Type, arg1: integer, arg2: integer): $List<(string)>
-public "getRfPerTick"(): integer
 public static "isItemEqual"(arg0: $ItemStack$Type, arg1: $ItemStack$Type): boolean
 public static "getStorageScanner"(arg0: $Level$Type, arg1: $ResourceKey$Type<($Level$Type)>, arg2: $BlockPos$Type): $IStorageScanner
+public "getRfPerTick"(): integer
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean, arg4: $Player$Type): void
 public "setupFromNBT"(arg0: $CompoundTag$Type, arg1: $ResourceKey$Type<($Level$Type)>, arg2: $BlockPos$Type): void
 public "needsController"(): boolean
@@ -588,12 +588,12 @@ constructor(arg0: integer)
 
 public static "getSize"(arg0: $ItemStack$Type): integer
 public static "getVersion"(arg0: $ItemStack$Type): integer
-public static "getCreatedBy"(arg0: $ItemStack$Type): string
-public static "getStorageInfo"(arg0: $ItemStack$Type): $StorageInfo
-public "getTagsToPreserve"(): $Collection<(string)>
-public static "getOrCreateUUID"(arg0: $ItemStack$Type): $UUID
-public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
 public "onCraftedBy"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $Player$Type): void
+public "getTagsToPreserve"(): $Collection<(string)>
+public static "getCreatedBy"(arg0: $ItemStack$Type): string
+public static "getOrCreateUUID"(arg0: $ItemStack$Type): $UUID
+public static "getStorageInfo"(arg0: $ItemStack$Type): $StorageInfo
+public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
 public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 get "tagsToPreserve"(): $Collection<(string)>
 }

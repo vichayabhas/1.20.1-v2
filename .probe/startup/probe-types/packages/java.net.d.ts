@@ -375,12 +375,12 @@ public static "networkInterfaces"(): $Stream<($NetworkInterface)>
 public "inetAddresses"(): $Stream<($InetAddress)>
 public "getDisplayName"(): string
 public "isVirtual"(): boolean
-public static "getNetworkInterfaces"(): $Enumeration<($NetworkInterface)>
-public static "getByInetAddress"(arg0: $InetAddress$Type): $NetworkInterface
 public "getHardwareAddress"(): (byte)[]
-public "getInetAddresses"(): $Enumeration<($InetAddress)>
-public "isUp"(): boolean
 public "isLoopback"(): boolean
+public static "getByInetAddress"(arg0: $InetAddress$Type): $NetworkInterface
+public "isUp"(): boolean
+public "getInetAddresses"(): $Enumeration<($InetAddress)>
+public static "getNetworkInterfaces"(): $Enumeration<($NetworkInterface)>
 public "getInterfaceAddresses"(): $List<($InterfaceAddress)>
 public "getSubInterfaces"(): $Enumeration<($NetworkInterface)>
 public "subInterfaces"(): $Stream<($NetworkInterface)>
@@ -394,8 +394,8 @@ get "index"(): integer
 get "displayName"(): string
 get "virtual"(): boolean
 get "hardwareAddress"(): (byte)[]
-get "up"(): boolean
 get "loopback"(): boolean
+get "up"(): boolean
 get "interfaceAddresses"(): $List<($InterfaceAddress)>
 get "pointToPoint"(): boolean
 get "mTU"(): integer
@@ -439,40 +439,40 @@ public "accept"(): $Socket
 public "close"(): void
 public "getChannel"(): $ServerSocketChannel
 public "isClosed"(): boolean
-/**
- * 
- * @deprecated
- */
-public static "setSocketFactory"(arg0: $SocketImplFactory$Type): void
+public "getOption"<T>(arg0: $SocketOption$Type<(T)>): T
+public "isBound"(): boolean
 public "getSoTimeout"(): integer
-public "setReuseAddress"(arg0: boolean): void
 public "setSoTimeout"(arg0: integer): void
+public "setReuseAddress"(arg0: boolean): void
 public "setPerformancePreferences"(arg0: integer, arg1: integer, arg2: integer): void
 public "getReceiveBufferSize"(): integer
 public "setReceiveBufferSize"(arg0: integer): void
+public "setOption"<T>(arg0: $SocketOption$Type<(T)>, arg1: T): $ServerSocket
 public "getInetAddress"(): $InetAddress
 public "supportedOptions"(): $Set<($SocketOption<(any)>)>
 public "getLocalSocketAddress"(): $SocketAddress
 public "getLocalPort"(): integer
 public "getReuseAddress"(): boolean
-public "getOption"<T>(arg0: $SocketOption$Type<(T)>): T
-public "setOption"<T>(arg0: $SocketOption$Type<(T)>, arg1: T): $ServerSocket
-public "isBound"(): boolean
-public "bind"(arg0: $SocketAddress$Type, arg1: integer): void
+/**
+ * 
+ * @deprecated
+ */
+public static "setSocketFactory"(arg0: $SocketImplFactory$Type): void
 public "bind"(arg0: $SocketAddress$Type): void
+public "bind"(arg0: $SocketAddress$Type, arg1: integer): void
 get "channel"(): $ServerSocketChannel
 get "closed"(): boolean
-set "socketFactory"(value: $SocketImplFactory$Type)
+get "bound"(): boolean
 get "soTimeout"(): integer
-set "reuseAddress"(value: boolean)
 set "soTimeout"(value: integer)
+set "reuseAddress"(value: boolean)
 get "receiveBufferSize"(): integer
 set "receiveBufferSize"(value: integer)
 get "inetAddress"(): $InetAddress
 get "localSocketAddress"(): $SocketAddress
 get "localPort"(): integer
 get "reuseAddress"(): boolean
-get "bound"(): boolean
+set "socketFactory"(value: $SocketImplFactory$Type)
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -515,60 +515,60 @@ public "close"(): void
 public "getPort"(): integer
 public "getChannel"(): $DatagramChannel
 public "isClosed"(): boolean
-public "getLocalAddress"(): $InetAddress
-public "send"(arg0: $DatagramPacket$Type): void
+public "getOption"<T>(arg0: $SocketOption$Type<(T)>): T
+public "isBound"(): boolean
+public "disconnect"(): void
 public "getSoTimeout"(): integer
-public "setTrafficClass"(arg0: integer): void
 public "getTrafficClass"(): integer
-public "setReuseAddress"(arg0: boolean): void
 public "getSendBufferSize"(): integer
+public "setTrafficClass"(arg0: integer): void
 public "setSendBufferSize"(arg0: integer): void
 public "setSoTimeout"(arg0: integer): void
+public "setReuseAddress"(arg0: boolean): void
 public "getReceiveBufferSize"(): integer
 public "setReceiveBufferSize"(arg0: integer): void
+public "joinGroup"(arg0: $SocketAddress$Type, arg1: $NetworkInterface$Type): void
+public "leaveGroup"(arg0: $SocketAddress$Type, arg1: $NetworkInterface$Type): void
+public "isConnected"(): boolean
+public "setOption"<T>(arg0: $SocketOption$Type<(T)>, arg1: T): $DatagramSocket
+public "getBroadcast"(): boolean
+public "send"(arg0: $DatagramPacket$Type): void
+public "getLocalAddress"(): $InetAddress
 public "getInetAddress"(): $InetAddress
 public "supportedOptions"(): $Set<($SocketOption<(any)>)>
 public "getRemoteSocketAddress"(): $SocketAddress
 public "getLocalSocketAddress"(): $SocketAddress
 public "getLocalPort"(): integer
 public "getReuseAddress"(): boolean
-public "getOption"<T>(arg0: $SocketOption$Type<(T)>): T
-public "setOption"<T>(arg0: $SocketOption$Type<(T)>, arg1: T): $DatagramSocket
-public "isConnected"(): boolean
 public "receive"(arg0: $DatagramPacket$Type): void
-public "disconnect"(): void
-public "getBroadcast"(): boolean
-public "isBound"(): boolean
+public "bind"(arg0: $SocketAddress$Type): void
 public "setBroadcast"(arg0: boolean): void
-public "joinGroup"(arg0: $SocketAddress$Type, arg1: $NetworkInterface$Type): void
-public "leaveGroup"(arg0: $SocketAddress$Type, arg1: $NetworkInterface$Type): void
 /**
  * 
  * @deprecated
  */
 public static "setDatagramSocketImplFactory"(arg0: $DatagramSocketImplFactory$Type): void
-public "bind"(arg0: $SocketAddress$Type): void
 get "port"(): integer
 get "channel"(): $DatagramChannel
 get "closed"(): boolean
-get "localAddress"(): $InetAddress
+get "bound"(): boolean
 get "soTimeout"(): integer
-set "trafficClass"(value: integer)
 get "trafficClass"(): integer
-set "reuseAddress"(value: boolean)
 get "sendBufferSize"(): integer
+set "trafficClass"(value: integer)
 set "sendBufferSize"(value: integer)
 set "soTimeout"(value: integer)
+set "reuseAddress"(value: boolean)
 get "receiveBufferSize"(): integer
 set "receiveBufferSize"(value: integer)
+get "connected"(): boolean
+get "broadcast"(): boolean
+get "localAddress"(): $InetAddress
 get "inetAddress"(): $InetAddress
 get "remoteSocketAddress"(): $SocketAddress
 get "localSocketAddress"(): $SocketAddress
 get "localPort"(): integer
 get "reuseAddress"(): boolean
-get "connected"(): boolean
-get "broadcast"(): boolean
-get "bound"(): boolean
 set "broadcast"(value: boolean)
 set "datagramSocketImplFactory"(value: $DatagramSocketImplFactory$Type)
 }
@@ -638,11 +638,13 @@ public "getInputStream"(): $InputStream
 public "getContent"(): any
 public "getContent"(arg0: ($Class$Type<(any)>)[]): any
 public "getPermission"(): $Permission
+public "getOutputStream"(): $OutputStream
+public "getURL"(): $URL
 public "getContentLength"(): integer
 public "getContentLengthLong"(): long
 public "getHeaderFields"(): $Map<(string), ($List<(string)>)>
-public "getHeaderField"(arg0: integer): string
 public "getHeaderField"(arg0: string): string
+public "getHeaderField"(arg0: integer): string
 public static "guessContentTypeFromStream"(arg0: $InputStream$Type): string
 public static "guessContentTypeFromName"(arg0: string): string
 public "setRequestProperty"(arg0: string, arg1: string): void
@@ -677,8 +679,8 @@ public static "getDefaultAllowUserInteraction"(): boolean
 public "getUseCaches"(): boolean
 public "setIfModifiedSince"(arg0: long): void
 public "getIfModifiedSince"(): long
-public "setDefaultUseCaches"(arg0: boolean): void
 public static "setDefaultUseCaches"(arg0: string, arg1: boolean): void
+public "setDefaultUseCaches"(arg0: boolean): void
 /**
  * 
  * @deprecated
@@ -690,12 +692,12 @@ public static "setDefaultRequestProperty"(arg0: string, arg1: string): void
  */
 public static "getDefaultRequestProperty"(arg0: string): string
 public static "setContentHandlerFactory"(arg0: $ContentHandlerFactory$Type): void
-public "getURL"(): $URL
 public "setUseCaches"(arg0: boolean): void
-public "getOutputStream"(): $OutputStream
 get "inputStream"(): $InputStream
 get "content"(): any
 get "permission"(): $Permission
+get "outputStream"(): $OutputStream
+get "uRL"(): $URL
 get "contentLength"(): integer
 get "contentLengthLong"(): long
 get "headerFields"(): $Map<(string), ($List<(string)>)>
@@ -725,9 +727,7 @@ set "ifModifiedSince"(value: long)
 get "ifModifiedSince"(): long
 set "defaultUseCaches"(value: boolean)
 set "contentHandlerFactory"(value: $ContentHandlerFactory$Type)
-get "uRL"(): $URL
 set "useCaches"(value: boolean)
-get "outputStream"(): $OutputStream
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -780,14 +780,14 @@ public "getQuery"(): string
 public "getPath"(): string
 public "getUserInfo"(): string
 public "toURL"(): $URL
-public "getRawAuthority"(): string
-public "relativize"(arg0: $URI$Type): $URI
 public "getRawSchemeSpecificPart"(): string
 public "parseServerAuthority"(): $URI
 public "getSchemeSpecificPart"(): string
 public "getRawUserInfo"(): string
 public "getFragment"(): string
 public "toASCIIString"(): string
+public "getRawAuthority"(): string
+public "relativize"(arg0: $URI$Type): $URI
 get "absolute"(): boolean
 get "scheme"(): string
 get "opaque"(): boolean
@@ -800,11 +800,11 @@ get "authority"(): string
 get "query"(): string
 get "path"(): string
 get "userInfo"(): string
-get "rawAuthority"(): string
 get "rawSchemeSpecificPart"(): string
 get "schemeSpecificPart"(): string
 get "rawUserInfo"(): string
 get "fragment"(): string
+get "rawAuthority"(): string
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -984,30 +984,34 @@ constructor(arg0: $Proxy$Type)
 constructor(arg0: string, arg1: integer)
 
 public "toString"(): string
-public "connect"(arg0: $SocketAddress$Type): void
 public "connect"(arg0: $SocketAddress$Type, arg1: integer): void
+public "connect"(arg0: $SocketAddress$Type): void
 public "close"(): void
 public "getPort"(): integer
 public "getInputStream"(): $InputStream
 public "getChannel"(): $SocketChannel
 public "getOutputStream"(): $OutputStream
 public "isClosed"(): boolean
-public "getLocalAddress"(): $InetAddress
+public "getOption"<T>(arg0: $SocketOption$Type<(T)>): T
+public "isBound"(): boolean
 public "getSoTimeout"(): integer
-public "setTrafficClass"(arg0: integer): void
-public "setSoLinger"(arg0: boolean, arg1: integer): void
-public "getTrafficClass"(): integer
-public "setTcpNoDelay"(arg0: boolean): void
-public "setReuseAddress"(arg0: boolean): void
-public "getSendBufferSize"(): integer
-public "getSoLinger"(): integer
-public "setSendBufferSize"(arg0: integer): void
 public "setKeepAlive"(arg0: boolean): void
+public "getSoLinger"(): integer
+public "setTcpNoDelay"(arg0: boolean): void
+public "getTrafficClass"(): integer
+public "getSendBufferSize"(): integer
+public "setTrafficClass"(arg0: integer): void
+public "setSendBufferSize"(arg0: integer): void
 public "setSoTimeout"(arg0: integer): void
+public "setReuseAddress"(arg0: boolean): void
+public "setSoLinger"(arg0: boolean, arg1: integer): void
 public "setOOBInline"(arg0: boolean): void
 public "setPerformancePreferences"(arg0: integer, arg1: integer, arg2: integer): void
 public "getReceiveBufferSize"(): integer
 public "setReceiveBufferSize"(arg0: integer): void
+public "isConnected"(): boolean
+public "setOption"<T>(arg0: $SocketOption$Type<(T)>, arg1: T): $Socket
+public "getLocalAddress"(): $InetAddress
 public "isOutputShutdown"(): boolean
 public "isInputShutdown"(): boolean
 public "shutdownOutput"(): void
@@ -1027,30 +1031,28 @@ public "getOOBInline"(): boolean
  * @deprecated
  */
 public static "setSocketImplFactory"(arg0: $SocketImplFactory$Type): void
-public "getOption"<T>(arg0: $SocketOption$Type<(T)>): T
-public "setOption"<T>(arg0: $SocketOption$Type<(T)>, arg1: T): $Socket
-public "isConnected"(): boolean
-public "isBound"(): boolean
 public "bind"(arg0: $SocketAddress$Type): void
 get "port"(): integer
 get "inputStream"(): $InputStream
 get "channel"(): $SocketChannel
 get "outputStream"(): $OutputStream
 get "closed"(): boolean
-get "localAddress"(): $InetAddress
+get "bound"(): boolean
 get "soTimeout"(): integer
-set "trafficClass"(value: integer)
-get "trafficClass"(): integer
-set "tcpNoDelay"(value: boolean)
-set "reuseAddress"(value: boolean)
-get "sendBufferSize"(): integer
-get "soLinger"(): integer
-set "sendBufferSize"(value: integer)
 set "keepAlive"(value: boolean)
+get "soLinger"(): integer
+set "tcpNoDelay"(value: boolean)
+get "trafficClass"(): integer
+get "sendBufferSize"(): integer
+set "trafficClass"(value: integer)
+set "sendBufferSize"(value: integer)
 set "soTimeout"(value: integer)
+set "reuseAddress"(value: boolean)
 set "oOBInline"(value: boolean)
 get "receiveBufferSize"(): integer
 set "receiveBufferSize"(value: integer)
+get "connected"(): boolean
+get "localAddress"(): $InetAddress
 get "outputShutdown"(): boolean
 get "inputShutdown"(): boolean
 get "inetAddress"(): $InetAddress
@@ -1062,8 +1064,6 @@ get "keepAlive"(): boolean
 get "reuseAddress"(): boolean
 get "oOBInline"(): boolean
 set "socketImplFactory"(value: $SocketImplFactory$Type)
-get "connected"(): boolean
-get "bound"(): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1232,9 +1232,11 @@ public "getHostName"(): string
 public "isLinkLocalAddress"(): boolean
 public static "getByAddress"(arg0: (byte)[]): $InetAddress
 public static "getByAddress"(arg0: string, arg1: (byte)[]): $InetAddress
+public static "getLocalHost"(): $InetAddress
+public "isLoopbackAddress"(): boolean
 public static "getLoopbackAddress"(): $InetAddress
-public "isReachable"(arg0: integer): boolean
 public "isReachable"(arg0: $NetworkInterface$Type, arg1: integer, arg2: integer): boolean
+public "isReachable"(arg0: integer): boolean
 public static "getAllByName"(arg0: string): ($InetAddress)[]
 public "isMulticastAddress"(): boolean
 public "isAnyLocalAddress"(): boolean
@@ -1245,12 +1247,12 @@ public "isMCLinkLocal"(): boolean
 public "isMCSiteLocal"(): boolean
 public "isMCOrgLocal"(): boolean
 public "getCanonicalHostName"(): string
-public static "getLocalHost"(): $InetAddress
-public "isLoopbackAddress"(): boolean
 get "hostAddress"(): string
 get "address"(): (byte)[]
 get "hostName"(): string
 get "linkLocalAddress"(): boolean
+get "localHost"(): $InetAddress
+get "loopbackAddress"(): boolean
 get "loopbackAddress"(): $InetAddress
 get "multicastAddress"(): boolean
 get "anyLocalAddress"(): boolean
@@ -1261,8 +1263,6 @@ get "mCLinkLocal"(): boolean
 get "mCSiteLocal"(): boolean
 get "mCOrgLocal"(): boolean
 get "canonicalHostName"(): string
-get "localHost"(): $InetAddress
-get "loopbackAddress"(): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_

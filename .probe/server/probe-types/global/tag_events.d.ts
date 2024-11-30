@@ -95,12 +95,12 @@ function tags(extra: "mekanism:gas", handler: (event: TagEventProbe<(Special.Gas
 function tags(extra: "mekanism:infuse_type", handler: (event: TagEventProbe<(Special.InfuseTypeTag), (Special.InfuseType)>) => void): void
 function tags(extra: "mekanism:pigment", handler: (event: TagEventProbe<(Special.PigmentTag), (Special.Pigment)>) => void): void
 function tags(extra: "mekanism:slurry", handler: (event: TagEventProbe<(Special.SlurryTag), (Special.Slurry)>) => void): void
-function tags(extra: "mekanism:robit_skin", handler: (event: TagEventProbe<(Special.RobitSkinTag), (Special.RobitSkin)>) => void): void
-function tags(extra: "libx:surface_rule_set", handler: (event: TagEventProbe<(Special.SurfaceRuleSetTag), (Special.SurfaceRuleSet)>) => void): void
-function tags(extra: "forge:structure_modifier", handler: (event: TagEventProbe<(Special.StructureModifierTag), (Special.StructureModifier)>) => void): void
 function tags(extra: "libx:template_pool_extension", handler: (event: TagEventProbe<(Special.TemplatePoolExtensionTag), (Special.TemplatePoolExtension)>) => void): void
 function tags(extra: "forge:biome_modifier", handler: (event: TagEventProbe<(Special.BiomeModifierTag), (Special.BiomeModifier)>) => void): void
-function tags(extra: "libx:biome_surface", handler: (event: TagEventProbe<(Special.BiomeSurfaceTag), (Special.BiomeSurface)>) => void): void
+function tags(extra: "mekanism:robit_skin", handler: (event: TagEventProbe<(Special.RobitSkinTag), (Special.RobitSkin)>) => void): void
+function tags(extra: "forge:structure_modifier", handler: (event: TagEventProbe<(Special.StructureModifierTag), (Special.StructureModifier)>) => void): void
+function tags(extra: "libx:surface_rule_set", handler: (event: TagEventProbe<(Special.SurfaceRuleSetTag), (Special.SurfaceRuleSet)>) => void): void
 function tags(extra: "libx:biome_layer", handler: (event: TagEventProbe<(Special.BiomeLayerTag), (Special.BiomeLayer)>) => void): void
+function tags(extra: "libx:biome_surface", handler: (event: TagEventProbe<(Special.BiomeSurfaceTag), (Special.BiomeSurface)>) => void): void
 }
 }

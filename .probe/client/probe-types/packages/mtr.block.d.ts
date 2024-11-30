@@ -111,8 +111,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
 import {$IBlock, $IBlock$Type} from "packages/mtr/block/$IBlock"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 
@@ -141,17 +141,17 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -184,8 +184,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
 import {$IBlock, $IBlock$Type} from "packages/mtr/block/$IBlock"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 
@@ -214,17 +214,17 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -288,14 +288,14 @@ constructor(style: integer)
 
 public "asItem"(): $Item
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -359,14 +359,14 @@ constructor(settings: $BlockBehaviour$Properties$Type)
 public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -432,8 +432,8 @@ export type $BlockPIDSPole_ = $BlockPIDSPole$Type;
 declare module "packages/mtr/block/$BlockPlatform$EnumDoorType" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -446,9 +446,9 @@ static readonly "APG": $BlockPlatform$EnumDoorType
 public static "values"(): ($BlockPlatform$EnumDoorType)[]
 public static "valueOf"(name: string): $BlockPlatform$EnumDoorType
 public "getSerializedName"(): string
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "serializedName"(): string
 }
 /**
@@ -526,14 +526,14 @@ public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $Block
 public static "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type, isTop: boolean): void
 public static "updateShape"(state: $BlockState$Type, direction: $Direction$Type, isThis: boolean, getDefaultState: $Supplier$Type<($BlockState$Type)>): $BlockState
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 get "type"(): $BlockEntityType<(any)>
 }
 /**
@@ -562,8 +562,8 @@ import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/leve
 import {$BlockMapper, $BlockMapper$Type} from "packages/mtr/mappings/$BlockMapper"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
 import {$BlockEntityTicker, $BlockEntityTicker$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityTicker"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$GameEventListener, $GameEventListener$Type} from "packages/net/minecraft/world/level/gameevent/$GameEventListener"
 import {$EntityBlockMapper, $EntityBlockMapper$Type} from "packages/mtr/mappings/$EntityBlockMapper"
@@ -592,9 +592,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(settings: $BlockBehaviour$Properties$Type)
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
-public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
+public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "getType"(): $BlockEntityType<(any)>
 public "tick"<T extends $BlockEntityMapper>(world: $Level$Type, pos: $BlockPos$Type, blockEntity: T): void
 public "newBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntity
@@ -677,14 +677,14 @@ public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $Block
 public static "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type, isTop: boolean): void
 public static "updateShape"(state: $BlockState$Type, direction: $Direction$Type, isThis: boolean, getDefaultState: $Supplier$Type<($BlockState$Type)>): $BlockState
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 get "type"(): $BlockEntityType<(any)>
 }
 /**
@@ -702,8 +702,8 @@ export type $BlockLiftPanelOdd1_ = $BlockLiftPanelOdd1$Type;
 declare module "packages/mtr/block/$BlockEscalatorBase$EnumEscalatorOrientation" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -719,9 +719,9 @@ static readonly "TRANSITION_TOP": $BlockEscalatorBase$EnumEscalatorOrientation
 public static "values"(): ($BlockEscalatorBase$EnumEscalatorOrientation)[]
 public static "valueOf"(name: string): $BlockEscalatorBase$EnumEscalatorOrientation
 public "getSerializedName"(): string
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "serializedName"(): string
 }
 /**
@@ -787,19 +787,19 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "getCollisionShape"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type, context: $CollisionContext$Type): $VoxelShape
-public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
-public "getVisualShape"(blockState: $BlockState$Type, blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "appendHoverText"(stack: $ItemStack$Type, blockGetter: $BlockGetter$Type, tooltip: $List$Type<($Component$Type)>, tooltipFlag: $TooltipFlag$Type): void
+public "getCollisionShape"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type, context: $CollisionContext$Type): $VoxelShape
+public "getVisualShape"(blockState: $BlockState$Type, blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -862,17 +862,17 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "asItem"(): $Item
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1027,9 +1027,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(upper: boolean, isStation: boolean)
 
-public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
 public "appendHoverText"(itemStack: $ItemStack$Type, blockGetter: $BlockGetter$Type, tooltip: $List$Type<($Component$Type)>, tooltipFlag: $TooltipFlag$Type): void
+public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1092,20 +1092,20 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
 public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
 public "getCollisionShape"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type, context: $CollisionContext$Type): $VoxelShape
-public "getShape"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getVisualShape"(blockState: $BlockState$Type, blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
-public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
+public "getShape"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1167,14 +1167,14 @@ constructor()
 
 public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1191,8 +1191,8 @@ export type $BlockPSDAPGGlassBase_ = $BlockPSDAPGGlassBase$Type;
 declare module "packages/mtr/block/$IBlock$EnumThird" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -1205,9 +1205,9 @@ static readonly "UPPER": $IBlock$EnumThird
 public static "values"(): ($IBlock$EnumThird)[]
 public static "valueOf"(name: string): $IBlock$EnumThird
 public "getSerializedName"(): string
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "serializedName"(): string
 }
 /**
@@ -1280,8 +1280,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
 public "appendHoverText"(stack: $ItemStack$Type, blockGetter: $BlockGetter$Type, tooltip: $List$Type<($Component$Type)>, tooltipFlag: $TooltipFlag$Type): void
+public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
 public "getType"(): $BlockEntityType<(any)>
 public "createBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntityMapper
 public "tick"<T extends $BlockEntityMapper>(world: $Level$Type, pos: $BlockPos$Type, blockEntity: T): void
@@ -1289,14 +1289,14 @@ public "newBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEnt
 public "getTicker"<T extends $BlockEntity>(level: $Level$Type, blockState: $BlockState$Type, type: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 get "type"(): $BlockEntityType<(any)>
 }
 /**
@@ -1450,15 +1450,15 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(isOdd: boolean, isFlat: boolean)
 
+public "getStateDefinition"(): $StateDefinition<($Block), ($BlockState)>
+public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
+public "setPlacedBy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, placer: $LivingEntity$Type, stack: $ItemStack$Type): void
+public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
+public "appendHoverText"(itemStack: $ItemStack$Type, blockGetter: $BlockGetter$Type, tooltip: $List$Type<($Component$Type)>, tooltipFlag: $TooltipFlag$Type): void
 public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
 public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, hit: $BlockHitResult$Type): $InteractionResult
 public "getShape"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type, context: $CollisionContext$Type): $VoxelShape
 public "tick"<T extends $BlockEntityMapper>(world: $Level$Type, pos: $BlockPos$Type, blockEntity: T): void
-public "setPlacedBy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, placer: $LivingEntity$Type, stack: $ItemStack$Type): void
-public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
-public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
-public "appendHoverText"(itemStack: $ItemStack$Type, blockGetter: $BlockGetter$Type, tooltip: $List$Type<($Component$Type)>, tooltipFlag: $TooltipFlag$Type): void
-public "getStateDefinition"(): $StateDefinition<($Block), ($BlockState)>
 public "getType"(): $BlockEntityType<(any)>
 public "createBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntityMapper
 public "newBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntity
@@ -1467,16 +1467,16 @@ public static "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state
 public static "updateShape"(state: $BlockState$Type, direction: $Direction$Type, isThis: boolean, getDefaultState: $Supplier$Type<($BlockState$Type)>): $BlockState
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
 public "propagate"(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, callback: $Consumer$Type<($BlockPos$Type)>, maxBlocksAway: integer): void
 public "propagate"<T extends $Comparable<(T)>>(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, property: $Property$Type<(T)>, maxBlocksAway: integer): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 get "stateDefinition"(): $StateDefinition<($Block), ($BlockState)>
 get "type"(): $BlockEntityType<(any)>
 }
@@ -1546,14 +1546,14 @@ constructor()
 
 public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1573,8 +1573,8 @@ import {$Comparable, $Comparable$Type} from "packages/java/lang/$Comparable"
 import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packages/net/minecraft/world/level/block/state/$BlockBehaviour$Properties"
 import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
-import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
+import {$Mirror, $Mirror$Type} from "packages/net/minecraft/world/level/block/$Mirror"
 import {$Runnable, $Runnable$Type} from "packages/java/lang/$Runnable"
 import {$LivingEntity, $LivingEntity$Type} from "packages/net/minecraft/world/entity/$LivingEntity"
 import {$BlockDirectionalMapper, $BlockDirectionalMapper$Type} from "packages/mtr/mappings/$BlockDirectionalMapper"
@@ -1617,23 +1617,23 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(settings: $BlockBehaviour$Properties$Type)
 
+public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
+public "setPlacedBy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, livingEntity: $LivingEntity$Type, itemStack: $ItemStack$Type): void
+public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
 public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
 public "mirror"(state: $BlockState$Type, mirror: $Mirror$Type): $BlockState
 public "rotate"(state: $BlockState$Type, rotation: $Rotation$Type): $BlockState
-public "setPlacedBy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, livingEntity: $LivingEntity$Type, itemStack: $ItemStack$Type): void
-public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
-public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
 public "propagate"(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, callback: $Consumer$Type<($BlockPos$Type)>, maxBlocksAway: integer): void
 public "propagate"<T extends $Comparable<(T)>>(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, property: $Property$Type<(T)>, maxBlocksAway: integer): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1684,9 +1684,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(settings: $BlockBehaviour$Properties$Type)
 
+public "propagatesSkylightDown"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type): boolean
 public "skipRendering"(state: $BlockState$Type, neighborState: $BlockState$Type, direction: $Direction$Type): boolean
 public "getShadeBrightness"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type): float
-public "propagatesSkylightDown"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1781,9 +1781,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(settings: $BlockBehaviour$Properties$Type)
 
+public "propagatesSkylightDown"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type): boolean
 public "skipRendering"(state: $BlockState$Type, neighborState: $BlockState$Type, direction: $Direction$Type): boolean
 public "getShadeBrightness"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type): float
-public "propagatesSkylightDown"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1851,8 +1851,8 @@ export type $BlockRailwaySignPole_ = $BlockRailwaySignPole$Type;
 declare module "packages/mtr/block/$BlockPSDTop$EnumPersistent" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -1866,9 +1866,9 @@ static readonly "BLANK": $BlockPSDTop$EnumPersistent
 public static "values"(): ($BlockPSDTop$EnumPersistent)[]
 public static "valueOf"(name: string): $BlockPSDTop$EnumPersistent
 public "getSerializedName"(): string
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "serializedName"(): string
 }
 /**
@@ -1917,8 +1917,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(settings: $BlockBehaviour$Properties$Type)
 
-public "getDescriptionId"(): string
 public "appendHoverText"(itemStack: $ItemStack$Type, blockGetter: $BlockGetter$Type, tooltip: $List$Type<($Component$Type)>, tooltipFlag: $TooltipFlag$Type): void
+public "getDescriptionId"(): string
 get "descriptionId"(): string
 }
 /**
@@ -1970,9 +1970,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(settings: $BlockBehaviour$Properties$Type, showTooltip: boolean)
 
+public "appendHoverText"(itemStack: $ItemStack$Type, blockGetter: $BlockGetter$Type, tooltip: $List$Type<($Component$Type)>, tooltipFlag: $TooltipFlag$Type): void
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public static "getStationPoleShape"(): $VoxelShape
-public "appendHoverText"(itemStack: $ItemStack$Type, blockGetter: $BlockGetter$Type, tooltip: $List$Type<($Component$Type)>, tooltipFlag: $TooltipFlag$Type): void
 get "stationPoleShape"(): $VoxelShape
 }
 /**
@@ -2079,9 +2079,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(settings: $BlockBehaviour$Properties$Type, isIndented: boolean)
 
+public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
 public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
 public "getShape"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type, context: $CollisionContext$Type): $VoxelShape
-public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2143,9 +2143,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
 public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
-public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
 public "getType"(): $BlockEntityType<(any)>
 public "createBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntityMapper
 public "tick"<T extends $BlockEntityMapper>(world: $Level$Type, pos: $BlockPos$Type, blockEntity: T): void
@@ -2317,10 +2317,10 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(settings: $BlockBehaviour$Properties$Type)
 
-public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
-public "randomTick"(state: $BlockState$Type, world: $ServerLevel$Type, pos: $BlockPos$Type): void
 public "isRandomlyTicking"(blockState: $BlockState$Type): boolean
 public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
+public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
+public "randomTick"(state: $BlockState$Type, world: $ServerLevel$Type, pos: $BlockPos$Type): void
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2388,21 +2388,21 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
-public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
 public "setPlacedBy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, placer: $LivingEntity$Type, itemStack: $ItemStack$Type): void
 public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
+public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
+public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
 public "propagate"(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, callback: $Consumer$Type<($BlockPos$Type)>, maxBlocksAway: integer): void
 public "propagate"<T extends $Comparable<(T)>>(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, property: $Property$Type<(T)>, maxBlocksAway: integer): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2471,21 +2471,21 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
 public "softenLanding"(): boolean
 public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
 public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
 public "getCollisionShape"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type, context: $CollisionContext$Type): $VoxelShape
 public "entityInside"(state: $BlockState$Type, level: $Level$Type, pos: $BlockPos$Type, entity: $Entity$Type): void
-public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2550,22 +2550,22 @@ static readonly "UPDATE_LIMIT": integer
 readonly "properties": $BlockBehaviour$Properties
 
 
+public "getCloneItemStack"(blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, blockState: $BlockState$Type): $ItemStack
+public "asItem"(): $Item
 public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
 public "rotate"(state: $BlockState$Type, rotation: $Rotation$Type): $BlockState
 public "getCollisionShape"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
-public "getCloneItemStack"(blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, blockState: $BlockState$Type): $ItemStack
-public "asItem"(): $Item
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
 public "propagate"(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, callback: $Consumer$Type<($BlockPos$Type)>, maxBlocksAway: integer): void
 public "propagate"<T extends $Comparable<(T)>>(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, property: $Property$Type<(T)>, maxBlocksAway: integer): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2594,8 +2594,8 @@ import {$BlockNode, $BlockNode$Type} from "packages/mtr/block/$BlockNode"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
 import {$BlockEntityTicker, $BlockEntityTicker$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityTicker"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$GameEventListener, $GameEventListener$Type} from "packages/net/minecraft/world/level/gameevent/$GameEventListener"
 import {$EntityBlockMapper, $EntityBlockMapper$Type} from "packages/mtr/mappings/$EntityBlockMapper"
 
@@ -2627,9 +2627,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
 public "canSurvive"(state: $BlockState$Type, world: $LevelReader$Type, pos: $BlockPos$Type): boolean
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "getType"(): $BlockEntityType<(any)>
 public "tick"<T extends $BlockEntityMapper>(world: $Level$Type, pos: $BlockPos$Type, blockEntity: T): void
 public "newBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntity
@@ -2694,11 +2694,11 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(settings: $BlockBehaviour$Properties$Type)
 
+public "isRandomlyTicking"(blockState: $BlockState$Type): boolean
+public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
 public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "randomTick"(state: $BlockState$Type, world: $ServerLevel$Type, pos: $BlockPos$Type): void
-public "isRandomlyTicking"(blockState: $BlockState$Type): boolean
-public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2775,14 +2775,14 @@ public "tick"<T extends $BlockEntityMapper>(world: $Level$Type, pos: $BlockPos$T
 public "newBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntity
 public "getTicker"<T extends $BlockEntity>(level: $Level$Type, blockState: $BlockState$Type, type: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 get "type"(): $BlockEntityType<(any)>
 }
@@ -2842,8 +2842,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(settings: $BlockBehaviour$Properties$Type)
 
-public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
+public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getType"(): $BlockEntityType<(any)>
 public "createBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntityMapper
 public "tick"<T extends $BlockEntityMapper>(world: $Level$Type, pos: $BlockPos$Type, blockEntity: T): void
@@ -2967,14 +2967,14 @@ public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, p
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "tick"(state: $BlockState$Type, world: $ServerLevel$Type, pos: $BlockPos$Type): void
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3101,8 +3101,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
 import {$BlockStationNameTallBase, $BlockStationNameTallBase$Type} from "packages/mtr/block/$BlockStationNameTallBase"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 
@@ -3132,18 +3132,18 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
-public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
+public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3264,8 +3264,8 @@ export type $BlockPoleCheckBase_ = $BlockPoleCheckBase$Type;
 declare module "packages/mtr/block/$BlockPSDAPGGlassEndBase$EnumPSDAPGGlassEndSide" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -3278,9 +3278,9 @@ static readonly "NONE": $BlockPSDAPGGlassEndBase$EnumPSDAPGGlassEndSide
 public static "values"(): ($BlockPSDAPGGlassEndBase$EnumPSDAPGGlassEndSide)[]
 public static "valueOf"(name: string): $BlockPSDAPGGlassEndBase$EnumPSDAPGGlassEndSide
 public "getSerializedName"(): string
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "serializedName"(): string
 }
 /**
@@ -3314,8 +3314,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
 import {$BlockStationNameTallBase, $BlockStationNameTallBase$Type} from "packages/mtr/block/$BlockStationNameTallBase"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 
@@ -3345,18 +3345,18 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
-public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
+public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3387,8 +3387,8 @@ import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/leve
 import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 
@@ -3416,17 +3416,17 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3459,8 +3459,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
 import {$IBlock, $IBlock$Type} from "packages/mtr/block/$IBlock"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 
@@ -3489,17 +3489,17 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3543,14 +3543,14 @@ const ODD: $BooleanProperty
 function playerWillDestroy(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type, isTop: boolean): void
 function updateShape(state: $BlockState$Type, direction: $Direction$Type, isThis: boolean, getDefaultState: $Supplier$Type<($BlockState$Type)>): $BlockState
 function isReplaceable(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-function getStatePropertySafe<T>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-function getStatePropertySafe<T>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-function getVoxelShapeByDirection(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-function checkHoldingItem(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 function getSideDirection(state: $BlockState$Type): $Direction
-function checkHoldingBrush(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 function checkHoldingBrush(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+function checkHoldingBrush(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+function checkHoldingItem(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 function onBreakCreative(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+function getVoxelShapeByDirection(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+function getStatePropertySafe<T>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+function getStatePropertySafe<T>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3581,8 +3581,8 @@ import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/leve
 import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 
@@ -3610,17 +3610,17 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3651,8 +3651,8 @@ import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/leve
 import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 
@@ -3680,17 +3680,17 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3721,8 +3721,8 @@ import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/leve
 import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 
@@ -3750,17 +3750,17 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3823,17 +3823,17 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(style: integer)
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "asItem"(): $Item
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3864,8 +3864,8 @@ import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/leve
 import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 
@@ -3893,17 +3893,17 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3966,8 +3966,8 @@ constructor(settings: $BlockBehaviour$Properties$Type, shapeX: integer, shapeHei
  */
 constructor(settings: $BlockBehaviour$Properties$Type)
 
-public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
+public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getType"(): $BlockEntityType<(any)>
 public "createBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntityMapper
 public "tick"<T extends $BlockEntityMapper>(world: $Level$Type, pos: $BlockPos$Type, blockEntity: T): void
@@ -4047,8 +4047,8 @@ import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/leve
 import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/world/phys/$BlockHitResult"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
 import {$BlockEntityTicker, $BlockEntityTicker$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityTicker"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$GameEventListener, $GameEventListener$Type} from "packages/net/minecraft/world/level/gameevent/$GameEventListener"
 import {$EntityBlockMapper, $EntityBlockMapper$Type} from "packages/mtr/mappings/$EntityBlockMapper"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
@@ -4077,9 +4077,9 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
-public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
 public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
+public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "getType"(): $BlockEntityType<(any)>
 public "tick"<T extends $BlockEntityMapper>(world: $Level$Type, pos: $BlockPos$Type, blockEntity: T): void
 public "newBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntity
@@ -4153,24 +4153,24 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(settings: $BlockBehaviour$Properties$Type)
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
+public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
 public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
 public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
-public "getCollisionShape"(blockState: $BlockState$Type, blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "canSurvive"(state: $BlockState$Type, world: $LevelReader$Type, pos: $BlockPos$Type): boolean
+public "getCollisionShape"(blockState: $BlockState$Type, blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
-public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
 public "propagate"(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, callback: $Consumer$Type<($BlockPos$Type)>, maxBlocksAway: integer): void
 public "propagate"<T extends $Comparable<(T)>>(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, property: $Property$Type<(T)>, maxBlocksAway: integer): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -4400,30 +4400,30 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
-public static "getActualState"(world: $BlockGetter$Type, pos: $BlockPos$Type): $BlockState
+public "getCloneItemStack"(blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, blockState: $BlockState$Type): $ItemStack
+public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
+public "asItem"(): $Item
 public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
 public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
 public "rotate"(state: $BlockState$Type, rotation: $Rotation$Type): $BlockState
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
-public "getCloneItemStack"(blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, blockState: $BlockState$Type): $ItemStack
-public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
-public "asItem"(): $Item
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
+public static "getActualState"(world: $BlockGetter$Type, pos: $BlockPos$Type): $BlockState
 public "getType"(): $BlockEntityType<(any)>
 public "tick"<T extends $BlockEntityMapper>(world: $Level$Type, pos: $BlockPos$Type, blockEntity: T): void
 public "newBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntity
 public "getTicker"<T extends $BlockEntity>(level: $Level$Type, blockState: $BlockState$Type, type: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
 public "propagate"(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, callback: $Consumer$Type<($BlockPos$Type)>, maxBlocksAway: integer): void
 public "propagate"<T extends $Comparable<(T)>>(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, property: $Property$Type<(T)>, maxBlocksAway: integer): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 get "type"(): $BlockEntityType<(any)>
 }
@@ -4536,14 +4536,14 @@ constructor()
 
 public "asItem"(): $Item
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -4593,8 +4593,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "getShape"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
+public "getShape"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -4617,8 +4617,8 @@ import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Directio
 import {$CollisionContext, $CollisionContext$Type} from "packages/net/minecraft/world/phys/shapes/$CollisionContext"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
-import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
 import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
+import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$BlockStationNameBase, $BlockStationNameBase$Type} from "packages/mtr/block/$BlockStationNameBase"
@@ -4649,11 +4649,11 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(settings: $BlockBehaviour$Properties$Type)
 
-public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
-public "getCollisionShape"(blockState: $BlockState$Type, blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
-public "canSurvive"(state: $BlockState$Type, world: $LevelReader$Type, pos: $BlockPos$Type): boolean
-public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
+public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
+public "canSurvive"(state: $BlockState$Type, world: $LevelReader$Type, pos: $BlockPos$Type): boolean
+public "getCollisionShape"(blockState: $BlockState$Type, blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -4722,23 +4722,23 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
-public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
 public "asItem"(): $Item
+public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "getType"(): $BlockEntityType<(any)>
 public "tick"<T extends $BlockEntityMapper>(world: $Level$Type, pos: $BlockPos$Type, blockEntity: T): void
 public "newBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntity
 public "getTicker"<T extends $BlockEntity>(level: $Level$Type, blockState: $BlockState$Type, type: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 get "type"(): $BlockEntityType<(any)>
 }
 /**
@@ -4789,8 +4789,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(settings: $BlockBehaviour$Properties$Type)
 
-public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
+public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -4854,18 +4854,18 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public static "getEndOutlineShape"(baseShape: $VoxelShape$Type, state: $BlockState$Type, height: integer, thickness: integer, leftAir: boolean, rightAir: boolean): $VoxelShape
 public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
 public "getShape"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type, context: $CollisionContext$Type): $VoxelShape
+public static "getEndOutlineShape"(baseShape: $VoxelShape$Type, state: $BlockState$Type, height: integer, thickness: integer, leftAir: boolean, rightAir: boolean): $VoxelShape
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -4942,14 +4942,14 @@ public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $Block
 public static "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type, isTop: boolean): void
 public static "updateShape"(state: $BlockState$Type, direction: $Direction$Type, isThis: boolean, getDefaultState: $Supplier$Type<($BlockState$Type)>): $BlockState
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 get "type"(): $BlockEntityType<(any)>
 }
 /**
@@ -5027,14 +5027,14 @@ public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $Block
 public static "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type, isTop: boolean): void
 public static "updateShape"(state: $BlockState$Type, direction: $Direction$Type, isThis: boolean, getDefaultState: $Supplier$Type<($BlockState$Type)>): $BlockState
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 get "type"(): $BlockEntityType<(any)>
 }
 /**
@@ -5091,11 +5091,11 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(isEntrance: boolean)
 
+public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
 public "getCollisionShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "entityInside"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, entity: $Entity$Type): void
 public "tick"(state: $BlockState$Type, world: $ServerLevel$Type, pos: $BlockPos$Type): void
-public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -5169,12 +5169,12 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
-public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
-public "setPlacedBy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, placer: $LivingEntity$Type, itemStack: $ItemStack$Type): void
 public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
+public "setPlacedBy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, placer: $LivingEntity$Type, itemStack: $ItemStack$Type): void
 public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
 public "appendHoverText"(stack: $ItemStack$Type, blockGetter: $BlockGetter$Type, tooltip: $List$Type<($Component$Type)>, tooltipFlag: $TooltipFlag$Type): void
+public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
+public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
 public "getType"(): $BlockEntityType<(any)>
 public "createBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntityMapper
 public "tick"<T extends $BlockEntityMapper>(world: $Level$Type, pos: $BlockPos$Type, blockEntity: T): void
@@ -5182,16 +5182,16 @@ public "newBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEnt
 public "getTicker"<T extends $BlockEntity>(level: $Level$Type, blockState: $BlockState$Type, type: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
 public "propagate"(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, callback: $Consumer$Type<($BlockPos$Type)>, maxBlocksAway: integer): void
 public "propagate"<T extends $Comparable<(T)>>(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, property: $Property$Type<(T)>, maxBlocksAway: integer): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 get "type"(): $BlockEntityType<(any)>
 }
 /**
@@ -5224,8 +5224,8 @@ import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/leve
 import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/world/phys/$BlockHitResult"
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
 import {$BlockEntityTicker, $BlockEntityTicker$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityTicker"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$GameEventListener, $GameEventListener$Type} from "packages/net/minecraft/world/level/gameevent/$GameEventListener"
 import {$EntityBlockMapper, $EntityBlockMapper$Type} from "packages/mtr/mappings/$EntityBlockMapper"
@@ -5257,11 +5257,11 @@ readonly "properties": $BlockBehaviour$Properties
 constructor()
 
 public "getType"(): $BlockEntityType<(any)>
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
+public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
 public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, hit: $BlockHitResult$Type): $InteractionResult
 public "getShape"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "tick"<T extends $BlockEntityMapper>(world: $Level$Type, pos: $BlockPos$Type, blockEntity: T): void
-public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
 public "newBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntity
 public "getTicker"<T extends $BlockEntity>(level: $Level$Type, blockState: $BlockState$Type, type: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
@@ -5385,11 +5385,11 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
 public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
 public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
 public "getCollisionShape"(state: $BlockState$Type, world: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "tick"(state: $BlockState$Type, world: $ServerLevel$Type, pos: $BlockPos$Type): void
-public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
 public "getType"(): $BlockEntityType<(any)>
 public "createBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntityMapper
 public "tick"<T extends $BlockEntityMapper>(world: $Level$Type, pos: $BlockPos$Type, blockEntity: T): void
@@ -5397,14 +5397,14 @@ public "newBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEnt
 public "getTicker"<T extends $BlockEntity>(level: $Level$Type, blockState: $BlockState$Type, type: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 get "type"(): $BlockEntityType<(any)>
 }
 /**
@@ -5465,18 +5465,18 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
-public "getVisualShape"(blockState: $BlockState$Type, blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getCloneItemStack"(blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, blockState: $BlockState$Type): $ItemStack
+public "getVisualShape"(blockState: $BlockState$Type, blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -5536,14 +5536,14 @@ constructor(style: integer)
 
 public "asItem"(): $Item
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -5645,12 +5645,12 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(transportMode: $TransportMode$Type)
 
-public static "getAngle"(state: $BlockState$Type): float
-public static "resetRailNode"(world: $Level$Type, pos: $BlockPos$Type): void
-public "getCollisionShape"(blockState: $BlockState$Type, blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
-public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
 public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
+public "getCollisionShape"(blockState: $BlockState$Type, blockGetter: $BlockGetter$Type, blockPos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public static "getAngle"(state: $BlockState$Type): float
+public static "resetRailNode"(world: $Level$Type, pos: $BlockPos$Type): void
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -5667,8 +5667,8 @@ export type $BlockNode_ = $BlockNode$Type;
 declare module "packages/mtr/block/$IBlock$EnumSide" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -5682,9 +5682,9 @@ static readonly "SINGLE": $IBlock$EnumSide
 public static "values"(): ($IBlock$EnumSide)[]
 public static "valueOf"(name: string): $IBlock$EnumSide
 public "getSerializedName"(): string
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "serializedName"(): string
 }
 /**
@@ -5718,8 +5718,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
 import {$BlockStationNameTallBase, $BlockStationNameTallBase$Type} from "packages/mtr/block/$BlockStationNameTallBase"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 
@@ -5749,18 +5749,18 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
-public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
 public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
+public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -5824,8 +5824,8 @@ export type $BlockClockPole_ = $BlockClockPole$Type;
 declare module "packages/mtr/block/$BlockTicketProcessor$EnumTicketProcessorLights" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -5839,9 +5839,9 @@ static readonly "GREEN": $BlockTicketProcessor$EnumTicketProcessorLights
 public static "values"(): ($BlockTicketProcessor$EnumTicketProcessorLights)[]
 public static "valueOf"(name: string): $BlockTicketProcessor$EnumTicketProcessorLights
 public "getSerializedName"(): string
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "serializedName"(): string
 }
 /**
@@ -5905,17 +5905,17 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "asItem"(): $Item
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -5949,8 +5949,8 @@ import {$ITripleBlock, $ITripleBlock$Type} from "packages/mtr/block/$ITripleBloc
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
 import {$BlockPSDAPGDoorBase, $BlockPSDAPGDoorBase$Type} from "packages/mtr/block/$BlockPSDAPGDoorBase"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 
@@ -5981,21 +5981,21 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
-public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
 public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
 public "asItem"(): $Item
+public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type, isTop: boolean): void
 public static "updateShape"(state: $BlockState$Type, direction: $Direction$Type, isThis: boolean, getDefaultState: $Supplier$Type<($BlockState$Type)>): $BlockState
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -6216,8 +6216,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
 import {$IBlock, $IBlock$Type} from "packages/mtr/block/$IBlock"
-import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
+import {$BlockEntityMapper, $BlockEntityMapper$Type} from "packages/mtr/mappings/$BlockEntityMapper"
 import {$BlockPlaceContext, $BlockPlaceContext$Type} from "packages/net/minecraft/world/item/context/$BlockPlaceContext"
 import {$DirectionProperty, $DirectionProperty$Type} from "packages/net/minecraft/world/level/block/state/properties/$DirectionProperty"
 
@@ -6246,17 +6246,17 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -6302,14 +6302,14 @@ const THIRD: $EnumProperty<($IBlock$EnumThird)>
 const SIDE_EXTENDED: $EnumProperty<($IBlock$EnumSide)>
 const SIDE: $EnumProperty<($IBlock$EnumSide)>
 function isReplaceable(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-function getStatePropertySafe<T>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-function getStatePropertySafe<T>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-function getVoxelShapeByDirection(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-function checkHoldingItem(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 function getSideDirection(state: $BlockState$Type): $Direction
-function checkHoldingBrush(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 function checkHoldingBrush(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+function checkHoldingBrush(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+function checkHoldingItem(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 function onBreakCreative(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+function getVoxelShapeByDirection(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+function getStatePropertySafe<T>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+function getStatePropertySafe<T>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -6378,22 +6378,22 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(settings: $BlockBehaviour$Properties$Type)
 
 public "getType"(): $BlockEntityType<(any)>
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, blockHitResult: $BlockHitResult$Type): $InteractionResult
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
 public "tick"<T extends $BlockEntityMapper>(world: $Level$Type, pos: $BlockPos$Type, blockEntity: T): void
 public "newBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntity
 public "getTicker"<T extends $BlockEntity>(level: $Level$Type, blockState: $BlockState$Type, type: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 get "type"(): $BlockEntityType<(any)>
 }
 /**
@@ -6447,8 +6447,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(settings: $BlockBehaviour$Properties$Type)
 
-public "getDescriptionId"(): string
 public "appendHoverText"(itemStack: $ItemStack$Type, blockGetter: $BlockGetter$Type, tooltip: $List$Type<($Component$Type)>, tooltipFlag: $TooltipFlag$Type): void
+public "getDescriptionId"(): string
 get "descriptionId"(): string
 }
 /**
@@ -6527,31 +6527,31 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(length: integer, isOdd: boolean)
 
-public "getDescriptionId"(): string
-public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
-public "getXStart"(): integer
+public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
+public "setPlacedBy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, placer: $LivingEntity$Type, itemStack: $ItemStack$Type): void
+public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
+public "appendHoverText"(itemStack: $ItemStack$Type, blockGetter: $BlockGetter$Type, tooltip: $List$Type<($Component$Type)>, tooltipFlag: $TooltipFlag$Type): void
 public "updateShape"(state: $BlockState$Type, direction: $Direction$Type, newState: $BlockState$Type, world: $LevelAccessor$Type, pos: $BlockPos$Type, posFrom: $BlockPos$Type): $BlockState
 public "use"(state: $BlockState$Type, world: $Level$Type, pos: $BlockPos$Type, player: $Player$Type, interactionHand: $InteractionHand$Type, hit: $BlockHitResult$Type): $InteractionResult
 public "getShape"(state: $BlockState$Type, blockGetter: $BlockGetter$Type, pos: $BlockPos$Type, collisionContext: $CollisionContext$Type): $VoxelShape
-public "setPlacedBy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, placer: $LivingEntity$Type, itemStack: $ItemStack$Type): void
-public "getStateForPlacement"(ctx: $BlockPlaceContext$Type): $BlockState
-public "playerWillDestroy"(world: $Level$Type, pos: $BlockPos$Type, state: $BlockState$Type, player: $Player$Type): void
-public "appendHoverText"(itemStack: $ItemStack$Type, blockGetter: $BlockGetter$Type, tooltip: $List$Type<($Component$Type)>, tooltipFlag: $TooltipFlag$Type): void
+public "createBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntityMapper
+public "getDescriptionId"(): string
+public "getXStart"(): integer
 public "getType"(): $BlockEntityType<(any)>
 public "tick"<T extends $BlockEntityMapper>(world: $Level$Type, pos: $BlockPos$Type, blockEntity: T): void
 public "newBlockEntity"(pos: $BlockPos$Type, state: $BlockState$Type): $BlockEntity
 public "getTicker"<T extends $BlockEntity>(level: $Level$Type, blockState: $BlockState$Type, type: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
 public "propagate"(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, callback: $Consumer$Type<($BlockPos$Type)>, maxBlocksAway: integer): void
 public "propagate"<T extends $Comparable<(T)>>(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, property: $Property$Type<(T)>, maxBlocksAway: integer): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 get "descriptionId"(): string
 get "xStart"(): integer

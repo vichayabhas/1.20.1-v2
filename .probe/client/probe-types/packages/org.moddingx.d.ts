@@ -42,12 +42,12 @@ constructor(arg0: $ModX$Type, arg1: $BlockBehaviour$Properties$Type)
 constructor(arg0: $ModX$Type, arg1: $BlockBehaviour$Properties$Type, arg2: $Item$Properties$Type)
 
 public "makeCreativeTabStacks"(): $Stream<($ItemStack)>
+public "initializeItemClient"(arg0: $Consumer$Type<($IClientItemExtensions$Type)>): void
 public "registerAdditional"(arg0: $RegistrationContext$Type, arg1: $Registerable$EntryCollector$Type): void
 public "initTracking"(arg0: $RegistrationContext$Type, arg1: $Registerable$TrackingCollector$Type): void
-public "initializeItemClient"(arg0: $Consumer$Type<($IClientItemExtensions$Type)>): void
 public "getBurnTime"(arg0: $ItemStack$Type, arg1: $RecipeType$Type<(any)>): integer
-public "registerClient"(arg0: $SetupContext$Type): void
 public "registerCommon"(arg0: $SetupContext$Type): void
+public "registerClient"(arg0: $SetupContext$Type): void
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -63,8 +63,8 @@ export type $BlockBase_ = $BlockBase$Type;
 }}
 declare module "packages/org/moddingx/libx/impl/crafting/recipe/$EmptyRecipe" {
 import {$InputReplacement, $InputReplacement$Type} from "packages/dev/latvian/mods/kubejs/recipe/$InputReplacement"
-import {$NonNullList, $NonNullList$Type} from "packages/net/minecraft/core/$NonNullList"
 import {$RecipeSerializer, $RecipeSerializer$Type} from "packages/net/minecraft/world/item/crafting/$RecipeSerializer"
+import {$NonNullList, $NonNullList$Type} from "packages/net/minecraft/core/$NonNullList"
 import {$RecipeSchema, $RecipeSchema$Type} from "packages/dev/latvian/mods/kubejs/recipe/schema/$RecipeSchema"
 import {$Ingredient, $Ingredient$Type} from "packages/net/minecraft/world/item/crafting/$Ingredient"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
@@ -85,39 +85,39 @@ static readonly "TYPE": $RecipeType<($EmptyRecipe)>
 constructor(arg0: $ResourceLocation$Type)
 
 public static "empty"(arg0: $ResourceLocation$Type): $FinishedRecipe
-public "isSpecial"(): boolean
 public "assemble"(arg0: $Container$Type, arg1: $RegistryAccess$Type): $ItemStack
 public "matches"(arg0: $Container$Type, arg1: $Level$Type): boolean
-public "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
-public "getIngredients"(): $NonNullList<($Ingredient)>
+public "getId"(): $ResourceLocation
+public "isSpecial"(): boolean
 public "getSerializer"(): $RecipeSerializer<(any)>
+public "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
 public "getRemainingItems"(arg0: $Container$Type): $NonNullList<($ItemStack)>
 public "getToastSymbol"(): $ItemStack
-public "getId"(): $ResourceLocation
+public "getIngredients"(): $NonNullList<($Ingredient)>
 public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
-public "showNotification"(): boolean
 public "isIncomplete"(): boolean
-public "getGroup"(): string
-public "getOrCreateId"(): $ResourceLocation
-public "hasOutput"(match: $ReplacementMatch$Type): boolean
-public "getSchema"(): $RecipeSchema
-public "hasInput"(match: $ReplacementMatch$Type): boolean
-public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
-public "setGroup"(group: string): void
-public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
+public "showNotification"(): boolean
 public "getMod"(): string
+public "getSchema"(): $RecipeSchema
+public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
+public "hasInput"(match: $ReplacementMatch$Type): boolean
+public "hasOutput"(match: $ReplacementMatch$Type): boolean
+public "getOrCreateId"(): $ResourceLocation
+public "setGroup"(group: string): void
+public "getGroup"(): string
+public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
 public "getType"(): $ResourceLocation
+get "id"(): $ResourceLocation
 get "special"(): boolean
-get "ingredients"(): $NonNullList<($Ingredient)>
 get "serializer"(): $RecipeSerializer<(any)>
 get "toastSymbol"(): $ItemStack
-get "id"(): $ResourceLocation
+get "ingredients"(): $NonNullList<($Ingredient)>
 get "incomplete"(): boolean
-get "group"(): string
-get "orCreateId"(): $ResourceLocation
-get "schema"(): $RecipeSchema
-set "group"(value: string)
 get "mod"(): string
+get "schema"(): $RecipeSchema
+get "orCreateId"(): $ResourceLocation
+set "group"(value: string)
+get "group"(): string
 get "type"(): $ResourceLocation
 }
 /**
@@ -142,8 +142,8 @@ export interface $Registerable {
 
  "registerAdditional"(arg0: $RegistrationContext$Type, arg1: $Registerable$EntryCollector$Type): void
  "initTracking"(arg0: $RegistrationContext$Type, arg1: $Registerable$TrackingCollector$Type): void
- "registerClient"(arg0: $SetupContext$Type): void
  "registerCommon"(arg0: $SetupContext$Type): void
+ "registerClient"(arg0: $SetupContext$Type): void
 }
 
 export namespace $Registerable {
@@ -176,9 +176,9 @@ import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/leve
 import {$ServerLevel, $ServerLevel$Type} from "packages/net/minecraft/server/level/$ServerLevel"
 import {$BlockBase, $BlockBase$Type} from "packages/org/moddingx/libx/base/$BlockBase"
 import {$BlockEntityTicker, $BlockEntityTicker$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityTicker"
+import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$RegistrationContext, $RegistrationContext$Type} from "packages/org/moddingx/libx/registration/$RegistrationContext"
 import {$Registerable$TrackingCollector, $Registerable$TrackingCollector$Type} from "packages/org/moddingx/libx/registration/$Registerable$TrackingCollector"
-import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$GameEventListener, $GameEventListener$Type} from "packages/net/minecraft/world/level/gameevent/$GameEventListener"
 
 export class $BlockBE<T extends $BlockEntity> extends $BlockBase implements $EntityBlock {
@@ -205,13 +205,13 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $ModX$Type, arg1: $Class$Type<(T)>, arg2: $BlockBehaviour$Properties$Type)
 constructor(arg0: $ModX$Type, arg1: $Class$Type<(T)>, arg2: $BlockBehaviour$Properties$Type, arg3: $Item$Properties$Type)
 
-public "registerAdditional"(arg0: $RegistrationContext$Type, arg1: $Registerable$EntryCollector$Type): void
-public "initTracking"(arg0: $RegistrationContext$Type, arg1: $Registerable$TrackingCollector$Type): void
 public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
 public "getBlockEntityType"(): $BlockEntityType<(T)>
 public "getBlockEntity"(arg0: $Level$Type, arg1: $BlockPos$Type): T
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "getListener"<X extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: X): $GameEventListener
+public "registerAdditional"(arg0: $RegistrationContext$Type, arg1: $Registerable$EntryCollector$Type): void
+public "initTracking"(arg0: $RegistrationContext$Type, arg1: $Registerable$TrackingCollector$Type): void
 public "getTicker"<X extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(X)>): $BlockEntityTicker<(X)>
 get "blockEntityType"(): $BlockEntityType<(T)>
 }
@@ -244,9 +244,9 @@ import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
 import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/world/phys/$BlockHitResult"
+import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 import {$RegistrationContext, $RegistrationContext$Type} from "packages/org/moddingx/libx/registration/$RegistrationContext"
 import {$Registerable$TrackingCollector, $Registerable$TrackingCollector$Type} from "packages/org/moddingx/libx/registration/$Registerable$TrackingCollector"
-import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 
 export class $MenuBlockBE<T extends $BlockEntity, C extends $BlockEntityMenu<(T)>> extends $BlockBE<(T)> {
 readonly "menu": $MenuType<(C)>
@@ -273,9 +273,9 @@ readonly "properties": $BlockBehaviour$Properties
 constructor(arg0: $ModX$Type, arg1: $Class$Type<(T)>, arg2: $MenuType$Type<(C)>, arg3: $BlockBehaviour$Properties$Type)
 constructor(arg0: $ModX$Type, arg1: $Class$Type<(T)>, arg2: $MenuType$Type<(C)>, arg3: $BlockBehaviour$Properties$Type, arg4: $Item$Properties$Type)
 
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "registerAdditional"(arg0: $RegistrationContext$Type, arg1: $Registerable$EntryCollector$Type): void
 public "initTracking"(arg0: $RegistrationContext$Type, arg1: $Registerable$TrackingCollector$Type): void
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -316,9 +316,9 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor(arg0: $BlockBase$Type, arg1: $Block$Type, arg2: $Item$Properties$Type)
 
+public "initializeClient"(arg0: $Consumer$Type<($IClientItemExtensions$Type)>): void
 public "makeCreativeTabStacks"(): $Stream<($ItemStack)>
 public "getBurnTime"(arg0: $ItemStack$Type, arg1: $RecipeType$Type<(any)>): integer
-public "initializeClient"(arg0: $Consumer$Type<($IClientItemExtensions$Type)>): void
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -348,8 +348,8 @@ constructor(arg0: $BlockEntityType$Type<(any)>, arg1: $BlockPos$Type, arg2: $Blo
 constructor(arg0: $BlockEntityType$Type<(any)>, arg1: $BlockPos$Type, arg2: $BlockState$Type, ...arg3: ($Capability$Type<(any)>)[])
 
 public "onLoad"(): void
-public "setDispatchable"(): void
 public "getCapability"<T>(arg0: $Capability$Type<(T)>, arg1: $Direction$Type): $LazyOptional<(T)>
+public "setDispatchable"(): void
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -376,9 +376,9 @@ export class $EmptyRecipe$Serializer implements $RecipeSerializer<($EmptyRecipe)
 static readonly "INSTANCE": $EmptyRecipe$Serializer
 
 
-public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $EmptyRecipe$Type): void
-public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $EmptyRecipe
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type): $EmptyRecipe
+public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $EmptyRecipe
+public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $EmptyRecipe$Type): void
 public static "register"<S extends $RecipeSerializer<(T)>, T extends $Recipe<(any)>>(arg0: string, arg1: S): S
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type, arg2: $ICondition$IContext$Type): $EmptyRecipe
 }
@@ -425,8 +425,8 @@ export interface $Function3<A, B, C, R> {
  "apply"(arg0: A, arg1: B, arg2: C): R
  "andThen"<V>(arg0: $Function$Type<(any), (any)>): $Function3<(A), (B), (C), (V)>
  "partial"(arg0: A, arg1: B, arg2: C): $Supplier<(R)>
- "partial"(arg0: A, arg1: B): $Function<(C), (R)>
  "partial"(arg0: A): $BiFunction<(B), (C), (R)>
+ "partial"(arg0: A, arg1: B): $Function<(C), (R)>
 
 (arg0: A, arg1: B, arg2: C): R
 }
@@ -457,9 +457,9 @@ export interface $Function4<A, B, C, D, R> {
  "apply"(arg0: A, arg1: B, arg2: C, arg3: D): R
  "andThen"<V>(arg0: $Function$Type<(any), (any)>): $Function4<(A), (B), (C), (D), (V)>
  "partial"(arg0: A, arg1: B, arg2: C, arg3: D): $Supplier<(R)>
- "partial"(arg0: A, arg1: B, arg2: C): $Function<(D), (R)>
- "partial"(arg0: A, arg1: B): $BiFunction<(C), (D), (R)>
  "partial"(arg0: A): $Function3<(B), (C), (D), (R)>
+ "partial"(arg0: A, arg1: B): $BiFunction<(C), (D), (R)>
+ "partial"(arg0: A, arg1: B, arg2: C): $Function<(D), (R)>
 
 (arg0: A, arg1: B, arg2: C, arg3: D): R
 }
@@ -491,8 +491,8 @@ export interface $Function5<A, B, C, D, E, R> {
  "apply"(arg0: A, arg1: B, arg2: C, arg3: D, arg4: E): R
  "andThen"<V>(arg0: $Function$Type<(any), (any)>): $Function5<(A), (B), (C), (D), (E), (V)>
  "partial"(arg0: A, arg1: B, arg2: C, arg3: D, arg4: E): $Supplier<(R)>
- "partial"(arg0: A, arg1: B, arg2: C, arg3: D): $Function<(E), (R)>
  "partial"(arg0: A): $Function4<(B), (C), (D), (E), (R)>
+ "partial"(arg0: A, arg1: B, arg2: C, arg3: D): $Function<(E), (R)>
  "partial"(arg0: A, arg1: B): $Function3<(C), (D), (E), (R)>
  "partial"(arg0: A, arg1: B, arg2: C): $BiFunction<(D), (E), (R)>
 
@@ -526,12 +526,12 @@ export interface $Function6<A, B, C, D, E, F, R> {
 
  "apply"(arg0: A, arg1: B, arg2: C, arg3: D, arg4: E, arg5: F): R
  "andThen"<V>(arg0: $Function$Type<(any), (any)>): $Function6<(A), (B), (C), (D), (E), (F), (V)>
- "partial"(arg0: A, arg1: B, arg2: C, arg3: D): $BiFunction<(E), (F), (R)>
- "partial"(arg0: A, arg1: B, arg2: C, arg3: D, arg4: E): $Function<(F), (R)>
  "partial"(arg0: A, arg1: B, arg2: C, arg3: D, arg4: E, arg5: F): $Supplier<(R)>
  "partial"(arg0: A): $Function5<(B), (C), (D), (E), (F), (R)>
+ "partial"(arg0: A, arg1: B, arg2: C, arg3: D, arg4: E): $Function<(F), (R)>
  "partial"(arg0: A, arg1: B): $Function4<(C), (D), (E), (F), (R)>
  "partial"(arg0: A, arg1: B, arg2: C): $Function3<(D), (E), (F), (R)>
+ "partial"(arg0: A, arg1: B, arg2: C, arg3: D): $BiFunction<(E), (F), (R)>
 
 (arg0: A, arg1: B, arg2: C, arg3: D, arg4: E, arg5: F): R
 }
@@ -643,10 +643,10 @@ readonly "containerListeners": $List<($ContainerListener)>
 
 constructor(arg0: $MenuType$Type<(any)>, arg1: integer, arg2: $Level$Type, arg3: $BlockPos$Type, arg4: $Inventory$Type, arg5: $Player$Type, arg6: integer, arg7: integer)
 
-public "stillValid"(arg0: $Player$Type): boolean
-public static "createMenuType"<T extends $BlockMenu>(arg0: $Function5$Type<(integer), ($Level$Type), ($BlockPos$Type), ($Inventory$Type), ($Player$Type), (T)>): $MenuType<(T)>
-public static "createMenuType"<T extends $BlockMenu>(arg0: $Function6$Type<($MenuType$Type<(T)>), (integer), ($Level$Type), ($BlockPos$Type), ($Inventory$Type), ($Player$Type), (T)>): $MenuType<(T)>
 public static "openMenu"(arg0: $ServerPlayer$Type, arg1: $MenuType$Type<(any)>, arg2: $Component$Type, arg3: $BlockPos$Type): void
+public static "createMenuType"<T extends $BlockMenu>(arg0: $Function6$Type<($MenuType$Type<(T)>), (integer), ($Level$Type), ($BlockPos$Type), ($Inventory$Type), ($Player$Type), (T)>): $MenuType<(T)>
+public static "createMenuType"<T extends $BlockMenu>(arg0: $Function5$Type<(integer), ($Level$Type), ($BlockPos$Type), ($Inventory$Type), ($Player$Type), (T)>): $MenuType<(T)>
+public "stillValid"(arg0: $Player$Type): boolean
 public "getPos"(): $BlockPos
 get "pos"(): $BlockPos
 }
@@ -756,9 +756,8 @@ export type $Registerable$TrackingCollector_ = $Registerable$TrackingCollector$T
 }}
 declare module "packages/org/moddingx/libx/command/$EnumArgument2" {
 import {$Suggestions, $Suggestions$Type} from "packages/com/mojang/brigadier/suggestion/$Suggestions"
-import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
-import {$StringReader, $StringReader$Type} from "packages/com/mojang/brigadier/$StringReader"
 import {$CompletableFuture, $CompletableFuture$Type} from "packages/java/util/concurrent/$CompletableFuture"
+import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Collection, $Collection$Type} from "packages/java/util/$Collection"
 import {$Class, $Class$Type} from "packages/java/lang/$Class"
 import {$SuggestionsBuilder, $SuggestionsBuilder$Type} from "packages/com/mojang/brigadier/suggestion/$SuggestionsBuilder"
@@ -768,10 +767,9 @@ import {$CommandContext, $CommandContext$Type} from "packages/com/mojang/brigadi
 export class $EnumArgument2<T extends $Enum<(T)>> implements $ArgumentType<(T)> {
 
 
-public "parse"(arg0: $StringReader$Type): T
-public static "enumArgument"<R extends $Enum<(R)>>(arg0: $Class$Type<(R)>): $EnumArgument2<(R)>
 public "getExamples"(): $Collection<(string)>
 public "listSuggestions"<S>(arg0: $CommandContext$Type<(S)>, arg1: $SuggestionsBuilder$Type): $CompletableFuture<($Suggestions)>
+public static "enumArgument"<R extends $Enum<(R)>>(arg0: $Class$Type<(R)>): $EnumArgument2<(R)>
 get "examples"(): $Collection<(string)>
 }
 /**
@@ -930,10 +928,10 @@ export class $EnumArgument2$Info implements $ArgumentTypeInfo<($EnumArgument2<(a
 static readonly "INSTANCE": $EnumArgument2$Info
 
 
+public "unpack"(arg0: $EnumArgument2$Type<(any)>): $EnumArgument2$Info$Template
+public "deserializeFromNetwork"(arg0: $FriendlyByteBuf$Type): $EnumArgument2$Info$Template
 public "serializeToJson"(arg0: $EnumArgument2$Info$Template$Type, arg1: $JsonObject$Type): void
 public "serializeToNetwork"(arg0: $EnumArgument2$Info$Template$Type, arg1: $FriendlyByteBuf$Type): void
-public "deserializeFromNetwork"(arg0: $FriendlyByteBuf$Type): $EnumArgument2$Info$Template
-public "unpack"(arg0: $EnumArgument2$Type<(any)>): $EnumArgument2$Info$Template
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_

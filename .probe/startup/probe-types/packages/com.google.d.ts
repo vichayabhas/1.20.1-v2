@@ -30,9 +30,9 @@ export interface $Multiset<E> extends $Collection<(E)> {
  "removeAll"(arg0: $Collection$Type<(any)>): boolean
  "retainAll"(arg0: $Collection$Type<(any)>): boolean
  "containsAll"(arg0: $Collection$Type<(any)>): boolean
- "setCount"(arg0: E, arg1: integer, arg2: integer): boolean
- "setCount"(arg0: E, arg1: integer): integer
  "elementSet"(): $Set<(E)>
+ "setCount"(arg0: E, arg1: integer): integer
+ "setCount"(arg0: E, arg1: integer, arg2: integer): boolean
  "clear"(): void
  "isEmpty"(): boolean
  "toArray"<T>(arg0: (T)[]): (T)[]
@@ -135,6 +135,7 @@ export class $ImmutableSetMultimap$Builder<K, V> extends $ImmutableMultimap$Buil
 constructor()
 
 public "put"(arg0: $Map$Entry$Type<(any), (any)>): $ImmutableSetMultimap$Builder<(K), (V)>
+public "orderValuesBy"(arg0: $Comparator$Type<(any)>): $ImmutableSetMultimap$Builder<(K), (V)>
 public "orderKeysBy"(arg0: $Comparator$Type<(any)>): $ImmutableSetMultimap$Builder<(K), (V)>
 }
 /**
@@ -175,9 +176,9 @@ public "keys"(): $Multiset<(K)>
 public "keySet"(): $Set<(K)>
 public "containsValue"(arg0: any): boolean
 public "entries"(): $Collection<($Map$Entry<(K), (V)>)>
-public "asMap"(): $Map<(K), ($Collection<(V)>)>
-public "containsEntry"(arg0: any, arg1: any): boolean
 public "replaceValues"(arg0: K, arg1: $Iterable$Type<(any)>): $Collection<(V)>
+public "containsEntry"(arg0: any, arg1: any): boolean
+public "asMap"(): $Map<(K), ($Collection<(V)>)>
 public "get"(arg0: K): $Collection<(V)>
 public "clear"(): void
 public "size"(): integer
@@ -211,13 +212,13 @@ constructor()
 
 public "write"(arg0: $JsonWriter$Type, arg1: T): void
 public "read"(arg0: $JsonReader$Type): T
-public "toJson"(arg0: $Writer$Type, arg1: T): void
-public "toJson"(arg0: T): string
-public "fromJsonTree"(arg0: $JsonElement$Type): T
-public "nullSafe"(): $TypeAdapter<(T)>
 public "toJsonTree"(arg0: T): $JsonElement
+public "nullSafe"(): $TypeAdapter<(T)>
+public "fromJsonTree"(arg0: $JsonElement$Type): T
 public "fromJson"(arg0: $Reader$Type): T
 public "fromJson"(arg0: string): T
+public "toJson"(arg0: $Writer$Type, arg1: T): void
+public "toJson"(arg0: T): string
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -334,15 +335,15 @@ public "size"(): integer
 public "entrySet"(): $Set<($Map$Entry<(string), ($JsonElement)>)>
 public "keySet"(): $Set<(string)>
 public "has"(arg0: string): boolean
-public "asMap"(): $Map<(string), ($JsonElement)>
-public "addProperty"(arg0: string, arg1: character): void
-public "addProperty"(arg0: string, arg1: string): void
-public "addProperty"(arg0: string, arg1: number): void
-public "addProperty"(arg0: string, arg1: boolean): void
-public "getAsJsonPrimitive"(arg0: string): $JsonPrimitive
-public "getAsJsonObject"(arg0: string): $JsonObject
 public "deepCopy"(): $JsonObject
+public "getAsJsonObject"(arg0: string): $JsonObject
+public "getAsJsonPrimitive"(arg0: string): $JsonPrimitive
 public "getAsJsonArray"(arg0: string): $JsonArray
+public "addProperty"(arg0: string, arg1: string): void
+public "addProperty"(arg0: string, arg1: boolean): void
+public "addProperty"(arg0: string, arg1: character): void
+public "addProperty"(arg0: string, arg1: number): void
+public "asMap"(): $Map<(string), ($JsonElement)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -423,13 +424,13 @@ static readonly "DEFAULT": $Excluder
 constructor()
 
 public "create"<T>(arg0: $Gson$Type, arg1: $TypeToken$Type<(T)>): $TypeAdapter<(T)>
+public "excludeClass"(arg0: $Class$Type<(any)>, arg1: boolean): boolean
+public "excludeField"(arg0: $Field$Type, arg1: boolean): boolean
+public "withModifiers"(...arg0: (integer)[]): $Excluder
+public "withVersion"(arg0: double): $Excluder
 public "disableInnerClassSerialization"(): $Excluder
 public "withExclusionStrategy"(arg0: $ExclusionStrategy$Type, arg1: boolean, arg2: boolean): $Excluder
 public "excludeFieldsWithoutExposeAnnotation"(): $Excluder
-public "withModifiers"(...arg0: (integer)[]): $Excluder
-public "withVersion"(arg0: double): $Excluder
-public "excludeField"(arg0: $Field$Type, arg1: boolean): boolean
-public "excludeClass"(arg0: $Class$Type<(any)>, arg1: boolean): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -460,7 +461,6 @@ export interface $ListMultimap<K, V> extends $Multimap<(K), (V)> {
  "equals"(arg0: any): boolean
  "removeAll"(arg0: any): $List<(V)>
  "asMap"(): $Map<(K), ($Collection<(V)>)>
- "replaceValues"(arg0: K, arg1: $Iterable$Type<(any)>): $List<(V)>
  "remove"(arg0: any, arg1: any): boolean
  "put"(arg0: K, arg1: V): boolean
  "values"(): $Collection<(V)>
@@ -638,28 +638,28 @@ public "containsAll"(arg0: $Iterable$Type<(any)>): boolean
 public static "range"<C extends $Comparable<(any)>>(arg0: C, arg1: $BoundType$Type, arg2: C, arg3: $BoundType$Type): $Range<(C)>
 public static "closed"<C extends $Comparable<(any)>>(arg0: C, arg1: C): $Range<(C)>
 public static "singleton"<C extends $Comparable<(any)>>(arg0: C): $Range<(C)>
-public static "upTo"<C extends $Comparable<(any)>>(arg0: C, arg1: $BoundType$Type): $Range<(C)>
 public static "all"<C extends $Comparable<(any)>>(): $Range<(C)>
+public static "upTo"<C extends $Comparable<(any)>>(arg0: C, arg1: $BoundType$Type): $Range<(C)>
 public "canonical"(arg0: $DiscreteDomain$Type<(C)>): $Range<(C)>
-public static "downTo"<C extends $Comparable<(any)>>(arg0: C, arg1: $BoundType$Type): $Range<(C)>
-public static "atMost"<C extends $Comparable<(any)>>(arg0: C): $Range<(C)>
-public static "encloseAll"<C extends $Comparable<(any)>>(arg0: $Iterable$Type<(C)>): $Range<(C)>
-public static "closedOpen"<C extends $Comparable<(any)>>(arg0: C, arg1: C): $Range<(C)>
-public "gap"(arg0: $Range$Type<(C)>): $Range<(C)>
-public static "greaterThan"<C extends $Comparable<(any)>>(arg0: C): $Range<(C)>
-public static "atLeast"<C extends $Comparable<(any)>>(arg0: C): $Range<(C)>
-public static "openClosed"<C extends $Comparable<(any)>>(arg0: C, arg1: C): $Range<(C)>
-public static "lessThan"<C extends $Comparable<(any)>>(arg0: C): $Range<(C)>
-public "isConnected"(arg0: $Range$Type<(C)>): boolean
-public "encloses"(arg0: $Range$Type<(C)>): boolean
-public "span"(arg0: $Range$Type<(C)>): $Range<(C)>
 public "intersection"(arg0: $Range$Type<(C)>): $Range<(C)>
+public "hasUpperBound"(): boolean
+public "hasLowerBound"(): boolean
+public "lowerEndpoint"(): C
 public "upperEndpoint"(): C
 public "lowerBoundType"(): $BoundType
-public "hasLowerBound"(): boolean
-public "hasUpperBound"(): boolean
-public "lowerEndpoint"(): C
 public "upperBoundType"(): $BoundType
+public "span"(arg0: $Range$Type<(C)>): $Range<(C)>
+public "encloses"(arg0: $Range$Type<(C)>): boolean
+public "isConnected"(arg0: $Range$Type<(C)>): boolean
+public static "downTo"<C extends $Comparable<(any)>>(arg0: C, arg1: $BoundType$Type): $Range<(C)>
+public static "openClosed"<C extends $Comparable<(any)>>(arg0: C, arg1: C): $Range<(C)>
+public static "atMost"<C extends $Comparable<(any)>>(arg0: C): $Range<(C)>
+public static "greaterThan"<C extends $Comparable<(any)>>(arg0: C): $Range<(C)>
+public static "atLeast"<C extends $Comparable<(any)>>(arg0: C): $Range<(C)>
+public static "encloseAll"<C extends $Comparable<(any)>>(arg0: $Iterable$Type<(C)>): $Range<(C)>
+public static "lessThan"<C extends $Comparable<(any)>>(arg0: C): $Range<(C)>
+public static "closedOpen"<C extends $Comparable<(any)>>(arg0: C, arg1: C): $Range<(C)>
+public "gap"(arg0: $Range$Type<(C)>): $Range<(C)>
 public "test"(arg0: C): boolean
 public "or"(arg0: $Predicate$0$Type<(any)>): $Predicate$0<(C)>
 public "negate"(): $Predicate$0<(C)>
@@ -791,13 +791,13 @@ export interface $Cache<K, V> {
  "put"(arg0: K, arg1: V): void
  "size"(): long
  "putAll"(arg0: $Map$Type<(any), (any)>): void
+ "getAllPresent"(arg0: $Iterable$Type<(any)>): $ImmutableMap<(K), (V)>
+ "cleanUp"(): void
+ "getIfPresent"(arg0: any): V
  "invalidate"(arg0: any): void
  "asMap"(): $ConcurrentMap<(K), (V)>
- "invalidateAll"(): void
  "invalidateAll"(arg0: $Iterable$Type<(any)>): void
- "cleanUp"(): void
- "getAllPresent"(arg0: $Iterable$Type<(any)>): $ImmutableMap<(K), (V)>
- "getIfPresent"(arg0: any): V
+ "invalidateAll"(): void
  "stats"(): $CacheStats
 }
 
@@ -847,9 +847,9 @@ public "keySet"(): $Set<(K)>
 public "containsValue"(arg0: any): boolean
 public "entries"(): $Collection<($Map$Entry<(K), (V)>)>
 public "removeAll"(arg0: any): $Collection<(V)>
-public "asMap"(): $Map<(K), ($Collection<(V)>)>
-public "containsEntry"(arg0: any, arg1: any): boolean
 public "replaceValues"(arg0: K, arg1: $Iterable$Type<(any)>): $Collection<(V)>
+public "containsEntry"(arg0: any, arg1: any): boolean
+public "asMap"(): $Map<(K), ($Collection<(V)>)>
 public "forEach"(arg0: $BiConsumer$Type<(any), (any)>): void
 get "empty"(): boolean
 }
@@ -903,15 +903,15 @@ export interface $Table<R, C, V> {
  "contains"(arg0: any, arg1: any): boolean
  "putAll"(arg0: $Table$Type<(any), (any), (any)>): void
  "containsValue"(arg0: any): boolean
- "column"(arg0: C): $Map<(R), (V)>
- "row"(arg0: R): $Map<(C), (V)>
  "containsRow"(arg0: any): boolean
+ "containsColumn"(arg0: any): boolean
+ "columnKeySet"(): $Set<(C)>
+ "columnMap"(): $Map<(C), ($Map<(R), (V)>)>
  "rowMap"(): $Map<(R), ($Map<(C), (V)>)>
  "rowKeySet"(): $Set<(R)>
- "containsColumn"(arg0: any): boolean
- "columnMap"(): $Map<(C), ($Map<(R), (V)>)>
  "cellSet"(): $Set<($Table$Cell<(R), (C), (V)>)>
- "columnKeySet"(): $Set<(C)>
+ "column"(arg0: C): $Map<(R), (V)>
+ "row"(arg0: R): $Map<(C), (V)>
 }
 
 export namespace $Table {
@@ -975,19 +975,19 @@ export interface $LoadingCache<K, V> extends $Cache<(K), (V)>, $Function$0<(K), 
  */
  "apply"(arg0: K): V
  "getUnchecked"(arg0: K): V
- "refresh"(arg0: K): void
  "getAll"(arg0: $Iterable$Type<(any)>): $ImmutableMap<(K), (V)>
+ "refresh"(arg0: K): void
  "asMap"(): $ConcurrentMap<(K), (V)>
  "get"(arg0: K, arg1: $Callable$Type<(any)>): V
  "put"(arg0: K, arg1: V): void
  "size"(): long
  "putAll"(arg0: $Map$Type<(any), (any)>): void
- "invalidate"(arg0: any): void
- "invalidateAll"(): void
- "invalidateAll"(arg0: $Iterable$Type<(any)>): void
- "cleanUp"(): void
  "getAllPresent"(arg0: $Iterable$Type<(any)>): $ImmutableMap<(K), (V)>
+ "cleanUp"(): void
  "getIfPresent"(arg0: any): V
+ "invalidate"(arg0: any): void
+ "invalidateAll"(arg0: $Iterable$Type<(any)>): void
+ "invalidateAll"(): void
  "stats"(): $CacheStats
  "equals"(arg0: any): boolean
  "compose"<V>(arg0: $Function$Type<(any), (any)>): $Function<(V), (V)>
@@ -1051,18 +1051,18 @@ public "toString"(): string
 public "hashCode"(): integer
 public "plus"(arg0: $CacheStats$Type): $CacheStats
 public "minus"(arg0: $CacheStats$Type): $CacheStats
-public "missCount"(): long
-public "hitCount"(): long
-public "loadSuccessCount"(): long
-public "loadExceptionCount"(): long
+public "loadCount"(): long
+public "averageLoadPenalty"(): double
+public "loadExceptionRate"(): double
 public "totalLoadTime"(): long
+public "loadSuccessCount"(): long
 public "evictionCount"(): long
 public "requestCount"(): long
-public "averageLoadPenalty"(): double
-public "loadCount"(): long
-public "hitRate"(): double
-public "loadExceptionRate"(): double
 public "missRate"(): double
+public "hitRate"(): double
+public "loadExceptionCount"(): long
+public "missCount"(): long
+public "hitCount"(): long
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1167,8 +1167,8 @@ public "putAll"(arg0: $Multimap$Type<(any), (any)>): $ImmutableMultimap$Builder<
 public "putAll"(arg0: K, ...arg1: (V)[]): $ImmutableMultimap$Builder<(K), (V)>
 public "putAll"(arg0: K, arg1: $Iterable$Type<(any)>): $ImmutableMultimap$Builder<(K), (V)>
 public "putAll"(arg0: $Iterable$Type<(any)>): $ImmutableMultimap$Builder<(K), (V)>
-public "orderKeysBy"(arg0: $Comparator$Type<(any)>): $ImmutableMultimap$Builder<(K), (V)>
 public "orderValuesBy"(arg0: $Comparator$Type<(any)>): $ImmutableMultimap$Builder<(K), (V)>
+public "orderKeysBy"(arg0: $Comparator$Type<(any)>): $ImmutableMultimap$Builder<(K), (V)>
 public "build"(): $ImmutableMultimap<(K), (V)>
 }
 /**
@@ -1370,22 +1370,22 @@ public "peek"(): $JsonToken
 public "nextInt"(): integer
 public "nextBoolean"(): boolean
 public "nextLong"(): long
-public "setLenient"(arg0: boolean): void
-public "isLenient"(): boolean
-public "nextNull"(): void
-public "beginArray"(): void
-public "endObject"(): void
+public "skipValue"(): void
 public "endArray"(): void
 public "beginObject"(): void
+public "beginArray"(): void
+public "endObject"(): void
+public "nextNull"(): void
 public "nextName"(): string
 public "nextString"(): string
 public "getPreviousPath"(): string
-public "skipValue"(): void
+public "setLenient"(arg0: boolean): void
+public "isLenient"(): boolean
 public "nextDouble"(): double
 get "path"(): string
+get "previousPath"(): string
 set "lenient"(value: boolean)
 get "lenient"(): boolean
-get "previousPath"(): string
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1417,41 +1417,41 @@ constructor()
 
 public "create"(): $Gson
 public "setVersion"(arg0: double): $GsonBuilder
-public "disableInnerClassSerialization"(): $GsonBuilder
 public "registerTypeAdapter"(arg0: $Type$Type, arg1: any): $GsonBuilder
-public "setFieldNamingStrategy"(arg0: $FieldNamingStrategy$Type): $GsonBuilder
-public "generateNonExecutableJson"(): $GsonBuilder
-public "setLenient"(): $GsonBuilder
-public "serializeSpecialFloatingPointValues"(): $GsonBuilder
-public "excludeFieldsWithoutExposeAnnotation"(): $GsonBuilder
-public "serializeNulls"(): $GsonBuilder
-public "setPrettyPrinting"(): $GsonBuilder
-public "addDeserializationExclusionStrategy"(arg0: $ExclusionStrategy$Type): $GsonBuilder
-public "setLongSerializationPolicy"(arg0: $LongSerializationPolicy$Type): $GsonBuilder
-public "registerTypeAdapterFactory"(arg0: $TypeAdapterFactory$Type): $GsonBuilder
-public "enableComplexMapKeySerialization"(): $GsonBuilder
-public "setFieldNamingPolicy"(arg0: $FieldNamingPolicy$Type): $GsonBuilder
-public "setObjectToNumberStrategy"(arg0: $ToNumberStrategy$Type): $GsonBuilder
-public "disableHtmlEscaping"(): $GsonBuilder
-public "setExclusionStrategies"(...arg0: ($ExclusionStrategy$Type)[]): $GsonBuilder
-public "excludeFieldsWithModifiers"(...arg0: (integer)[]): $GsonBuilder
-public "setNumberToNumberStrategy"(arg0: $ToNumberStrategy$Type): $GsonBuilder
-public "addReflectionAccessFilter"(arg0: $ReflectionAccessFilter$Type): $GsonBuilder
-public "addSerializationExclusionStrategy"(arg0: $ExclusionStrategy$Type): $GsonBuilder
-public "registerTypeHierarchyAdapter"(arg0: $Class$Type<(any)>, arg1: any): $GsonBuilder
 public "setDateFormat"(arg0: string): $GsonBuilder
 public "setDateFormat"(arg0: integer, arg1: integer): $GsonBuilder
 public "setDateFormat"(arg0: integer): $GsonBuilder
 public "disableJdkUnsafe"(): $GsonBuilder
+public "setPrettyPrinting"(): $GsonBuilder
+public "serializeNulls"(): $GsonBuilder
+public "setLongSerializationPolicy"(arg0: $LongSerializationPolicy$Type): $GsonBuilder
+public "setFieldNamingStrategy"(arg0: $FieldNamingStrategy$Type): $GsonBuilder
+public "enableComplexMapKeySerialization"(): $GsonBuilder
+public "setFieldNamingPolicy"(arg0: $FieldNamingPolicy$Type): $GsonBuilder
+public "setExclusionStrategies"(...arg0: ($ExclusionStrategy$Type)[]): $GsonBuilder
+public "disableHtmlEscaping"(): $GsonBuilder
+public "generateNonExecutableJson"(): $GsonBuilder
+public "disableInnerClassSerialization"(): $GsonBuilder
+public "excludeFieldsWithModifiers"(...arg0: (integer)[]): $GsonBuilder
+public "setNumberToNumberStrategy"(arg0: $ToNumberStrategy$Type): $GsonBuilder
+public "registerTypeAdapterFactory"(arg0: $TypeAdapterFactory$Type): $GsonBuilder
+public "registerTypeHierarchyAdapter"(arg0: $Class$Type<(any)>, arg1: any): $GsonBuilder
+public "addSerializationExclusionStrategy"(arg0: $ExclusionStrategy$Type): $GsonBuilder
+public "addReflectionAccessFilter"(arg0: $ReflectionAccessFilter$Type): $GsonBuilder
+public "setObjectToNumberStrategy"(arg0: $ToNumberStrategy$Type): $GsonBuilder
+public "addDeserializationExclusionStrategy"(arg0: $ExclusionStrategy$Type): $GsonBuilder
+public "setLenient"(): $GsonBuilder
+public "serializeSpecialFloatingPointValues"(): $GsonBuilder
+public "excludeFieldsWithoutExposeAnnotation"(): $GsonBuilder
 set "version"(value: double)
-set "fieldNamingStrategy"(value: $FieldNamingStrategy$Type)
-set "longSerializationPolicy"(value: $LongSerializationPolicy$Type)
-set "fieldNamingPolicy"(value: $FieldNamingPolicy$Type)
-set "objectToNumberStrategy"(value: $ToNumberStrategy$Type)
-set "exclusionStrategies"(value: ($ExclusionStrategy$Type)[])
-set "numberToNumberStrategy"(value: $ToNumberStrategy$Type)
 set "dateFormat"(value: string)
 set "dateFormat"(value: integer)
+set "longSerializationPolicy"(value: $LongSerializationPolicy$Type)
+set "fieldNamingStrategy"(value: $FieldNamingStrategy$Type)
+set "fieldNamingPolicy"(value: $FieldNamingPolicy$Type)
+set "exclusionStrategies"(value: ($ExclusionStrategy$Type)[])
+set "numberToNumberStrategy"(value: $ToNumberStrategy$Type)
+set "objectToNumberStrategy"(value: $ToNumberStrategy$Type)
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1480,7 +1480,6 @@ export interface $SetMultimap<K, V> extends $Multimap<(K), (V)> {
  "equals"(arg0: any): boolean
  "removeAll"(arg0: any): $Set<(V)>
  "asMap"(): $Map<(K), ($Collection<(V)>)>
- "replaceValues"(arg0: K, arg1: $Iterable$Type<(any)>): $Set<(V)>
  "remove"(arg0: any, arg1: any): boolean
  "put"(arg0: K, arg1: V): boolean
  "values"(): $Collection<(V)>
@@ -1570,38 +1569,38 @@ public "contains"(arg0: $JsonElement$Type): boolean
 public "addAll"(arg0: $JsonArray$Type): void
 public "set"(arg0: integer, arg1: $JsonElement$Type): $JsonElement
 public "asList"(): $List<($JsonElement)>
-public "getAsBoolean"(): boolean
-public "getAsString"(): string
 public "getAsDouble"(): double
 public "getAsInt"(): integer
 public "getAsLong"(): long
-public "getAsFloat"(): float
+public "getAsBoolean"(): boolean
+public "getAsString"(): string
 public "getAsNumber"(): number
-public "getAsBigInteger"(): $BigInteger
+public "getAsFloat"(): float
+public "getAsByte"(): byte
 /**
  * 
  * @deprecated
  */
 public "getAsCharacter"(): character
-public "getAsShort"(): short
 public "getAsBigDecimal"(): $BigDecimal
-public "getAsByte"(): byte
+public "getAsBigInteger"(): $BigInteger
+public "getAsShort"(): short
 public "spliterator"(): $Spliterator<($JsonElement)>
 public "forEach"(arg0: $Consumer$Type<(any)>): void
 [Symbol.iterator](): IterableIterator<$JsonElement>;
 get "empty"(): boolean
-get "asBoolean"(): boolean
-get "asString"(): string
 get "asDouble"(): double
 get "asInt"(): integer
 get "asLong"(): long
-get "asFloat"(): float
+get "asBoolean"(): boolean
+get "asString"(): string
 get "asNumber"(): number
-get "asBigInteger"(): $BigInteger
-get "asCharacter"(): character
-get "asShort"(): short
-get "asBigDecimal"(): $BigDecimal
+get "asFloat"(): float
 get "asByte"(): byte
+get "asCharacter"(): character
+get "asBigDecimal"(): $BigDecimal
+get "asBigInteger"(): $BigInteger
+get "asShort"(): short
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1679,9 +1678,9 @@ public "previous"(arg0: C): C
 public "distance"(arg0: C, arg1: C): long
 public "maxValue"(): C
 public static "longs"(): $DiscreteDomain<(long)>
+public "minValue"(): C
 public static "bigIntegers"(): $DiscreteDomain<($BigInteger)>
 public static "integers"(): $DiscreteDomain<(integer)>
-public "minValue"(): C
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1709,40 +1708,40 @@ constructor(arg0: boolean)
 
 public "equals"(arg0: any): boolean
 public "hashCode"(): integer
-public "getAsBoolean"(): boolean
-public "getAsString"(): string
 public "getAsDouble"(): double
 public "getAsInt"(): integer
 public "getAsLong"(): long
-public "isNumber"(): boolean
-public "getAsFloat"(): float
+public "getAsBoolean"(): boolean
+public "getAsString"(): string
 public "getAsNumber"(): number
-public "isString"(): boolean
-public "getAsBigInteger"(): $BigInteger
-public "isBoolean"(): boolean
+public "getAsFloat"(): float
+public "getAsByte"(): byte
 /**
  * 
  * @deprecated
  */
 public "getAsCharacter"(): character
-public "getAsShort"(): short
+public "isBoolean"(): boolean
 public "getAsBigDecimal"(): $BigDecimal
-public "getAsByte"(): byte
-get "asBoolean"(): boolean
-get "asString"(): string
+public "isString"(): boolean
+public "getAsBigInteger"(): $BigInteger
+public "getAsShort"(): short
+public "isNumber"(): boolean
 get "asDouble"(): double
 get "asInt"(): integer
 get "asLong"(): long
-get "number"(): boolean
-get "asFloat"(): float
+get "asBoolean"(): boolean
+get "asString"(): string
 get "asNumber"(): number
+get "asFloat"(): float
+get "asByte"(): byte
+get "asCharacter"(): character
+get "boolean"(): boolean
+get "asBigDecimal"(): $BigDecimal
 get "string"(): boolean
 get "asBigInteger"(): $BigInteger
-get "boolean"(): boolean
-get "asCharacter"(): character
 get "asShort"(): short
-get "asBigDecimal"(): $BigDecimal
-get "asByte"(): byte
+get "number"(): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1779,8 +1778,8 @@ public static "of"<K, V>(): $ImmutableSetMultimap<(K), (V)>
 public static "of"<K, V>(arg0: K, arg1: V, arg2: K, arg3: V, arg4: K, arg5: V, arg6: K, arg7: V, arg8: K, arg9: V): $ImmutableSetMultimap<(K), (V)>
 public static "of"<K, V>(arg0: K, arg1: V, arg2: K, arg3: V, arg4: K, arg5: V, arg6: K, arg7: V): $ImmutableSetMultimap<(K), (V)>
 public static "builder"<K, V>(): $ImmutableSetMultimap$Builder<(K), (V)>
-public static "flatteningToImmutableSetMultimap"<T, K, V>(arg0: $Function$Type<(any), (any)>, arg1: $Function$Type<(any), (any)>): $Collector<(T), (any), ($ImmutableSetMultimap<(K), (V)>)>
 public static "toImmutableSetMultimap"<T, K, V>(arg0: $Function$Type<(any), (any)>, arg1: $Function$Type<(any), (any)>): $Collector<(T), (any), ($ImmutableSetMultimap<(K), (V)>)>
+public static "flatteningToImmutableSetMultimap"<T, K, V>(arg0: $Function$Type<(any), (any)>, arg1: $Function$Type<(any), (any)>): $Collector<(T), (any), ($ImmutableSetMultimap<(K), (V)>)>
 public "inverse"(): $ImmutableSetMultimap<(V), (K)>
 public "equals"(arg0: any): boolean
 public "asMap"(): $Map<(K), ($Collection<(V)>)>
@@ -1813,14 +1812,14 @@ public "toString"(): string
 public "getDeclaringClass"(): $Class<(any)>
 public "getAnnotation"<T extends $Annotation>(arg0: $Class$Type<(T)>): T
 public "getAnnotations"(): $Collection<($Annotation)>
-public "getDeclaredType"(): $Type
-public "getDeclaredClass"(): $Class<(any)>
 public "hasModifier"(arg0: integer): boolean
+public "getDeclaredClass"(): $Class<(any)>
+public "getDeclaredType"(): $Type
 get "name"(): string
 get "declaringClass"(): $Class<(any)>
 get "annotations"(): $Collection<($Annotation)>
-get "declaredType"(): $Type
 get "declaredClass"(): $Class<(any)>
+get "declaredType"(): $Type
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1837,8 +1836,8 @@ export type $FieldAttributes_ = $FieldAttributes$Type;
 declare module "packages/com/google/gson/$JsonElement" {
 import {$JsonObject, $JsonObject$Type} from "packages/com/google/gson/$JsonObject"
 import {$JsonNull, $JsonNull$Type} from "packages/com/google/gson/$JsonNull"
-import {$BigInteger, $BigInteger$Type} from "packages/java/math/$BigInteger"
 import {$JsonPrimitive, $JsonPrimitive$Type} from "packages/com/google/gson/$JsonPrimitive"
+import {$BigInteger, $BigInteger$Type} from "packages/java/math/$BigInteger"
 import {$BigDecimal, $BigDecimal$Type} from "packages/java/math/$BigDecimal"
 import {$JsonArray, $JsonArray$Type} from "packages/com/google/gson/$JsonArray"
 
@@ -1851,51 +1850,51 @@ export class $JsonElement {
 constructor()
 
 public "toString"(): string
-public "getAsBoolean"(): boolean
-public "getAsString"(): string
 public "getAsDouble"(): double
 public "getAsInt"(): integer
 public "getAsLong"(): long
-public "getAsFloat"(): float
-public "getAsNumber"(): number
-public "getAsBigInteger"(): $BigInteger
+public "getAsBoolean"(): boolean
+public "getAsString"(): string
+public "isJsonArray"(): boolean
+public "isJsonPrimitive"(): boolean
+public "isJsonNull"(): boolean
+public "deepCopy"(): $JsonElement
+public "getAsJsonObject"(): $JsonObject
 public "getAsJsonNull"(): $JsonNull
+public "getAsNumber"(): number
+public "getAsFloat"(): float
+public "getAsByte"(): byte
 /**
  * 
  * @deprecated
  */
 public "getAsCharacter"(): character
-public "getAsShort"(): short
-public "getAsBigDecimal"(): $BigDecimal
-public "getAsByte"(): byte
 public "getAsJsonPrimitive"(): $JsonPrimitive
-public "isJsonPrimitive"(): boolean
-public "isJsonNull"(): boolean
-public "isJsonArray"(): boolean
-public "getAsJsonObject"(): $JsonObject
-public "isJsonObject"(): boolean
-public "deepCopy"(): $JsonElement
 public "getAsJsonArray"(): $JsonArray
-get "asBoolean"(): boolean
-get "asString"(): string
+public "isJsonObject"(): boolean
+public "getAsBigDecimal"(): $BigDecimal
+public "getAsBigInteger"(): $BigInteger
+public "getAsShort"(): short
 get "asDouble"(): double
 get "asInt"(): integer
 get "asLong"(): long
-get "asFloat"(): float
-get "asNumber"(): number
-get "asBigInteger"(): $BigInteger
-get "asJsonNull"(): $JsonNull
-get "asCharacter"(): character
-get "asShort"(): short
-get "asBigDecimal"(): $BigDecimal
-get "asByte"(): byte
-get "asJsonPrimitive"(): $JsonPrimitive
+get "asBoolean"(): boolean
+get "asString"(): string
+get "jsonArray"(): boolean
 get "jsonPrimitive"(): boolean
 get "jsonNull"(): boolean
-get "jsonArray"(): boolean
 get "asJsonObject"(): $JsonObject
-get "jsonObject"(): boolean
+get "asJsonNull"(): $JsonNull
+get "asNumber"(): number
+get "asFloat"(): float
+get "asByte"(): byte
+get "asCharacter"(): character
+get "asJsonPrimitive"(): $JsonPrimitive
 get "asJsonArray"(): $JsonArray
+get "jsonObject"(): boolean
+get "asBigDecimal"(): $BigDecimal
+get "asBigInteger"(): $BigInteger
+get "asShort"(): short
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2219,35 +2218,35 @@ export class $JsonWriter implements $Closeable, $Flushable {
 constructor(arg0: $Writer$Type)
 
 public "name"(arg0: string): $JsonWriter
-public "value"(arg0: float): $JsonWriter
-public "value"(arg0: double): $JsonWriter
 public "value"(arg0: long): $JsonWriter
 public "value"(arg0: boolean): $JsonWriter
-public "value"(arg0: boolean): $JsonWriter
-public "value"(arg0: string): $JsonWriter
 public "value"(arg0: number): $JsonWriter
+public "value"(arg0: boolean): $JsonWriter
+public "value"(arg0: double): $JsonWriter
+public "value"(arg0: float): $JsonWriter
+public "value"(arg0: string): $JsonWriter
 public "flush"(): void
 public "close"(): void
 public "nullValue"(): $JsonWriter
-public "setLenient"(arg0: boolean): void
-public "isLenient"(): boolean
-public "setIndent"(arg0: string): void
-public "beginArray"(): $JsonWriter
-public "endObject"(): $JsonWriter
+public "setHtmlSafe"(arg0: boolean): void
+public "getSerializeNulls"(): boolean
+public "isHtmlSafe"(): boolean
+public "setSerializeNulls"(arg0: boolean): void
 public "jsonValue"(arg0: string): $JsonWriter
 public "endArray"(): $JsonWriter
 public "beginObject"(): $JsonWriter
-public "getSerializeNulls"(): boolean
-public "setHtmlSafe"(arg0: boolean): void
-public "setSerializeNulls"(arg0: boolean): void
-public "isHtmlSafe"(): boolean
+public "beginArray"(): $JsonWriter
+public "endObject"(): $JsonWriter
+public "setLenient"(arg0: boolean): void
+public "isLenient"(): boolean
+public "setIndent"(arg0: string): void
+set "htmlSafe"(value: boolean)
+get "serializeNulls"(): boolean
+get "htmlSafe"(): boolean
+set "serializeNulls"(value: boolean)
 set "lenient"(value: boolean)
 get "lenient"(): boolean
 set "indent"(value: string)
-get "serializeNulls"(): boolean
-set "htmlSafe"(value: boolean)
-set "serializeNulls"(value: boolean)
-get "htmlSafe"(): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2267,7 +2266,9 @@ import {$ImmutableSet, $ImmutableSet$Type} from "packages/com/google/common/coll
 import {$ImmutableMultimap$Builder, $ImmutableMultimap$Builder$Type} from "packages/com/google/common/collect/$ImmutableMultimap$Builder"
 import {$Multimap, $Multimap$Type} from "packages/com/google/common/collect/$Multimap"
 import {$Serializable, $Serializable$Type} from "packages/java/io/$Serializable"
+import {$Collection, $Collection$Type} from "packages/java/util/$Collection"
 import {$BaseImmutableMultimap, $BaseImmutableMultimap$Type} from "packages/com/google/common/collect/$BaseImmutableMultimap"
+import {$ImmutableMap, $ImmutableMap$Type} from "packages/com/google/common/collect/$ImmutableMap"
 import {$ImmutableCollection, $ImmutableCollection$Type} from "packages/com/google/common/collect/$ImmutableCollection"
 import {$Iterable, $Iterable$Type} from "packages/java/lang/$Iterable"
 
@@ -2279,24 +2280,24 @@ export class $ImmutableMultimap<K, V> extends $BaseImmutableMultimap<(K), (V)> i
  * @deprecated
  */
 public "remove"(arg0: any, arg1: any): boolean
+public "get"(arg0: K): $ImmutableCollection<(V)>
 /**
  * 
  * @deprecated
  */
 public "put"(arg0: K, arg1: V): boolean
-public "values"(): $ImmutableCollection<(V)>
-public static "copyOf"<K, V>(arg0: $Multimap$Type<(any), (any)>): $ImmutableMultimap<(K), (V)>
 public static "copyOf"<K, V>(arg0: $Iterable$Type<(any)>): $ImmutableMultimap<(K), (V)>
+public static "copyOf"<K, V>(arg0: $Multimap$Type<(any), (any)>): $ImmutableMultimap<(K), (V)>
 /**
  * 
  * @deprecated
  */
 public "clear"(): void
 public "size"(): integer
+public static "of"<K, V>(): $ImmutableMultimap<(K), (V)>
 public static "of"<K, V>(arg0: K, arg1: V, arg2: K, arg3: V, arg4: K, arg5: V): $ImmutableMultimap<(K), (V)>
 public static "of"<K, V>(arg0: K, arg1: V, arg2: K, arg3: V): $ImmutableMultimap<(K), (V)>
 public static "of"<K, V>(arg0: K, arg1: V): $ImmutableMultimap<(K), (V)>
-public static "of"<K, V>(): $ImmutableMultimap<(K), (V)>
 public static "of"<K, V>(arg0: K, arg1: V, arg2: K, arg3: V, arg4: K, arg5: V, arg6: K, arg7: V, arg8: K, arg9: V): $ImmutableMultimap<(K), (V)>
 public static "of"<K, V>(arg0: K, arg1: V, arg2: K, arg3: V, arg4: K, arg5: V, arg6: K, arg7: V): $ImmutableMultimap<(K), (V)>
 public static "builder"<K, V>(): $ImmutableMultimap$Builder<(K), (V)>
@@ -2314,7 +2315,13 @@ public "forEach"(arg0: $BiConsumer$Type<(any), (any)>): void
 public "containsKey"(arg0: any): boolean
 public "keySet"(): $ImmutableSet<(K)>
 public "containsValue"(arg0: any): boolean
+/**
+ * 
+ * @deprecated
+ */
+public "replaceValues"(arg0: K, arg1: $Iterable$Type<(any)>): $ImmutableCollection<(V)>
 public "inverse"(): $ImmutableMultimap<(V), (K)>
+public "asMap"(): $ImmutableMap<(K), ($Collection<(V)>)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2377,9 +2384,9 @@ public "isNative"(): boolean
 public "isSynchronized"(): boolean
 public "getOwnerType"(): $TypeToken<(T)>
 public "isOverridable"(): boolean
-public "isPackagePrivate"(): boolean
 public "returning"<R1 extends R>(arg0: $TypeToken$Type<(R1)>): $Invokable<(T), (R1)>
 public "returning"<R1 extends R>(arg0: $Class$Type<(R1)>): $Invokable<(T), (R1)>
+public "isPackagePrivate"(): boolean
 public "getAnnotationsByType"<T extends $Annotation>(arg0: $Class$Type<(T)>): (T)[]
 public "getDeclaredAnnotation"<T extends $Annotation>(arg0: $Class$Type<(T)>): T
 public "getDeclaredAnnotationsByType"<T extends $Annotation>(arg0: $Class$Type<(T)>): (T)[]
@@ -2450,9 +2457,9 @@ export interface $Multimap<K, V> {
  "containsValue"(arg0: any): boolean
  "entries"(): $Collection<($Map$Entry<(K), (V)>)>
  "removeAll"(arg0: any): $Collection<(V)>
- "asMap"(): $Map<(K), ($Collection<(V)>)>
- "containsEntry"(arg0: any, arg1: any): boolean
  "replaceValues"(arg0: K, arg1: $Iterable$Type<(any)>): $Collection<(V)>
+ "containsEntry"(arg0: any, arg1: any): boolean
+ "asMap"(): $Map<(K), ($Collection<(V)>)>
 }
 
 export namespace $Multimap {
@@ -2552,10 +2559,10 @@ public "reverse"(): $ImmutableList<(E)>
  * @deprecated
  */
 public "sort"(arg0: $Comparator$Type<(any)>): void
-public static "builderWithExpectedSize"<E>(arg0: integer): $ImmutableList$Builder<(E)>
 public static "toImmutableList"<E>(): $Collector<(E), (any), ($ImmutableList<(E)>)>
 public static "sortedCopyOf"<E extends $Comparable<(any)>>(arg0: $Iterable$Type<(any)>): $ImmutableList<(E)>
 public static "sortedCopyOf"<E>(arg0: $Comparator$Type<(any)>, arg1: $Iterable$Type<(any)>): $ImmutableList<(E)>
+public static "builderWithExpectedSize"<E>(arg0: integer): $ImmutableList$Builder<(E)>
 public "add"(arg0: E): boolean
 public "remove"(arg0: any): boolean
 public "get"(arg0: integer): E
@@ -2602,16 +2609,16 @@ public "hashCode"(): integer
 public static "of"<T>(arg0: T): $Optional<(T)>
 public "transform"<V>(arg0: $Function$Type<(any), (V)>): $Optional<(V)>
 public "isPresent"(): boolean
-public "or"(arg0: $Supplier$Type<(any)>): T
 public "or"(arg0: $Optional$Type<(any)>): $Optional<(T)>
+public "or"(arg0: $Supplier$Type<(any)>): T
 public "or"(arg0: T): T
-public static "absent"<T>(): $Optional<(T)>
 public "asSet"(): $Set<(T)>
+public static "absent"<T>(): $Optional<(T)>
+public static "fromNullable"<T>(arg0: T): $Optional<(T)>
+public static "fromJavaUtil"<T>(arg0: $Optional$0$Type<(T)>): $Optional<(T)>
 public static "toJavaUtil"<T>(arg0: $Optional$Type<(T)>): $Optional$0<(T)>
 public "toJavaUtil"(): $Optional$0<(T)>
-public static "fromJavaUtil"<T>(arg0: $Optional$0$Type<(T)>): $Optional<(T)>
 public static "presentInstances"<T>(arg0: $Iterable$Type<(any)>): $Iterable<(T)>
-public static "fromNullable"<T>(arg0: T): $Optional<(T)>
 public "orNull"(): T
 get "present"(): boolean
 }
@@ -2696,8 +2703,8 @@ declare global {
 export type $ImmutableCollection_<E> = $ImmutableCollection$Type<(E)>;
 }}
 declare module "packages/com/google/gson/$Gson" {
-import {$FieldNamingStrategy, $FieldNamingStrategy$Type} from "packages/com/google/gson/$FieldNamingStrategy"
 import {$JsonElement, $JsonElement$Type} from "packages/com/google/gson/$JsonElement"
+import {$FieldNamingStrategy, $FieldNamingStrategy$Type} from "packages/com/google/gson/$FieldNamingStrategy"
 import {$JsonReader, $JsonReader$Type} from "packages/com/google/gson/stream/$JsonReader"
 import {$Class, $Class$Type} from "packages/java/lang/$Class"
 import {$Appendable, $Appendable$Type} from "packages/java/lang/$Appendable"
@@ -2717,9 +2724,30 @@ constructor()
 
 public "toString"(): string
 public "newBuilder"(): $GsonBuilder
-public "fieldNamingStrategy"(): $FieldNamingStrategy
-public "getAdapter"<T>(arg0: $Class$Type<(T)>): $TypeAdapter<(T)>
-public "getAdapter"<T>(arg0: $TypeToken$Type<(T)>): $TypeAdapter<(T)>
+public "getDelegateAdapter"<T>(arg0: $TypeAdapterFactory$Type, arg1: $TypeToken$Type<(T)>): $TypeAdapter<(T)>
+public "toJsonTree"(arg0: any, arg1: $Type$Type): $JsonElement
+public "toJsonTree"(arg0: any): $JsonElement
+public "newJsonWriter"(arg0: $Writer$Type): $JsonWriter
+public "newJsonReader"(arg0: $Reader$Type): $JsonReader
+public "fromJson"<T>(arg0: $JsonElement$Type, arg1: $TypeToken$Type<(T)>): T
+public "fromJson"<T>(arg0: string, arg1: $Type$Type): T
+public "fromJson"<T>(arg0: string, arg1: $TypeToken$Type<(T)>): T
+public "fromJson"<T>(arg0: string, arg1: $Class$Type<(T)>): T
+public "fromJson"<T>(arg0: $JsonElement$Type, arg1: $Class$Type<(T)>): T
+public "fromJson"<T>(arg0: $Reader$Type, arg1: $TypeToken$Type<(T)>): T
+public "fromJson"<T>(arg0: $JsonElement$Type, arg1: $Type$Type): T
+public "fromJson"<T>(arg0: $Reader$Type, arg1: $Type$Type): T
+public "fromJson"<T>(arg0: $Reader$Type, arg1: $Class$Type<(T)>): T
+public "fromJson"<T>(arg0: $JsonReader$Type, arg1: $TypeToken$Type<(T)>): T
+public "fromJson"<T>(arg0: $JsonReader$Type, arg1: $Type$Type): T
+public "toJson"(arg0: $JsonElement$Type, arg1: $JsonWriter$Type): void
+public "toJson"(arg0: any, arg1: $Appendable$Type): void
+public "toJson"(arg0: any, arg1: $Type$Type): string
+public "toJson"(arg0: any): string
+public "toJson"(arg0: any, arg1: $Type$Type, arg2: $JsonWriter$Type): void
+public "toJson"(arg0: $JsonElement$Type, arg1: $Appendable$Type): void
+public "toJson"(arg0: $JsonElement$Type): string
+public "toJson"(arg0: any, arg1: $Type$Type, arg2: $Appendable$Type): void
 public "htmlSafe"(): boolean
 /**
  * 
@@ -2727,30 +2755,9 @@ public "htmlSafe"(): boolean
  */
 public "excluder"(): $Excluder
 public "serializeNulls"(): boolean
-public "toJson"(arg0: any, arg1: $Type$Type): string
-public "toJson"(arg0: any, arg1: $Type$Type, arg2: $JsonWriter$Type): void
-public "toJson"(arg0: any, arg1: $Appendable$Type): void
-public "toJson"(arg0: any, arg1: $Type$Type, arg2: $Appendable$Type): void
-public "toJson"(arg0: $JsonElement$Type, arg1: $JsonWriter$Type): void
-public "toJson"(arg0: $JsonElement$Type, arg1: $Appendable$Type): void
-public "toJson"(arg0: $JsonElement$Type): string
-public "toJson"(arg0: any): string
-public "newJsonWriter"(arg0: $Writer$Type): $JsonWriter
-public "newJsonReader"(arg0: $Reader$Type): $JsonReader
-public "toJsonTree"(arg0: any): $JsonElement
-public "toJsonTree"(arg0: any, arg1: $Type$Type): $JsonElement
-public "getDelegateAdapter"<T>(arg0: $TypeAdapterFactory$Type, arg1: $TypeToken$Type<(T)>): $TypeAdapter<(T)>
-public "fromJson"<T>(arg0: $JsonReader$Type, arg1: $TypeToken$Type<(T)>): T
-public "fromJson"<T>(arg0: $JsonElement$Type, arg1: $Class$Type<(T)>): T
-public "fromJson"<T>(arg0: $JsonElement$Type, arg1: $Type$Type): T
-public "fromJson"<T>(arg0: $JsonElement$Type, arg1: $TypeToken$Type<(T)>): T
-public "fromJson"<T>(arg0: string, arg1: $Class$Type<(T)>): T
-public "fromJson"<T>(arg0: $Reader$Type, arg1: $Class$Type<(T)>): T
-public "fromJson"<T>(arg0: string, arg1: $TypeToken$Type<(T)>): T
-public "fromJson"<T>(arg0: $Reader$Type, arg1: $Type$Type): T
-public "fromJson"<T>(arg0: $Reader$Type, arg1: $TypeToken$Type<(T)>): T
-public "fromJson"<T>(arg0: string, arg1: $Type$Type): T
-public "fromJson"<T>(arg0: $JsonReader$Type, arg1: $Type$Type): T
+public "fieldNamingStrategy"(): $FieldNamingStrategy
+public "getAdapter"<T>(arg0: $Class$Type<(T)>): $TypeAdapter<(T)>
+public "getAdapter"<T>(arg0: $TypeToken$Type<(T)>): $TypeAdapter<(T)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2792,15 +2799,15 @@ public "constructor"(arg0: $Constructor$Type<(any)>): $Invokable<(T), (T)>
 public "getType"(): $Type
 public "unwrap"(): $TypeToken<(T)>
 public "getRawType"(): $Class<(any)>
-public "resolveType"(arg0: $Type$Type): $TypeToken<(any)>
+public "getSupertype"(arg0: $Class$Type<(any)>): $TypeToken<(any)>
 public "getSubtype"(arg0: $Class$Type<(any)>): $TypeToken<(any)>
-public "isSupertypeOf"(arg0: $Type$Type): boolean
+public "resolveType"(arg0: $Type$Type): $TypeToken<(any)>
 public "isSupertypeOf"(arg0: $TypeToken$Type<(any)>): boolean
+public "isSupertypeOf"(arg0: $Type$Type): boolean
 public "isSubtypeOf"(arg0: $TypeToken$Type<(any)>): boolean
 public "isSubtypeOf"(arg0: $Type$Type): boolean
-public "where"<X>(arg0: $TypeParameter$Type<(X)>, arg1: $Class$Type<(X)>): $TypeToken<(T)>
 public "where"<X>(arg0: $TypeParameter$Type<(X)>, arg1: $TypeToken$Type<(X)>): $TypeToken<(T)>
-public "getSupertype"(arg0: $Class$Type<(any)>): $TypeToken<(any)>
+public "where"<X>(arg0: $TypeParameter$Type<(X)>, arg1: $Class$Type<(X)>): $TypeToken<(T)>
 public "getTypes"(): $TypeToken$TypeSet<>
 get "array"(): boolean
 get "primitive"(): boolean
@@ -2916,9 +2923,9 @@ public "put"(arg0: K, arg1: V): $ImmutableMap$Builder<(K), (V)>
 public "put"(arg0: $Map$Entry$Type<(any), (any)>): $ImmutableMap$Builder<(K), (V)>
 public "putAll"(arg0: $Iterable$Type<(any)>): $ImmutableMap$Builder<(K), (V)>
 public "putAll"(arg0: $Map$Type<(any), (any)>): $ImmutableMap$Builder<(K), (V)>
-public "orderEntriesByValue"(arg0: $Comparator$Type<(any)>): $ImmutableMap$Builder<(K), (V)>
-public "buildOrThrow"(): $ImmutableMap<(K), (V)>
 public "buildKeepingLast"(): $ImmutableMap<(K), (V)>
+public "buildOrThrow"(): $ImmutableMap<(K), (V)>
+public "orderEntriesByValue"(arg0: $Comparator$Type<(any)>): $ImmutableMap$Builder<(K), (V)>
 public "build"(): $ImmutableMap<(K), (V)>
 }
 /**
@@ -2943,14 +2950,14 @@ public "toString"(): string
 public "hashCode"(): integer
 public "bits"(): integer
 public static "fromString"(arg0: string): $HashCode
-public "asInt"(): integer
 public "asBytes"(): (byte)[]
-public static "fromInt"(arg0: integer): $HashCode
-public static "fromLong"(arg0: long): $HashCode
+public "writeBytesTo"(arg0: (byte)[], arg1: integer, arg2: integer): integer
+public "asInt"(): integer
 public "asLong"(): long
 public static "fromBytes"(arg0: (byte)[]): $HashCode
 public "padToLong"(): long
-public "writeBytesTo"(arg0: (byte)[], arg1: integer, arg2: integer): integer
+public static "fromInt"(arg0: integer): $HashCode
+public static "fromLong"(arg0: long): $HashCode
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_

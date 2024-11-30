@@ -25,32 +25,32 @@ readonly "playersUsing": $Set<($Player)>
 constructor(pos: $BlockPos$Type, state: $BlockState$Type)
 
 public "getPosition"(): integer
-public "updateRotors"(): void
-public "addBlade"(checkBelow: boolean): boolean
-public "removeBlade"(): boolean
-public "getReducedUpdateTag"(): $CompoundTag
-public "blockRemoved"(): void
-public "clearContent"(): void
+public "onNeighborChange"(block: $Block$Type, neighborPos: $BlockPos$Type): void
+public "getRenderBoundingBox"(): $AABB
 public "load"(nbt: $CompoundTag$Type): void
 public "m_183515_"(nbtTags: $CompoundTag$Type): void
 public "handleUpdateTag"(tag: $CompoundTag$Type): void
+public "blockRemoved"(): void
+public "getReducedUpdateTag"(): $CompoundTag
+public "removeBlade"(): boolean
+public "addBlade"(checkBelow: boolean): boolean
+public "clearContent"(): void
 public "getHousedBlades"(): integer
-public "getRenderBoundingBox"(): $AABB
-public "onNeighborChange"(block: $Block$Type, neighborPos: $BlockPos$Type): void
+public "updateRotors"(): void
 public static "tryClear"(arg0: any): void
 public static "calculateRadiationScale"(tanks: $List$Type<($IGasTank$Type)>): float
-public "getTileCoord"(): $Coord4D
-public "getTileWorld"(): $Level
-public "getTileChunk"(): $Chunk3D
 public "getTilePos"(): $BlockPos
+public "getTileWorld"(): $Level
+public "getTileCoord"(): $Coord4D
+public "getTileChunk"(): $Chunk3D
 get "position"(): integer
+get "renderBoundingBox"(): $AABB
 get "reducedUpdateTag"(): $CompoundTag
 get "housedBlades"(): integer
-get "renderBoundingBox"(): $AABB
-get "tileCoord"(): $Coord4D
-get "tileWorld"(): $Level
-get "tileChunk"(): $Chunk3D
 get "tilePos"(): $BlockPos
+get "tileWorld"(): $Level
+get "tileCoord"(): $Coord4D
+get "tileChunk"(): $Chunk3D
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -89,20 +89,20 @@ constructor(pos: $BlockPos$Type, state: $BlockState$Type)
 constructor(blockProvider: $IBlockProvider$Type, pos: $BlockPos$Type, state: $BlockState$Type)
 
 public "setInjectionRateFromPacket"(rate: integer): void
+public "addContainerTrackers"(container: $MekanismContainer$Type): void
 public "getManager"(): $MultiblockManager<($FusionReactorMultiblockData)>
 public "canBeMaster"(): boolean
-public "addContainerTrackers"(container: $MekanismContainer$Type): void
 public static "calculateRadiationScale"(tanks: $List$Type<($IGasTank$Type)>): float
-public "getTileCoord"(): $Coord4D
-public "getTileWorld"(): $Level
-public "getTileChunk"(): $Chunk3D
 public "getTilePos"(): $BlockPos
+public "getTileWorld"(): $Level
+public "getTileCoord"(): $Coord4D
+public "getTileChunk"(): $Chunk3D
 set "injectionRateFromPacket"(value: integer)
 get "manager"(): $MultiblockManager<($FusionReactorMultiblockData)>
-get "tileCoord"(): $Coord4D
-get "tileWorld"(): $Level
-get "tileChunk"(): $Chunk3D
 get "tilePos"(): $BlockPos
+get "tileWorld"(): $Level
+get "tileCoord"(): $Coord4D
+get "tileChunk"(): $Chunk3D
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -143,8 +143,8 @@ constructor(properties: $Item$Properties$Type)
 
 public "addItems"(tabOutput: $CreativeModeTab$Output$Type): void
 public "isBarVisible"(stack: $ItemStack$Type): boolean
-public "getBarColor"(stack: $ItemStack$Type): integer
 public "getBarWidth"(stack: $ItemStack$Type): integer
+public "getBarColor"(stack: $ItemStack$Type): integer
 public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
 public "addDefault"(): boolean
 }
@@ -186,14 +186,14 @@ public "onRightClick"(player: $Player$Type): $InteractionResult
 public "canLasersDig"(): boolean
 public "receiveLaserEnergy"(energy: $FloatingLong$Type): void
 public static "calculateRadiationScale"(tanks: $List$Type<($IGasTank$Type)>): float
-public "getTileCoord"(): $Coord4D
-public "getTileWorld"(): $Level
-public "getTileChunk"(): $Chunk3D
 public "getTilePos"(): $BlockPos
-get "tileCoord"(): $Coord4D
-get "tileWorld"(): $Level
-get "tileChunk"(): $Chunk3D
+public "getTileWorld"(): $Level
+public "getTileCoord"(): $Coord4D
+public "getTileChunk"(): $Chunk3D
 get "tilePos"(): $BlockPos
+get "tileWorld"(): $Level
+get "tileCoord"(): $Coord4D
+get "tileChunk"(): $Chunk3D
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -370,6 +370,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "propagatesSkylightDown"(state: $BlockState$Type, reader: $BlockGetter$Type, pos: $BlockPos$Type): boolean
+public "shouldDisplayFluidOverlay"(state: $BlockState$Type, world: $BlockAndTintGetter$Type, pos: $BlockPos$Type, fluidState: $FluidState$Type): boolean
 /**
  * 
  * @deprecated
@@ -385,8 +387,6 @@ public "getShadeBrightness"(state: $BlockState$Type, worldIn: $BlockGetter$Type,
  * @deprecated
  */
 public "getVisualShape"(state: $BlockState$Type, reader: $BlockGetter$Type, pos: $BlockPos$Type, ctx: $CollisionContext$Type): $VoxelShape
-public "shouldDisplayFluidOverlay"(state: $BlockState$Type, world: $BlockAndTintGetter$Type, pos: $BlockPos$Type, fluidState: $FluidState$Type): boolean
-public "propagatesSkylightDown"(state: $BlockState$Type, reader: $BlockGetter$Type, pos: $BlockPos$Type): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -441,43 +441,43 @@ static readonly "MAX_INJECTION": integer
 
 constructor(tile: $TileEntityFusionReactorBlock$Type)
 
-public "simulate"(): $HeatAPI$HeatTransfer
-public "onCreated"(world: $Level$Type): void
-public "readUpdateTag"(tag: $CompoundTag$Type): void
-public "writeUpdateTag"(tag: $CompoundTag$Type): void
-public "getInjectionRate"(): integer
-public "setBurning"(burn: boolean): void
-public "setInjectionRate"(rate: integer): void
-public "updateTemperatures"(): void
-public "getMaxSteam"(): long
-public "getMaxWater"(): integer
-public "getLastCaseTemp"(): double
-public "setLastPlasmaTemp"(temp: double): void
-public "getLastPlasmaTemp"(): double
-public "getCaseTemp"(): double
-public "setPlasmaTemp"(temp: double): void
-public "getPlasmaTemp"(): double
-public "getSteamPerTick"(current: boolean): long
-public "tick"(world: $Level$Type): boolean
 public "isBurning"(): boolean
-public "addTemperatureFromEnergyInput"(energyAdded: $FloatingLong$Type): void
-public "getMinInjectionRate"(active: boolean): integer
-public "getMaxPlasmaTemperature"(active: boolean): double
+public "simulate"(): $HeatAPI$HeatTransfer
+public "tick"(world: $Level$Type): boolean
 public "getPassiveGeneration"(active: boolean, current: boolean): $FloatingLong
+public "getMinInjectionRate"(active: boolean): integer
 public "getIgnitionTemperature"(active: boolean): double
 public "getMaxCasingTemperature"(active: boolean): double
-get "injectionRate"(): integer
-set "burning"(value: boolean)
-set "injectionRate"(value: integer)
+public "addTemperatureFromEnergyInput"(energyAdded: $FloatingLong$Type): void
+public "getMaxPlasmaTemperature"(active: boolean): double
+public "onCreated"(world: $Level$Type): void
+public "writeUpdateTag"(tag: $CompoundTag$Type): void
+public "readUpdateTag"(tag: $CompoundTag$Type): void
+public "getMaxSteam"(): long
+public "setLastPlasmaTemp"(temp: double): void
+public "getPlasmaTemp"(): double
+public "setPlasmaTemp"(temp: double): void
+public "getLastPlasmaTemp"(): double
+public "getMaxWater"(): integer
+public "getLastCaseTemp"(): double
+public "getSteamPerTick"(current: boolean): long
+public "getCaseTemp"(): double
+public "setInjectionRate"(rate: integer): void
+public "getInjectionRate"(): integer
+public "setBurning"(burn: boolean): void
+public "updateTemperatures"(): void
+get "burning"(): boolean
 get "maxSteam"(): long
+set "lastPlasmaTemp"(value: double)
+get "plasmaTemp"(): double
+set "plasmaTemp"(value: double)
+get "lastPlasmaTemp"(): double
 get "maxWater"(): integer
 get "lastCaseTemp"(): double
-set "lastPlasmaTemp"(value: double)
-get "lastPlasmaTemp"(): double
 get "caseTemp"(): double
-set "plasmaTemp"(value: double)
-get "plasmaTemp"(): double
-get "burning"(): boolean
+set "injectionRate"(value: integer)
+get "injectionRate"(): integer
+set "burning"(value: boolean)
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_

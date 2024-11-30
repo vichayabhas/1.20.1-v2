@@ -22,6 +22,7 @@
     "crop_progress": true,
     "command_block": true,
     "mob_growth": true,
+    "waxed": true,
     "harvest_tool.new_line": false,
     "entity_health.max_for_render": 40,
     "entity_health.show_fractions": false,
@@ -77,6 +78,7 @@
     "maintenance_info": true,
     "machine_mode": true,
     "electric_container_provider": true,
+    "steam_boiler_info": true,
     "recipe_output_info": true,
     "stained_color": true,
     "hazard_cleaner_provider": true,
@@ -94,9 +96,6 @@
   "expatternprovider": {
     "jade_chamber": true,
     "jade_wireless": true
-  },
-  "gregiceng": {
-    "crafting_io_buffer": true
   },
   "ae2": {
     "part_icon": true,

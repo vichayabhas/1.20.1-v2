@@ -212,12 +212,12 @@ function registry(extra: "mekanism:module", handler: (event: Module) => void): v
 function registry(extra: "mekanism:pigment", handler: (event: Pigment) => void): void
 function registry(extra: "mekanism:robit_skin_serializer", handler: (event: RobitSkinSerializer) => void): void
 function registry(extra: "mekanism:slurry", handler: (event: Slurry) => void): void
-function registry(extra: "mekanism:robit_skin", handler: (event: RobitSkin) => void): void
-function registry(extra: "libx:surface_rule_set", handler: (event: SurfaceRuleSet) => void): void
-function registry(extra: "forge:structure_modifier", handler: (event: StructureModifier) => void): void
 function registry(extra: "libx:template_pool_extension", handler: (event: TemplatePoolExtension) => void): void
 function registry(extra: "forge:biome_modifier", handler: (event: BiomeModifier) => void): void
-function registry(extra: "libx:biome_surface", handler: (event: BiomeSurface) => void): void
+function registry(extra: "mekanism:robit_skin", handler: (event: RobitSkin) => void): void
+function registry(extra: "forge:structure_modifier", handler: (event: StructureModifier) => void): void
+function registry(extra: "libx:surface_rule_set", handler: (event: SurfaceRuleSet) => void): void
 function registry(extra: "libx:biome_layer", handler: (event: BiomeLayer) => void): void
+function registry(extra: "libx:biome_surface", handler: (event: BiomeSurface) => void): void
 }
 }

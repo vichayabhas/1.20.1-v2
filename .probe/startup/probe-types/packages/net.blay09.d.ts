@@ -2,8 +2,8 @@ declare module "packages/net/blay09/mods/clienttweaks/mixin/$ItemInHandRendererA
 export {} // Mark the file as a module, do not remove unless there are other import/exports!
 export interface $ItemInHandRendererAccessor {
 
- "setOOffHandHeight"(arg0: float): void
  "setOffHandHeight"(arg0: float): void
+ "setOOffHandHeight"(arg0: float): void
 }
 
 export namespace $ItemInHandRendererAccessor {
@@ -25,8 +25,8 @@ declare module "packages/net/blay09/mods/balm/mixin/$MouseHandlerAccessor" {
 export {} // Mark the file as a module, do not remove unless there are other import/exports!
 export interface $MouseHandlerAccessor {
 
- "getMouseX"(): double
  "getMouseY"(): double
+ "getMouseX"(): double
 }
 
 export namespace $MouseHandlerAccessor {
@@ -145,8 +145,8 @@ import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$Compo
 
 export interface $BalmEntity {
 
- "setFabricBalmData"(arg0: $CompoundTag$Type): void
  "getFabricBalmData"(): $CompoundTag
+ "setFabricBalmData"(arg0: $CompoundTag$Type): void
 }
 
 export namespace $BalmEntity {
@@ -170,13 +170,13 @@ import {$GuiGraphics, $GuiGraphics$Type} from "packages/net/minecraft/client/gui
 
 export interface $AbstractContainerScreenAccessor {
 
+ "callIsHovering"(arg0: $Slot$Type, arg1: double, arg2: double): boolean
  "getTopPos"(): integer
+ "getHoveredSlot"(): $Slot
+ "getImageWidth"(): integer
  "getLeftPos"(): integer
  "getImageHeight"(): integer
  "callRenderSlot"(arg0: $GuiGraphics$Type, arg1: $Slot$Type): void
- "getImageWidth"(): integer
- "getHoveredSlot"(): $Slot
- "callIsHovering"(arg0: $Slot$Type, arg1: double, arg2: double): boolean
 }
 
 export namespace $AbstractContainerScreenAccessor {
@@ -199,10 +199,10 @@ import {$Slot, $Slot$Type} from "packages/net/minecraft/world/inventory/$Slot"
 
 export interface $AbstractContainerScreenAccessor {
 
- "getTopPos"(): integer
- "getLeftPos"(): integer
- "getHoveredSlot"(): $Slot
  "callHasClickedOutside"(arg0: double, arg1: double, arg2: integer, arg3: integer, arg4: integer): boolean
+ "getTopPos"(): integer
+ "getHoveredSlot"(): $Slot
+ "getLeftPos"(): integer
 }
 
 export namespace $AbstractContainerScreenAccessor {
@@ -251,9 +251,9 @@ import {$NarratableEntry, $NarratableEntry$Type} from "packages/net/minecraft/cl
 
 export interface $ScreenAccessor {
 
- "balm_getChildren"(): $List<($GuiEventListener)>
  "balm_getNarratables"(): $List<($NarratableEntry)>
  "balm_getRenderables"(): $List<($Renderable)>
+ "balm_getChildren"(): $List<($GuiEventListener)>
 }
 
 export namespace $ScreenAccessor {

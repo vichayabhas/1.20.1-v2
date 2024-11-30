@@ -2,8 +2,8 @@ declare module "packages/org/anti_ad/mc/ipnext/mixinhelpers/$IMixinItemGroup" {
 export {} // Mark the file as a module, do not remove unless there are other import/exports!
 export interface $IMixinItemGroup {
 
- "setIPNPriorityIndex"(arg0: integer): void
  "getIPNPriorityIndex"(): integer
+ "setIPNPriorityIndex"(arg0: integer): void
 }
 
 export namespace $IMixinItemGroup {
@@ -29,8 +29,8 @@ export interface $IMixinKeyBinding {
  "getKeyCode"(): $InputConstants$Key
  "getPressed"(): boolean
  "getTimesPressed"(): integer
- "setTimesPressed"(arg0: integer): void
  "setPressed"(arg0: boolean): void
+ "setTimesPressed"(arg0: integer): void
 }
 
 export namespace $IMixinKeyBinding {

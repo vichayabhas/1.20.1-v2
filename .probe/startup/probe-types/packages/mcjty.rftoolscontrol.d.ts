@@ -16,8 +16,8 @@ export class $InteractionClientScreenModule implements $IClientScreenModule<($IM
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleDataBoolean$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $IModuleDataBoolean$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -154,14 +154,14 @@ constructor(arg0: $Map$Type<(string), ($GfxOp$Type)>, arg1: $List$Type<(string)>
 constructor(arg0: $List$Type<($GfxOp$Type)>)
 
 public "getId"(): string
-public "getSortedOperations"(): $List<($GfxOp)>
-public "writeToBuf"(arg0: $FriendlyByteBuf$Type): void
 public "getOperations"(): $Map<(string), ($GfxOp)>
 public "getOrderedOps"(): $List<(string)>
+public "writeToBuf"(arg0: $FriendlyByteBuf$Type): void
+public "getSortedOperations"(): $List<($GfxOp)>
 get "id"(): string
-get "sortedOperations"(): $List<($GfxOp)>
 get "operations"(): $Map<(string), ($GfxOp)>
 get "orderedOps"(): $List<(string)>
+get "sortedOperations"(): $List<($GfxOp)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -199,10 +199,10 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor()
 
-public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "getManualEntry"(): $ManualEntry
 public static "setCardName"(arg0: $ItemStack$Type, arg1: string): void
 public static "getCardName"(arg0: $ItemStack$Type): string
+public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "getMaxWidth"(): integer
 get "manualEntry"(): $ManualEntry
 get "maxWidth"(): integer
@@ -268,8 +268,8 @@ export class $VariableClientScreenModule implements $IClientScreenModule<($Modul
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $ModuleDataVariable$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $ModuleDataVariable$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -444,8 +444,8 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 public "getRotationType"(): $RotationType
+public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 get "rotationType"(): $RotationType
 }
 /**
@@ -571,13 +571,13 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($InteractionScreenModule)>
-public "getClientScreenModule"(): $Class<($InteractionClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($InteractionClientScreenModule)>
+public "getServerScreenModule"(): $Class<($InteractionScreenModule)>
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($InteractionScreenModule)>
 get "clientScreenModule"(): $Class<($InteractionClientScreenModule)>
+get "serverScreenModule"(): $Class<($InteractionScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -592,8 +592,8 @@ declare global {
 export type $InteractionModuleItem_ = $InteractionModuleItem$Type;
 }}
 declare module "packages/mcjty/rftoolscontrol/modules/processor/blocks/$ProcessorBlock" {
-import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
 import {$LevelReader, $LevelReader$Type} from "packages/net/minecraft/world/level/$LevelReader"
+import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
 import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packages/net/minecraft/world/level/block/state/$BlockBehaviour$Properties"
 import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
@@ -630,10 +630,10 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "onNeighborChange"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): void
 public "canConnectRedstone"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
 public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
 public "getSignal"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "onNeighborChange"(arg0: $BlockState$Type, arg1: $LevelReader$Type, arg2: $BlockPos$Type, arg3: $BlockPos$Type): void
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -722,8 +722,8 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor()
 
-public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "getManualEntry"(): $ManualEntry
+public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "getMaxWidth"(): integer
 get "manualEntry"(): $ManualEntry
 get "maxWidth"(): integer
@@ -801,8 +801,8 @@ export class $VectorArtClientScreenModule implements $IClientScreenModule<($Modu
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $ModuleDataVectorArt$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $ModuleDataVectorArt$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -886,8 +886,8 @@ export class $ConsoleClientScreenModule implements $IClientScreenModule<($Module
 
 constructor()
 
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $ModuleDataLog$Type, arg6: $ModuleRenderInfo$Type): void
 public "getHeight"(): integer
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: $ModuleDataLog$Type, arg6: $ModuleRenderInfo$Type): void
 public "getTransformMode"(): $IClientScreenModule$TransformMode
 public "needsServerData"(): boolean
 public "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -919,9 +919,9 @@ export class $GfxOp {
 constructor()
 
 public "getType"(): $GfxOpType
+public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type): void
 public static "readFromBuf"(arg0: $FriendlyByteBuf$Type): $GfxOp
 public "writeToBuf"(arg0: $FriendlyByteBuf$Type): void
-public "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type): void
 public "writeToNBT"(): $CompoundTag
 public static "readFromNBT"(arg0: $CompoundTag$Type): $GfxOp
 get "type"(): $GfxOpType
@@ -988,8 +988,8 @@ declare module "packages/mcjty/rftoolscontrol/modules/various/items/consolemodul
 import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
 import {$ConsoleScreenModule, $ConsoleScreenModule$Type} from "packages/mcjty/rftoolscontrol/modules/various/items/consolemodule/$ConsoleScreenModule"
 import {$Class, $Class$Type} from "packages/java/lang/$Class"
-import {$ConsoleClientScreenModule, $ConsoleClientScreenModule$Type} from "packages/mcjty/rftoolscontrol/modules/various/items/consolemodule/$ConsoleClientScreenModule"
 import {$InteractionResult, $InteractionResult$Type} from "packages/net/minecraft/world/$InteractionResult"
+import {$ConsoleClientScreenModule, $ConsoleClientScreenModule$Type} from "packages/mcjty/rftoolscontrol/modules/various/items/consolemodule/$ConsoleClientScreenModule"
 import {$IModuleGuiBuilder, $IModuleGuiBuilder$Type} from "packages/mcjty/rftoolsbase/api/screens/$IModuleGuiBuilder"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$ITabletSupport, $ITabletSupport$Type} from "packages/mcjty/rftoolsbase/api/various/$ITabletSupport"
@@ -1011,15 +1011,15 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($ConsoleScreenModule)>
-public "getClientScreenModule"(): $Class<($ConsoleClientScreenModule)>
-public "getInstalledTablet"(): $Item
-public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "openGui"(arg0: $Player$Type, arg1: $ItemStack$Type, arg2: $ItemStack$Type): void
+public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($ConsoleClientScreenModule)>
+public "getServerScreenModule"(): $Class<($ConsoleScreenModule)>
+public "getInstalledTablet"(): $Item
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($ConsoleScreenModule)>
 get "clientScreenModule"(): $Class<($ConsoleClientScreenModule)>
+get "serverScreenModule"(): $Class<($ConsoleScreenModule)>
 get "installedTablet"(): $Item
 }
 /**
@@ -1114,13 +1114,13 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($VariableScreenModule)>
-public "getClientScreenModule"(): $Class<($VariableClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($VariableClientScreenModule)>
+public "getServerScreenModule"(): $Class<($VariableScreenModule)>
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($VariableScreenModule)>
 get "clientScreenModule"(): $Class<($VariableClientScreenModule)>
+get "serverScreenModule"(): $Class<($VariableScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1158,13 +1158,13 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor()
 
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<($VectorArtScreenModule)>
-public "getClientScreenModule"(): $Class<($VectorArtClientScreenModule)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
 public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "getClientScreenModule"(): $Class<($VectorArtClientScreenModule)>
+public "getServerScreenModule"(): $Class<($VectorArtScreenModule)>
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<($VectorArtScreenModule)>
 get "clientScreenModule"(): $Class<($VectorArtClientScreenModule)>
+get "serverScreenModule"(): $Class<($VectorArtScreenModule)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_

@@ -147,8 +147,8 @@ export type $ItemLiftRefresher_ = $ItemLiftRefresher$Type;
 declare module "packages/mtr/item/$ItemPSDAPGBase$EnumPSDAPGItem" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -161,9 +161,9 @@ static readonly "PSD_APG_GLASS_END": $ItemPSDAPGBase$EnumPSDAPGItem
 public static "values"(): ($ItemPSDAPGBase$EnumPSDAPGItem)[]
 public static "valueOf"(name: string): $ItemPSDAPGBase$EnumPSDAPGItem
 public "getSerializedName"(): string
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "serializedName"(): string
 }
 /**
@@ -330,20 +330,20 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor(item: $ItemPSDAPGBase$EnumPSDAPGItem$Type, type: $ItemPSDAPGBase$EnumPSDAPGType$Type)
 
-public static "blocksNotReplaceable"(context: $UseOnContext$Type, width: integer, height: integer, blacklistBlock: $Block$Type): boolean
 public "useOn"(context: $UseOnContext$Type): $InteractionResult
 public "appendHoverText"(itemStack: $ItemStack$Type, level: $Level$Type, tooltip: $List$Type<($Component$Type)>, tooltipFlag: $TooltipFlag$Type): void
+public static "blocksNotReplaceable"(context: $UseOnContext$Type, width: integer, height: integer, blacklistBlock: $Block$Type): boolean
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
 public "propagate"(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, callback: $Consumer$Type<($BlockPos$Type)>, maxBlocksAway: integer): void
 public "propagate"<T extends $Comparable<(T)>>(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, property: $Property$Type<(T)>, maxBlocksAway: integer): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -733,16 +733,16 @@ constructor()
 
 public "useOn"(context: $UseOnContext$Type): $InteractionResult
 public static "isReplaceable"(ctx: $BlockPlaceContext$Type, direction: $Direction$Type, totalLength: integer): boolean
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
-public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
-public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
-public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "getSideDirection"(state: $BlockState$Type): $Direction
-public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
 public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingBrush"(world: $Level$Type, player: $Player$Type, callbackBrush: $Runnable$Type, callbackNoBrush: $Runnable$Type): $InteractionResult
+public static "checkHoldingItem"(world: $Level$Type, player: $Player$Type, callbackItem: $Consumer$Type<($Item$Type)>, callbackNoItem: $Runnable$Type, ...items: ($Item$Type)[]): $InteractionResult
 public static "onBreakCreative"(world: $Level$Type, player: $Player$Type, pos: $BlockPos$Type): void
 public "propagate"(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, callback: $Consumer$Type<($BlockPos$Type)>, maxBlocksAway: integer): void
 public "propagate"<T extends $Comparable<(T)>>(world: $Level$Type, pos: $BlockPos$Type, direction: $Direction$Type, property: $Property$Type<(T)>, maxBlocksAway: integer): void
+public static "getVoxelShapeByDirection"(x1: double, y1: double, z1: double, x2: double, y2: double, z2: double, facing: $Direction$Type): $VoxelShape
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(world: $BlockGetter$Type, pos: $BlockPos$Type, property: $Property$Type<(T)>): T
+public static "getStatePropertySafe"<T extends $Comparable<(T)>>(state: $BlockState$Type, property: $Property$Type<(T)>): T
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_

@@ -9,8 +9,8 @@ export class $CustomParticleType extends $ParticleType<($CustomParticleType)> im
 constructor(bl: boolean)
 
 public "getType"(): $CustomParticleType
-public "writeToString"(): string
 public "writeToNetwork"(friendlyByteBuf: $FriendlyByteBuf$Type): void
+public "writeToString"(): string
 public "codec"(): $Codec<($CustomParticleType)>
 get "type"(): $CustomParticleType
 }

@@ -294,9 +294,9 @@ export class $ChunkLoaderBlockEntity extends $AEBaseBlockEntity implements $Serv
 
 constructor(arg0: $BlockEntityType$Type<(any)>, arg1: $BlockPos$Type, arg2: $BlockState$Type)
 
+public "setRemoved"(): void
 public "onLoad"(): void
 public "serverTick"(): void
-public "setRemoved"(): void
 public static "tryClear"(arg0: any): void
 }
 /**
@@ -422,12 +422,12 @@ export class $ItemGenBlockEntity extends $AEBaseBlockEntity implements $Internal
 
 constructor(arg0: $BlockEntityType$Type<(any)>, arg1: $BlockPos$Type, arg2: $BlockState$Type)
 
-public "loadTag"(arg0: $CompoundTag$Type): void
-public "onReady"(): void
 public "m_183515_"(arg0: $CompoundTag$Type): void
 public "clearRemoved"(): void
-public "setItem"(arg0: $Item$Type): void
+public "onReady"(): void
+public "loadTag"(arg0: $CompoundTag$Type): void
 public "getCapability"<T>(arg0: $Capability$Type<(T)>, arg1: $Direction$Type): $LazyOptional<(T)>
+public "setItem"(arg0: $Item$Type): void
 public "onChangeInventory"(arg0: $InternalInventory$Type, arg1: integer): void
 public "isClientSide"(): boolean
 public "saveChanges"(): void
@@ -463,17 +463,17 @@ export class $EnergyGeneratorBlockEntity extends $AEBaseBlockEntity implements $
 
 constructor(arg0: $BlockEntityType$Type<(any)>, arg1: $BlockPos$Type, arg2: $BlockState$Type)
 
-public "serverTick"(): void
-public "canExtract"(): boolean
-public "getCapability"<T>(arg0: $Capability$Type<(T)>, arg1: $Direction$Type): $LazyOptional<(T)>
+public "canReceive"(): boolean
 public "receiveEnergy"(arg0: integer, arg1: boolean): integer
+public "getEnergyStored"(): integer
 public "getMaxEnergyStored"(): integer
 public "extractEnergy"(arg0: integer, arg1: boolean): integer
-public "canReceive"(): boolean
-public "getEnergyStored"(): integer
+public "getCapability"<T>(arg0: $Capability$Type<(T)>, arg1: $Direction$Type): $LazyOptional<(T)>
+public "canExtract"(): boolean
+public "serverTick"(): void
 public static "tryClear"(arg0: any): void
-get "maxEnergyStored"(): integer
 get "energyStored"(): integer
+get "maxEnergyStored"(): integer
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_

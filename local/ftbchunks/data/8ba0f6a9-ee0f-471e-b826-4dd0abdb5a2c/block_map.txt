@@ -190,6 +190,7 @@
 #2E2249 minecraft:iron_block
 #99FCFE mekanism:isotopic_centrifuge
 #7323DF gtceu:iv_256a_laser_target_hatch
+#9E0973 gtceu:iv_diode
 #52E3BA gtceu:iv_electrolyzer
 #54C520 gtceu:iv_energy_input_hatch
 #5E8A41 gtceu:iv_energy_output_hatch
@@ -377,6 +378,7 @@
 #FBFECE gtceu:tungsten_steel_crate
 #1B2AE6 gtceu:tungsten_steel_normal_fluid_pipe
 #44A92C gtceu:tungsten_steel_quadruple_fluid_pipe
+#8BDE60 gtceu:tungstensteel_pipe_casing
 #505D3A mekanismgenerators:turbine_casing
 #C05067 mekanismgenerators:turbine_rotor
 #F233FD mekanismgenerators:turbine_valve
@@ -395,6 +397,7 @@
 #7DD0FE mekanism:ultimate_pressurized_tube
 #BB3278 mekanism:ultimate_universal_cable
 #3DF04E gtceu:ulv_energy_input_hatch
+#9AC4D3 gtceu:ulv_energy_output_hatch
 #968585 gtceu:ulv_input_bus
 #0AF485 gtceu:ulv_input_hatch
 #F7003F gtceu:ulv_machine_hull
@@ -410,9 +413,14 @@
 #1483E6 gtceu:uranium_triplatinum_single_wire
 #1C52BE gtceu:uv_battery_buffer_16x
 #FFF5CD gtceu:uv_battery_buffer_4x
+#F1C924 gtceu:uv_centrifuge
 #46BACD gtceu:uv_chemical_reactor
+#2C23E7 gtceu:uv_diode
 #80472C gtceu:uv_energy_input_hatch
 #D18C49 gtceu:uv_energy_input_hatch_16a
+#A349B5 gtceu:uv_energy_output_hatch
+#2E2252 gtceu:uv_energy_output_hatch_16a
+#8F7B67 gtceu:uv_input_hatch
 #0BE28E gtceu:uv_muffler_hatch
 #E6D2DA gtceu:uv_scanner
 #5D6192 gtceu:uv_transformer_16a

@@ -6,8 +6,8 @@ import {$Component, $Component$Type} from "packages/net/minecraft/network/chat/$
 import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
 import {$Item$Properties, $Item$Properties$Type} from "packages/net/minecraft/world/item/$Item$Properties"
 import {$Ingredient, $Ingredient$Type} from "packages/net/minecraft/world/item/crafting/$Ingredient"
-import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$EquipmentSlot, $EquipmentSlot$Type} from "packages/net/minecraft/world/entity/$EquipmentSlot"
+import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$Tier, $Tier$Type} from "packages/net/minecraft/world/item/$Tier"
 import {$Block, $Block$Type} from "packages/net/minecraft/world/level/block/$Block"
@@ -33,15 +33,15 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor(material: $MaterialCreator$Type, properties: $Item$Properties$Type)
 
-public "getDamage"(): float
-public "getMaxDamage"(stack: $ItemStack$Type): integer
-public "canBeDepleted"(): boolean
-public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
-public "getRepairMaterial"(): $Ingredient
 public "addToBuilder"(builder: $ImmutableMultimap$Builder$Type<($Attribute$Type), ($AttributeModifier$Type)>): void
 public "getAttributeModifiers"(slot: $EquipmentSlot$Type, stack: $ItemStack$Type): $Multimap<($Attribute), ($AttributeModifier)>
-get "damage"(): float
+public "getRepairMaterial"(): $Ingredient
+public "canBeDepleted"(): boolean
+public "getMaxDamage"(stack: $ItemStack$Type): integer
+public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
+public "getDamage"(): float
 get "repairMaterial"(): $Ingredient
+get "damage"(): float
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -142,20 +142,20 @@ readonly "paxelAtkSpeed": $CachedFloatValue
 constructor(config: $IMekanismConfig$Type, builder: $ForgeConfigSpec$Builder$Type, materialDefaults: $VanillaPaxelMaterial$Type)
 
 public "getRegistryPrefix"(): string
-public "getPaxelEnchantability"(): integer
 public "getConfigCommentName"(): string
-public "getVanillaTier"(): $Tiers
+public "getPaxelEnchantability"(): integer
+public "getPaxelEfficiency"(): float
 public "getPaxelMaxUses"(): integer
 public "getPaxelAtkSpeed"(): float
-public "getPaxelEfficiency"(): float
+public "getVanillaTier"(): $Tiers
 public "getPaxelDamage"(): float
 get "registryPrefix"(): string
-get "paxelEnchantability"(): integer
 get "configCommentName"(): string
-get "vanillaTier"(): $Tiers
+get "paxelEnchantability"(): integer
+get "paxelEfficiency"(): float
 get "paxelMaxUses"(): integer
 get "paxelAtkSpeed"(): float
-get "paxelEfficiency"(): float
+get "vanillaTier"(): $Tiers
 get "paxelDamage"(): float
 }
 /**
@@ -187,64 +187,64 @@ constructor()
 public "getTag"(): $TagKey<($Block)>
 public "getRegistryPrefix"(): string
 public "getItemEnchantability"(): integer
-public "getCommonRepairMaterial"(): $Ingredient
-public "getArmorRepairMaterial"(): $Ingredient
-public "getShieldDurability"(): integer
 public "getItemRepairMaterial"(): $Ingredient
 public "getCommonEnchantability"(): integer
+public "getCommonRepairMaterial"(): $Ingredient
 public "getArmorEnchantability"(): integer
+public "getShieldDurability"(): integer
+public "getArmorRepairMaterial"(): $Ingredient
 public "getPaxelEnchantability"(): integer
-public "getPaxelMaxUses"(): integer
+public "getName"(): string
 public "getPaxelEfficiency"(): float
-public "getPaxelDamage"(): float
-public "getPickaxeDamage"(): float
-public "getHoeAtkSpeed"(): float
-public "getHoeDamage"(): float
+public "getPaxelMaxUses"(): integer
+public "getSwordDamage"(): float
 public "getSwordAtkSpeed"(): float
 public "getShovelDamage"(): float
+public "getPaxelDamage"(): float
+public "burnsInFire"(): boolean
+public "getHoeDamage"(): float
+public "getPickaxeDamage"(): float
+public "getAxeDamage"(): float
+public "getShovelAtkSpeed"(): float
 public "getAxeAtkSpeed"(): float
 public "getPickaxeAtkSpeed"(): float
-public "getSwordDamage"(): float
-public "burnsInFire"(): boolean
-public "getShovelAtkSpeed"(): float
-public "getAxeDamage"(): float
-public "getName"(): string
+public "getHoeAtkSpeed"(): float
 public "getConfigCommentName"(): string
 public "getPaxelAtkSpeed"(): float
 public "getDefenseForType"(arg0: $ArmorItem$Type$Type): integer
 public "getEquipSound"(): $SoundEvent
-public "getToughness"(): float
 public "getDurabilityForType"(arg0: $ArmorItem$Type$Type): integer
 public "getKnockbackResistance"(): float
+public "getToughness"(): float
 get "tag"(): $TagKey<($Block)>
 get "registryPrefix"(): string
 get "itemEnchantability"(): integer
-get "commonRepairMaterial"(): $Ingredient
-get "armorRepairMaterial"(): $Ingredient
-get "shieldDurability"(): integer
 get "itemRepairMaterial"(): $Ingredient
 get "commonEnchantability"(): integer
+get "commonRepairMaterial"(): $Ingredient
 get "armorEnchantability"(): integer
+get "shieldDurability"(): integer
+get "armorRepairMaterial"(): $Ingredient
 get "paxelEnchantability"(): integer
-get "paxelMaxUses"(): integer
+get "name"(): string
 get "paxelEfficiency"(): float
-get "paxelDamage"(): float
-get "pickaxeDamage"(): float
-get "hoeAtkSpeed"(): float
-get "hoeDamage"(): float
+get "paxelMaxUses"(): integer
+get "swordDamage"(): float
 get "swordAtkSpeed"(): float
 get "shovelDamage"(): float
+get "paxelDamage"(): float
+get "hoeDamage"(): float
+get "pickaxeDamage"(): float
+get "axeDamage"(): float
+get "shovelAtkSpeed"(): float
 get "axeAtkSpeed"(): float
 get "pickaxeAtkSpeed"(): float
-get "swordDamage"(): float
-get "shovelAtkSpeed"(): float
-get "axeDamage"(): float
-get "name"(): string
+get "hoeAtkSpeed"(): float
 get "configCommentName"(): string
 get "paxelAtkSpeed"(): float
 get "equipSound"(): $SoundEvent
-get "toughness"(): float
 get "knockbackResistance"(): float
+get "toughness"(): float
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -273,9 +273,9 @@ import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
 import {$Predicate, $Predicate$Type} from "packages/java/util/function/$Predicate"
 import {$Item$Properties, $Item$Properties$Type} from "packages/net/minecraft/world/item/$Item$Properties"
 import {$Ingredient, $Ingredient$Type} from "packages/net/minecraft/world/item/crafting/$Ingredient"
+import {$EquipmentSlot, $EquipmentSlot$Type} from "packages/net/minecraft/world/entity/$EquipmentSlot"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
-import {$EquipmentSlot, $EquipmentSlot$Type} from "packages/net/minecraft/world/entity/$EquipmentSlot"
 import {$Tier, $Tier$Type} from "packages/net/minecraft/world/item/$Tier"
 import {$IHasRepairType, $IHasRepairType$Type} from "packages/mekanism/tools/common/$IHasRepairType"
 import {$IAttributeRefresher, $IAttributeRefresher$Type} from "packages/mekanism/common/lib/attribute/$IAttributeRefresher"
@@ -304,16 +304,16 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor(material: $MaterialCreator$Type, properties: $Item$Properties$Type)
 
-public "getAttackDamage"(): float
-public "getDestroySpeed"(stack: $ItemStack$Type, state: $BlockState$Type): float
-public "getMaxDamage"(stack: $ItemStack$Type): integer
-public "canBeDepleted"(): boolean
-public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
-public "getRepairMaterial"(): $Ingredient
 public "addToBuilder"(builder: $ImmutableMultimap$Builder$Type<($Attribute$Type), ($AttributeModifier$Type)>): void
 public "getAttributeModifiers"(slot: $EquipmentSlot$Type, stack: $ItemStack$Type): $Multimap<($Attribute), ($AttributeModifier)>
-get "attackDamage"(): float
+public "getRepairMaterial"(): $Ingredient
+public "getDestroySpeed"(stack: $ItemStack$Type, state: $BlockState$Type): float
+public "canBeDepleted"(): boolean
+public "getMaxDamage"(stack: $ItemStack$Type): integer
+public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
+public "getAttackDamage"(): float
 get "repairMaterial"(): $Ingredient
+get "attackDamage"(): float
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -364,69 +364,69 @@ constructor(config: $IMekanismConfig$Type, builder: $ForgeConfigSpec$Builder$Typ
 
 public "getTag"(): $TagKey<($Block)>
 public "getRegistryPrefix"(): string
+public "getCommonEnchantability"(): integer
 public "getCommonRepairMaterial"(): $Ingredient
 public "getShieldDurability"(): integer
-public "getCommonEnchantability"(): integer
-public "getPaxelEnchantability"(): integer
 public "getConfigCommentName"(): string
-public "getPaxelMaxUses"(): integer
-public "getPaxelAtkSpeed"(): float
-public "getPaxelEfficiency"(): float
-public "getPaxelDamage"(): float
-public "getPickaxeDamage"(): float
-public "getHoeAtkSpeed"(): float
-public "getHoeDamage"(): float
-public "getSwordAtkSpeed"(): float
-public "getShovelDamage"(): float
-public "getAxeAtkSpeed"(): float
-public "getPickaxeAtkSpeed"(): float
-public "getSwordDamage"(): float
-public "burnsInFire"(): boolean
-public "getShovelAtkSpeed"(): float
-public "getAxeDamage"(): float
+public "getPaxelEnchantability"(): integer
 public "getDefenseForType"(armorType: $ArmorItem$Type$Type): integer
 public "getEquipSound"(): $SoundEvent
 public "getName"(): string
-public "getToughness"(): float
 public "getDurabilityForType"(armorType: $ArmorItem$Type$Type): integer
 public "getKnockbackResistance"(): float
-public "getAttackDamageBonus"(): float
+public "getToughness"(): float
 public "getUses"(): integer
-public "getSpeed"(): float
 /**
  * 
  * @deprecated
  */
 public "getLevel"(): integer
+public "getSpeed"(): float
+public "getAttackDamageBonus"(): float
+public "getPaxelEfficiency"(): float
+public "getPaxelMaxUses"(): integer
+public "getPaxelAtkSpeed"(): float
+public "getSwordDamage"(): float
+public "getSwordAtkSpeed"(): float
+public "getShovelDamage"(): float
+public "getPaxelDamage"(): float
+public "burnsInFire"(): boolean
+public "getHoeDamage"(): float
+public "getPickaxeDamage"(): float
+public "getAxeDamage"(): float
+public "getShovelAtkSpeed"(): float
+public "getAxeAtkSpeed"(): float
+public "getPickaxeAtkSpeed"(): float
+public "getHoeAtkSpeed"(): float
 get "tag"(): $TagKey<($Block)>
 get "registryPrefix"(): string
+get "commonEnchantability"(): integer
 get "commonRepairMaterial"(): $Ingredient
 get "shieldDurability"(): integer
-get "commonEnchantability"(): integer
-get "paxelEnchantability"(): integer
 get "configCommentName"(): string
-get "paxelMaxUses"(): integer
-get "paxelAtkSpeed"(): float
-get "paxelEfficiency"(): float
-get "paxelDamage"(): float
-get "pickaxeDamage"(): float
-get "hoeAtkSpeed"(): float
-get "hoeDamage"(): float
-get "swordAtkSpeed"(): float
-get "shovelDamage"(): float
-get "axeAtkSpeed"(): float
-get "pickaxeAtkSpeed"(): float
-get "swordDamage"(): float
-get "shovelAtkSpeed"(): float
-get "axeDamage"(): float
+get "paxelEnchantability"(): integer
 get "equipSound"(): $SoundEvent
 get "name"(): string
-get "toughness"(): float
 get "knockbackResistance"(): float
-get "attackDamageBonus"(): float
+get "toughness"(): float
 get "uses"(): integer
-get "speed"(): float
 get "level"(): integer
+get "speed"(): float
+get "attackDamageBonus"(): float
+get "paxelEfficiency"(): float
+get "paxelMaxUses"(): integer
+get "paxelAtkSpeed"(): float
+get "swordDamage"(): float
+get "swordAtkSpeed"(): float
+get "shovelDamage"(): float
+get "paxelDamage"(): float
+get "hoeDamage"(): float
+get "pickaxeDamage"(): float
+get "axeDamage"(): float
+get "shovelAtkSpeed"(): float
+get "axeAtkSpeed"(): float
+get "pickaxeAtkSpeed"(): float
+get "hoeAtkSpeed"(): float
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -448,9 +448,9 @@ import {$Component, $Component$Type} from "packages/net/minecraft/network/chat/$
 import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
 import {$Item$Properties, $Item$Properties$Type} from "packages/net/minecraft/world/item/$Item$Properties"
 import {$Ingredient, $Ingredient$Type} from "packages/net/minecraft/world/item/crafting/$Ingredient"
+import {$EquipmentSlot, $EquipmentSlot$Type} from "packages/net/minecraft/world/entity/$EquipmentSlot"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
-import {$EquipmentSlot, $EquipmentSlot$Type} from "packages/net/minecraft/world/entity/$EquipmentSlot"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$Tier, $Tier$Type} from "packages/net/minecraft/world/item/$Tier"
 import {$Block, $Block$Type} from "packages/net/minecraft/world/level/block/$Block"
@@ -477,16 +477,16 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor(material: $MaterialCreator$Type, properties: $Item$Properties$Type)
 
-public "getAttackDamage"(): float
-public "getDestroySpeed"(stack: $ItemStack$Type, state: $BlockState$Type): float
-public "getMaxDamage"(stack: $ItemStack$Type): integer
-public "canBeDepleted"(): boolean
-public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
-public "getRepairMaterial"(): $Ingredient
 public "addToBuilder"(builder: $ImmutableMultimap$Builder$Type<($Attribute$Type), ($AttributeModifier$Type)>): void
 public "getAttributeModifiers"(slot: $EquipmentSlot$Type, stack: $ItemStack$Type): $Multimap<($Attribute), ($AttributeModifier)>
-get "attackDamage"(): float
+public "getRepairMaterial"(): $Ingredient
+public "getDestroySpeed"(stack: $ItemStack$Type, state: $BlockState$Type): float
+public "canBeDepleted"(): boolean
+public "getMaxDamage"(stack: $ItemStack$Type): integer
+public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
+public "getAttackDamage"(): float
 get "repairMaterial"(): $Ingredient
+get "attackDamage"(): float
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -509,9 +509,9 @@ import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
 import {$Item$Properties, $Item$Properties$Type} from "packages/net/minecraft/world/item/$Item$Properties"
 import {$AxeItem, $AxeItem$Type} from "packages/net/minecraft/world/item/$AxeItem"
 import {$Ingredient, $Ingredient$Type} from "packages/net/minecraft/world/item/crafting/$Ingredient"
+import {$EquipmentSlot, $EquipmentSlot$Type} from "packages/net/minecraft/world/entity/$EquipmentSlot"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
-import {$EquipmentSlot, $EquipmentSlot$Type} from "packages/net/minecraft/world/entity/$EquipmentSlot"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$Block, $Block$Type} from "packages/net/minecraft/world/level/block/$Block"
 import {$Tier, $Tier$Type} from "packages/net/minecraft/world/item/$Tier"
@@ -538,16 +538,16 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor(material: $MaterialCreator$Type, properties: $Item$Properties$Type)
 
-public "getAttackDamage"(): float
-public "getDestroySpeed"(stack: $ItemStack$Type, state: $BlockState$Type): float
-public "getMaxDamage"(stack: $ItemStack$Type): integer
-public "canBeDepleted"(): boolean
-public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
-public "getRepairMaterial"(): $Ingredient
 public "addToBuilder"(builder: $ImmutableMultimap$Builder$Type<($Attribute$Type), ($AttributeModifier$Type)>): void
 public "getAttributeModifiers"(slot: $EquipmentSlot$Type, stack: $ItemStack$Type): $Multimap<($Attribute), ($AttributeModifier)>
-get "attackDamage"(): float
+public "getRepairMaterial"(): $Ingredient
+public "getDestroySpeed"(stack: $ItemStack$Type, state: $BlockState$Type): float
+public "canBeDepleted"(): boolean
+public "getMaxDamage"(stack: $ItemStack$Type): integer
+public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
+public "getAttackDamage"(): float
 get "repairMaterial"(): $Ingredient
+get "attackDamage"(): float
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -569,16 +569,16 @@ import {$ArmorItem$Type, $ArmorItem$Type$Type} from "packages/net/minecraft/worl
 
 export interface $IArmorMaterialHelper extends $ArmorMaterial {
 
- "getArmorRepairMaterial"(): $Ingredient
  "getArmorEnchantability"(): integer
- "getEnchantmentValue"(): integer
+ "getArmorRepairMaterial"(): $Ingredient
  "getRepairIngredient"(): $Ingredient
+ "getEnchantmentValue"(): integer
  "getDefenseForType"(arg0: $ArmorItem$Type$Type): integer
  "getEquipSound"(): $SoundEvent
  "getName"(): string
- "getToughness"(): float
  "getDurabilityForType"(arg0: $ArmorItem$Type$Type): integer
  "getKnockbackResistance"(): float
+ "getToughness"(): float
 }
 
 export namespace $IArmorMaterialHelper {
@@ -600,11 +600,11 @@ declare module "packages/mekanism/tools/common/material/$IPaxelMaterial" {
 export {} // Mark the file as a module, do not remove unless there are other import/exports!
 export interface $IPaxelMaterial {
 
- "getPaxelEnchantability"(): integer
  "getConfigCommentName"(): string
+ "getPaxelEnchantability"(): integer
+ "getPaxelEfficiency"(): float
  "getPaxelMaxUses"(): integer
  "getPaxelAtkSpeed"(): float
- "getPaxelEfficiency"(): float
  "getPaxelDamage"(): float
 }
 
@@ -633,17 +633,17 @@ constructor()
 
 public "getRegistryPrefix"(): string
 public "getPaxelEnchantability"(): integer
-public "getVanillaTier"(): $Tiers
-public "getPaxelMaxUses"(): integer
 public "getPaxelEfficiency"(): float
+public "getPaxelMaxUses"(): integer
+public "getVanillaTier"(): $Tiers
 public "getConfigCommentName"(): string
 public "getPaxelAtkSpeed"(): float
 public "getPaxelDamage"(): float
 get "registryPrefix"(): string
 get "paxelEnchantability"(): integer
-get "vanillaTier"(): $Tiers
-get "paxelMaxUses"(): integer
 get "paxelEfficiency"(): float
+get "paxelMaxUses"(): integer
+get "vanillaTier"(): $Tiers
 get "configCommentName"(): string
 get "paxelAtkSpeed"(): float
 get "paxelDamage"(): float
@@ -692,16 +692,16 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor(material: $BaseMekanismMaterial$Type, properties: $Item$Properties$Type)
 
-public "getMaxDamage"(stack: $ItemStack$Type): integer
-public "canBeDepleted"(): boolean
-public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
-public "getEnchantmentValue"(): integer
-public "isValidRepairItem"(toRepair: $ItemStack$Type, repair: $ItemStack$Type): boolean
-public "getRepairMaterial"(): $Ingredient
 public "initializeClient"(consumer: $Consumer$Type<($IClientItemExtensions$Type)>): void
+public "getRepairMaterial"(): $Ingredient
+public "canBeDepleted"(): boolean
+public "getMaxDamage"(stack: $ItemStack$Type): integer
+public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
+public "isValidRepairItem"(toRepair: $ItemStack$Type, repair: $ItemStack$Type): boolean
+public "getEnchantmentValue"(): integer
 public static "get"(arg0: $ItemStack$Type): $Equipable
-get "enchantmentValue"(): integer
 get "repairMaterial"(): $Ingredient
+get "enchantmentValue"(): integer
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -725,8 +725,8 @@ import {$ShovelItem, $ShovelItem$Type} from "packages/net/minecraft/world/item/$
 import {$Item$Properties, $Item$Properties$Type} from "packages/net/minecraft/world/item/$Item$Properties"
 import {$Ingredient, $Ingredient$Type} from "packages/net/minecraft/world/item/crafting/$Ingredient"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
-import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$EquipmentSlot, $EquipmentSlot$Type} from "packages/net/minecraft/world/entity/$EquipmentSlot"
+import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$Block, $Block$Type} from "packages/net/minecraft/world/level/block/$Block"
 import {$Tier, $Tier$Type} from "packages/net/minecraft/world/item/$Tier"
@@ -753,16 +753,16 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor(material: $MaterialCreator$Type, properties: $Item$Properties$Type)
 
-public "getAttackDamage"(): float
-public "getDestroySpeed"(stack: $ItemStack$Type, state: $BlockState$Type): float
-public "getMaxDamage"(stack: $ItemStack$Type): integer
-public "canBeDepleted"(): boolean
-public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
-public "getRepairMaterial"(): $Ingredient
 public "addToBuilder"(builder: $ImmutableMultimap$Builder$Type<($Attribute$Type), ($AttributeModifier$Type)>): void
 public "getAttributeModifiers"(slot: $EquipmentSlot$Type, stack: $ItemStack$Type): $Multimap<($Attribute), ($AttributeModifier)>
-get "attackDamage"(): float
+public "getRepairMaterial"(): $Ingredient
+public "getDestroySpeed"(stack: $ItemStack$Type, state: $BlockState$Type): float
+public "canBeDepleted"(): boolean
+public "getMaxDamage"(stack: $ItemStack$Type): integer
+public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
+public "getAttackDamage"(): float
 get "repairMaterial"(): $Ingredient
+get "attackDamage"(): float
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -791,8 +791,8 @@ import {$Multimap, $Multimap$Type} from "packages/com/google/common/collect/$Mul
 import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
 import {$Item$Properties, $Item$Properties$Type} from "packages/net/minecraft/world/item/$Item$Properties"
 import {$Ingredient, $Ingredient$Type} from "packages/net/minecraft/world/item/crafting/$Ingredient"
-import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$EquipmentSlot, $EquipmentSlot$Type} from "packages/net/minecraft/world/entity/$EquipmentSlot"
+import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$IHasRepairType, $IHasRepairType$Type} from "packages/mekanism/tools/common/$IHasRepairType"
 import {$IAttributeRefresher, $IAttributeRefresher$Type} from "packages/mekanism/common/lib/attribute/$IAttributeRefresher"
 import {$Item, $Item$Type} from "packages/net/minecraft/world/item/$Item"
@@ -815,21 +815,21 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor(material: $MaterialCreator$Type, armorType: $ArmorItem$Type$Type, properties: $Item$Properties$Type)
 
-public "initCapabilities"(stack: $ItemStack$Type, nbt: $CompoundTag$Type): $ICapabilityProvider
-public "getToughness"(): float
-public "getDefense"(): integer
-public "getKnockbackResistance"(): float
-public "getMaxDamage"(stack: $ItemStack$Type): integer
-public "canBeDepleted"(): boolean
-public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
-public "getRepairMaterial"(): $Ingredient
 public "addToBuilder"(builder: $ImmutableMultimap$Builder$Type<($Attribute$Type), ($AttributeModifier$Type)>): void
+public "initCapabilities"(stack: $ItemStack$Type, nbt: $CompoundTag$Type): $ICapabilityProvider
 public "getAttributeModifiers"(slot: $EquipmentSlot$Type, stack: $ItemStack$Type): $Multimap<($Attribute), ($AttributeModifier)>
+public "getRepairMaterial"(): $Ingredient
+public "canBeDepleted"(): boolean
+public "getMaxDamage"(stack: $ItemStack$Type): integer
+public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
+public "getDefense"(): integer
+public "getToughness"(): float
+public "getKnockbackResistance"(): float
 public static "get"(arg0: $ItemStack$Type): $Equipable
-get "toughness"(): float
-get "defense"(): integer
-get "knockbackResistance"(): float
 get "repairMaterial"(): $Ingredient
+get "defense"(): integer
+get "toughness"(): float
+get "knockbackResistance"(): float
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -857,23 +857,23 @@ public "getItemRepairMaterial"(): $Ingredient
 public "getRepairIngredient"(): $Ingredient
 public "getEnchantmentValue"(): integer
 public "getTag"(): $TagKey<($Block)>
-public "getAttackDamageBonus"(): float
 public "getUses"(): integer
-public "getSpeed"(): float
 /**
  * 
  * @deprecated
  */
 public "getLevel"(): integer
+public "getSpeed"(): float
+public "getAttackDamageBonus"(): float
 get "itemEnchantability"(): integer
 get "itemRepairMaterial"(): $Ingredient
 get "repairIngredient"(): $Ingredient
 get "enchantmentValue"(): integer
 get "tag"(): $TagKey<($Block)>
-get "attackDamageBonus"(): float
 get "uses"(): integer
-get "speed"(): float
 get "level"(): integer
+get "speed"(): float
+get "attackDamageBonus"(): float
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -901,11 +901,11 @@ import {$ImmutableMultimap$Builder, $ImmutableMultimap$Builder$Type} from "packa
 import {$Multimap, $Multimap$Type} from "packages/com/google/common/collect/$Multimap"
 import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
 import {$Item$Properties, $Item$Properties$Type} from "packages/net/minecraft/world/item/$Item$Properties"
-import {$InteractionResult, $InteractionResult$Type} from "packages/net/minecraft/world/$InteractionResult"
 import {$Ingredient, $Ingredient$Type} from "packages/net/minecraft/world/item/crafting/$Ingredient"
+import {$InteractionResult, $InteractionResult$Type} from "packages/net/minecraft/world/$InteractionResult"
+import {$EquipmentSlot, $EquipmentSlot$Type} from "packages/net/minecraft/world/entity/$EquipmentSlot"
 import {$BlockState, $BlockState$Type} from "packages/net/minecraft/world/level/block/state/$BlockState"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
-import {$EquipmentSlot, $EquipmentSlot$Type} from "packages/net/minecraft/world/entity/$EquipmentSlot"
 import {$Tier, $Tier$Type} from "packages/net/minecraft/world/item/$Tier"
 import {$IHasRepairType, $IHasRepairType$Type} from "packages/mekanism/tools/common/$IHasRepairType"
 import {$IAttributeRefresher, $IAttributeRefresher$Type} from "packages/mekanism/common/lib/attribute/$IAttributeRefresher"
@@ -930,22 +930,22 @@ static readonly "MAX_BAR_WIDTH": integer
 constructor(material: $MaterialCreator$Type, properties: $Item$Properties$Type)
 constructor(material: $VanillaPaxelMaterialCreator$Type, properties: $Item$Properties$Type)
 
-public "getAttackDamage"(): float
 public "canPerformAction"(stack: $ItemStack$Type, action: $ToolAction$Type): boolean
-public "isCorrectToolForDrops"(stack: $ItemStack$Type, state: $BlockState$Type): boolean
-public "useOn"(context: $UseOnContext$Type): $InteractionResult
-public "getDestroySpeed"(stack: $ItemStack$Type, state: $BlockState$Type): float
-public "getMaxDamage"(stack: $ItemStack$Type): integer
-public "canBeDepleted"(): boolean
-public "isCorrectToolForDrops"(state: $BlockState$Type): boolean
-public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
-public "getEnchantmentValue"(): integer
-public "getRepairMaterial"(): $Ingredient
 public "addToBuilder"(builder: $ImmutableMultimap$Builder$Type<($Attribute$Type), ($AttributeModifier$Type)>): void
 public "getAttributeModifiers"(slot: $EquipmentSlot$Type, stack: $ItemStack$Type): $Multimap<($Attribute), ($AttributeModifier)>
-get "attackDamage"(): float
-get "enchantmentValue"(): integer
+public "getRepairMaterial"(): $Ingredient
+public "isCorrectToolForDrops"(state: $BlockState$Type): boolean
+public "useOn"(context: $UseOnContext$Type): $InteractionResult
+public "getDestroySpeed"(stack: $ItemStack$Type, state: $BlockState$Type): float
+public "canBeDepleted"(): boolean
+public "getMaxDamage"(stack: $ItemStack$Type): integer
+public "appendHoverText"(stack: $ItemStack$Type, world: $Level$Type, tooltip: $List$Type<($Component$Type)>, flag: $TooltipFlag$Type): void
+public "getEnchantmentValue"(): integer
+public "isCorrectToolForDrops"(stack: $ItemStack$Type, state: $BlockState$Type): boolean
+public "getAttackDamage"(): float
 get "repairMaterial"(): $Ingredient
+get "enchantmentValue"(): integer
+get "attackDamage"(): float
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_

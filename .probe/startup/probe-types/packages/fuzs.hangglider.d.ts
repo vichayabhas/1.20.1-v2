@@ -75,8 +75,8 @@ declare module "packages/fuzs/hangglider/mixin/accessor/$ServerGamePacketListene
 export {} // Mark the file as a module, do not remove unless there are other import/exports!
 export interface $ServerGamePacketListenerImplAccessor {
 
- "hangglider$setAboveGroundTickCount"(arg0: integer): void
  "hangglider$setAboveGroundVehicleTickCount"(arg0: integer): void
+ "hangglider$setAboveGroundTickCount"(arg0: integer): void
 }
 
 export namespace $ServerGamePacketListenerImplAccessor {

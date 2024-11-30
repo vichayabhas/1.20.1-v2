@@ -32,15 +32,15 @@ import {$PigmentStack, $PigmentStack$Type} from "packages/mekanism/api/chemical/
 export interface $IPigmentHandler extends $IChemicalHandler<($Pigment), ($PigmentStack)>, $IEmptyPigmentProvider {
 
  "isValid"(arg0: integer, arg1: $PigmentStack$Type): boolean
- "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): $PigmentStack
- "extractChemical"(arg0: $PigmentStack$Type, arg1: $Action$Type): $PigmentStack
- "extractChemical"(arg0: long, arg1: $Action$Type): $PigmentStack
- "insertChemical"(arg0: integer, arg1: $PigmentStack$Type, arg2: $Action$Type): $PigmentStack
- "insertChemical"(arg0: $PigmentStack$Type, arg1: $Action$Type): $PigmentStack
- "getChemicalInTank"(arg0: integer): $PigmentStack
- "setChemicalInTank"(arg0: integer, arg1: $PigmentStack$Type): void
  "getTanks"(): integer
  "getTankCapacity"(arg0: integer): long
+ "insertChemical"(arg0: $PigmentStack$Type, arg1: $Action$Type): $PigmentStack
+ "insertChemical"(arg0: integer, arg1: $PigmentStack$Type, arg2: $Action$Type): $PigmentStack
+ "getChemicalInTank"(arg0: integer): $PigmentStack
+ "extractChemical"(arg0: long, arg1: $Action$Type): $PigmentStack
+ "extractChemical"(arg0: $PigmentStack$Type, arg1: $Action$Type): $PigmentStack
+ "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): $PigmentStack
+ "setChemicalInTank"(arg0: integer, arg1: $PigmentStack$Type): void
  "getEmptyStack"(): $PigmentStack
 }
 
@@ -71,8 +71,8 @@ import {$Slurry, $Slurry$Type} from "packages/mekanism/api/chemical/slurry/$Slur
 
 export interface $ISlurryTank extends $IChemicalTank<($Slurry), ($SlurryStack)>, $IEmptySlurryProvider {
 
- "createStack"(arg0: $SlurryStack$Type, arg1: long): $SlurryStack
  "deserializeNBT"(arg0: $CompoundTag$Type): void
+ "createStack"(arg0: $SlurryStack$Type, arg1: long): $SlurryStack
  "extract"(arg0: long, arg1: $Action$Type, arg2: $AutomationType$Type): $SlurryStack
  "insert"(arg0: $SlurryStack$Type, arg1: $Action$Type, arg2: $AutomationType$Type): $SlurryStack
  "isEmpty"(): boolean
@@ -80,17 +80,17 @@ export interface $ISlurryTank extends $IChemicalTank<($Slurry), ($SlurryStack)>,
  "getStack"(): $SlurryStack
  "getCapacity"(): long
  "isValid"(arg0: $SlurryStack$Type): boolean
+ "setEmpty"(): void
+ "setStack"(arg0: $SlurryStack$Type): void
+ "growStack"(arg0: long, arg1: $Action$Type): long
+ "isTypeEqual"(arg0: $Slurry$Type): boolean
+ "isTypeEqual"(arg0: $SlurryStack$Type): boolean
  "setStackUnchecked"(arg0: $SlurryStack$Type): void
+ "shrinkStack"(arg0: long, arg1: $Action$Type): long
  "setStackSize"(arg0: long, arg1: $Action$Type): long
  "getStored"(): long
  "getNeeded"(): long
  "getAttributeValidator"(): $ChemicalAttributeValidator
- "setStack"(arg0: $SlurryStack$Type): void
- "setEmpty"(): void
- "growStack"(arg0: long, arg1: $Action$Type): long
- "isTypeEqual"(arg0: $Slurry$Type): boolean
- "isTypeEqual"(arg0: $SlurryStack$Type): boolean
- "shrinkStack"(arg0: long, arg1: $Action$Type): long
  "getEmptyStack"(): $SlurryStack
  "onContentsChanged"(): void
 }
@@ -125,32 +125,32 @@ constructor(arg0: $ModuleData$ModuleDataBuilder$Type<(MODULE)>)
 
 public "get"(): MODULE
 public "getTranslationKey"(): string
-public "getRarity"(): $Rarity
-public "getRegistryName"(): $ResourceLocation
-public "getModuleData"(): $ModuleData<(MODULE)>
+public "getItemProvider"(): $IItemProvider
+public "handlesModeChange"(): boolean
 public "isExclusive"(arg0: integer): boolean
-public "isNoDisable"(): boolean
 public "rendersHUD"(): boolean
 public "getExclusiveFlags"(): integer
-public "handlesModeChange"(): boolean
-public "getItemProvider"(): $IItemProvider
+public "isNoDisable"(): boolean
+public "getRegistryName"(): $ResourceLocation
 public "getMaxStackSize"(): integer
-public "isModeChangeDisabledByDefault"(): boolean
 public "isDisabledByDefault"(): boolean
 public "getDescriptionTranslationKey"(): string
+public "isModeChangeDisabledByDefault"(): boolean
+public "getModuleData"(): $ModuleData<(MODULE)>
+public "getRarity"(): $Rarity
 public "getName"(): string
 public "getTextComponent"(): $Component
 get "translationKey"(): string
-get "rarity"(): $Rarity
-get "registryName"(): $ResourceLocation
-get "moduleData"(): $ModuleData<(MODULE)>
-get "noDisable"(): boolean
-get "exclusiveFlags"(): integer
 get "itemProvider"(): $IItemProvider
+get "exclusiveFlags"(): integer
+get "noDisable"(): boolean
+get "registryName"(): $ResourceLocation
 get "maxStackSize"(): integer
-get "modeChangeDisabledByDefault"(): boolean
 get "disabledByDefault"(): boolean
 get "descriptionTranslationKey"(): string
+get "modeChangeDisabledByDefault"(): boolean
+get "moduleData"(): $ModuleData<(MODULE)>
+get "rarity"(): $Rarity
 get "name"(): string
 get "textComponent"(): $Component
 }
@@ -196,36 +196,36 @@ declare module "packages/mekanism/api/energy/$IMekanismStrictEnergyHandler" {
 import {$IEnergyContainer, $IEnergyContainer$Type} from "packages/mekanism/api/energy/$IEnergyContainer"
 import {$ISidedStrictEnergyHandler, $ISidedStrictEnergyHandler$Type} from "packages/mekanism/api/energy/$ISidedStrictEnergyHandler"
 import {$Action, $Action$Type} from "packages/mekanism/api/$Action"
-import {$List, $List$Type} from "packages/java/util/$List"
 import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
+import {$List, $List$Type} from "packages/java/util/$List"
 import {$FloatingLong, $FloatingLong$Type} from "packages/mekanism/api/math/$FloatingLong"
 import {$IContentsListener, $IContentsListener$Type} from "packages/mekanism/api/$IContentsListener"
 
 export interface $IMekanismStrictEnergyHandler extends $ISidedStrictEnergyHandler, $IContentsListener {
 
- "getEnergyContainers"(arg0: $Direction$Type): $List<($IEnergyContainer)>
  "getEnergyContainer"(arg0: integer, arg1: $Direction$Type): $IEnergyContainer
- "canHandleEnergy"(): boolean
- "getMaxEnergy"(arg0: integer, arg1: $Direction$Type): $FloatingLong
- "insertEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Direction$Type, arg3: $Action$Type): $FloatingLong
- "getNeededEnergy"(arg0: integer, arg1: $Direction$Type): $FloatingLong
- "getEnergy"(arg0: integer, arg1: $Direction$Type): $FloatingLong
- "setEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Direction$Type): void
  "getEnergyContainerCount"(arg0: $Direction$Type): integer
  "extractEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Direction$Type, arg3: $Action$Type): $FloatingLong
- "getMaxEnergy"(arg0: integer): $FloatingLong
- "insertEnergy"(arg0: $FloatingLong$Type, arg1: $Direction$Type, arg2: $Action$Type): $FloatingLong
- "insertEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Action$Type): $FloatingLong
- "getNeededEnergy"(arg0: integer): $FloatingLong
- "getEnergySideFor"(): $Direction
+ "getEnergy"(arg0: integer, arg1: $Direction$Type): $FloatingLong
+ "setEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Direction$Type): void
+ "getEnergyContainers"(arg0: $Direction$Type): $List<($IEnergyContainer)>
+ "canHandleEnergy"(): boolean
+ "getMaxEnergy"(arg0: integer, arg1: $Direction$Type): $FloatingLong
+ "getNeededEnergy"(arg0: integer, arg1: $Direction$Type): $FloatingLong
+ "insertEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Direction$Type, arg3: $Action$Type): $FloatingLong
+ "getEnergyContainerCount"(): integer
+ "extractEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Action$Type): $FloatingLong
+ "extractEnergy"(arg0: $FloatingLong$Type, arg1: $Direction$Type, arg2: $Action$Type): $FloatingLong
  "getEnergy"(arg0: integer): $FloatingLong
  "setEnergy"(arg0: integer, arg1: $FloatingLong$Type): void
- "getEnergyContainerCount"(): integer
- "extractEnergy"(arg0: $FloatingLong$Type, arg1: $Direction$Type, arg2: $Action$Type): $FloatingLong
- "extractEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Action$Type): $FloatingLong
+ "getMaxEnergy"(arg0: integer): $FloatingLong
+ "getNeededEnergy"(arg0: integer): $FloatingLong
+ "insertEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Action$Type): $FloatingLong
+ "insertEnergy"(arg0: $FloatingLong$Type, arg1: $Direction$Type, arg2: $Action$Type): $FloatingLong
+ "getEnergySideFor"(): $Direction
  "onContentsChanged"(): void
- "insertEnergy"(arg0: $FloatingLong$Type, arg1: $Action$Type): $FloatingLong
  "extractEnergy"(arg0: $FloatingLong$Type, arg1: $Action$Type): $FloatingLong
+ "insertEnergy"(arg0: $FloatingLong$Type, arg1: $Action$Type): $FloatingLong
 }
 
 export namespace $IMekanismStrictEnergyHandler {
@@ -283,10 +283,10 @@ constructor()
 public "write"(arg0: $FriendlyByteBuf$Type): void
 public "testType"(arg0: $ItemStack$Type): boolean
 public "serialize"(): $JsonElement
-public "getRepresentations"(): $List<($ItemStack)>
+public "hasNoMatchingInstances"(): boolean
 public "getMatchingInstance"(arg0: $ItemStack$Type): $ItemStack
 public "getNeededAmount"(arg0: $ItemStack$Type): long
-public "hasNoMatchingInstances"(): boolean
+public "getRepresentations"(): $List<($ItemStack)>
 public "test"(arg0: $ItemStack$Type): boolean
 public "or"(arg0: $Predicate$Type<(any)>): $Predicate<($ItemStack)>
 public "negate"(): $Predicate<($ItemStack)>
@@ -318,14 +318,14 @@ export class $ChemicalBuilder<CHEMICAL extends $Chemical<(CHEMICAL)>, BUILDER ex
 
 
 public "isHidden"(): boolean
+public "getTexture"(): $ResourceLocation
 public "with"(arg0: $ChemicalAttribute$Type): BUILDER
 public "hidden"(): BUILDER
-public "tint"(arg0: integer): BUILDER
 public "getTint"(): integer
+public "tint"(arg0: integer): BUILDER
 public "getAttributeMap"(): $Map<($Class<(any)>), ($ChemicalAttribute)>
-public "getTexture"(): $ResourceLocation
-get "attributeMap"(): $Map<($Class<(any)>), ($ChemicalAttribute)>
 get "texture"(): $ResourceLocation
+get "attributeMap"(): $Map<($Class<(any)>), ($ChemicalAttribute)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -353,16 +353,16 @@ export interface $IInventorySlot extends $INBTSerializable<($CompoundTag)>, $ICo
  "isEmpty"(): boolean
  "getStack"(): $ItemStack
  "getCount"(): integer
- "insertItem"(arg0: $ItemStack$Type, arg1: $Action$Type, arg2: $AutomationType$Type): $ItemStack
- "extractItem"(arg0: integer, arg1: $Action$Type, arg2: $AutomationType$Type): $ItemStack
- "isItemValid"(arg0: $ItemStack$Type): boolean
- "setStackSize"(arg0: integer, arg1: $Action$Type): integer
- "setStack"(arg0: $ItemStack$Type): void
  "setEmpty"(): void
- "growStack"(arg0: integer, arg1: $Action$Type): integer
+ "setStack"(arg0: $ItemStack$Type): void
  "getLimit"(arg0: $ItemStack$Type): integer
  "createContainerSlot"(): $Slot
+ "growStack"(arg0: integer, arg1: $Action$Type): integer
  "shrinkStack"(arg0: integer, arg1: $Action$Type): integer
+ "insertItem"(arg0: $ItemStack$Type, arg1: $Action$Type, arg2: $AutomationType$Type): $ItemStack
+ "isItemValid"(arg0: $ItemStack$Type): boolean
+ "extractItem"(arg0: integer, arg1: $Action$Type, arg2: $AutomationType$Type): $ItemStack
+ "setStackSize"(arg0: integer, arg1: $Action$Type): integer
  "deserializeNBT"(arg0: $CompoundTag$Type): void
  "serializeNBT"(): $CompoundTag
  "onContentsChanged"(): void
@@ -402,20 +402,20 @@ constructor(arg0: $ResourceLocation$Type, arg1: $FluidStackIngredient$Type, arg2
 public "test"(arg0: $GasStack$Type): boolean
 public "test"(arg0: $FluidStack$Type): boolean
 public "write"(arg0: $FriendlyByteBuf$Type): void
-public "getGasInput"(): $ChemicalStackIngredient$GasStackIngredient
 public "isIncomplete"(): boolean
-public "hasFluidToGas"(): boolean
-public "hasGasToFluid"(): boolean
-public "getFluidOutput"(arg0: $GasStack$Type): $FluidStack
 public "getGasOutput"(arg0: $FluidStack$Type): $GasStack
+public "hasFluidToGas"(): boolean
+public "getFluidOutput"(arg0: $GasStack$Type): $FluidStack
+public "hasGasToFluid"(): boolean
 public "getFluidInput"(): $FluidStackIngredient
-public "getGasOutputDefinition"(): $List<($GasStack)>
 public "getFluidOutputDefinition"(): $List<($FluidStack)>
-get "gasInput"(): $ChemicalStackIngredient$GasStackIngredient
+public "getGasOutputDefinition"(): $List<($GasStack)>
+public "getGasInput"(): $ChemicalStackIngredient$GasStackIngredient
 get "incomplete"(): boolean
 get "fluidInput"(): $FluidStackIngredient
-get "gasOutputDefinition"(): $List<($GasStack)>
 get "fluidOutputDefinition"(): $List<($FluidStack)>
+get "gasOutputDefinition"(): $List<($GasStack)>
+get "gasInput"(): $ChemicalStackIngredient$GasStackIngredient
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -469,20 +469,20 @@ export class $MergedChemicalTank {
 
 
 public static "create"(arg0: $IGasTank$Type, arg1: $IInfusionTank$Type, arg2: $IPigmentTank$Type, arg3: $ISlurryTank$Type): $MergedChemicalTank
-public "getCurrent"(): $MergedChemicalTank$Current
-public "getTankFromCurrent"(arg0: $MergedChemicalTank$Current$Type): $IChemicalTank<(any), (any)>
-public "getTankForType"(arg0: $ChemicalType$Type): $IChemicalTank<(any), (any)>
-public "getAllTanks"(): $Collection<($IChemicalTank<(any), (any)>)>
 public "getGasTank"(): $IGasTank
 public "getSlurryTank"(): $ISlurryTank
 public "getInfusionTank"(): $IInfusionTank
 public "getPigmentTank"(): $IPigmentTank
-get "current"(): $MergedChemicalTank$Current
-get "allTanks"(): $Collection<($IChemicalTank<(any), (any)>)>
+public "getCurrent"(): $MergedChemicalTank$Current
+public "getTankFromCurrent"(arg0: $MergedChemicalTank$Current$Type): $IChemicalTank<(any), (any)>
+public "getTankForType"(arg0: $ChemicalType$Type): $IChemicalTank<(any), (any)>
+public "getAllTanks"(): $Collection<($IChemicalTank<(any), (any)>)>
 get "gasTank"(): $IGasTank
 get "slurryTank"(): $ISlurryTank
 get "infusionTank"(): $IInfusionTank
 get "pigmentTank"(): $IPigmentTank
+get "current"(): $MergedChemicalTank$Current
+get "allTanks"(): $Collection<($IChemicalTank<(any), (any)>)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -538,11 +538,11 @@ export class $ICustomModule$ModuleDamageAbsorbInfo extends $Record {
 
 constructor(absorptionRatio: $FloatSupplier$Type, energyCost: $FloatingLongSupplier$Type)
 
+public "absorptionRatio"(): $FloatSupplier
 public "equals"(arg0: any): boolean
 public "toString"(): string
 public "hashCode"(): integer
 public "energyCost"(): $FloatingLongSupplier
-public "absorptionRatio"(): $FloatSupplier
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -566,27 +566,27 @@ import {$ISlurryHandler, $ISlurryHandler$Type} from "packages/mekanism/api/chemi
 
 export interface $ISlurryHandler$ISidedSlurryHandler extends $ISidedChemicalHandler<($Slurry), ($SlurryStack)>, $ISlurryHandler {
 
- "isValid"(arg0: integer, arg1: $SlurryStack$Type): boolean
- "isValid"(arg0: integer, arg1: $SlurryStack$Type, arg2: $Direction$Type): boolean
- "extractChemical"(arg0: integer, arg1: long, arg2: $Direction$Type, arg3: $Action$Type): $SlurryStack
- "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): $SlurryStack
- "extractChemical"(arg0: long, arg1: $Direction$Type, arg2: $Action$Type): $SlurryStack
- "extractChemical"(arg0: $SlurryStack$Type, arg1: $Direction$Type, arg2: $Action$Type): $SlurryStack
  "getSideFor"(): $Direction
+ "isValid"(arg0: integer, arg1: $SlurryStack$Type, arg2: $Direction$Type): boolean
+ "isValid"(arg0: integer, arg1: $SlurryStack$Type): boolean
+ "getTanks"(): integer
+ "getTanks"(arg0: $Direction$Type): integer
+ "getTankCapacity"(arg0: integer, arg1: $Direction$Type): long
+ "getTankCapacity"(arg0: integer): long
  "insertChemical"(arg0: $SlurryStack$Type, arg1: $Direction$Type, arg2: $Action$Type): $SlurryStack
  "insertChemical"(arg0: integer, arg1: $SlurryStack$Type, arg2: $Action$Type): $SlurryStack
  "insertChemical"(arg0: integer, arg1: $SlurryStack$Type, arg2: $Direction$Type, arg3: $Action$Type): $SlurryStack
- "getChemicalInTank"(arg0: integer): $SlurryStack
  "getChemicalInTank"(arg0: integer, arg1: $Direction$Type): $SlurryStack
- "setChemicalInTank"(arg0: integer, arg1: $SlurryStack$Type): void
+ "getChemicalInTank"(arg0: integer): $SlurryStack
+ "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): $SlurryStack
+ "extractChemical"(arg0: long, arg1: $Direction$Type, arg2: $Action$Type): $SlurryStack
+ "extractChemical"(arg0: $SlurryStack$Type, arg1: $Direction$Type, arg2: $Action$Type): $SlurryStack
+ "extractChemical"(arg0: integer, arg1: long, arg2: $Direction$Type, arg3: $Action$Type): $SlurryStack
  "setChemicalInTank"(arg0: integer, arg1: $SlurryStack$Type, arg2: $Direction$Type): void
- "getTanks"(arg0: $Direction$Type): integer
- "getTanks"(): integer
- "getTankCapacity"(arg0: integer, arg1: $Direction$Type): long
- "getTankCapacity"(arg0: integer): long
- "extractChemical"(arg0: $SlurryStack$Type, arg1: $Action$Type): $SlurryStack
- "extractChemical"(arg0: long, arg1: $Action$Type): $SlurryStack
+ "setChemicalInTank"(arg0: integer, arg1: $SlurryStack$Type): void
  "insertChemical"(arg0: $SlurryStack$Type, arg1: $Action$Type): $SlurryStack
+ "extractChemical"(arg0: long, arg1: $Action$Type): $SlurryStack
+ "extractChemical"(arg0: $SlurryStack$Type, arg1: $Action$Type): $SlurryStack
  "getEmptyStack"(): $SlurryStack
 }
 
@@ -672,19 +672,19 @@ static readonly "TRUSTED": $SecurityMode
 
 public static "values"(): ($SecurityMode)[]
 public static "valueOf"(arg0: string): $SecurityMode
-public static "byIndexStatic"(arg0: integer): $SecurityMode
-public "getTextComponent"(): $Component
 public "byIndex"(arg0: integer): $SecurityMode
+public "getTextComponent"(): $Component
+public static "byIndexStatic"(arg0: integer): $SecurityMode
 public "ordinal"(): integer
 public "adjust"(arg0: integer): $SecurityMode
 public "adjust"(arg0: integer, arg1: $Predicate$Type<($SecurityMode$Type)>): $SecurityMode
-public "getPrevious"(arg0: $Predicate$Type<($SecurityMode$Type)>): $SecurityMode
-public "getPrevious"(): $SecurityMode
 public "getNext"(arg0: $Predicate$Type<($SecurityMode$Type)>): $SecurityMode
 public "getNext"(): $SecurityMode
+public "getPrevious"(): $SecurityMode
+public "getPrevious"(arg0: $Predicate$Type<($SecurityMode$Type)>): $SecurityMode
 get "textComponent"(): $Component
-get "previous"(): $SecurityMode
 get "next"(): $SecurityMode
+get "previous"(): $SecurityMode
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -713,9 +713,9 @@ constructor(arg0: $GasBuilder$Type)
 public "toString"(): string
 public "write"(arg0: $CompoundTag$Type): $CompoundTag
 public "getRegistryName"(): $ResourceLocation
-public "isEmptyType"(): boolean
-public static "getFromRegistry"(arg0: $ResourceLocation$Type): $Gas
 public static "readFromNBT"(arg0: $CompoundTag$Type): $Gas
+public static "getFromRegistry"(arg0: $ResourceLocation$Type): $Gas
+public "isEmptyType"(): boolean
 public "getStack"(arg0: long): $GasStack
 get "registryName"(): $ResourceLocation
 get "emptyType"(): boolean
@@ -745,9 +745,8 @@ static readonly "EMPTY": $InfusionStack
 constructor(arg0: $IInfuseTypeProvider$Type, arg1: long)
 constructor(arg0: $InfusionStack$Type, arg1: long)
 
-public "copy"(): $InfusionStack
-public static "readFromPacket"(arg0: $FriendlyByteBuf$Type): $InfusionStack
 public static "readFromNBT"(arg0: $CompoundTag$Type): $InfusionStack
+public static "readFromPacket"(arg0: $FriendlyByteBuf$Type): $InfusionStack
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -771,27 +770,27 @@ import {$PigmentStack, $PigmentStack$Type} from "packages/mekanism/api/chemical/
 
 export interface $IPigmentHandler$ISidedPigmentHandler extends $ISidedChemicalHandler<($Pigment), ($PigmentStack)>, $IPigmentHandler {
 
- "isValid"(arg0: integer, arg1: $PigmentStack$Type): boolean
- "isValid"(arg0: integer, arg1: $PigmentStack$Type, arg2: $Direction$Type): boolean
- "extractChemical"(arg0: integer, arg1: long, arg2: $Direction$Type, arg3: $Action$Type): $PigmentStack
- "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): $PigmentStack
- "extractChemical"(arg0: long, arg1: $Direction$Type, arg2: $Action$Type): $PigmentStack
- "extractChemical"(arg0: $PigmentStack$Type, arg1: $Direction$Type, arg2: $Action$Type): $PigmentStack
  "getSideFor"(): $Direction
+ "isValid"(arg0: integer, arg1: $PigmentStack$Type, arg2: $Direction$Type): boolean
+ "isValid"(arg0: integer, arg1: $PigmentStack$Type): boolean
+ "getTanks"(): integer
+ "getTanks"(arg0: $Direction$Type): integer
+ "getTankCapacity"(arg0: integer, arg1: $Direction$Type): long
+ "getTankCapacity"(arg0: integer): long
  "insertChemical"(arg0: $PigmentStack$Type, arg1: $Direction$Type, arg2: $Action$Type): $PigmentStack
  "insertChemical"(arg0: integer, arg1: $PigmentStack$Type, arg2: $Action$Type): $PigmentStack
  "insertChemical"(arg0: integer, arg1: $PigmentStack$Type, arg2: $Direction$Type, arg3: $Action$Type): $PigmentStack
- "getChemicalInTank"(arg0: integer): $PigmentStack
  "getChemicalInTank"(arg0: integer, arg1: $Direction$Type): $PigmentStack
- "setChemicalInTank"(arg0: integer, arg1: $PigmentStack$Type): void
+ "getChemicalInTank"(arg0: integer): $PigmentStack
+ "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): $PigmentStack
+ "extractChemical"(arg0: long, arg1: $Direction$Type, arg2: $Action$Type): $PigmentStack
+ "extractChemical"(arg0: $PigmentStack$Type, arg1: $Direction$Type, arg2: $Action$Type): $PigmentStack
+ "extractChemical"(arg0: integer, arg1: long, arg2: $Direction$Type, arg3: $Action$Type): $PigmentStack
  "setChemicalInTank"(arg0: integer, arg1: $PigmentStack$Type, arg2: $Direction$Type): void
- "getTanks"(arg0: $Direction$Type): integer
- "getTanks"(): integer
- "getTankCapacity"(arg0: integer, arg1: $Direction$Type): long
- "getTankCapacity"(arg0: integer): long
- "extractChemical"(arg0: $PigmentStack$Type, arg1: $Action$Type): $PigmentStack
- "extractChemical"(arg0: long, arg1: $Action$Type): $PigmentStack
+ "setChemicalInTank"(arg0: integer, arg1: $PigmentStack$Type): void
  "insertChemical"(arg0: $PigmentStack$Type, arg1: $Action$Type): $PigmentStack
+ "extractChemical"(arg0: long, arg1: $Action$Type): $PigmentStack
+ "extractChemical"(arg0: $PigmentStack$Type, arg1: $Action$Type): $PigmentStack
  "getEmptyStack"(): $PigmentStack
 }
 
@@ -817,11 +816,11 @@ import {$IContentsListener, $IContentsListener$Type} from "packages/mekanism/api
 
 export interface $IHeatCapacitor extends $INBTSerializable<($CompoundTag)>, $IContentsListener {
 
- "handleHeat"(arg0: double): void
  "getHeatCapacity"(): double
- "getTemperature"(): double
+ "handleHeat"(arg0: double): void
  "getHeat"(): double
  "setHeat"(arg0: double): void
+ "getTemperature"(): double
  "getInverseConduction"(): double
  "getInverseInsulation"(): double
  "deserializeNBT"(arg0: $CompoundTag$Type): void
@@ -880,41 +879,41 @@ public "copy"(): $ChemicalStack<(CHEMICAL)>
 public "getAttributes"(): $Collection<($ChemicalAttribute)>
 public "grow"(arg0: long): void
 public "has"(arg0: $Class$Type<(any)>): boolean
-public "getAmount"(): long
-public "setAmount"(arg0: long): void
 public "getTranslationKey"(): string
-public "writeToPacket"(arg0: $FriendlyByteBuf$Type): void
-public "getTextComponent"(): $Component
-public "getAttributeTypes"(): $Collection<($Class<(any)>)>
-public "isTypeEqual"(arg0: $ChemicalStack$Type<(CHEMICAL)>): boolean
-public "isTypeEqual"(arg0: CHEMICAL): boolean
-public "isStackIdentical"(arg0: $ChemicalStack$Type<(CHEMICAL)>): boolean
-public "getChemicalTint"(): integer
 public "getRaw"(): CHEMICAL
 public "shrink"(arg0: long): void
+public "writeToPacket"(arg0: $FriendlyByteBuf$Type): void
+public "isTypeEqual"(arg0: $ChemicalStack$Type<(CHEMICAL)>): boolean
+public "isTypeEqual"(arg0: CHEMICAL): boolean
+public "getChemicalTint"(): integer
+public "isStackIdentical"(arg0: $ChemicalStack$Type<(CHEMICAL)>): boolean
+public "getAttributeTypes"(): $Collection<($Class<(any)>)>
+public "getAmount"(): long
+public "setAmount"(arg0: long): void
 public "getTypeRegistryName"(): $ResourceLocation
 public "getChemicalColorRepresentation"(): integer
+public "getTextComponent"(): $Component
 public "mapAttributeToDouble"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToDoubleBiFunction$Type<($ChemicalStack$Type<(CHEMICAL)>), (any)>): double
 public "mapAttributeToDouble"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToDoubleFunction$Type<(any)>): double
+public "mapAttributeToLong"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToLongFunction$Type<(any)>): long
+public "mapAttributeToLong"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToLongBiFunction$Type<($ChemicalStack$Type<(CHEMICAL)>), (any)>): long
 public "mapAttribute"<ATTRIBUTE extends $ChemicalAttribute, V>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $Function$Type<(any), (any)>, arg2: V): V
 public "mapAttribute"<ATTRIBUTE extends $ChemicalAttribute, V>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $BiFunction$Type<($ChemicalStack$Type<(CHEMICAL)>), (any), (any)>, arg2: V): V
 public "mapAttributeToInt"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToIntBiFunction$Type<($ChemicalStack$Type<(CHEMICAL)>), (any)>): integer
 public "mapAttributeToInt"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToIntFunction$Type<(any)>): integer
 public "ifAttributePresent"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $Consumer$Type<(any)>): void
-public "mapAttributeToLong"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToLongFunction$Type<(any)>): long
-public "mapAttributeToLong"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToLongBiFunction$Type<($ChemicalStack$Type<(CHEMICAL)>), (any)>): long
 get "empty"(): boolean
 get "type"(): CHEMICAL
 get "attributes"(): $Collection<($ChemicalAttribute)>
+get "translationKey"(): string
+get "raw"(): CHEMICAL
+get "chemicalTint"(): integer
+get "attributeTypes"(): $Collection<($Class<(any)>)>
 get "amount"(): long
 set "amount"(value: long)
-get "translationKey"(): string
-get "textComponent"(): $Component
-get "attributeTypes"(): $Collection<($Class<(any)>)>
-get "chemicalTint"(): integer
-get "raw"(): CHEMICAL
 get "typeRegistryName"(): $ResourceLocation
 get "chemicalColorRepresentation"(): integer
+get "textComponent"(): $Component
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -973,16 +972,16 @@ constructor(arg0: $ResourceLocation$Type, arg1: INGREDIENT, arg2: INGREDIENT, ar
 public "test"(arg0: STACK, arg1: STACK): boolean
 public "write"(arg0: $FriendlyByteBuf$Type): void
 public "getOutput"(arg0: STACK, arg1: STACK): STACK
+public "isIncomplete"(): boolean
 public "getRightInput"(): INGREDIENT
 public "getLeftInput"(): INGREDIENT
-public "isIncomplete"(): boolean
 public "getOutputDefinition"(): $List<(STACK)>
 public "or"(arg0: $BiPredicate$Type<(any), (any)>): $BiPredicate<(STACK), (STACK)>
 public "negate"(): $BiPredicate<(STACK), (STACK)>
 public "and"(arg0: $BiPredicate$Type<(any), (any)>): $BiPredicate<(STACK), (STACK)>
+get "incomplete"(): boolean
 get "rightInput"(): INGREDIENT
 get "leftInput"(): INGREDIENT
-get "incomplete"(): boolean
 get "outputDefinition"(): $List<(STACK)>
 }
 /**
@@ -1035,46 +1034,46 @@ import {$IItemHandler, $IItemHandler$Type} from "packages/net/minecraftforge/ite
 
 export interface $ISidedItemHandler extends $IItemHandlerModifiable {
 
+ "getSlots"(): integer
+ "getSlots"(arg0: $Direction$Type): integer
  "getInventorySideFor"(): $Direction
  "insertItem"(arg0: integer, arg1: $ItemStack$Type, arg2: boolean): $ItemStack
  "insertItem"(arg0: integer, arg1: $ItemStack$Type, arg2: $Direction$Type, arg3: $Action$Type): $ItemStack
- "extractItem"(arg0: integer, arg1: integer, arg2: $Direction$Type, arg3: $Action$Type): $ItemStack
- "extractItem"(arg0: integer, arg1: integer, arg2: boolean): $ItemStack
- "getStackInSlot"(arg0: integer): $ItemStack
  "getStackInSlot"(arg0: integer, arg1: $Direction$Type): $ItemStack
- "isItemValid"(arg0: integer, arg1: $ItemStack$Type, arg2: $Direction$Type): boolean
- "isItemValid"(arg0: integer, arg1: $ItemStack$Type): boolean
- "setStackInSlot"(arg0: integer, arg1: $ItemStack$Type, arg2: $Direction$Type): void
- "setStackInSlot"(arg0: integer, arg1: $ItemStack$Type): void
+ "getStackInSlot"(arg0: integer): $ItemStack
  "getSlotLimit"(arg0: integer): integer
  "getSlotLimit"(arg0: integer, arg1: $Direction$Type): integer
- "getSlots"(): integer
- "getSlots"(arg0: $Direction$Type): integer
+ "isItemValid"(arg0: integer, arg1: $ItemStack$Type, arg2: $Direction$Type): boolean
+ "isItemValid"(arg0: integer, arg1: $ItemStack$Type): boolean
+ "extractItem"(arg0: integer, arg1: integer, arg2: boolean): $ItemStack
+ "extractItem"(arg0: integer, arg1: integer, arg2: $Direction$Type, arg3: $Action$Type): $ItemStack
+ "setStackInSlot"(arg0: integer, arg1: $ItemStack$Type, arg2: $Direction$Type): void
+ "setStackInSlot"(arg0: integer, arg1: $ItemStack$Type): void
  "getBlock"(level: $Level$Type): $BlockContainerJS
- "kjs$self"(): $IItemHandler
- "extractItem"(i: integer, i1: integer, b: boolean): $ItemStack
- "setStackInSlot"(slot: integer, stack: $ItemStack$Type): void
- "getSlots"(): integer
  "isMutable"(): boolean
- "isItemValid"(i: integer, itemStack: $ItemStack$Type): boolean
+ "getSlots"(): integer
  "getStackInSlot"(i: integer): $ItemStack
+ "extractItem"(i: integer, i1: integer, b: boolean): $ItemStack
  "insertItem"(i: integer, itemStack: $ItemStack$Type, b: boolean): $ItemStack
  "getSlotLimit"(i: integer): integer
+ "setStackInSlot"(slot: integer, stack: $ItemStack$Type): void
+ "isItemValid"(i: integer, itemStack: $ItemStack$Type): boolean
+ "kjs$self"(): $IItemHandler
  "isEmpty"(): boolean
- "asContainer"(): $Container
  "insertItem"(stack: $ItemStack$Type, simulate: boolean): $ItemStack
+ "countNonEmpty"(ingredient: $Ingredient$Type): integer
+ "countNonEmpty"(): integer
+ "getAllItems"(): $List<($ItemStack)>
+ "asContainer"(): $Container
  "getWidth"(): integer
- "setChanged"(): void
- "getHeight"(): integer
+ "find"(): integer
+ "find"(ingredient: $Ingredient$Type): integer
  "clear"(ingredient: $Ingredient$Type): void
  "clear"(): void
- "count"(): integer
+ "setChanged"(): void
  "count"(ingredient: $Ingredient$Type): integer
- "getAllItems"(): $List<($ItemStack)>
- "find"(ingredient: $Ingredient$Type): integer
- "find"(): integer
- "countNonEmpty"(): integer
- "countNonEmpty"(ingredient: $Ingredient$Type): integer
+ "count"(): integer
+ "getHeight"(): integer
 }
 
 export namespace $ISidedItemHandler {
@@ -1107,10 +1106,10 @@ export interface $ChemicalStackIngredient$GasStackIngredient extends $ChemicalSt
  "write"(arg0: $FriendlyByteBuf$Type): void
  "testType"(arg0: $GasStack$Type): boolean
  "serialize"(): $JsonElement
- "getRepresentations"(): $List<($GasStack)>
+ "hasNoMatchingInstances"(): boolean
  "getMatchingInstance"(arg0: $GasStack$Type): $GasStack
  "getNeededAmount"(arg0: $GasStack$Type): long
- "hasNoMatchingInstances"(): boolean
+ "getRepresentations"(): $List<($GasStack)>
  "test"(arg0: $GasStack$Type): boolean
  "or"(arg0: $Predicate$Type<(any)>): $Predicate<($GasStack)>
  "negate"(): $Predicate<($GasStack)>
@@ -1137,10 +1136,10 @@ declare module "packages/mekanism/api/$SupportsColorMap" {
 export {} // Mark the file as a module, do not remove unless there are other import/exports!
 export interface $SupportsColorMap {
 
- "setColorFromAtlas"(arg0: (integer)[]): void
- "getRgbCode"(): (integer)[]
- "getRgbCodeFloat"(): (float)[]
  "getColor"(arg0: integer): float
+ "getRgbCode"(): (integer)[]
+ "setColorFromAtlas"(arg0: (integer)[]): void
+ "getRgbCodeFloat"(): (float)[]
 }
 
 export namespace $SupportsColorMap {
@@ -1244,12 +1243,11 @@ export interface $IEnergyContainer extends $INBTSerializable<($CompoundTag)>, $I
  "extract"(arg0: $FloatingLong$Type, arg1: $Action$Type, arg2: $AutomationType$Type): $FloatingLong
  "insert"(arg0: $FloatingLong$Type, arg1: $Action$Type, arg2: $AutomationType$Type): $FloatingLong
  "isEmpty"(): boolean
- "serializeNBT"(): $CompoundTag
- "getMaxEnergy"(): $FloatingLong
- "getNeeded"(): $FloatingLong
+ "setEmpty"(): void
  "getEnergy"(): $FloatingLong
  "setEnergy"(arg0: $FloatingLong$Type): void
- "setEmpty"(): void
+ "getMaxEnergy"(): $FloatingLong
+ "getNeeded"(): $FloatingLong
  "deserializeNBT"(arg0: $CompoundTag$Type): void
  "onContentsChanged"(): void
 }
@@ -1335,9 +1333,9 @@ export class $SlurryBuilder extends $ChemicalBuilder<($Slurry), ($SlurryBuilder)
 public static "builder"(arg0: $ResourceLocation$Type): $SlurryBuilder
 public static "clean"(): $SlurryBuilder
 public static "dirty"(): $SlurryBuilder
-public "getOreTag"(): $TagKey<($Item)>
 public "ore"(arg0: $TagKey$Type<($Item$Type)>): $SlurryBuilder
 public "ore"(arg0: $ResourceLocation$Type): $SlurryBuilder
+public "getOreTag"(): $TagKey<($Item)>
 get "oreTag"(): $TagKey<($Item)>
 }
 /**
@@ -1379,19 +1377,19 @@ public "offset"(arg0: $Direction$Type): $Coord4D
 public "offset"(arg0: $Direction$Type, arg1: integer): $Coord4D
 public "write"(arg0: $FriendlyByteBuf$Type): void
 public "write"(arg0: $CompoundTag$Type): $CompoundTag
-public static "read"(arg0: $FriendlyByteBuf$Type): $Coord4D
 public static "read"(arg0: $CompoundTag$Type): $Coord4D
+public static "read"(arg0: $FriendlyByteBuf$Type): $Coord4D
 public "getY"(): integer
-public "distanceToSquared"(arg0: $Coord4D$Type): double
-public "distanceTo"(arg0: $Coord4D$Type): double
+public "getZ"(): integer
 public "translate"(arg0: integer, arg1: integer, arg2: integer): $Coord4D
 public "getX"(): integer
+public "distanceTo"(arg0: $Coord4D$Type): double
 public "getPos"(): $BlockPos
-public "getZ"(): integer
+public "distanceToSquared"(arg0: $Coord4D$Type): double
 get "y"(): integer
+get "z"(): integer
 get "x"(): integer
 get "pos"(): $BlockPos
-get "z"(): integer
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1422,9 +1420,9 @@ static readonly "BOTTOM": $RelativeSide
 public static "values"(): ($RelativeSide)[]
 public static "valueOf"(arg0: string): $RelativeSide
 public "getTranslationKey"(): string
-public static "fromDirections"(arg0: $Direction$Type, arg1: $Direction$Type): $RelativeSide
-public "getDirection"(arg0: $Direction$Type): $Direction
 public static "byIndex"(arg0: integer): $RelativeSide
+public "getDirection"(arg0: $Direction$Type): $Direction
+public static "fromDirections"(arg0: $Direction$Type, arg1: $Direction$Type): $RelativeSide
 get "translationKey"(): string
 }
 /**
@@ -1441,8 +1439,8 @@ export type $RelativeSide_ = $RelativeSide$Type;
 }}
 declare module "packages/mekanism/api/providers/$IChemicalProvider" {
 import {$ChemicalStack, $ChemicalStack$Type} from "packages/mekanism/api/chemical/$ChemicalStack"
-import {$Component, $Component$Type} from "packages/net/minecraft/network/chat/$Component"
 import {$Chemical, $Chemical$Type} from "packages/mekanism/api/chemical/$Chemical"
+import {$Component, $Component$Type} from "packages/net/minecraft/network/chat/$Component"
 import {$IBaseProvider, $IBaseProvider$Type} from "packages/mekanism/api/providers/$IBaseProvider"
 import {$ResourceLocation, $ResourceLocation$Type} from "packages/net/minecraft/resources/$ResourceLocation"
 
@@ -1450,9 +1448,9 @@ export interface $IChemicalProvider<CHEMICAL extends $Chemical<(CHEMICAL)>> exte
 
  "getStack"(arg0: long): $ChemicalStack<(CHEMICAL)>
  "getTranslationKey"(): string
- "getTextComponent"(): $Component
  "getRegistryName"(): $ResourceLocation
  "getChemical"(): CHEMICAL
+ "getTextComponent"(): $Component
  "getName"(): string
 }
 
@@ -1511,19 +1509,19 @@ export type $Chunk3D_ = $Chunk3D$Type;
 }}
 declare module "packages/mekanism/api/security/$ISecurityObject" {
 import {$SecurityMode, $SecurityMode$Type} from "packages/mekanism/api/security/$SecurityMode"
-import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
+import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
 import {$IOwnerObject, $IOwnerObject$Type} from "packages/mekanism/api/security/$IOwnerObject"
 
 export interface $ISecurityObject extends $IOwnerObject {
 
+ "setSecurityMode"(arg0: $SecurityMode$Type): void
  "onSecurityChanged"(arg0: $SecurityMode$Type, arg1: $SecurityMode$Type): void
  "getSecurityMode"(): $SecurityMode
- "setSecurityMode"(arg0: $SecurityMode$Type): void
- "setOwnerUUID"(arg0: $UUID$Type): void
  "ownerMatches"(arg0: $Player$Type): boolean
- "getOwnerUUID"(): $UUID
+ "setOwnerUUID"(arg0: $UUID$Type): void
  "getOwnerName"(): string
+ "getOwnerUUID"(): $UUID
 }
 
 export namespace $ISecurityObject {
@@ -1592,23 +1590,23 @@ export type $AutomationType_ = $AutomationType$Type;
 }}
 declare module "packages/mekanism/api/fluid/$ISidedFluidHandler" {
 import {$Action, $Action$Type} from "packages/mekanism/api/$Action"
-import {$FluidStack, $FluidStack$Type} from "packages/net/minecraftforge/fluids/$FluidStack"
 import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
+import {$FluidStack, $FluidStack$Type} from "packages/net/minecraftforge/fluids/$FluidStack"
 import {$IExtendedFluidHandler, $IExtendedFluidHandler$Type} from "packages/mekanism/api/fluid/$IExtendedFluidHandler"
 import {$IFluidHandler$FluidAction, $IFluidHandler$FluidAction$Type} from "packages/net/minecraftforge/fluids/capability/$IFluidHandler$FluidAction"
 
 export interface $ISidedFluidHandler extends $IExtendedFluidHandler {
 
- "setFluidInTank"(arg0: integer, arg1: $FluidStack$Type): void
- "setFluidInTank"(arg0: integer, arg1: $FluidStack$Type, arg2: $Direction$Type): void
- "getTanks"(): integer
  "getTanks"(arg0: $Direction$Type): integer
+ "getTanks"(): integer
+ "getTankCapacity"(arg0: integer): integer
+ "getTankCapacity"(arg0: integer, arg1: $Direction$Type): integer
+ "getFluidInTank"(arg0: integer): $FluidStack
+ "getFluidInTank"(arg0: integer, arg1: $Direction$Type): $FluidStack
  "isFluidValid"(arg0: integer, arg1: $FluidStack$Type, arg2: $Direction$Type): boolean
  "isFluidValid"(arg0: integer, arg1: $FluidStack$Type): boolean
- "getTankCapacity"(arg0: integer, arg1: $Direction$Type): integer
- "getTankCapacity"(arg0: integer): integer
- "getFluidInTank"(arg0: integer, arg1: $Direction$Type): $FluidStack
- "getFluidInTank"(arg0: integer): $FluidStack
+ "setFluidInTank"(arg0: integer, arg1: $FluidStack$Type, arg2: $Direction$Type): void
+ "setFluidInTank"(arg0: integer, arg1: $FluidStack$Type): void
  "insertFluid"(arg0: integer, arg1: $FluidStack$Type, arg2: $Direction$Type, arg3: $Action$Type): $FluidStack
  "insertFluid"(arg0: integer, arg1: $FluidStack$Type, arg2: $Action$Type): $FluidStack
  "insertFluid"(arg0: $FluidStack$Type, arg1: $Direction$Type, arg2: $Action$Type): $FluidStack
@@ -1672,14 +1670,14 @@ public static "read"(arg0: $CompoundTag$Type): $BoxedChemicalStack
 public "getType"(): $BoxedChemical
 public "copy"(): $BoxedChemicalStack
 public static "box"(arg0: $ChemicalStack$Type<(any)>): $BoxedChemicalStack
-public "getTextComponent"(): $Component
-public "getChemicalType"(): $ChemicalType
 public "getChemicalStack"(): $ChemicalStack<(any)>
+public "getChemicalType"(): $ChemicalType
+public "getTextComponent"(): $Component
 get "empty"(): boolean
 get "type"(): $BoxedChemical
-get "textComponent"(): $Component
-get "chemicalType"(): $ChemicalType
 get "chemicalStack"(): $ChemicalStack<(any)>
+get "chemicalType"(): $ChemicalType
+get "textComponent"(): $Component
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1702,13 +1700,13 @@ export interface $IDisableableEnum<TYPE extends ($Enum<(TYPE)>) & ($IDisableable
 
  "adjust"(arg0: integer): TYPE
  "isEnabled"(): boolean
- "getPrevious"(arg0: $Predicate$Type<(TYPE)>): TYPE
  "getNext"(arg0: $Predicate$Type<(TYPE)>): TYPE
+ "getPrevious"(arg0: $Predicate$Type<(TYPE)>): TYPE
  "ordinal"(): integer
  "adjust"(arg0: integer, arg1: $Predicate$Type<(TYPE)>): TYPE
- "getPrevious"(): TYPE
- "getNext"(): TYPE
  "byIndex"(arg0: integer): TYPE
+ "getNext"(): TYPE
+ "getPrevious"(): TYPE
 }
 
 export namespace $IDisableableEnum {
@@ -1746,17 +1744,17 @@ constructor(arg0: $ResourceLocation$Type, arg1: $ItemStackIngredient$Type, arg2:
 public "test"(arg0: $ItemStack$Type, arg1: $GasStack$Type): boolean
 public "write"(arg0: $FriendlyByteBuf$Type): void
 public "getOutput"(arg0: $ItemStack$Type, arg1: $GasStack$Type): $BoxedChemicalStack
-public "getGasInput"(): $ChemicalStackIngredient$GasStackIngredient
 public "isIncomplete"(): boolean
-public "getItemInput"(): $ItemStackIngredient
 public "getOutputDefinition"(): $List<($BoxedChemicalStack)>
+public "getItemInput"(): $ItemStackIngredient
+public "getGasInput"(): $ChemicalStackIngredient$GasStackIngredient
 public "or"(arg0: $BiPredicate$Type<(any), (any)>): $BiPredicate<($ItemStack), ($GasStack)>
 public "negate"(): $BiPredicate<($ItemStack), ($GasStack)>
 public "and"(arg0: $BiPredicate$Type<(any), (any)>): $BiPredicate<($ItemStack), ($GasStack)>
-get "gasInput"(): $ChemicalStackIngredient$GasStackIngredient
 get "incomplete"(): boolean
-get "itemInput"(): $ItemStackIngredient
 get "outputDefinition"(): $List<($BoxedChemicalStack)>
+get "itemInput"(): $ItemStackIngredient
+get "gasInput"(): $ChemicalStackIngredient$GasStackIngredient
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1807,10 +1805,10 @@ export interface $InputIngredient<TYPE> extends $Predicate<(TYPE)> {
  "write"(arg0: $FriendlyByteBuf$Type): void
  "testType"(arg0: TYPE): boolean
  "serialize"(): $JsonElement
- "getRepresentations"(): $List<(TYPE)>
+ "hasNoMatchingInstances"(): boolean
  "getMatchingInstance"(arg0: TYPE): TYPE
  "getNeededAmount"(arg0: TYPE): long
- "hasNoMatchingInstances"(): boolean
+ "getRepresentations"(): $List<(TYPE)>
  "test"(arg0: TYPE): boolean
  "or"(arg0: $Predicate$Type<(any)>): $Predicate<(TYPE)>
  "negate"(): $Predicate<(TYPE)>
@@ -1912,9 +1910,8 @@ static readonly "EMPTY": $SlurryStack
 constructor(arg0: $ISlurryProvider$Type, arg1: long)
 constructor(arg0: $SlurryStack$Type, arg1: long)
 
-public "copy"(): $SlurryStack
-public static "readFromPacket"(arg0: $FriendlyByteBuf$Type): $SlurryStack
 public static "readFromNBT"(arg0: $CompoundTag$Type): $SlurryStack
+public static "readFromPacket"(arg0: $FriendlyByteBuf$Type): $SlurryStack
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1931,8 +1928,8 @@ export type $SlurryStack_ = $SlurryStack$Type;
 declare module "packages/mekanism/api/chemical/$BasicChemicalTank" {
 import {$ChemicalStack, $ChemicalStack$Type} from "packages/mekanism/api/chemical/$ChemicalStack"
 import {$IChemicalHandler, $IChemicalHandler$Type} from "packages/mekanism/api/chemical/$IChemicalHandler"
-import {$ChemicalAttributeValidator, $ChemicalAttributeValidator$Type} from "packages/mekanism/api/chemical/attribute/$ChemicalAttributeValidator"
 import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$CompoundTag"
+import {$ChemicalAttributeValidator, $ChemicalAttributeValidator$Type} from "packages/mekanism/api/chemical/attribute/$ChemicalAttributeValidator"
 import {$AutomationType, $AutomationType$Type} from "packages/mekanism/api/$AutomationType"
 import {$Chemical, $Chemical$Type} from "packages/mekanism/api/chemical/$Chemical"
 import {$Action, $Action$Type} from "packages/mekanism/api/$Action"
@@ -1947,41 +1944,42 @@ public "isEmpty"(): boolean
 public "getType"(): CHEMICAL
 public "getStack"(): STACK
 public "getCapacity"(): long
-public "isValid"(arg0: integer, arg1: STACK): boolean
 public "isValid"(arg0: STACK): boolean
-public "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): STACK
+public "isValid"(arg0: integer, arg1: STACK): boolean
+public "setStack"(arg0: STACK): void
+public "getTanks"(): integer
+public "getTankCapacity"(arg0: integer): long
+public "onContentsChanged"(): void
+public "serializeNBT"(): $CompoundTag
+public "insertChemical"(arg0: integer, arg1: STACK, arg2: $Action$Type): STACK
+public "growStack"(arg0: long, arg1: $Action$Type): long
+public "isTypeEqual"(arg0: STACK): boolean
+public "isTypeEqual"(arg0: CHEMICAL): boolean
 public "setStackUnchecked"(arg0: STACK): void
 public "setStackSize"(arg0: long, arg1: $Action$Type): long
 public "getStored"(): long
-public "insertChemical"(arg0: integer, arg1: STACK, arg2: $Action$Type): STACK
-public "getAttributeValidator"(): $ChemicalAttributeValidator
-public "setStack"(arg0: STACK): void
-public "growStack"(arg0: long, arg1: $Action$Type): long
 public "getChemicalInTank"(arg0: integer): STACK
-public "isTypeEqual"(arg0: CHEMICAL): boolean
-public "isTypeEqual"(arg0: STACK): boolean
+public "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): STACK
 public "setChemicalInTank"(arg0: integer, arg1: STACK): void
-public "onContentsChanged"(): void
-public "getTanks"(): integer
-public "getTankCapacity"(arg0: integer): long
-public "createStack"(arg0: STACK, arg1: long): STACK
-public "getNeeded"(): long
+public "getAttributeValidator"(): $ChemicalAttributeValidator
 public "setEmpty"(): void
+public "createStack"(arg0: STACK, arg1: long): STACK
 public "shrinkStack"(arg0: long, arg1: $Action$Type): long
-public "extractChemical"(arg0: STACK, arg1: $Action$Type): STACK
-public "extractChemical"(arg0: long, arg1: $Action$Type): STACK
+public "getNeeded"(): long
 public "insertChemical"(arg0: STACK, arg1: $Action$Type): STACK
+public "extractChemical"(arg0: long, arg1: $Action$Type): STACK
+public "extractChemical"(arg0: STACK, arg1: $Action$Type): STACK
 public "getEmptyStack"(): STACK
 public "deserializeNBT"(arg0: $CompoundTag$Type): void
 get "empty"(): boolean
 get "type"(): CHEMICAL
 get "stack"(): STACK
 get "capacity"(): long
+set "stack"(value: STACK)
+get "tanks"(): integer
 set "stackUnchecked"(value: STACK)
 get "stored"(): long
 get "attributeValidator"(): $ChemicalAttributeValidator
-set "stack"(value: STACK)
-get "tanks"(): integer
 get "needed"(): long
 get "emptyStack"(): STACK
 }
@@ -2014,18 +2012,18 @@ constructor(arg0: $ResourceLocation$Type, arg1: $ItemStackIngredient$Type, arg2:
 public "test"(arg0: $ItemStack$Type, arg1: $ItemStack$Type): boolean
 public "write"(arg0: $FriendlyByteBuf$Type): void
 public "getOutput"(arg0: $ItemStack$Type, arg1: $ItemStack$Type): $ItemStack
-public "getMainInput"(): $ItemStackIngredient
 public "isIncomplete"(): boolean
-public "getExtraInput"(): $ItemStackIngredient
-public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
+public "getMainInput"(): $ItemStackIngredient
 public "getOutputDefinition"(): $List<($ItemStack)>
+public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
+public "getExtraInput"(): $ItemStackIngredient
 public "or"(arg0: $BiPredicate$Type<(any), (any)>): $BiPredicate<($ItemStack), ($ItemStack)>
 public "negate"(): $BiPredicate<($ItemStack), ($ItemStack)>
 public "and"(arg0: $BiPredicate$Type<(any), (any)>): $BiPredicate<($ItemStack), ($ItemStack)>
-get "mainInput"(): $ItemStackIngredient
 get "incomplete"(): boolean
-get "extraInput"(): $ItemStackIngredient
+get "mainInput"(): $ItemStackIngredient
 get "outputDefinition"(): $List<($ItemStack)>
+get "extraInput"(): $ItemStackIngredient
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2051,8 +2049,8 @@ import {$PigmentStack, $PigmentStack$Type} from "packages/mekanism/api/chemical/
 
 export interface $IPigmentTank extends $IChemicalTank<($Pigment), ($PigmentStack)>, $IEmptyPigmentProvider {
 
- "createStack"(arg0: $PigmentStack$Type, arg1: long): $PigmentStack
  "deserializeNBT"(arg0: $CompoundTag$Type): void
+ "createStack"(arg0: $PigmentStack$Type, arg1: long): $PigmentStack
  "extract"(arg0: long, arg1: $Action$Type, arg2: $AutomationType$Type): $PigmentStack
  "insert"(arg0: $PigmentStack$Type, arg1: $Action$Type, arg2: $AutomationType$Type): $PigmentStack
  "isEmpty"(): boolean
@@ -2060,17 +2058,17 @@ export interface $IPigmentTank extends $IChemicalTank<($Pigment), ($PigmentStack
  "getStack"(): $PigmentStack
  "getCapacity"(): long
  "isValid"(arg0: $PigmentStack$Type): boolean
+ "setEmpty"(): void
+ "setStack"(arg0: $PigmentStack$Type): void
+ "growStack"(arg0: long, arg1: $Action$Type): long
+ "isTypeEqual"(arg0: $Pigment$Type): boolean
+ "isTypeEqual"(arg0: $PigmentStack$Type): boolean
  "setStackUnchecked"(arg0: $PigmentStack$Type): void
+ "shrinkStack"(arg0: long, arg1: $Action$Type): long
  "setStackSize"(arg0: long, arg1: $Action$Type): long
  "getStored"(): long
  "getNeeded"(): long
  "getAttributeValidator"(): $ChemicalAttributeValidator
- "setStack"(arg0: $PigmentStack$Type): void
- "setEmpty"(): void
- "growStack"(arg0: long, arg1: $Action$Type): long
- "isTypeEqual"(arg0: $Pigment$Type): boolean
- "isTypeEqual"(arg0: $PigmentStack$Type): boolean
- "shrinkStack"(arg0: long, arg1: $Action$Type): long
  "getEmptyStack"(): $PigmentStack
  "onContentsChanged"(): void
 }
@@ -2146,52 +2144,52 @@ import {$IContentsListener, $IContentsListener$Type} from "packages/mekanism/api
 
 export interface $IMekanismInventory extends $ISidedItemHandler, $IContentsListener {
 
- "insertItem"(arg0: integer, arg1: $ItemStack$Type, arg2: $Direction$Type, arg3: $Action$Type): $ItemStack
- "extractItem"(arg0: integer, arg1: integer, arg2: $Direction$Type, arg3: $Action$Type): $ItemStack
- "getStackInSlot"(arg0: integer, arg1: $Direction$Type): $ItemStack
- "isItemValid"(arg0: integer, arg1: $ItemStack$Type, arg2: $Direction$Type): boolean
- "setStackInSlot"(arg0: integer, arg1: $ItemStack$Type, arg2: $Direction$Type): void
- "getSlotLimit"(arg0: integer, arg1: $Direction$Type): integer
  "getSlots"(arg0: $Direction$Type): integer
+ "insertItem"(arg0: integer, arg1: $ItemStack$Type, arg2: $Direction$Type, arg3: $Action$Type): $ItemStack
+ "getStackInSlot"(arg0: integer, arg1: $Direction$Type): $ItemStack
+ "getSlotLimit"(arg0: integer, arg1: $Direction$Type): integer
+ "isItemValid"(arg0: integer, arg1: $ItemStack$Type, arg2: $Direction$Type): boolean
+ "extractItem"(arg0: integer, arg1: integer, arg2: $Direction$Type, arg3: $Action$Type): $ItemStack
+ "setStackInSlot"(arg0: integer, arg1: $ItemStack$Type, arg2: $Direction$Type): void
  "getInventorySlots"(arg0: $Direction$Type): $List<($IInventorySlot)>
- "hasInventory"(): boolean
  "getInventorySlot"(arg0: integer, arg1: $Direction$Type): $IInventorySlot
- "isInventoryEmpty"(): boolean
+ "hasInventory"(): boolean
  "isInventoryEmpty"(arg0: $Direction$Type): boolean
+ "isInventoryEmpty"(): boolean
+ "getSlots"(): integer
  "getInventorySideFor"(): $Direction
  "insertItem"(arg0: integer, arg1: $ItemStack$Type, arg2: boolean): $ItemStack
- "extractItem"(arg0: integer, arg1: integer, arg2: boolean): $ItemStack
  "getStackInSlot"(arg0: integer): $ItemStack
- "isItemValid"(arg0: integer, arg1: $ItemStack$Type): boolean
- "setStackInSlot"(arg0: integer, arg1: $ItemStack$Type): void
  "getSlotLimit"(arg0: integer): integer
- "getSlots"(): integer
+ "isItemValid"(arg0: integer, arg1: $ItemStack$Type): boolean
+ "extractItem"(arg0: integer, arg1: integer, arg2: boolean): $ItemStack
+ "setStackInSlot"(arg0: integer, arg1: $ItemStack$Type): void
  "onContentsChanged"(): void
  "getBlock"(level: $Level$Type): $BlockContainerJS
- "kjs$self"(): $IItemHandler
- "extractItem"(i: integer, i1: integer, b: boolean): $ItemStack
- "setStackInSlot"(slot: integer, stack: $ItemStack$Type): void
- "getSlots"(): integer
  "isMutable"(): boolean
- "isItemValid"(i: integer, itemStack: $ItemStack$Type): boolean
+ "getSlots"(): integer
  "getStackInSlot"(i: integer): $ItemStack
+ "extractItem"(i: integer, i1: integer, b: boolean): $ItemStack
  "insertItem"(i: integer, itemStack: $ItemStack$Type, b: boolean): $ItemStack
  "getSlotLimit"(i: integer): integer
+ "setStackInSlot"(slot: integer, stack: $ItemStack$Type): void
+ "isItemValid"(i: integer, itemStack: $ItemStack$Type): boolean
+ "kjs$self"(): $IItemHandler
  "isEmpty"(): boolean
- "asContainer"(): $Container
  "insertItem"(stack: $ItemStack$Type, simulate: boolean): $ItemStack
+ "countNonEmpty"(ingredient: $Ingredient$Type): integer
+ "countNonEmpty"(): integer
+ "getAllItems"(): $List<($ItemStack)>
+ "asContainer"(): $Container
  "getWidth"(): integer
- "setChanged"(): void
- "getHeight"(): integer
+ "find"(): integer
+ "find"(ingredient: $Ingredient$Type): integer
  "clear"(ingredient: $Ingredient$Type): void
  "clear"(): void
- "count"(): integer
+ "setChanged"(): void
  "count"(ingredient: $Ingredient$Type): integer
- "getAllItems"(): $List<($ItemStack)>
- "find"(ingredient: $Ingredient$Type): integer
- "find"(): integer
- "countNonEmpty"(): integer
- "countNonEmpty"(ingredient: $Ingredient$Type): integer
+ "count"(): integer
+ "getHeight"(): integer
 }
 
 export namespace $IMekanismInventory {
@@ -2369,9 +2367,9 @@ static readonly "PRIVATE": $APILang
 public static "values"(): ($APILang)[]
 public static "valueOf"(arg0: string): $APILang
 public "getTranslationKey"(): string
+public "translate"(...arg0: (any)[]): $MutableComponent
 public "translateColored"(arg0: $EnumColor$Type, ...arg1: (any)[]): $MutableComponent
 public "translateColored"(arg0: $TextColor$Type, ...arg1: (any)[]): $MutableComponent
-public "translate"(...arg0: (any)[]): $MutableComponent
 get "translationKey"(): string
 }
 /**
@@ -2401,10 +2399,10 @@ export interface $ChemicalStackIngredient<CHEMICAL extends $Chemical<(CHEMICAL)>
  "write"(arg0: $FriendlyByteBuf$Type): void
  "testType"(arg0: STACK): boolean
  "serialize"(): $JsonElement
- "getRepresentations"(): $List<(STACK)>
+ "hasNoMatchingInstances"(): boolean
  "getMatchingInstance"(arg0: STACK): STACK
  "getNeededAmount"(arg0: STACK): long
- "hasNoMatchingInstances"(): boolean
+ "getRepresentations"(): $List<(STACK)>
  "test"(arg0: STACK): boolean
  "or"(arg0: $Predicate$Type<(any)>): $Predicate<(STACK)>
  "negate"(): $Predicate<(STACK)>
@@ -2465,9 +2463,8 @@ static readonly "EMPTY": $PigmentStack
 constructor(arg0: $IPigmentProvider$Type, arg1: long)
 constructor(arg0: $PigmentStack$Type, arg1: long)
 
-public "copy"(): $PigmentStack
-public static "readFromPacket"(arg0: $FriendlyByteBuf$Type): $PigmentStack
 public static "readFromNBT"(arg0: $CompoundTag$Type): $PigmentStack
+public static "readFromPacket"(arg0: $FriendlyByteBuf$Type): $PigmentStack
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2505,25 +2502,25 @@ export interface $IExtendedFluidTank extends $IFluidTank, $INBTSerializable<($Co
  * 
  * @deprecated
  */
- "drain"(arg0: integer, arg1: $IFluidHandler$FluidAction$Type): $FluidStack
+ "drain"(arg0: $FluidStack$Type, arg1: $IFluidHandler$FluidAction$Type): $FluidStack
 /**
  * 
  * @deprecated
  */
- "drain"(arg0: $FluidStack$Type, arg1: $IFluidHandler$FluidAction$Type): $FluidStack
- "setStackUnchecked"(arg0: $FluidStack$Type): void
+ "drain"(arg0: integer, arg1: $IFluidHandler$FluidAction$Type): $FluidStack
+ "setEmpty"(): void
+ "setStack"(arg0: $FluidStack$Type): void
+ "isFluidEqual"(arg0: $FluidStack$Type): boolean
  "serializeNBT"(): $CompoundTag
+ "growStack"(arg0: integer, arg1: $Action$Type): integer
+ "setStackUnchecked"(arg0: $FluidStack$Type): void
+ "shrinkStack"(arg0: integer, arg1: $Action$Type): integer
  "setStackSize"(arg0: integer, arg1: $Action$Type): integer
  "getNeeded"(): integer
- "isFluidEqual"(arg0: $FluidStack$Type): boolean
- "setStack"(arg0: $FluidStack$Type): void
- "setEmpty"(): void
- "growStack"(arg0: integer, arg1: $Action$Type): integer
- "shrinkStack"(arg0: integer, arg1: $Action$Type): integer
  "getCapacity"(): integer
- "getFluidAmount"(): integer
- "getFluid"(): $FluidStack
  "isFluidValid"(arg0: $FluidStack$Type): boolean
+ "getFluid"(): $FluidStack
+ "getFluidAmount"(): integer
  "deserializeNBT"(arg0: $CompoundTag$Type): void
  "onContentsChanged"(): void
 }
@@ -2558,10 +2555,10 @@ export interface $ChemicalStackIngredient$SlurryStackIngredient extends $Chemica
  "write"(arg0: $FriendlyByteBuf$Type): void
  "testType"(arg0: $SlurryStack$Type): boolean
  "serialize"(): $JsonElement
- "getRepresentations"(): $List<($SlurryStack)>
+ "hasNoMatchingInstances"(): boolean
  "getMatchingInstance"(arg0: $SlurryStack$Type): $SlurryStack
  "getNeededAmount"(arg0: $SlurryStack$Type): long
- "hasNoMatchingInstances"(): boolean
+ "getRepresentations"(): $List<($SlurryStack)>
  "test"(arg0: $SlurryStack$Type): boolean
  "or"(arg0: $Predicate$Type<(any)>): $Predicate<($SlurryStack)>
  "negate"(): $Predicate<($SlurryStack)>
@@ -2590,20 +2587,20 @@ import {$IHeatHandler, $IHeatHandler$Type} from "packages/mekanism/api/heat/$IHe
 
 export interface $ISidedHeatHandler extends $IHeatHandler {
 
+ "getHeatCapacity"(arg0: integer, arg1: $Direction$Type): double
+ "getHeatCapacity"(arg0: integer): double
+ "handleHeat"(arg0: double, arg1: $Direction$Type): void
  "handleHeat"(arg0: integer, arg1: double, arg2: $Direction$Type): void
  "handleHeat"(arg0: integer, arg1: double): void
- "handleHeat"(arg0: double, arg1: $Direction$Type): void
  "getHeatSideFor"(): $Direction
- "getHeatCapacity"(arg0: integer): double
- "getHeatCapacity"(arg0: integer, arg1: $Direction$Type): double
  "getTotalInverseConductionCoefficient"(arg0: $Direction$Type): double
- "getTemperature"(arg0: integer): double
  "getTemperature"(arg0: integer, arg1: $Direction$Type): double
+ "getTemperature"(arg0: integer): double
  "getTotalHeatCapacity"(arg0: $Direction$Type): double
- "getInverseConduction"(arg0: integer): double
- "getInverseConduction"(arg0: integer, arg1: $Direction$Type): double
- "getHeatCapacitorCount"(): integer
  "getHeatCapacitorCount"(arg0: $Direction$Type): integer
+ "getHeatCapacitorCount"(): integer
+ "getInverseConduction"(arg0: integer, arg1: $Direction$Type): double
+ "getInverseConduction"(arg0: integer): double
  "getTotalTemperature"(arg0: $Direction$Type): double
  "handleHeat"(arg0: double): void
  "getTotalHeatCapacity"(): double
@@ -2648,23 +2645,23 @@ constructor(arg0: $ResourceLocation$Type, arg1: $ItemStackIngredient$Type, arg2:
 public "test"(arg0: $ItemStack$Type, arg1: $FluidStack$Type, arg2: $GasStack$Type): boolean
 public "write"(arg0: $FriendlyByteBuf$Type): void
 public "getDuration"(): integer
+public "getInputFluid"(): $FluidStackIngredient
+public "getInputGas"(): $ChemicalStackIngredient$GasStackIngredient
+public "getEnergyRequired"(): $FloatingLong
 public "getOutput"(arg0: $ItemStack$Type, arg1: $FluidStack$Type, arg2: $GasStack$Type): $PressurizedReactionRecipe$PressurizedReactionRecipeOutput
 public "isIncomplete"(): boolean
-public "getInputGas"(): $ChemicalStackIngredient$GasStackIngredient
-public "getInputFluid"(): $FluidStackIngredient
-public "getEnergyRequired"(): $FloatingLong
-public "getInputSolid"(): $ItemStackIngredient
 public "getOutputDefinition"(): $List<($PressurizedReactionRecipe$PressurizedReactionRecipeOutput)>
+public "getInputSolid"(): $ItemStackIngredient
 public "or"(arg0: $TriPredicate$Type<(any), (any), (any)>): $TriPredicate<($ItemStack), ($FluidStack), ($GasStack)>
 public "negate"(): $TriPredicate<($ItemStack), ($FluidStack), ($GasStack)>
 public "and"(arg0: $TriPredicate$Type<(any), (any), (any)>): $TriPredicate<($ItemStack), ($FluidStack), ($GasStack)>
 get "duration"(): integer
-get "incomplete"(): boolean
-get "inputGas"(): $ChemicalStackIngredient$GasStackIngredient
 get "inputFluid"(): $FluidStackIngredient
+get "inputGas"(): $ChemicalStackIngredient$GasStackIngredient
 get "energyRequired"(): $FloatingLong
-get "inputSolid"(): $ItemStackIngredient
+get "incomplete"(): boolean
 get "outputDefinition"(): $List<($PressurizedReactionRecipe$PressurizedReactionRecipeOutput)>
+get "inputSolid"(): $ItemStackIngredient
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2713,40 +2710,40 @@ public static "create"(arg0: double): $FloatingLong
 public static "create"(arg0: long, arg1: short): $FloatingLong
 public static "create"(arg0: long): $FloatingLong
 public "isZero"(): boolean
+public "divide"(arg0: double): $FloatingLong
 public "divide"(arg0: $FloatingLong$Type): $FloatingLong
 public "divide"(arg0: long): $FloatingLong
-public "divide"(arg0: double): $FloatingLong
-public "subtract"(arg0: double): $FloatingLong
 public "subtract"(arg0: $FloatingLong$Type): $FloatingLong
+public "subtract"(arg0: double): $FloatingLong
 public "subtract"(arg0: long): $FloatingLong
-public "timesEqual"(arg0: long): $FloatingLong
+public "divideToUnsignedLong"(arg0: $FloatingLong$Type): long
 public "timesEqual"(arg0: $FloatingLong$Type): $FloatingLong
+public "timesEqual"(arg0: long): $FloatingLong
 public "plusEqual"(arg0: long): $FloatingLong
 public "plusEqual"(arg0: $FloatingLong$Type): $FloatingLong
-public "divideToUnsignedLong"(arg0: $FloatingLong$Type): long
 public "greaterThan"(arg0: $FloatingLong$Type): boolean
-public static "createConst"(arg0: double): $FloatingLong
-public static "createConst"(arg0: long): $FloatingLong
-public static "createConst"(arg0: long, arg1: short): $FloatingLong
-public static "readFromBuffer"(arg0: $FriendlyByteBuf$Type): $FloatingLong
-public "getDecimal"(): short
-public "minusEqual"(arg0: long): $FloatingLong
 public "minusEqual"(arg0: $FloatingLong$Type): $FloatingLong
-public "copyAsConst"(): $FloatingLong
+public "minusEqual"(arg0: long): $FloatingLong
+public "getDecimal"(): short
+public static "readFromBuffer"(arg0: $FriendlyByteBuf$Type): $FloatingLong
 public "greaterOrEqual"(arg0: $FloatingLong$Type): boolean
-public static "parseFloatingLong"(arg0: string): $FloatingLong
-public static "parseFloatingLong"(arg0: string, arg1: boolean): $FloatingLong
-public "smallerOrEqual"(arg0: $FloatingLong$Type): boolean
-public "divideToLevel"(arg0: $FloatingLong$Type): double
-public "divideToInt"(arg0: $FloatingLong$Type): integer
-public "divideEquals"(arg0: $FloatingLong$Type): $FloatingLong
-public "divideEquals"(arg0: long): $FloatingLong
+public "copyAsConst"(): $FloatingLong
+public static "createConst"(arg0: double): $FloatingLong
+public static "createConst"(arg0: long, arg1: short): $FloatingLong
+public static "createConst"(arg0: long): $FloatingLong
 public "absDifference"(arg0: $FloatingLong$Type): $FloatingLong
-public "divideToLong"(arg0: $FloatingLong$Type): long
 public "writeToBuffer"(arg0: $FriendlyByteBuf$Type): void
-public "floorSelf"(): $FloatingLong
+public "divideToInt"(arg0: $FloatingLong$Type): integer
+public "divideEquals"(arg0: long): $FloatingLong
+public "divideEquals"(arg0: $FloatingLong$Type): $FloatingLong
+public static "parseFloatingLong"(arg0: string, arg1: boolean): $FloatingLong
+public static "parseFloatingLong"(arg0: string): $FloatingLong
+public "divideToLong"(arg0: $FloatingLong$Type): long
 public "ceilSelf"(): $FloatingLong
 public "smallerThan"(arg0: $FloatingLong$Type): boolean
+public "divideToLevel"(arg0: $FloatingLong$Type): double
+public "smallerOrEqual"(arg0: $FloatingLong$Type): boolean
+public "floorSelf"(): $FloatingLong
 public "multiply"(arg0: long): $FloatingLong
 public "multiply"(arg0: $FloatingLong$Type): $FloatingLong
 public "multiply"(arg0: double): $FloatingLong
@@ -2786,9 +2783,9 @@ public "toString"(): string
 public "hashCode"(): integer
 public "color"(): $EnumColor
 public "nestedData"(): $RadialData<(any)>
+public "icon"(): $ResourceLocation
 public "sliceName"(): $Component
 public "hasNestedData"(): boolean
-public "icon"(): $ResourceLocation
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -2817,10 +2814,10 @@ constructor()
 public "write"(arg0: $FriendlyByteBuf$Type): void
 public "testType"(arg0: $FluidStack$Type): boolean
 public "serialize"(): $JsonElement
-public "getRepresentations"(): $List<($FluidStack)>
+public "hasNoMatchingInstances"(): boolean
 public "getMatchingInstance"(arg0: $FluidStack$Type): $FluidStack
 public "getNeededAmount"(arg0: $FluidStack$Type): long
-public "hasNoMatchingInstances"(): boolean
+public "getRepresentations"(): $List<($FluidStack)>
 public "test"(arg0: $FluidStack$Type): boolean
 public "or"(arg0: $Predicate$Type<(any)>): $Predicate<($FluidStack)>
 public "negate"(): $Predicate<($FluidStack)>
@@ -2851,27 +2848,27 @@ import {$IGasHandler, $IGasHandler$Type} from "packages/mekanism/api/chemical/ga
 
 export interface $IGasHandler$ISidedGasHandler extends $ISidedChemicalHandler<($Gas), ($GasStack)>, $IGasHandler {
 
- "isValid"(arg0: integer, arg1: $GasStack$Type): boolean
- "isValid"(arg0: integer, arg1: $GasStack$Type, arg2: $Direction$Type): boolean
- "extractChemical"(arg0: integer, arg1: long, arg2: $Direction$Type, arg3: $Action$Type): $GasStack
- "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): $GasStack
- "extractChemical"(arg0: long, arg1: $Direction$Type, arg2: $Action$Type): $GasStack
- "extractChemical"(arg0: $GasStack$Type, arg1: $Direction$Type, arg2: $Action$Type): $GasStack
  "getSideFor"(): $Direction
+ "isValid"(arg0: integer, arg1: $GasStack$Type, arg2: $Direction$Type): boolean
+ "isValid"(arg0: integer, arg1: $GasStack$Type): boolean
+ "getTanks"(): integer
+ "getTanks"(arg0: $Direction$Type): integer
+ "getTankCapacity"(arg0: integer, arg1: $Direction$Type): long
+ "getTankCapacity"(arg0: integer): long
  "insertChemical"(arg0: $GasStack$Type, arg1: $Direction$Type, arg2: $Action$Type): $GasStack
  "insertChemical"(arg0: integer, arg1: $GasStack$Type, arg2: $Action$Type): $GasStack
  "insertChemical"(arg0: integer, arg1: $GasStack$Type, arg2: $Direction$Type, arg3: $Action$Type): $GasStack
- "getChemicalInTank"(arg0: integer): $GasStack
  "getChemicalInTank"(arg0: integer, arg1: $Direction$Type): $GasStack
- "setChemicalInTank"(arg0: integer, arg1: $GasStack$Type): void
+ "getChemicalInTank"(arg0: integer): $GasStack
+ "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): $GasStack
+ "extractChemical"(arg0: long, arg1: $Direction$Type, arg2: $Action$Type): $GasStack
+ "extractChemical"(arg0: $GasStack$Type, arg1: $Direction$Type, arg2: $Action$Type): $GasStack
+ "extractChemical"(arg0: integer, arg1: long, arg2: $Direction$Type, arg3: $Action$Type): $GasStack
  "setChemicalInTank"(arg0: integer, arg1: $GasStack$Type, arg2: $Direction$Type): void
- "getTanks"(arg0: $Direction$Type): integer
- "getTanks"(): integer
- "getTankCapacity"(arg0: integer, arg1: $Direction$Type): long
- "getTankCapacity"(arg0: integer): long
- "extractChemical"(arg0: $GasStack$Type, arg1: $Action$Type): $GasStack
- "extractChemical"(arg0: long, arg1: $Action$Type): $GasStack
+ "setChemicalInTank"(arg0: integer, arg1: $GasStack$Type): void
  "insertChemical"(arg0: $GasStack$Type, arg1: $Action$Type): $GasStack
+ "extractChemical"(arg0: long, arg1: $Action$Type): $GasStack
+ "extractChemical"(arg0: $GasStack$Type, arg1: $Action$Type): $GasStack
  "getEmptyStack"(): $GasStack
 }
 
@@ -2921,14 +2918,14 @@ declare module "packages/mekanism/api/heat/$IHeatHandler" {
 export {} // Mark the file as a module, do not remove unless there are other import/exports!
 export interface $IHeatHandler {
 
+ "getHeatCapacity"(arg0: integer): double
  "handleHeat"(arg0: double): void
  "handleHeat"(arg0: integer, arg1: double): void
- "getHeatCapacity"(arg0: integer): double
  "getTemperature"(arg0: integer): double
  "getTotalHeatCapacity"(): double
+ "getHeatCapacitorCount"(): integer
  "getInverseConduction"(arg0: integer): double
  "getTotalInverseConduction"(): double
- "getHeatCapacitorCount"(): integer
  "getTotalTemperature"(): double
 }
 
@@ -3001,28 +2998,28 @@ export class $CachedRecipe<RECIPE extends $MekanismRecipe> {
 
 
 public "process"(): void
-public "setPostProcessOperations"(arg0: $Consumer$Type<($CachedRecipe$OperationTracker$Type)>): $CachedRecipe<(RECIPE)>
+public "setActive"(arg0: $BooleanConsumer$Type): $CachedRecipe<(RECIPE)>
+public "getRecipe"(): RECIPE
+public "setCanHolderFunction"(arg0: $BooleanSupplier$Type): $CachedRecipe<(RECIPE)>
 public "setErrorsChanged"(arg0: $Consumer$Type<($Set$Type<($CachedRecipe$OperationTracker$RecipeError$Type)>)>): $CachedRecipe<(RECIPE)>
 public "setRequiredTicks"(arg0: $IntSupplier$Type): $CachedRecipe<(RECIPE)>
 public "setOnFinish"(arg0: $Runnable$Type): $CachedRecipe<(RECIPE)>
 public "setEnergyRequirements"(arg0: $FloatingLongSupplier$Type, arg1: $IEnergyContainer$Type): $CachedRecipe<(RECIPE)>
 public "setOperatingTicksChanged"(arg0: $IntConsumer$Type): $CachedRecipe<(RECIPE)>
-public "getRecipe"(): RECIPE
-public "setActive"(arg0: $BooleanConsumer$Type): $CachedRecipe<(RECIPE)>
 public "isInputValid"(): boolean
-public "loadSavedOperatingTicks"(arg0: integer): void
-public "setCanHolderFunction"(arg0: $BooleanSupplier$Type): $CachedRecipe<(RECIPE)>
 public "setBaselineMaxOperations"(arg0: $IntSupplier$Type): $CachedRecipe<(RECIPE)>
-set "postProcessOperations"(value: $Consumer$Type<($CachedRecipe$OperationTracker$Type)>)
+public "loadSavedOperatingTicks"(arg0: integer): void
+public "setPostProcessOperations"(arg0: $Consumer$Type<($CachedRecipe$OperationTracker$Type)>): $CachedRecipe<(RECIPE)>
+set "active"(value: $BooleanConsumer$Type)
+get "recipe"(): RECIPE
+set "canHolderFunction"(value: $BooleanSupplier$Type)
 set "errorsChanged"(value: $Consumer$Type<($Set$Type<($CachedRecipe$OperationTracker$RecipeError$Type)>)>)
 set "requiredTicks"(value: $IntSupplier$Type)
 set "onFinish"(value: $Runnable$Type)
 set "operatingTicksChanged"(value: $IntConsumer$Type)
-get "recipe"(): RECIPE
-set "active"(value: $BooleanConsumer$Type)
 get "inputValid"(): boolean
-set "canHolderFunction"(value: $BooleanSupplier$Type)
 set "baselineMaxOperations"(value: $IntSupplier$Type)
+set "postProcessOperations"(value: $Consumer$Type<($CachedRecipe$OperationTracker$Type)>)
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3056,13 +3053,13 @@ public "write"(arg0: $CompoundTag$Type): $CompoundTag
 public static "read"(arg0: $CompoundTag$Type): $BoxedChemical
 public static "read"(arg0: $FriendlyByteBuf$Type): $BoxedChemical
 public static "box"(arg0: $Chemical$Type<(any)>): $BoxedChemical
-public "getTextComponent"(): $Component
-public "getChemical"(): $Chemical<(any)>
 public "getChemicalType"(): $ChemicalType
+public "getChemical"(): $Chemical<(any)>
+public "getTextComponent"(): $Component
 get "empty"(): boolean
-get "textComponent"(): $Component
-get "chemical"(): $Chemical<(any)>
 get "chemicalType"(): $ChemicalType
+get "chemical"(): $Chemical<(any)>
+get "textComponent"(): $Component
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3164,17 +3161,17 @@ public "test"(arg0: $ItemStack$Type, arg1: STACK): boolean
 public "write"(arg0: $FriendlyByteBuf$Type): void
 public "getOutput"(arg0: $ItemStack$Type, arg1: STACK): $ItemStack
 public "isIncomplete"(): boolean
+public "getOutputDefinition"(): $List<($ItemStack)>
+public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
 public "getItemInput"(): $ItemStackIngredient
 public "getChemicalInput"(): INGREDIENT
-public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
-public "getOutputDefinition"(): $List<($ItemStack)>
 public "or"(arg0: $BiPredicate$Type<(any), (any)>): $BiPredicate<($ItemStack), (STACK)>
 public "negate"(): $BiPredicate<($ItemStack), (STACK)>
 public "and"(arg0: $BiPredicate$Type<(any), (any)>): $BiPredicate<($ItemStack), (STACK)>
 get "incomplete"(): boolean
+get "outputDefinition"(): $List<($ItemStack)>
 get "itemInput"(): $ItemStackIngredient
 get "chemicalInput"(): INGREDIENT
-get "outputDefinition"(): $List<($ItemStack)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3225,13 +3222,13 @@ public "index"(arg0: $List$Type<(MODE)>, arg1: MODE): integer
 public "equals"(arg0: any): boolean
 public "hashCode"(): integer
 public "getIdentifier"(): $ResourceLocation
-public "tryGetNetworkRepresentation"(arg0: $IRadialMode$Type): integer
-public "getNetworkRepresentation"(arg0: MODE): integer
-public "fromNetworkRepresentation"(arg0: integer): MODE
-public "fromIdentifier"(arg0: $ResourceLocation$Type): $INestedRadialMode
 public "getModes"(): $List<(MODE)>
 public "getDefaultMode"(arg0: $List$Type<(MODE)>): MODE
 public "indexNullable"(arg0: $List$Type<(MODE)>, arg1: MODE): integer
+public "fromIdentifier"(arg0: $ResourceLocation$Type): $INestedRadialMode
+public "tryGetNetworkRepresentation"(arg0: $IRadialMode$Type): integer
+public "getNetworkRepresentation"(arg0: MODE): integer
+public "fromNetworkRepresentation"(arg0: integer): MODE
 get "identifier"(): $ResourceLocation
 get "modes"(): $List<(MODE)>
 }
@@ -3263,8 +3260,8 @@ import {$Consumer, $Consumer$Type} from "packages/java/util/function/$Consumer"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$BlockSource, $BlockSource$Type} from "packages/net/minecraft/core/$BlockSource"
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
-import {$NestedRadialMode, $NestedRadialMode$Type} from "packages/mekanism/api/radial/mode/$NestedRadialMode"
 import {$ToolAction, $ToolAction$Type} from "packages/net/minecraftforge/common/$ToolAction"
+import {$NestedRadialMode, $NestedRadialMode$Type} from "packages/mekanism/api/radial/mode/$NestedRadialMode"
 import {$IRadialMode, $IRadialMode$Type} from "packages/mekanism/api/radial/mode/$IRadialMode"
 import {$RadialData, $RadialData$Type} from "packages/mekanism/api/radial/$RadialData"
 
@@ -3273,23 +3270,23 @@ export interface $ICustomModule<MODULE extends $ICustomModule<(MODULE)>> {
  "init"(arg0: $IModule$Type<(MODULE)>, arg1: $ModuleConfigItemCreator$Type): void
  "setMode"<MODE extends $IRadialMode>(arg0: $IModule$Type<(MODULE)>, arg1: $Player$Type, arg2: $ItemStack$Type, arg3: $RadialData$Type<(MODE)>, arg4: MODE): boolean
  "getMode"<MODE extends $IRadialMode>(arg0: $IModule$Type<(MODULE)>, arg1: $ItemStack$Type, arg2: $RadialData$Type<(MODE)>): MODE
+ "canPerformAction"(arg0: $IModule$Type<(MODULE)>, arg1: $ToolAction$Type): boolean
+ "onItemUse"(arg0: $IModule$Type<(MODULE)>, arg1: $UseOnContext$Type): $InteractionResult
  "tickClient"(arg0: $IModule$Type<(MODULE)>, arg1: $Player$Type): void
- "changeMode"(arg0: $IModule$Type<(MODULE)>, arg1: $Player$Type, arg2: $ItemStack$Type, arg3: integer, arg4: boolean): void
- "addHUDStrings"(arg0: $IModule$Type<(MODULE)>, arg1: $Player$Type, arg2: $Consumer$Type<($Component$Type)>): void
  "tickServer"(arg0: $IModule$Type<(MODULE)>, arg1: $Player$Type): void
  "onAdded"(arg0: $IModule$Type<(MODULE)>, arg1: boolean): void
- "onItemUse"(arg0: $IModule$Type<(MODULE)>, arg1: $UseOnContext$Type): $InteractionResult
- "addHUDElements"(arg0: $IModule$Type<(MODULE)>, arg1: $Player$Type, arg2: $Consumer$Type<($IHUDElement$Type)>): void
- "onInteract"(arg0: $IModule$Type<(MODULE)>, arg1: $Player$Type, arg2: $LivingEntity$Type, arg3: $InteractionHand$Type): $InteractionResult
- "addRadialModes"(arg0: $IModule$Type<(MODULE)>, arg1: $ItemStack$Type, arg2: $Consumer$Type<($NestedRadialMode$Type)>): void
- "onRemoved"(arg0: $IModule$Type<(MODULE)>, arg1: boolean): void
- "onDispense"(arg0: $IModule$Type<(MODULE)>, arg1: $BlockSource$Type): $ICustomModule$ModuleDispenseResult
- "canPerformAction"(arg0: $IModule$Type<(MODULE)>, arg1: $ToolAction$Type): boolean
- "canChangeRadialModeWhenDisabled"(arg0: $IModule$Type<(MODULE)>): boolean
- "getModeScrollComponent"(arg0: $IModule$Type<(MODULE)>, arg1: $ItemStack$Type): $Component
+ "onEnabledStateChange"(arg0: $IModule$Type<(MODULE)>): void
  "getDamageAbsorbInfo"(arg0: $IModule$Type<(MODULE)>, arg1: $DamageSource$Type): $ICustomModule$ModuleDamageAbsorbInfo
  "canChangeModeWhenDisabled"(arg0: $IModule$Type<(MODULE)>): boolean
- "onEnabledStateChange"(arg0: $IModule$Type<(MODULE)>): void
+ "canChangeRadialModeWhenDisabled"(arg0: $IModule$Type<(MODULE)>): boolean
+ "getModeScrollComponent"(arg0: $IModule$Type<(MODULE)>, arg1: $ItemStack$Type): $Component
+ "onDispense"(arg0: $IModule$Type<(MODULE)>, arg1: $BlockSource$Type): $ICustomModule$ModuleDispenseResult
+ "onRemoved"(arg0: $IModule$Type<(MODULE)>, arg1: boolean): void
+ "onInteract"(arg0: $IModule$Type<(MODULE)>, arg1: $Player$Type, arg2: $LivingEntity$Type, arg3: $InteractionHand$Type): $InteractionResult
+ "addRadialModes"(arg0: $IModule$Type<(MODULE)>, arg1: $ItemStack$Type, arg2: $Consumer$Type<($NestedRadialMode$Type)>): void
+ "addHUDElements"(arg0: $IModule$Type<(MODULE)>, arg1: $Player$Type, arg2: $Consumer$Type<($IHUDElement$Type)>): void
+ "addHUDStrings"(arg0: $IModule$Type<(MODULE)>, arg1: $Player$Type, arg2: $Consumer$Type<($Component$Type)>): void
+ "changeMode"(arg0: $IModule$Type<(MODULE)>, arg1: $Player$Type, arg2: $ItemStack$Type, arg3: integer, arg4: boolean): void
 }
 
 export namespace $ICustomModule {
@@ -3327,18 +3324,18 @@ export interface $IChemicalTank<CHEMICAL extends $Chemical<(CHEMICAL)>, STACK ex
  "getStack"(): STACK
  "getCapacity"(): long
  "isValid"(arg0: STACK): boolean
+ "setEmpty"(): void
+ "setStack"(arg0: STACK): void
+ "growStack"(arg0: long, arg1: $Action$Type): long
  "createStack"(arg0: STACK, arg1: long): STACK
+ "isTypeEqual"(arg0: CHEMICAL): boolean
+ "isTypeEqual"(arg0: STACK): boolean
  "setStackUnchecked"(arg0: STACK): void
+ "shrinkStack"(arg0: long, arg1: $Action$Type): long
  "setStackSize"(arg0: long, arg1: $Action$Type): long
  "getStored"(): long
  "getNeeded"(): long
  "getAttributeValidator"(): $ChemicalAttributeValidator
- "setStack"(arg0: STACK): void
- "setEmpty"(): void
- "growStack"(arg0: long, arg1: $Action$Type): long
- "isTypeEqual"(arg0: CHEMICAL): boolean
- "isTypeEqual"(arg0: STACK): boolean
- "shrinkStack"(arg0: long, arg1: $Action$Type): long
  "getEmptyStack"(): STACK
  "deserializeNBT"(arg0: $CompoundTag$Type): void
  "onContentsChanged"(): void
@@ -3369,15 +3366,15 @@ import {$InfusionStack, $InfusionStack$Type} from "packages/mekanism/api/chemica
 export interface $IInfusionHandler extends $IChemicalHandler<($InfuseType), ($InfusionStack)>, $IEmptyInfusionProvider {
 
  "isValid"(arg0: integer, arg1: $InfusionStack$Type): boolean
- "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): $InfusionStack
- "extractChemical"(arg0: $InfusionStack$Type, arg1: $Action$Type): $InfusionStack
- "extractChemical"(arg0: long, arg1: $Action$Type): $InfusionStack
- "insertChemical"(arg0: integer, arg1: $InfusionStack$Type, arg2: $Action$Type): $InfusionStack
- "insertChemical"(arg0: $InfusionStack$Type, arg1: $Action$Type): $InfusionStack
- "getChemicalInTank"(arg0: integer): $InfusionStack
- "setChemicalInTank"(arg0: integer, arg1: $InfusionStack$Type): void
  "getTanks"(): integer
  "getTankCapacity"(arg0: integer): long
+ "insertChemical"(arg0: $InfusionStack$Type, arg1: $Action$Type): $InfusionStack
+ "insertChemical"(arg0: integer, arg1: $InfusionStack$Type, arg2: $Action$Type): $InfusionStack
+ "getChemicalInTank"(arg0: integer): $InfusionStack
+ "extractChemical"(arg0: long, arg1: $Action$Type): $InfusionStack
+ "extractChemical"(arg0: $InfusionStack$Type, arg1: $Action$Type): $InfusionStack
+ "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): $InfusionStack
+ "setChemicalInTank"(arg0: integer, arg1: $InfusionStack$Type): void
  "getEmptyStack"(): $InfusionStack
 }
 
@@ -3544,16 +3541,16 @@ public "test"(arg0: $FluidStack$Type, arg1: STACK): boolean
 public "write"(arg0: $FriendlyByteBuf$Type): void
 public "getOutput"(arg0: $FluidStack$Type, arg1: STACK): STACK
 public "isIncomplete"(): boolean
-public "getChemicalInput"(): INGREDIENT
-public "getFluidInput"(): $FluidStackIngredient
 public "getOutputDefinition"(): $List<(STACK)>
+public "getFluidInput"(): $FluidStackIngredient
+public "getChemicalInput"(): INGREDIENT
 public "or"(arg0: $BiPredicate$Type<(any), (any)>): $BiPredicate<($FluidStack), (STACK)>
 public "negate"(): $BiPredicate<($FluidStack), (STACK)>
 public "and"(arg0: $BiPredicate$Type<(any), (any)>): $BiPredicate<($FluidStack), (STACK)>
 get "incomplete"(): boolean
-get "chemicalInput"(): INGREDIENT
-get "fluidInput"(): $FluidStackIngredient
 get "outputDefinition"(): $List<(STACK)>
+get "fluidInput"(): $FluidStackIngredient
+get "chemicalInput"(): INGREDIENT
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3569,8 +3566,8 @@ export type $FluidChemicalToChemicalRecipe_<CHEMICAL, STACK, INGREDIENT> = $Flui
 }}
 declare module "packages/mekanism/api/fluid/$IMekanismFluidHandler" {
 import {$Action, $Action$Type} from "packages/mekanism/api/$Action"
-import {$FluidStack, $FluidStack$Type} from "packages/net/minecraftforge/fluids/$FluidStack"
 import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
+import {$FluidStack, $FluidStack$Type} from "packages/net/minecraftforge/fluids/$FluidStack"
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$IFluidHandler$FluidAction, $IFluidHandler$FluidAction$Type} from "packages/net/minecraftforge/fluids/capability/$IFluidHandler$FluidAction"
 import {$ISidedFluidHandler, $ISidedFluidHandler$Type} from "packages/mekanism/api/fluid/$ISidedFluidHandler"
@@ -3579,21 +3576,21 @@ import {$IExtendedFluidTank, $IExtendedFluidTank$Type} from "packages/mekanism/a
 
 export interface $IMekanismFluidHandler extends $ISidedFluidHandler, $IContentsListener {
 
- "setFluidInTank"(arg0: integer, arg1: $FluidStack$Type, arg2: $Direction$Type): void
- "getFluidTank"(arg0: integer, arg1: $Direction$Type): $IExtendedFluidTank
  "getTanks"(arg0: $Direction$Type): integer
- "isFluidValid"(arg0: integer, arg1: $FluidStack$Type, arg2: $Direction$Type): boolean
  "getTankCapacity"(arg0: integer, arg1: $Direction$Type): integer
  "getFluidInTank"(arg0: integer, arg1: $Direction$Type): $FluidStack
+ "isFluidValid"(arg0: integer, arg1: $FluidStack$Type, arg2: $Direction$Type): boolean
+ "getFluidTank"(arg0: integer, arg1: $Direction$Type): $IExtendedFluidTank
+ "setFluidInTank"(arg0: integer, arg1: $FluidStack$Type, arg2: $Direction$Type): void
  "getFluidTanks"(arg0: $Direction$Type): $List<($IExtendedFluidTank)>
- "canHandleFluid"(): boolean
  "insertFluid"(arg0: integer, arg1: $FluidStack$Type, arg2: $Direction$Type, arg3: $Action$Type): $FluidStack
+ "canHandleFluid"(): boolean
  "extractFluid"(arg0: integer, arg1: integer, arg2: $Direction$Type, arg3: $Action$Type): $FluidStack
- "setFluidInTank"(arg0: integer, arg1: $FluidStack$Type): void
  "getTanks"(): integer
- "isFluidValid"(arg0: integer, arg1: $FluidStack$Type): boolean
  "getTankCapacity"(arg0: integer): integer
  "getFluidInTank"(arg0: integer): $FluidStack
+ "isFluidValid"(arg0: integer, arg1: $FluidStack$Type): boolean
+ "setFluidInTank"(arg0: integer, arg1: $FluidStack$Type): void
  "insertFluid"(arg0: integer, arg1: $FluidStack$Type, arg2: $Action$Type): $FluidStack
  "insertFluid"(arg0: $FluidStack$Type, arg1: $Direction$Type, arg2: $Action$Type): $FluidStack
  "getFluidSideFor"(): $Direction
@@ -3648,8 +3645,8 @@ import {$InfusionStack, $InfusionStack$Type} from "packages/mekanism/api/chemica
 
 export interface $IInfusionTank extends $IChemicalTank<($InfuseType), ($InfusionStack)>, $IEmptyInfusionProvider {
 
- "createStack"(arg0: $InfusionStack$Type, arg1: long): $InfusionStack
  "deserializeNBT"(arg0: $CompoundTag$Type): void
+ "createStack"(arg0: $InfusionStack$Type, arg1: long): $InfusionStack
  "extract"(arg0: long, arg1: $Action$Type, arg2: $AutomationType$Type): $InfusionStack
  "insert"(arg0: $InfusionStack$Type, arg1: $Action$Type, arg2: $AutomationType$Type): $InfusionStack
  "isEmpty"(): boolean
@@ -3657,17 +3654,17 @@ export interface $IInfusionTank extends $IChemicalTank<($InfuseType), ($Infusion
  "getStack"(): $InfusionStack
  "getCapacity"(): long
  "isValid"(arg0: $InfusionStack$Type): boolean
+ "setEmpty"(): void
+ "setStack"(arg0: $InfusionStack$Type): void
+ "growStack"(arg0: long, arg1: $Action$Type): long
+ "isTypeEqual"(arg0: $InfuseType$Type): boolean
+ "isTypeEqual"(arg0: $InfusionStack$Type): boolean
  "setStackUnchecked"(arg0: $InfusionStack$Type): void
+ "shrinkStack"(arg0: long, arg1: $Action$Type): long
  "setStackSize"(arg0: long, arg1: $Action$Type): long
  "getStored"(): long
  "getNeeded"(): long
  "getAttributeValidator"(): $ChemicalAttributeValidator
- "setStack"(arg0: $InfusionStack$Type): void
- "setEmpty"(): void
- "growStack"(arg0: long, arg1: $Action$Type): long
- "isTypeEqual"(arg0: $InfuseType$Type): boolean
- "isTypeEqual"(arg0: $InfusionStack$Type): boolean
- "shrinkStack"(arg0: long, arg1: $Action$Type): long
  "getEmptyStack"(): $InfusionStack
  "onContentsChanged"(): void
 }
@@ -3688,15 +3685,15 @@ declare global {
 export type $IInfusionTank_ = $IInfusionTank$Type;
 }}
 declare module "packages/mekanism/api/security/$IOwnerObject" {
-import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
+import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
 
 export interface $IOwnerObject {
 
- "setOwnerUUID"(arg0: $UUID$Type): void
  "ownerMatches"(arg0: $Player$Type): boolean
- "getOwnerUUID"(): $UUID
+ "setOwnerUUID"(arg0: $UUID$Type): void
  "getOwnerName"(): string
+ "getOwnerUUID"(): $UUID
 }
 
 export namespace $IOwnerObject {
@@ -3753,10 +3750,10 @@ export interface $ChemicalStackIngredient$InfusionStackIngredient extends $Chemi
  "write"(arg0: $FriendlyByteBuf$Type): void
  "testType"(arg0: $InfusionStack$Type): boolean
  "serialize"(): $JsonElement
- "getRepresentations"(): $List<($InfusionStack)>
+ "hasNoMatchingInstances"(): boolean
  "getMatchingInstance"(arg0: $InfusionStack$Type): $InfusionStack
  "getNeededAmount"(arg0: $InfusionStack$Type): long
- "hasNoMatchingInstances"(): boolean
+ "getRepresentations"(): $List<($InfusionStack)>
  "test"(arg0: $InfusionStack$Type): boolean
  "or"(arg0: $Predicate$Type<(any)>): $Predicate<($InfusionStack)>
  "negate"(): $Predicate<($InfusionStack)>
@@ -3798,8 +3795,8 @@ constructor(arg0: $ResourceLocation$Type, arg1: $FluidStackIngredient$Type, arg2
 public "test"(arg0: $FluidStack$Type): boolean
 public "write"(arg0: $FriendlyByteBuf$Type): void
 public "getInput"(): $FluidStackIngredient
-public "getOutput"(arg0: $FluidStack$Type): $ElectrolysisRecipe$ElectrolysisRecipeOutput
 public "getEnergyMultiplier"(): $FloatingLong
+public "getOutput"(arg0: $FluidStack$Type): $ElectrolysisRecipe$ElectrolysisRecipeOutput
 public "isIncomplete"(): boolean
 public "getOutputDefinition"(): $List<($ElectrolysisRecipe$ElectrolysisRecipeOutput)>
 public "or"(arg0: $Predicate$Type<(any)>): $Predicate<($FluidStack)>
@@ -3835,9 +3832,9 @@ export interface $ISlurryProvider extends $IChemicalProvider<($Slurry)> {
 
  "getStack"(arg0: long): $SlurryStack
  "getTranslationKey"(): string
- "getTextComponent"(): $Component
  "getRegistryName"(): $ResourceLocation
  "getChemical"(): $Slurry
+ "getTextComponent"(): $Component
  "getName"(): string
 
 (arg0: long): $SlurryStack
@@ -3869,16 +3866,16 @@ export class $ModuleData$ModuleDataBuilder<MODULE extends $ICustomModule<(MODULE
 
 
 public "maxStackSize"(arg0: integer): $ModuleData$ModuleDataBuilder<(MODULE)>
-public static "custom"<MODULE extends $ICustomModule<(MODULE)>>(arg0: $NonNullSupplier$Type<(MODULE)>, arg1: $IItemProvider$Type): $ModuleData$ModuleDataBuilder<(MODULE)>
-public "exclusive"(...arg0: ($ModuleData$ExclusiveFlag$Type)[]): $ModuleData$ModuleDataBuilder<(MODULE)>
-public "exclusive"(arg0: integer): $ModuleData$ModuleDataBuilder<(MODULE)>
+public static "marker"(arg0: $IItemProvider$Type): $ModuleData$ModuleDataBuilder<(any)>
+public "handlesModeChange"(): $ModuleData$ModuleDataBuilder<(MODULE)>
 public "rendersHUD"(): $ModuleData$ModuleDataBuilder<(MODULE)>
 public "noDisable"(): $ModuleData$ModuleDataBuilder<(MODULE)>
-public "handlesModeChange"(): $ModuleData$ModuleDataBuilder<(MODULE)>
 public "disabledByDefault"(): $ModuleData$ModuleDataBuilder<(MODULE)>
-public static "marker"(arg0: $IItemProvider$Type): $ModuleData$ModuleDataBuilder<(any)>
-public "rarity"(arg0: $Rarity$Type): $ModuleData$ModuleDataBuilder<(MODULE)>
+public "exclusive"(arg0: integer): $ModuleData$ModuleDataBuilder<(MODULE)>
+public "exclusive"(...arg0: ($ModuleData$ExclusiveFlag$Type)[]): $ModuleData$ModuleDataBuilder<(MODULE)>
+public static "custom"<MODULE extends $ICustomModule<(MODULE)>>(arg0: $NonNullSupplier$Type<(MODULE)>, arg1: $IItemProvider$Type): $ModuleData$ModuleDataBuilder<(MODULE)>
 public "modeChangeDisabledByDefault"(): $ModuleData$ModuleDataBuilder<(MODULE)>
+public "rarity"(arg0: $Rarity$Type): $ModuleData$ModuleDataBuilder<(MODULE)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -3924,8 +3921,8 @@ import {$ResourceLocation, $ResourceLocation$Type} from "packages/net/minecraft/
 export interface $IBaseProvider extends $IHasTextComponent, $IHasTranslationKey {
 
  "getName"(): string
- "getTextComponent"(): $Component
  "getRegistryName"(): $ResourceLocation
+ "getTextComponent"(): $Component
  "getTranslationKey"(): string
 }
 
@@ -3952,9 +3949,9 @@ import {$BlockEntityType, $BlockEntityType$Type} from "packages/net/minecraft/wo
 export interface $IConfigCardAccess {
 
  "getConfigurationData"(arg0: $Player$Type): $CompoundTag
+ "configurationDataSet"(): void
  "getConfigurationDataType"(): $BlockEntityType<(any)>
  "setConfigurationData"(arg0: $Player$Type, arg1: $CompoundTag$Type): void
- "configurationDataSet"(): void
  "isConfigurationDataCompatible"(arg0: $BlockEntityType$Type<(any)>): boolean
  "getConfigCardName"(): string
 }
@@ -3989,9 +3986,9 @@ constructor(arg0: $PigmentBuilder$Type)
 public "toString"(): string
 public "write"(arg0: $CompoundTag$Type): $CompoundTag
 public "getRegistryName"(): $ResourceLocation
-public "isEmptyType"(): boolean
-public static "getFromRegistry"(arg0: $ResourceLocation$Type): $Pigment
 public static "readFromNBT"(arg0: $CompoundTag$Type): $Pigment
+public static "getFromRegistry"(arg0: $ResourceLocation$Type): $Pigment
+public "isEmptyType"(): boolean
 public "getStack"(arg0: long): $PigmentStack
 get "registryName"(): $ResourceLocation
 get "emptyType"(): boolean
@@ -4027,8 +4024,8 @@ public "write"(arg0: $FriendlyByteBuf$Type): void
 public "getInput"(): $ItemStackIngredient
 public "getOutput"(arg0: $ItemStack$Type): $ItemStack
 public "isIncomplete"(): boolean
-public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
 public "getOutputDefinition"(): $List<($ItemStack)>
+public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
 public "or"(arg0: $Predicate$Type<(any)>): $Predicate<($ItemStack)>
 public "negate"(): $Predicate<($ItemStack)>
 public "and"(arg0: $Predicate$Type<(any)>): $Predicate<($ItemStack)>
@@ -4059,15 +4056,15 @@ import {$IEmptyStackProvider, $IEmptyStackProvider$Type} from "packages/mekanism
 export interface $IChemicalHandler<CHEMICAL extends $Chemical<(CHEMICAL)>, STACK extends $ChemicalStack<(CHEMICAL)>> extends $IEmptyStackProvider<(CHEMICAL), (STACK)> {
 
  "isValid"(arg0: integer, arg1: STACK): boolean
- "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): STACK
- "extractChemical"(arg0: STACK, arg1: $Action$Type): STACK
- "extractChemical"(arg0: long, arg1: $Action$Type): STACK
- "insertChemical"(arg0: integer, arg1: STACK, arg2: $Action$Type): STACK
- "insertChemical"(arg0: STACK, arg1: $Action$Type): STACK
- "getChemicalInTank"(arg0: integer): STACK
- "setChemicalInTank"(arg0: integer, arg1: STACK): void
  "getTanks"(): integer
  "getTankCapacity"(arg0: integer): long
+ "insertChemical"(arg0: STACK, arg1: $Action$Type): STACK
+ "insertChemical"(arg0: integer, arg1: STACK, arg2: $Action$Type): STACK
+ "getChemicalInTank"(arg0: integer): STACK
+ "extractChemical"(arg0: long, arg1: $Action$Type): STACK
+ "extractChemical"(arg0: STACK, arg1: $Action$Type): STACK
+ "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): STACK
+ "setChemicalInTank"(arg0: integer, arg1: STACK): void
  "getEmptyStack"(): STACK
 }
 
@@ -4096,15 +4093,15 @@ import {$Slurry, $Slurry$Type} from "packages/mekanism/api/chemical/slurry/$Slur
 export interface $ISlurryHandler extends $IChemicalHandler<($Slurry), ($SlurryStack)>, $IEmptySlurryProvider {
 
  "isValid"(arg0: integer, arg1: $SlurryStack$Type): boolean
- "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): $SlurryStack
- "extractChemical"(arg0: $SlurryStack$Type, arg1: $Action$Type): $SlurryStack
- "extractChemical"(arg0: long, arg1: $Action$Type): $SlurryStack
- "insertChemical"(arg0: integer, arg1: $SlurryStack$Type, arg2: $Action$Type): $SlurryStack
- "insertChemical"(arg0: $SlurryStack$Type, arg1: $Action$Type): $SlurryStack
- "getChemicalInTank"(arg0: integer): $SlurryStack
- "setChemicalInTank"(arg0: integer, arg1: $SlurryStack$Type): void
  "getTanks"(): integer
  "getTankCapacity"(arg0: integer): long
+ "insertChemical"(arg0: $SlurryStack$Type, arg1: $Action$Type): $SlurryStack
+ "insertChemical"(arg0: integer, arg1: $SlurryStack$Type, arg2: $Action$Type): $SlurryStack
+ "getChemicalInTank"(arg0: integer): $SlurryStack
+ "extractChemical"(arg0: long, arg1: $Action$Type): $SlurryStack
+ "extractChemical"(arg0: $SlurryStack$Type, arg1: $Action$Type): $SlurryStack
+ "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): $SlurryStack
+ "setChemicalInTank"(arg0: integer, arg1: $SlurryStack$Type): void
  "getEmptyStack"(): $SlurryStack
 }
 
@@ -4135,8 +4132,8 @@ import {$IEmptyGasProvider, $IEmptyGasProvider$Type} from "packages/mekanism/api
 
 export interface $IGasTank extends $IChemicalTank<($Gas), ($GasStack)>, $IEmptyGasProvider {
 
- "createStack"(arg0: $GasStack$Type, arg1: long): $GasStack
  "deserializeNBT"(arg0: $CompoundTag$Type): void
+ "createStack"(arg0: $GasStack$Type, arg1: long): $GasStack
  "extract"(arg0: long, arg1: $Action$Type, arg2: $AutomationType$Type): $GasStack
  "insert"(arg0: $GasStack$Type, arg1: $Action$Type, arg2: $AutomationType$Type): $GasStack
  "isEmpty"(): boolean
@@ -4144,17 +4141,17 @@ export interface $IGasTank extends $IChemicalTank<($Gas), ($GasStack)>, $IEmptyG
  "getStack"(): $GasStack
  "getCapacity"(): long
  "isValid"(arg0: $GasStack$Type): boolean
+ "setEmpty"(): void
+ "setStack"(arg0: $GasStack$Type): void
+ "growStack"(arg0: long, arg1: $Action$Type): long
+ "isTypeEqual"(arg0: $Gas$Type): boolean
+ "isTypeEqual"(arg0: $GasStack$Type): boolean
  "setStackUnchecked"(arg0: $GasStack$Type): void
+ "shrinkStack"(arg0: long, arg1: $Action$Type): long
  "setStackSize"(arg0: long, arg1: $Action$Type): long
  "getStored"(): long
  "getNeeded"(): long
  "getAttributeValidator"(): $ChemicalAttributeValidator
- "setStack"(arg0: $GasStack$Type): void
- "setEmpty"(): void
- "growStack"(arg0: long, arg1: $Action$Type): long
- "isTypeEqual"(arg0: $Gas$Type): boolean
- "isTypeEqual"(arg0: $GasStack$Type): boolean
- "shrinkStack"(arg0: long, arg1: $Action$Type): long
  "getEmptyStack"(): $GasStack
  "onContentsChanged"(): void
 }
@@ -4196,18 +4193,18 @@ public static "values"(): ($Upgrade)[]
 public static "valueOf"(arg0: string): $Upgrade
 public "getTag"(arg0: integer): $CompoundTag
 public "getDescription"(): $Component
-public static "byIndexStatic"(arg0: integer): $Upgrade
 public "getTranslationKey"(): string
 public "getMax"(): integer
-public "getRawName"(): string
-public static "saveMap"(arg0: $Map$Type<($Upgrade$Type), (integer)>, arg1: $CompoundTag$Type): void
-public static "buildMap"(arg0: $CompoundTag$Type): $Map<($Upgrade), (integer)>
 public "getColor"(): $EnumColor
+public static "saveMap"(arg0: $Map$Type<($Upgrade$Type), (integer)>, arg1: $CompoundTag$Type): void
+public "getRawName"(): string
+public static "buildMap"(arg0: $CompoundTag$Type): $Map<($Upgrade), (integer)>
+public static "byIndexStatic"(arg0: integer): $Upgrade
 get "description"(): $Component
 get "translationKey"(): string
 get "max"(): integer
-get "rawName"(): string
 get "color"(): $EnumColor
+get "rawName"(): string
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -4252,18 +4249,18 @@ declare module "packages/mekanism/api/inventory/qio/$IQIOFrequency" {
 import {$ObjLongConsumer, $ObjLongConsumer$Type} from "packages/java/util/function/$ObjLongConsumer"
 import {$SecurityMode, $SecurityMode$Type} from "packages/mekanism/api/security/$SecurityMode"
 import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
-import {$IHashedItem, $IHashedItem$Type} from "packages/mekanism/api/inventory/$IHashedItem"
 import {$Action, $Action$Type} from "packages/mekanism/api/$Action"
+import {$IHashedItem, $IHashedItem$Type} from "packages/mekanism/api/inventory/$IHashedItem"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$IFrequency, $IFrequency$Type} from "packages/mekanism/api/$IFrequency"
 
 export interface $IQIOFrequency extends $IFrequency {
 
  "getStored"(arg0: $ItemStack$Type): long
- "forAllHashedStored"(arg0: $ObjLongConsumer$Type<($IHashedItem$Type)>): void
- "forAllStored"(arg0: $ObjLongConsumer$Type<($ItemStack$Type)>): void
  "massExtract"(arg0: $ItemStack$Type, arg1: long, arg2: $Action$Type): long
+ "forAllHashedStored"(arg0: $ObjLongConsumer$Type<($IHashedItem$Type)>): void
  "massInsert"(arg0: $ItemStack$Type, arg1: long, arg2: $Action$Type): long
+ "forAllStored"(arg0: $ObjLongConsumer$Type<($ItemStack$Type)>): void
  "getName"(): string
  "isValid"(): boolean
  "getSecurity"(): $SecurityMode
@@ -4341,27 +4338,27 @@ import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Directio
 
 export interface $ISidedChemicalHandler<CHEMICAL extends $Chemical<(CHEMICAL)>, STACK extends $ChemicalStack<(CHEMICAL)>> extends $IChemicalHandler<(CHEMICAL), (STACK)> {
 
- "isValid"(arg0: integer, arg1: STACK): boolean
- "isValid"(arg0: integer, arg1: STACK, arg2: $Direction$Type): boolean
- "extractChemical"(arg0: integer, arg1: long, arg2: $Direction$Type, arg3: $Action$Type): STACK
- "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): STACK
- "extractChemical"(arg0: long, arg1: $Direction$Type, arg2: $Action$Type): STACK
- "extractChemical"(arg0: STACK, arg1: $Direction$Type, arg2: $Action$Type): STACK
  "getSideFor"(): $Direction
+ "isValid"(arg0: integer, arg1: STACK, arg2: $Direction$Type): boolean
+ "isValid"(arg0: integer, arg1: STACK): boolean
+ "getTanks"(): integer
+ "getTanks"(arg0: $Direction$Type): integer
+ "getTankCapacity"(arg0: integer, arg1: $Direction$Type): long
+ "getTankCapacity"(arg0: integer): long
  "insertChemical"(arg0: STACK, arg1: $Direction$Type, arg2: $Action$Type): STACK
  "insertChemical"(arg0: integer, arg1: STACK, arg2: $Action$Type): STACK
  "insertChemical"(arg0: integer, arg1: STACK, arg2: $Direction$Type, arg3: $Action$Type): STACK
- "getChemicalInTank"(arg0: integer): STACK
  "getChemicalInTank"(arg0: integer, arg1: $Direction$Type): STACK
- "setChemicalInTank"(arg0: integer, arg1: STACK): void
+ "getChemicalInTank"(arg0: integer): STACK
+ "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): STACK
+ "extractChemical"(arg0: long, arg1: $Direction$Type, arg2: $Action$Type): STACK
+ "extractChemical"(arg0: STACK, arg1: $Direction$Type, arg2: $Action$Type): STACK
+ "extractChemical"(arg0: integer, arg1: long, arg2: $Direction$Type, arg3: $Action$Type): STACK
  "setChemicalInTank"(arg0: integer, arg1: STACK, arg2: $Direction$Type): void
- "getTanks"(arg0: $Direction$Type): integer
- "getTanks"(): integer
- "getTankCapacity"(arg0: integer, arg1: $Direction$Type): long
- "getTankCapacity"(arg0: integer): long
- "extractChemical"(arg0: STACK, arg1: $Action$Type): STACK
- "extractChemical"(arg0: long, arg1: $Action$Type): STACK
+ "setChemicalInTank"(arg0: integer, arg1: STACK): void
  "insertChemical"(arg0: STACK, arg1: $Action$Type): STACK
+ "extractChemical"(arg0: long, arg1: $Action$Type): STACK
+ "extractChemical"(arg0: STACK, arg1: $Action$Type): STACK
  "getEmptyStack"(): STACK
 }
 
@@ -4387,8 +4384,8 @@ import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} fro
 import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$CompoundTag"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
 import {$Chemical, $Chemical$Type} from "packages/mekanism/api/chemical/$Chemical"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -4409,9 +4406,9 @@ public static "getTypeFor"(arg0: $ChemicalStackIngredient$Type<(any), (any)>): $
 public static "getTypeFor"(arg0: $Chemical$Type<(any)>): $ChemicalType
 public static "getTypeFor"(arg0: $ChemicalStack$Type<(any)>): $ChemicalType
 public "getSerializedName"(): string
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "serializedName"(): string
 }
 /**
@@ -4450,8 +4447,8 @@ public "testType"(arg0: $BoxedChemicalStack$Type): boolean
 public "getInput"(): $ChemicalStackIngredient<(any), (any)>
 public "getOutput"(arg0: $BoxedChemicalStack$Type): $ItemStack
 public "isIncomplete"(): boolean
-public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
 public "getOutputDefinition"(): $List<($ItemStack)>
+public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
 public "or"(arg0: $Predicate$Type<(any)>): $Predicate<($BoxedChemicalStack)>
 public "negate"(): $Predicate<($BoxedChemicalStack)>
 public "and"(arg0: $Predicate$Type<(any)>): $Predicate<($BoxedChemicalStack)>
@@ -4484,9 +4481,9 @@ export interface $IInfuseTypeProvider extends $IChemicalProvider<($InfuseType)> 
 
  "getStack"(arg0: long): $InfusionStack
  "getTranslationKey"(): string
- "getTextComponent"(): $Component
  "getRegistryName"(): $ResourceLocation
  "getChemical"(): $InfuseType
+ "getTextComponent"(): $Component
  "getName"(): string
 
 (arg0: long): $InfusionStack
@@ -4517,8 +4514,8 @@ constructor(adjacentTransfer: double, environmentTransfer: double)
 public "equals"(arg0: any): boolean
 public "toString"(): string
 public "hashCode"(): integer
-public "adjacentTransfer"(): double
 public "environmentTransfer"(): double
+public "adjacentTransfer"(): double
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -4560,25 +4557,25 @@ import {$FloatingLong, $FloatingLong$Type} from "packages/mekanism/api/math/$Flo
 
 export interface $ISidedStrictEnergyHandler extends $IStrictEnergyHandler {
 
- "getMaxEnergy"(arg0: integer, arg1: $Direction$Type): $FloatingLong
- "getMaxEnergy"(arg0: integer): $FloatingLong
- "insertEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Direction$Type, arg3: $Action$Type): $FloatingLong
- "insertEnergy"(arg0: $FloatingLong$Type, arg1: $Direction$Type, arg2: $Action$Type): $FloatingLong
- "insertEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Action$Type): $FloatingLong
- "getNeededEnergy"(arg0: integer): $FloatingLong
- "getNeededEnergy"(arg0: integer, arg1: $Direction$Type): $FloatingLong
- "getEnergySideFor"(): $Direction
- "getEnergy"(arg0: integer): $FloatingLong
- "getEnergy"(arg0: integer, arg1: $Direction$Type): $FloatingLong
- "setEnergy"(arg0: integer, arg1: $FloatingLong$Type): void
- "setEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Direction$Type): void
- "getEnergyContainerCount"(): integer
  "getEnergyContainerCount"(arg0: $Direction$Type): integer
- "extractEnergy"(arg0: $FloatingLong$Type, arg1: $Direction$Type, arg2: $Action$Type): $FloatingLong
+ "getEnergyContainerCount"(): integer
  "extractEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Direction$Type, arg3: $Action$Type): $FloatingLong
  "extractEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Action$Type): $FloatingLong
- "insertEnergy"(arg0: $FloatingLong$Type, arg1: $Action$Type): $FloatingLong
+ "extractEnergy"(arg0: $FloatingLong$Type, arg1: $Direction$Type, arg2: $Action$Type): $FloatingLong
+ "getEnergy"(arg0: integer, arg1: $Direction$Type): $FloatingLong
+ "getEnergy"(arg0: integer): $FloatingLong
+ "setEnergy"(arg0: integer, arg1: $FloatingLong$Type): void
+ "setEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Direction$Type): void
+ "getMaxEnergy"(arg0: integer, arg1: $Direction$Type): $FloatingLong
+ "getMaxEnergy"(arg0: integer): $FloatingLong
+ "getNeededEnergy"(arg0: integer, arg1: $Direction$Type): $FloatingLong
+ "getNeededEnergy"(arg0: integer): $FloatingLong
+ "insertEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Direction$Type, arg3: $Action$Type): $FloatingLong
+ "insertEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Action$Type): $FloatingLong
+ "insertEnergy"(arg0: $FloatingLong$Type, arg1: $Direction$Type, arg2: $Action$Type): $FloatingLong
+ "getEnergySideFor"(): $Direction
  "extractEnergy"(arg0: $FloatingLong$Type, arg1: $Action$Type): $FloatingLong
+ "insertEnergy"(arg0: $FloatingLong$Type, arg1: $Action$Type): $FloatingLong
 }
 
 export namespace $ISidedStrictEnergyHandler {
@@ -4632,27 +4629,27 @@ import {$InfusionStack, $InfusionStack$Type} from "packages/mekanism/api/chemica
 
 export interface $IInfusionHandler$ISidedInfusionHandler extends $ISidedChemicalHandler<($InfuseType), ($InfusionStack)>, $IInfusionHandler {
 
- "isValid"(arg0: integer, arg1: $InfusionStack$Type): boolean
- "isValid"(arg0: integer, arg1: $InfusionStack$Type, arg2: $Direction$Type): boolean
- "extractChemical"(arg0: integer, arg1: long, arg2: $Direction$Type, arg3: $Action$Type): $InfusionStack
- "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): $InfusionStack
- "extractChemical"(arg0: long, arg1: $Direction$Type, arg2: $Action$Type): $InfusionStack
- "extractChemical"(arg0: $InfusionStack$Type, arg1: $Direction$Type, arg2: $Action$Type): $InfusionStack
  "getSideFor"(): $Direction
+ "isValid"(arg0: integer, arg1: $InfusionStack$Type, arg2: $Direction$Type): boolean
+ "isValid"(arg0: integer, arg1: $InfusionStack$Type): boolean
+ "getTanks"(): integer
+ "getTanks"(arg0: $Direction$Type): integer
+ "getTankCapacity"(arg0: integer, arg1: $Direction$Type): long
+ "getTankCapacity"(arg0: integer): long
  "insertChemical"(arg0: $InfusionStack$Type, arg1: $Direction$Type, arg2: $Action$Type): $InfusionStack
  "insertChemical"(arg0: integer, arg1: $InfusionStack$Type, arg2: $Action$Type): $InfusionStack
  "insertChemical"(arg0: integer, arg1: $InfusionStack$Type, arg2: $Direction$Type, arg3: $Action$Type): $InfusionStack
- "getChemicalInTank"(arg0: integer): $InfusionStack
  "getChemicalInTank"(arg0: integer, arg1: $Direction$Type): $InfusionStack
- "setChemicalInTank"(arg0: integer, arg1: $InfusionStack$Type): void
+ "getChemicalInTank"(arg0: integer): $InfusionStack
+ "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): $InfusionStack
+ "extractChemical"(arg0: long, arg1: $Direction$Type, arg2: $Action$Type): $InfusionStack
+ "extractChemical"(arg0: $InfusionStack$Type, arg1: $Direction$Type, arg2: $Action$Type): $InfusionStack
+ "extractChemical"(arg0: integer, arg1: long, arg2: $Direction$Type, arg3: $Action$Type): $InfusionStack
  "setChemicalInTank"(arg0: integer, arg1: $InfusionStack$Type, arg2: $Direction$Type): void
- "getTanks"(arg0: $Direction$Type): integer
- "getTanks"(): integer
- "getTankCapacity"(arg0: integer, arg1: $Direction$Type): long
- "getTankCapacity"(arg0: integer): long
- "extractChemical"(arg0: $InfusionStack$Type, arg1: $Action$Type): $InfusionStack
- "extractChemical"(arg0: long, arg1: $Action$Type): $InfusionStack
+ "setChemicalInTank"(arg0: integer, arg1: $InfusionStack$Type): void
  "insertChemical"(arg0: $InfusionStack$Type, arg1: $Action$Type): $InfusionStack
+ "extractChemical"(arg0: long, arg1: $Action$Type): $InfusionStack
+ "extractChemical"(arg0: $InfusionStack$Type, arg1: $Action$Type): $InfusionStack
  "getEmptyStack"(): $InfusionStack
 }
 
@@ -4677,8 +4674,8 @@ import {$InteractionResult, $InteractionResult$Type} from "packages/net/minecraf
 
 export interface $IConfigurable {
 
- "onSneakRightClick"(arg0: $Player$Type): $InteractionResult
  "onRightClick"(arg0: $Player$Type): $InteractionResult
+ "onSneakRightClick"(arg0: $Player$Type): $InteractionResult
 }
 
 export namespace $IConfigurable {
@@ -4726,9 +4723,9 @@ export interface $IExtendedFluidHandler extends $IFluidHandler {
  "extractFluid"(arg0: integer, arg1: integer, arg2: $Action$Type): $FluidStack
  "extractFluid"(arg0: $FluidStack$Type, arg1: $Action$Type): $FluidStack
  "getTanks"(): integer
- "isFluidValid"(arg0: integer, arg1: $FluidStack$Type): boolean
  "getTankCapacity"(arg0: integer): integer
  "getFluidInTank"(arg0: integer): $FluidStack
+ "isFluidValid"(arg0: integer, arg1: $FluidStack$Type): boolean
 }
 
 export namespace $IExtendedFluidHandler {
@@ -4784,9 +4781,9 @@ export interface $IPigmentProvider extends $IChemicalProvider<($Pigment)> {
 
  "getStack"(arg0: long): $PigmentStack
  "getTranslationKey"(): string
- "getTextComponent"(): $Component
  "getRegistryName"(): $ResourceLocation
  "getChemical"(): $Pigment
+ "getTextComponent"(): $Component
  "getName"(): string
 
 (arg0: long): $PigmentStack
@@ -4815,8 +4812,8 @@ export class $ChemicalAttribute {
 
 constructor()
 
-public "addTooltipText"(arg0: $List$Type<($Component$Type)>): $List<($Component)>
 public "needsValidation"(): boolean
+public "addTooltipText"(arg0: $List$Type<($Component$Type)>): $List<($Component)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -5001,39 +4998,39 @@ public "getAttributes"(): $Collection<($ChemicalAttribute)>
 public "is"(arg0: $TagKey$Type<(CHEMICAL)>): boolean
 public "has"(arg0: $Class$Type<(any)>): boolean
 public "addAttribute"(arg0: $ChemicalAttribute$Type): void
-public "getIcon"(): $ResourceLocation
 public "getTranslationKey"(): string
-public "getColorRepresentation"(): integer
-public "getTextComponent"(): $Component
+public "getIcon"(): $ResourceLocation
+public "getTags"(): $Stream<($TagKey<(CHEMICAL)>)>
 public "getRegistryName"(): $ResourceLocation
 public "getTint"(): integer
-public "getAttributeTypes"(): $Collection<($Class<(any)>)>
+public "getColorRepresentation"(): integer
 public "getChemical"(): CHEMICAL
+public "getAttributeTypes"(): $Collection<($Class<(any)>)>
 public "isEmptyType"(): boolean
-public "getTags"(): $Stream<($TagKey<(CHEMICAL)>)>
+public "getTextComponent"(): $Component
 public "getStack"(arg0: long): $ChemicalStack<(CHEMICAL)>
 public "mapAttributeToDouble"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToDoubleBiFunction$Type<(CHEMICAL), (any)>): double
 public "mapAttributeToDouble"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToDoubleFunction$Type<(any)>): double
+public "mapAttributeToLong"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToLongFunction$Type<(any)>): long
+public "mapAttributeToLong"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToLongBiFunction$Type<(CHEMICAL), (any)>): long
 public "mapAttribute"<ATTRIBUTE extends $ChemicalAttribute, V>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $Function$Type<(any), (any)>, arg2: V): V
 public "mapAttribute"<ATTRIBUTE extends $ChemicalAttribute, V>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $BiFunction$Type<(CHEMICAL), (any), (any)>, arg2: V): V
 public "mapAttributeToInt"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToIntBiFunction$Type<(CHEMICAL), (any)>): integer
 public "mapAttributeToInt"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToIntFunction$Type<(any)>): integer
 public "ifAttributePresent"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $Consumer$Type<(any)>): void
-public "mapAttributeToLong"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToLongFunction$Type<(any)>): long
-public "mapAttributeToLong"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToLongBiFunction$Type<(CHEMICAL), (any)>): long
 public "getName"(): string
 get "hidden"(): boolean
 get "attributes"(): $Collection<($ChemicalAttribute)>
-get "icon"(): $ResourceLocation
 get "translationKey"(): string
-get "colorRepresentation"(): integer
-get "textComponent"(): $Component
+get "icon"(): $ResourceLocation
+get "tags"(): $Stream<($TagKey<(CHEMICAL)>)>
 get "registryName"(): $ResourceLocation
 get "tint"(): integer
-get "attributeTypes"(): $Collection<($Class<(any)>)>
+get "colorRepresentation"(): integer
 get "chemical"(): CHEMICAL
+get "attributeTypes"(): $Collection<($Class<(any)>)>
 get "emptyType"(): boolean
-get "tags"(): $Stream<($TagKey<(CHEMICAL)>)>
+get "textComponent"(): $Component
 get "name"(): string
 }
 /**
@@ -5051,8 +5048,8 @@ export type $Chemical_<CHEMICAL> = $Chemical$Type<(CHEMICAL)>;
 declare module "packages/mekanism/api/tier/$BaseTier" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$MapColor, $MapColor$Type} from "packages/net/minecraft/world/level/material/$MapColor"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
@@ -5071,24 +5068,24 @@ public static "values"(): ($BaseTier)[]
 public static "valueOf"(arg0: string): $BaseTier
 public "getSimpleName"(): string
 public "getMapColor"(): $MapColor
-public static "byIndexStatic"(arg0: integer): $BaseTier
-public "setColorFromAtlas"(arg0: (integer)[]): void
-public "getLowerName"(): string
-public "getRgbCode"(): (integer)[]
 public "getSerializedName"(): string
 public "getColor"(): $TextColor
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
+public "getRgbCode"(): (integer)[]
+public "setColorFromAtlas"(arg0: (integer)[]): void
+public "getLowerName"(): string
+public static "byIndexStatic"(arg0: integer): $BaseTier
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
-public "getRgbCodeFloat"(): (float)[]
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 public "getColor"(arg0: integer): float
+public "getRgbCodeFloat"(): (float)[]
 get "simpleName"(): string
 get "mapColor"(): $MapColor
-set "colorFromAtlas"(value: (integer)[])
-get "lowerName"(): string
-get "rgbCode"(): (integer)[]
 get "serializedName"(): string
 get "color"(): $TextColor
+get "rgbCode"(): (integer)[]
+set "colorFromAtlas"(value: (integer)[])
+get "lowerName"(): string
 get "rgbCodeFloat"(): (float)[]
 }
 /**
@@ -5136,12 +5133,12 @@ import {$TextColor, $TextColor$Type} from "packages/net/minecraft/network/chat/$
 
 export interface $ILangEntry extends $IHasTranslationKey {
 
+ "translate"(...arg0: (any)[]): $MutableComponent
  "translateColored"(arg0: $EnumColor$Type, ...arg1: (any)[]): $MutableComponent
  "translateColored"(arg0: $TextColor$Type, ...arg1: (any)[]): $MutableComponent
- "translate"(...arg0: (any)[]): $MutableComponent
  "getTranslationKey"(): string
 
-(arg0: $EnumColor$Type, ...arg1: (any)[]): $MutableComponent
+(...arg0: (any)[]): $MutableComponent
 }
 
 export namespace $ILangEntry {
@@ -5169,15 +5166,15 @@ import {$IEmptyGasProvider, $IEmptyGasProvider$Type} from "packages/mekanism/api
 export interface $IGasHandler extends $IChemicalHandler<($Gas), ($GasStack)>, $IEmptyGasProvider {
 
  "isValid"(arg0: integer, arg1: $GasStack$Type): boolean
- "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): $GasStack
- "extractChemical"(arg0: $GasStack$Type, arg1: $Action$Type): $GasStack
- "extractChemical"(arg0: long, arg1: $Action$Type): $GasStack
- "insertChemical"(arg0: integer, arg1: $GasStack$Type, arg2: $Action$Type): $GasStack
- "insertChemical"(arg0: $GasStack$Type, arg1: $Action$Type): $GasStack
- "getChemicalInTank"(arg0: integer): $GasStack
- "setChemicalInTank"(arg0: integer, arg1: $GasStack$Type): void
  "getTanks"(): integer
  "getTankCapacity"(arg0: integer): long
+ "insertChemical"(arg0: $GasStack$Type, arg1: $Action$Type): $GasStack
+ "insertChemical"(arg0: integer, arg1: $GasStack$Type, arg2: $Action$Type): $GasStack
+ "getChemicalInTank"(arg0: integer): $GasStack
+ "extractChemical"(arg0: long, arg1: $Action$Type): $GasStack
+ "extractChemical"(arg0: $GasStack$Type, arg1: $Action$Type): $GasStack
+ "extractChemical"(arg0: integer, arg1: long, arg2: $Action$Type): $GasStack
+ "setChemicalInTank"(arg0: integer, arg1: $GasStack$Type): void
  "getEmptyStack"(): $GasStack
 }
 
@@ -5234,38 +5231,37 @@ public "getName"(): $MutableComponent
 public "toString"(): string
 public static "values"(): ($EnumColor)[]
 public static "valueOf"(arg0: string): $EnumColor
-public "getRegistryPrefix"(): string
 public "getMapColor"(): $MapColor
-public "getDyeColor"(): $DyeColor
+public "getRegistryPrefix"(): string
 public "getEnglishName"(): string
-public static "byIndexStatic"(arg0: integer): $EnumColor
-public "setColorFromAtlas"(arg0: (integer)[]): void
-public "getRgbCode"(): (integer)[]
-public "getLangEntry"(): $APILang
-public "getColoredName"(): $Component
-public "byIndex"(arg0: integer): $EnumColor
 public "getColor"(): $TextColor
+public "getRgbCode"(): (integer)[]
+public "setColorFromAtlas"(arg0: (integer)[]): void
+public "getDyeColor"(): $DyeColor
+public "getLangEntry"(): $APILang
+public static "byIndexStatic"(arg0: integer): $EnumColor
+public "getColoredName"(): $Component
 public "ordinal"(): integer
 public "adjust"(arg0: integer): $EnumColor
 public "adjust"(arg0: integer, arg1: $Predicate$Type<($EnumColor$Type)>): $EnumColor
-public "getPrevious"(arg0: $Predicate$Type<($EnumColor$Type)>): $EnumColor
-public "getPrevious"(): $EnumColor
 public "getNext"(arg0: $Predicate$Type<($EnumColor$Type)>): $EnumColor
 public "getNext"(): $EnumColor
-public "getRgbCodeFloat"(): (float)[]
+public "getPrevious"(): $EnumColor
+public "getPrevious"(arg0: $Predicate$Type<($EnumColor$Type)>): $EnumColor
 public "getColor"(arg0: integer): float
+public "getRgbCodeFloat"(): (float)[]
 get "name"(): $MutableComponent
-get "registryPrefix"(): string
 get "mapColor"(): $MapColor
-get "dyeColor"(): $DyeColor
+get "registryPrefix"(): string
 get "englishName"(): string
-set "colorFromAtlas"(value: (integer)[])
+get "color"(): $TextColor
 get "rgbCode"(): (integer)[]
+set "colorFromAtlas"(value: (integer)[])
+get "dyeColor"(): $DyeColor
 get "langEntry"(): $APILang
 get "coloredName"(): $Component
-get "color"(): $TextColor
-get "previous"(): $EnumColor
 get "next"(): $EnumColor
+get "previous"(): $EnumColor
 get "rgbCodeFloat"(): (float)[]
 }
 /**
@@ -5297,21 +5293,21 @@ constructor(arg0: $ResourceLocation$Type, arg1: $ItemStackIngredient$Type, arg2:
 public "test"(arg0: $ItemStack$Type): boolean
 public "write"(arg0: $FriendlyByteBuf$Type): void
 public "getInput"(): $ItemStackIngredient
+public "getSecondaryOutputDefinition"(): $List<($ItemStack)>
+public "getMainOutputDefinition"(): $List<($ItemStack)>
 public "getOutput"(arg0: $ItemStack$Type): $SawmillRecipe$ChanceOutput
 public "isIncomplete"(): boolean
 public "getSecondaryChance"(): double
-public "getMainOutputDefinition"(): $List<($ItemStack)>
-public "getSecondaryOutputDefinition"(): $List<($ItemStack)>
 public "or"(arg0: $Predicate$Type<(any)>): $Predicate<($ItemStack)>
 public "negate"(): $Predicate<($ItemStack)>
 public "and"(arg0: $Predicate$Type<(any)>): $Predicate<($ItemStack)>
 public static "isEqual"<T>(arg0: any): $Predicate<($ItemStack)>
 public static "not"<T>(arg0: $Predicate$Type<(any)>): $Predicate<($ItemStack)>
 get "input"(): $ItemStackIngredient
+get "secondaryOutputDefinition"(): $List<($ItemStack)>
+get "mainOutputDefinition"(): $List<($ItemStack)>
 get "incomplete"(): boolean
 get "secondaryChance"(): double
-get "mainOutputDefinition"(): $List<($ItemStack)>
-get "secondaryOutputDefinition"(): $List<($ItemStack)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -5333,8 +5329,8 @@ import {$EnumColor, $EnumColor$Type} from "packages/mekanism/api/text/$EnumColor
 export interface $IRadialMode {
 
  "color"(): $EnumColor
- "sliceName"(): $Component
  "icon"(): $ResourceLocation
+ "sliceName"(): $Component
 }
 
 export namespace $IRadialMode {
@@ -5369,23 +5365,23 @@ export interface $IModule<MODULE extends $ICustomModule<(MODULE)>> {
  "getData"(): $ModuleData<(MODULE)>
  "isEnabled"(): boolean
  "renderHUD"(): boolean
- "displayModeChange"(arg0: $Player$Type, arg1: $Component$Type, arg2: $IHasTextComponent$Type): void
- "getContainer"(): $ItemStack
  "getEnergyContainer"(): $IEnergyContainer
- "getCustomInstance"(): MODULE
- "useEnergy"(arg0: $LivingEntity$Type, arg1: $FloatingLong$Type): $FloatingLong
- "useEnergy"(arg0: $LivingEntity$Type, arg1: $IEnergyContainer$Type, arg2: $FloatingLong$Type, arg3: boolean): $FloatingLong
- "useEnergy"(arg0: $LivingEntity$Type, arg1: $FloatingLong$Type, arg2: boolean): $FloatingLong
- "canUseEnergy"(arg0: $LivingEntity$Type, arg1: $FloatingLong$Type, arg2: boolean): boolean
- "canUseEnergy"(arg0: $LivingEntity$Type, arg1: $FloatingLong$Type): boolean
- "canUseEnergy"(arg0: $LivingEntity$Type, arg1: $IEnergyContainer$Type, arg2: $FloatingLong$Type, arg3: boolean): boolean
+ "getContainer"(): $ItemStack
  "handlesModeChange"(): boolean
- "getInstalledCount"(): integer
- "handlesRadialModeChange"(): boolean
+ "displayModeChange"(arg0: $Player$Type, arg1: $Component$Type, arg2: $IHasTextComponent$Type): void
  "getContainerEnergy"(): $FloatingLong
+ "toggleEnabled"(arg0: $Player$Type, arg1: $Component$Type): void
  "hasEnoughEnergy"(arg0: $FloatingLongSupplier$Type): boolean
  "hasEnoughEnergy"(arg0: $FloatingLong$Type): boolean
- "toggleEnabled"(arg0: $Player$Type, arg1: $Component$Type): void
+ "getInstalledCount"(): integer
+ "getCustomInstance"(): MODULE
+ "canUseEnergy"(arg0: $LivingEntity$Type, arg1: $FloatingLong$Type, arg2: boolean): boolean
+ "canUseEnergy"(arg0: $LivingEntity$Type, arg1: $IEnergyContainer$Type, arg2: $FloatingLong$Type, arg3: boolean): boolean
+ "canUseEnergy"(arg0: $LivingEntity$Type, arg1: $FloatingLong$Type): boolean
+ "useEnergy"(arg0: $LivingEntity$Type, arg1: $IEnergyContainer$Type, arg2: $FloatingLong$Type, arg3: boolean): $FloatingLong
+ "useEnergy"(arg0: $LivingEntity$Type, arg1: $FloatingLong$Type, arg2: boolean): $FloatingLong
+ "useEnergy"(arg0: $LivingEntity$Type, arg1: $FloatingLong$Type): $FloatingLong
+ "handlesRadialModeChange"(): boolean
 }
 
 export namespace $IModule {
@@ -5418,10 +5414,10 @@ export interface $ChemicalStackIngredient$PigmentStackIngredient extends $Chemic
  "write"(arg0: $FriendlyByteBuf$Type): void
  "testType"(arg0: $PigmentStack$Type): boolean
  "serialize"(): $JsonElement
- "getRepresentations"(): $List<($PigmentStack)>
+ "hasNoMatchingInstances"(): boolean
  "getMatchingInstance"(arg0: $PigmentStack$Type): $PigmentStack
  "getNeededAmount"(arg0: $PigmentStack$Type): long
- "hasNoMatchingInstances"(): boolean
+ "getRepresentations"(): $List<($PigmentStack)>
  "test"(arg0: $PigmentStack$Type): boolean
  "or"(arg0: $Predicate$Type<(any)>): $Predicate<($PigmentStack)>
  "negate"(): $Predicate<($PigmentStack)>
@@ -5456,8 +5452,8 @@ export interface $INestedRadialMode extends $IRadialMode {
  "nestedData"(): $RadialData<(any)>
  "hasNestedData"(): boolean
  "color"(): $EnumColor
- "sliceName"(): $Component
  "icon"(): $ResourceLocation
+ "sliceName"(): $Component
 }
 
 export namespace $INestedRadialMode {
@@ -5490,9 +5486,9 @@ constructor(arg0: $InfuseTypeBuilder$Type)
 public "toString"(): string
 public "write"(arg0: $CompoundTag$Type): $CompoundTag
 public "getRegistryName"(): $ResourceLocation
-public "isEmptyType"(): boolean
-public static "getFromRegistry"(arg0: $ResourceLocation$Type): $InfuseType
 public static "readFromNBT"(arg0: $CompoundTag$Type): $InfuseType
+public static "getFromRegistry"(arg0: $ResourceLocation$Type): $InfuseType
+public "isEmptyType"(): boolean
 public "getStack"(arg0: long): $InfusionStack
 get "registryName"(): $ResourceLocation
 get "emptyType"(): boolean
@@ -5522,9 +5518,8 @@ static readonly "EMPTY": $GasStack
 constructor(arg0: $IGasProvider$Type, arg1: long)
 constructor(arg0: $GasStack$Type, arg1: long)
 
-public "copy"(): $GasStack
-public static "readFromPacket"(arg0: $FriendlyByteBuf$Type): $GasStack
 public static "readFromNBT"(arg0: $CompoundTag$Type): $GasStack
+public static "readFromPacket"(arg0: $FriendlyByteBuf$Type): $GasStack
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -5571,10 +5566,10 @@ import {$CachedRecipe$OperationTracker$RecipeError, $CachedRecipe$OperationTrack
 export class $CachedRecipe$OperationTracker {
 
 
+public "shouldContinueChecking"(): boolean
 public "addError"(arg0: $CachedRecipe$OperationTracker$RecipeError$Type): void
 public "resetProgress"(arg0: $CachedRecipe$OperationTracker$RecipeError$Type): void
 public "updateOperations"(arg0: integer): boolean
-public "shouldContinueChecking"(): boolean
 public "mismatchedRecipe"(): void
 }
 /**
@@ -5598,11 +5593,11 @@ export interface $IIncrementalEnum<TYPE extends ($Enum<(TYPE)>) & ($IIncremental
  "ordinal"(): integer
  "adjust"(arg0: integer): TYPE
  "adjust"(arg0: integer, arg1: $Predicate$Type<(TYPE)>): TYPE
- "getPrevious"(arg0: $Predicate$Type<(TYPE)>): TYPE
- "getPrevious"(): TYPE
+ "byIndex"(arg0: integer): TYPE
  "getNext"(arg0: $Predicate$Type<(TYPE)>): TYPE
  "getNext"(): TYPE
- "byIndex"(arg0: integer): TYPE
+ "getPrevious"(): TYPE
+ "getPrevious"(arg0: $Predicate$Type<(TYPE)>): TYPE
 }
 
 export namespace $IIncrementalEnum {
@@ -5631,9 +5626,9 @@ export interface $IGasProvider extends $IChemicalProvider<($Gas)> {
 
  "getStack"(arg0: long): $GasStack
  "getTranslationKey"(): string
- "getTextComponent"(): $Component
  "getRegistryName"(): $ResourceLocation
  "getChemical"(): $Gas
+ "getTextComponent"(): $Component
  "getName"(): string
 
 (arg0: long): $GasStack
@@ -5657,8 +5652,8 @@ export type $IGasProvider_ = $IGasProvider$Type;
 declare module "packages/mekanism/api/inventory/$IgnoredIInventory" {
 import {$Item, $Item$Type} from "packages/net/minecraft/world/item/$Item"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
-import {$Set, $Set$Type} from "packages/java/util/$Set"
 import {$BlockEntity, $BlockEntity$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntity"
+import {$Set, $Set$Type} from "packages/java/util/$Set"
 import {$Predicate, $Predicate$Type} from "packages/java/util/function/$Predicate"
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$Ingredient, $Ingredient$Type} from "packages/net/minecraft/world/item/crafting/$Ingredient"
@@ -5671,56 +5666,56 @@ export class $IgnoredIInventory implements $Container {
 static readonly "INSTANCE": $IgnoredIInventory
 
 
-public "removeItemNoUpdate"(arg0: integer): $ItemStack
 public "getContainerSize"(): integer
 public "getItem"(arg0: integer): $ItemStack
+public "removeItemNoUpdate"(arg0: integer): $ItemStack
+public "stillValid"(arg0: $Player$Type): boolean
 public "setChanged"(): void
+public "setItem"(arg0: integer, arg1: $ItemStack$Type): void
 public "isEmpty"(): boolean
 public "removeItem"(arg0: integer, arg1: integer): $ItemStack
 public "clearContent"(): void
-public "setItem"(arg0: integer, arg1: $ItemStack$Type): void
-public "stillValid"(arg0: $Player$Type): boolean
 public "getBlock"(level: $Level$Type): $BlockContainerJS
-public "kjs$self"(): $Container
-public "canPlaceItem"(arg0: integer, arg1: $ItemStack$Type): boolean
-public "hasAnyOf"(arg0: $Set$Type<($Item$Type)>): boolean
-public static "stillValidBlockEntity"(arg0: $BlockEntity$Type, arg1: $Player$Type, arg2: integer): boolean
-public "startOpen"(arg0: $Player$Type): void
 public "stopOpen"(arg0: $Player$Type): void
-public "canTakeItem"(arg0: $Container$Type, arg1: integer, arg2: $ItemStack$Type): boolean
-public static "stillValidBlockEntity"(arg0: $BlockEntity$Type, arg1: $Player$Type): boolean
+public "startOpen"(arg0: $Player$Type): void
+public "canPlaceItem"(arg0: integer, arg1: $ItemStack$Type): boolean
 public "getMaxStackSize"(): integer
-public "countItem"(arg0: $Item$Type): integer
-public "hasAnyMatching"(arg0: $Predicate$Type<($ItemStack$Type)>): boolean
-public "extractItem"(slot: integer, amount: integer, simulate: boolean): $ItemStack
-public "setStackInSlot"(slot: integer, stack: $ItemStack$Type): void
-public "asContainer"(): $Container
-public "getSlots"(): integer
+public "canTakeItem"(arg0: $Container$Type, arg1: integer, arg2: $ItemStack$Type): boolean
+public static "stillValidBlockEntity"(arg0: $BlockEntity$Type, arg1: $Player$Type, arg2: integer): boolean
 public "isMutable"(): boolean
-public "isItemValid"(slot: integer, stack: $ItemStack$Type): boolean
+public "getSlots"(): integer
 public "getStackInSlot"(slot: integer): $ItemStack
+public "extractItem"(slot: integer, amount: integer, simulate: boolean): $ItemStack
+public "hasAnyOf"(arg0: $Set$Type<($Item$Type)>): boolean
+public "countItem"(arg0: $Item$Type): integer
 public "insertItem"(slot: integer, stack: $ItemStack$Type, simulate: boolean): $ItemStack
-public "getWidth"(): integer
-public "setChanged"(): void
-public "getHeight"(): integer
-public "clear"(): void
+public "hasAnyMatching"(arg0: $Predicate$Type<($ItemStack$Type)>): boolean
 public "getSlotLimit"(slot: integer): integer
+public static "stillValidBlockEntity"(arg0: $BlockEntity$Type, arg1: $Player$Type): boolean
+public "asContainer"(): $Container
+public "setStackInSlot"(slot: integer, stack: $ItemStack$Type): void
+public "getWidth"(): integer
+public "clear"(): void
+public "setChanged"(): void
+public "isItemValid"(slot: integer, stack: $ItemStack$Type): boolean
+public "getHeight"(): integer
+public "kjs$self"(): $Container
 public static "tryClear"(arg0: any): void
 public "isEmpty"(): boolean
 public "insertItem"(stack: $ItemStack$Type, simulate: boolean): $ItemStack
-public "clear"(ingredient: $Ingredient$Type): void
-public "count"(): integer
-public "count"(ingredient: $Ingredient$Type): integer
-public "getAllItems"(): $List<($ItemStack)>
-public "find"(ingredient: $Ingredient$Type): integer
-public "find"(): integer
-public "countNonEmpty"(): integer
 public "countNonEmpty"(ingredient: $Ingredient$Type): integer
+public "countNonEmpty"(): integer
+public "getAllItems"(): $List<($ItemStack)>
+public "find"(): integer
+public "find"(ingredient: $Ingredient$Type): integer
+public "clear"(ingredient: $Ingredient$Type): void
+public "count"(ingredient: $Ingredient$Type): integer
+public "count"(): integer
 get "containerSize"(): integer
 get "empty"(): boolean
 get "maxStackSize"(): integer
-get "slots"(): integer
 get "mutable"(): boolean
+get "slots"(): integer
 get "width"(): integer
 get "height"(): integer
 get "empty"(): boolean
@@ -5746,10 +5741,10 @@ import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$It
 export interface $IHashedItem {
 
  "getItem"(): $Item
- "createStack"(arg0: integer): $ItemStack
- "getInternalTag"(): $CompoundTag
- "getInternalStack"(): $ItemStack
  "getMaxStackSize"(): integer
+ "createStack"(arg0: integer): $ItemStack
+ "getInternalStack"(): $ItemStack
+ "getInternalTag"(): $CompoundTag
 }
 
 export namespace $IHashedItem {
@@ -5773,13 +5768,13 @@ import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$It
 export class $SawmillRecipe$ChanceOutput {
 
 
-public "nextSecondaryOutput"(): $ItemStack
 public "getSecondaryOutput"(): $ItemStack
-public "getMainOutput"(): $ItemStack
 public "getMaxSecondaryOutput"(): $ItemStack
+public "getMainOutput"(): $ItemStack
+public "nextSecondaryOutput"(): $ItemStack
 get "secondaryOutput"(): $ItemStack
-get "mainOutput"(): $ItemStack
 get "maxSecondaryOutput"(): $ItemStack
+get "mainOutput"(): $ItemStack
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -5885,15 +5880,15 @@ import {$Codec, $Codec$Type} from "packages/com/mojang/serialization/$Codec"
 
 export interface $RobitSkin {
 
- "isUnlocked"(arg0: $Player$Type): boolean
- "codec"(): $Codec<(any)>
  "textures"(): $List<($ResourceLocation)>
+ "codec"(): $Codec<(any)>
  "customModel"(): $ResourceLocation
+ "isUnlocked"(arg0: $Player$Type): boolean
 }
 
 export namespace $RobitSkin {
-function getTranslatedName(arg0: $ResourceKey$Type<(any)>): $Component
 function getTranslationKey(arg0: $ResourceKey$Type<(any)>): string
+function getTranslatedName(arg0: $ResourceKey$Type<(any)>): $Component
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -5913,15 +5908,15 @@ import {$FloatingLong, $FloatingLong$Type} from "packages/mekanism/api/math/$Flo
 
 export interface $IStrictEnergyHandler {
 
- "getMaxEnergy"(arg0: integer): $FloatingLong
- "insertEnergy"(arg0: $FloatingLong$Type, arg1: $Action$Type): $FloatingLong
- "insertEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Action$Type): $FloatingLong
- "getNeededEnergy"(arg0: integer): $FloatingLong
- "getEnergy"(arg0: integer): $FloatingLong
- "setEnergy"(arg0: integer, arg1: $FloatingLong$Type): void
  "getEnergyContainerCount"(): integer
  "extractEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Action$Type): $FloatingLong
  "extractEnergy"(arg0: $FloatingLong$Type, arg1: $Action$Type): $FloatingLong
+ "getEnergy"(arg0: integer): $FloatingLong
+ "setEnergy"(arg0: integer, arg1: $FloatingLong$Type): void
+ "getMaxEnergy"(arg0: integer): $FloatingLong
+ "getNeededEnergy"(arg0: integer): $FloatingLong
+ "insertEnergy"(arg0: $FloatingLong$Type, arg1: $Action$Type): $FloatingLong
+ "insertEnergy"(arg0: integer, arg1: $FloatingLong$Type, arg2: $Action$Type): $FloatingLong
 }
 
 export namespace $IStrictEnergyHandler {
@@ -5948,25 +5943,25 @@ import {$ISidedHeatHandler, $ISidedHeatHandler$Type} from "packages/mekanism/api
 
 export interface $IMekanismHeatHandler extends $ISidedHeatHandler, $IContentsListener {
 
+ "canHandleHeat"(): boolean
+ "getHeatCapacity"(arg0: integer, arg1: $Direction$Type): double
  "getHeatCapacitor"(arg0: integer, arg1: $Direction$Type): $IHeatCapacitor
  "handleHeat"(arg0: integer, arg1: double, arg2: $Direction$Type): void
- "getHeatCapacity"(arg0: integer, arg1: $Direction$Type): double
- "canHandleHeat"(): boolean
  "getTemperature"(arg0: integer, arg1: $Direction$Type): double
+ "getHeatCapacitors"(arg0: $Direction$Type): $List<($IHeatCapacitor)>
+ "getHeatCapacitorCount"(arg0: $Direction$Type): integer
+ "getTotalInverseInsulation"(arg0: $Direction$Type): double
  "getInverseConduction"(arg0: integer, arg1: $Direction$Type): double
  "getInverseInsulation"(arg0: integer, arg1: $Direction$Type): double
- "getTotalInverseInsulation"(arg0: $Direction$Type): double
- "getHeatCapacitorCount"(arg0: $Direction$Type): integer
- "getHeatCapacitors"(arg0: $Direction$Type): $List<($IHeatCapacitor)>
- "handleHeat"(arg0: integer, arg1: double): void
- "handleHeat"(arg0: double, arg1: $Direction$Type): void
- "getHeatSideFor"(): $Direction
  "getHeatCapacity"(arg0: integer): double
+ "handleHeat"(arg0: double, arg1: $Direction$Type): void
+ "handleHeat"(arg0: integer, arg1: double): void
+ "getHeatSideFor"(): $Direction
  "getTotalInverseConductionCoefficient"(arg0: $Direction$Type): double
  "getTemperature"(arg0: integer): double
  "getTotalHeatCapacity"(arg0: $Direction$Type): double
- "getInverseConduction"(arg0: integer): double
  "getHeatCapacitorCount"(): integer
+ "getInverseConduction"(arg0: integer): double
  "getTotalTemperature"(arg0: $Direction$Type): double
  "onContentsChanged"(): void
  "handleHeat"(arg0: double): void
@@ -6007,10 +6002,10 @@ constructor(arg0: $SlurryBuilder$Type)
 public "toString"(): string
 public "write"(arg0: $CompoundTag$Type): $CompoundTag
 public "getRegistryName"(): $ResourceLocation
-public "getOreTag"(): $TagKey<($Item)>
-public "isEmptyType"(): boolean
-public static "getFromRegistry"(arg0: $ResourceLocation$Type): $Slurry
 public static "readFromNBT"(arg0: $CompoundTag$Type): $Slurry
+public "getOreTag"(): $TagKey<($Item)>
+public static "getFromRegistry"(arg0: $ResourceLocation$Type): $Slurry
+public "isEmptyType"(): boolean
 public "getStack"(arg0: long): $SlurryStack
 get "registryName"(): $ResourceLocation
 get "oreTag"(): $TagKey<($Item)>
@@ -6030,8 +6025,8 @@ export type $Slurry_ = $Slurry$Type;
 }}
 declare module "packages/mekanism/api/recipes/$MekanismRecipe" {
 import {$InputReplacement, $InputReplacement$Type} from "packages/dev/latvian/mods/kubejs/recipe/$InputReplacement"
-import {$NonNullList, $NonNullList$Type} from "packages/net/minecraft/core/$NonNullList"
 import {$RecipeSerializer, $RecipeSerializer$Type} from "packages/net/minecraft/world/item/crafting/$RecipeSerializer"
+import {$NonNullList, $NonNullList$Type} from "packages/net/minecraft/core/$NonNullList"
 import {$RecipeSchema, $RecipeSchema$Type} from "packages/dev/latvian/mods/kubejs/recipe/schema/$RecipeSchema"
 import {$Ingredient, $Ingredient$Type} from "packages/net/minecraft/world/item/crafting/$Ingredient"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
@@ -6049,38 +6044,38 @@ export class $MekanismRecipe implements $Recipe<($IgnoredIInventory)> {
 
 public "matches"(arg0: $IgnoredIInventory$Type, arg1: $Level$Type): boolean
 public "write"(arg0: $FriendlyByteBuf$Type): void
-public "isSpecial"(): boolean
-public "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
-public "isIncomplete"(): boolean
 public "getId"(): $ResourceLocation
+public "isSpecial"(): boolean
+public "isIncomplete"(): boolean
+public "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
 public "assemble"(arg0: $IgnoredIInventory$Type, arg1: $RegistryAccess$Type): $ItemStack
 public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
-public "getIngredients"(): $NonNullList<($Ingredient)>
-public "showNotification"(): boolean
 public "getSerializer"(): $RecipeSerializer<(any)>
 public "getRemainingItems"(arg0: $IgnoredIInventory$Type): $NonNullList<($ItemStack)>
+public "showNotification"(): boolean
 public "getToastSymbol"(): $ItemStack
-public "getGroup"(): string
-public "getOrCreateId"(): $ResourceLocation
-public "hasOutput"(match: $ReplacementMatch$Type): boolean
-public "getSchema"(): $RecipeSchema
-public "hasInput"(match: $ReplacementMatch$Type): boolean
-public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
-public "setGroup"(group: string): void
-public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
+public "getIngredients"(): $NonNullList<($Ingredient)>
 public "getMod"(): string
+public "getSchema"(): $RecipeSchema
+public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
+public "hasInput"(match: $ReplacementMatch$Type): boolean
+public "hasOutput"(match: $ReplacementMatch$Type): boolean
+public "getOrCreateId"(): $ResourceLocation
+public "setGroup"(group: string): void
+public "getGroup"(): string
+public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
 public "getType"(): $ResourceLocation
+get "id"(): $ResourceLocation
 get "special"(): boolean
 get "incomplete"(): boolean
-get "id"(): $ResourceLocation
-get "ingredients"(): $NonNullList<($Ingredient)>
 get "serializer"(): $RecipeSerializer<(any)>
 get "toastSymbol"(): $ItemStack
-get "group"(): string
-get "orCreateId"(): $ResourceLocation
-get "schema"(): $RecipeSchema
-set "group"(value: string)
+get "ingredients"(): $NonNullList<($Ingredient)>
 get "mod"(): string
+get "schema"(): $RecipeSchema
+get "orCreateId"(): $ResourceLocation
+set "group"(value: string)
+get "group"(): string
 get "type"(): $ResourceLocation
 }
 /**
@@ -6197,13 +6192,13 @@ export interface $IChemicalAttributeContainer<SELF extends $IChemicalAttributeCo
  "mapAttributeToDouble"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToDoubleBiFunction$Type<(SELF), (any)>): double
  "mapAttributeToDouble"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToDoubleFunction$Type<(any)>): double
  "getAttributeTypes"(): $Collection<($Class<(any)>)>
+ "mapAttributeToLong"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToLongFunction$Type<(any)>): long
+ "mapAttributeToLong"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToLongBiFunction$Type<(SELF), (any)>): long
  "mapAttribute"<ATTRIBUTE extends $ChemicalAttribute, V>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $Function$Type<(any), (any)>, arg2: V): V
  "mapAttribute"<ATTRIBUTE extends $ChemicalAttribute, V>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $BiFunction$Type<(SELF), (any), (any)>, arg2: V): V
  "mapAttributeToInt"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToIntBiFunction$Type<(SELF), (any)>): integer
  "mapAttributeToInt"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToIntFunction$Type<(any)>): integer
  "ifAttributePresent"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $Consumer$Type<(any)>): void
- "mapAttributeToLong"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToLongFunction$Type<(any)>): long
- "mapAttributeToLong"<ATTRIBUTE extends $ChemicalAttribute>(arg0: $Class$Type<(ATTRIBUTE)>, arg1: $ToLongBiFunction$Type<(SELF), (any)>): long
 }
 
 export namespace $IChemicalAttributeContainer {

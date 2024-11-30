@@ -18,16 +18,16 @@ static readonly "EMPTY_TYPES": $ConfigInventory
 public "getKey"(arg0: integer): $AEKey
 public "keySet"(): $Set<($AEKey)>
 public "getStack"(arg0: integer): $GenericStack
-public "addFilter"(arg0: $ItemLike$Type): $ConfigInventory
-public "addFilter"(arg0: $Fluid$Type): $ConfigInventory
-public "addFilter"(arg0: $AEKey$Type): $ConfigInventory
 public "setStack"(arg0: integer, arg1: $GenericStack$Type): void
-public static "storage"(arg0: integer, arg1: $Runnable$Type): $ConfigInventory
 public static "storage"(arg0: $AEKeyFilter$Type, arg1: integer, arg2: $Runnable$Type): $ConfigInventory
+public static "storage"(arg0: integer, arg1: $Runnable$Type): $ConfigInventory
+public "addFilter"(arg0: $Fluid$Type): $ConfigInventory
+public "addFilter"(arg0: $ItemLike$Type): $ConfigInventory
+public "addFilter"(arg0: $AEKey$Type): $ConfigInventory
 public static "configTypes"(arg0: $AEKeyFilter$Type, arg1: integer, arg2: $Runnable$Type): $ConfigInventory
 public static "configTypes"(arg0: integer, arg1: $Runnable$Type): $ConfigInventory
-public "getMaxAmount"(arg0: $AEKey$Type): long
 public static "configStacks"(arg0: $AEKeyFilter$Type, arg1: integer, arg2: $Runnable$Type, arg3: boolean): $ConfigInventory
+public "getMaxAmount"(arg0: $AEKey$Type): long
 public "createMenuWrapper"(): $ConfigMenuInventory
 public static "checkPreconditions"(arg0: $AEKey$Type, arg1: long, arg2: $Actionable$Type, arg3: $IActionSource$Type): void
 }
@@ -119,33 +119,33 @@ constructor(arg0: $GenericStackInv$Type)
 
 public "size"(): integer
 public "getDelegate"(): $GenericStackInv
-public "getStackInSlot"(arg0: integer): $ItemStack
-public "isItemValid"(arg0: integer, arg1: $ItemStack$Type): boolean
-public "getSlotLimit"(arg0: integer): integer
 public "setItemDirect"(arg0: integer, arg1: $ItemStack$Type): void
 public "convertToSuitableStack"(arg0: $ItemStack$Type): $GenericStack
+public "getStackInSlot"(arg0: integer): $ItemStack
+public "getSlotLimit"(arg0: integer): integer
+public "isItemValid"(arg0: integer, arg1: $ItemStack$Type): boolean
 public "clear"(): void
 public "isEmpty"(): boolean
 public "iterator"(): $Iterator<($ItemStack)>
 public static "empty"(): $InternalInventory
-public "insertItem"(arg0: integer, arg1: $ItemStack$Type, arg2: boolean): $ItemStack
-public "extractItem"(arg0: integer, arg1: integer, arg2: boolean): $ItemStack
 public "getRedstoneSignal"(): integer
 public "toItemHandler"(): $IItemHandler
-public "toContainer"(): $Container
 public static "wrapExternal"(arg0: $BlockEntity$Type, arg1: $Direction$Type): $ItemTransfer
 public static "wrapExternal"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Direction$Type): $ItemTransfer
-public "removeItems"(arg0: integer, arg1: $ItemStack$Type, arg2: $Predicate$Type<($ItemStack$Type)>): $ItemStack
+public "getSlotInv"(arg0: integer): $InternalInventory
 public "addItems"(arg0: $ItemStack$Type, arg1: boolean): $ItemStack
 public "addItems"(arg0: $ItemStack$Type): $ItemStack
-public "simulateRemove"(arg0: integer, arg1: $ItemStack$Type, arg2: $Predicate$Type<($ItemStack$Type)>): $ItemStack
 public "simulateAdd"(arg0: $ItemStack$Type): $ItemStack
-public "getSlotInv"(arg0: integer): $InternalInventory
-public "removeSimilarItems"(arg0: integer, arg1: $ItemStack$Type, arg2: $FuzzyMode$Type, arg3: $Predicate$Type<($ItemStack$Type)>): $ItemStack
+public "toContainer"(): $Container
+public "simulateRemove"(arg0: integer, arg1: $ItemStack$Type, arg2: $Predicate$Type<($ItemStack$Type)>): $ItemStack
 public "mayAllowInsertion"(): boolean
+public "removeSimilarItems"(arg0: integer, arg1: $ItemStack$Type, arg2: $FuzzyMode$Type, arg3: $Predicate$Type<($ItemStack$Type)>): $ItemStack
+public "removeItems"(arg0: integer, arg1: $ItemStack$Type, arg2: $Predicate$Type<($ItemStack$Type)>): $ItemStack
 public "getSubInventory"(arg0: integer, arg1: integer): $InternalInventory
-public "simulateSimilarRemove"(arg0: integer, arg1: $ItemStack$Type, arg2: $FuzzyMode$Type, arg3: $Predicate$Type<($ItemStack$Type)>): $ItemStack
 public "sendChangeNotification"(arg0: integer): void
+public "simulateSimilarRemove"(arg0: integer, arg1: $ItemStack$Type, arg2: $FuzzyMode$Type, arg3: $Predicate$Type<($ItemStack$Type)>): $ItemStack
+public "insertItem"(arg0: integer, arg1: $ItemStack$Type, arg2: boolean): $ItemStack
+public "extractItem"(arg0: integer, arg1: integer, arg2: boolean): $ItemStack
 public "spliterator"(): $Spliterator<($ItemStack)>
 public "forEach"(arg0: $Consumer$Type<(any)>): void
 [Symbol.iterator](): IterableIterator<$ItemStack>;
@@ -170,8 +170,8 @@ import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$It
 
 export interface $IAEItemFilter {
 
- "allowExtract"(arg0: $InternalInventory$Type, arg1: integer, arg2: integer): boolean
  "allowInsert"(arg0: $InternalInventory$Type, arg1: integer, arg2: $ItemStack$Type): boolean
+ "allowExtract"(arg0: $InternalInventory$Type, arg1: integer, arg2: integer): boolean
 }
 
 export namespace $IAEItemFilter {
@@ -236,22 +236,22 @@ constructor(arg0: $InternalInventoryHost$Type, arg1: integer, arg2: integer, arg
 
 public "size"(): integer
 public "getHost"(): $InternalInventoryHost
-public "setFilter"(arg0: $IAEItemFilter$Type): void
-public "extractItem"(arg0: integer, arg1: integer, arg2: boolean): $ItemStack
-public "getStackInSlot"(arg0: integer): $ItemStack
-public "isItemValid"(arg0: integer, arg1: $ItemStack$Type): boolean
-public "getSlotLimit"(arg0: integer): integer
 public "setItemDirect"(arg0: integer, arg1: $ItemStack$Type): void
 public "setEnableClientEvents"(arg0: boolean): void
+public "setFilter"(arg0: $IAEItemFilter$Type): void
 public "setMaxStackSize"(arg0: integer, arg1: integer): void
 public "writeToNBT"(arg0: $CompoundTag$Type, arg1: string): void
 public "readFromNBT"(arg0: $CompoundTag$Type, arg1: string): void
+public "getStackInSlot"(arg0: integer): $ItemStack
+public "getSlotLimit"(arg0: integer): integer
+public "isItemValid"(arg0: integer, arg1: $ItemStack$Type): boolean
+public "extractItem"(arg0: integer, arg1: integer, arg2: boolean): $ItemStack
 public static "empty"(): $InternalInventory
 public static "wrapExternal"(arg0: $BlockEntity$Type, arg1: $Direction$Type): $ItemTransfer
 public static "wrapExternal"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Direction$Type): $ItemTransfer
 get "host"(): $InternalInventoryHost
-set "filter"(value: $IAEItemFilter$Type)
 set "enableClientEvents"(value: boolean)
+set "filter"(value: $IAEItemFilter$Type)
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -279,12 +279,12 @@ export class $ConfigManager implements $IConfigManager {
 constructor(arg0: $IConfigManagerListener$Type)
 constructor(arg0: $Runnable$Type)
 
-public "registerSetting"<T extends $Enum<(T)>>(arg0: $Setting$Type<(T)>, arg1: T): void
-public "putSetting"<T extends $Enum<(T)>>(arg0: $Setting$Type<(T)>, arg1: T): void
-public "getSetting"<T extends $Enum<(T)>>(arg0: $Setting$Type<(T)>): T
 public "getSettings"(): $Set<($Setting<(any)>)>
 public "writeToNBT"(arg0: $CompoundTag$Type): void
 public "readFromNBT"(arg0: $CompoundTag$Type): boolean
+public "registerSetting"<T extends $Enum<(T)>>(arg0: $Setting$Type<(T)>, arg1: T): void
+public "putSetting"<T extends $Enum<(T)>>(arg0: $Setting$Type<(T)>, arg1: T): void
+public "getSetting"<T extends $Enum<(T)>>(arg0: $Setting$Type<(T)>): T
 public "hasSetting"(arg0: $Setting$Type<(any)>): boolean
 get "settings"(): $Set<($Setting<(any)>)>
 }

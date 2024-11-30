@@ -210,20 +210,20 @@ constructor()
 
 public "initCapabilities"(arg0: $ItemStack$Type, arg1: $CompoundTag$Type): $ICapabilityProvider
 public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
-public "getMaxDamage"(arg0: $ItemStack$Type): integer
 public "isBarVisible"(arg0: $ItemStack$Type): boolean
-public "getBarColor"(arg0: $ItemStack$Type): integer
 public "getBarWidth"(arg0: $ItemStack$Type): integer
+public "getMaxDamage"(arg0: $ItemStack$Type): integer
+public "getBarColor"(arg0: $ItemStack$Type): integer
 public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "getEnergyMax"(): integer
 public "getEnergyCost"(): integer
-public "gadgetTarget"(): $GadgetTarget
 public "bindToInventory"(arg0: $Level$Type, arg1: $Player$Type, arg2: $ItemStack$Type, arg3: $BlockHitResult$Type): boolean
 public "rotateModes"(arg0: $ItemStack$Type): $ResourceLocation
-public static "getHitPos"(arg0: $ItemActionContext$Type): $BlockPos
-public "canUndo"(arg0: $Level$Type, arg1: $Player$Type, arg2: $ItemStack$Type): boolean
+public "gadgetTarget"(): $GadgetTarget
 public "undo"(arg0: $Level$Type, arg1: $Player$Type, arg2: $ItemStack$Type): void
+public "canUndo"(arg0: $Level$Type, arg1: $Player$Type, arg2: $ItemStack$Type): boolean
 public static "getGadget"(arg0: $Player$Type): $ItemStack
+public static "getHitPos"(arg0: $ItemActionContext$Type): $BlockPos
 get "energyMax"(): integer
 get "energyCost"(): integer
 }
@@ -311,6 +311,8 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor()
 
+public "getEnchantmentValue"(arg0: $ItemStack$Type): integer
+public "canApplyAtEnchantingTable"(arg0: $ItemStack$Type, arg1: $Enchantment$Type): boolean
 public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "isEnchantable"(arg0: $ItemStack$Type): boolean
 public "isBookEnchantable"(arg0: $ItemStack$Type, arg1: $ItemStack$Type): boolean
@@ -318,8 +320,6 @@ public "getEnergyMax"(): integer
 public "getEnergyCost"(): integer
 public "gadgetTarget"(): $GadgetTarget
 public "undo"(arg0: $Level$Type, arg1: $Player$Type, arg2: $ItemStack$Type): void
-public "canApplyAtEnchantingTable"(arg0: $ItemStack$Type, arg1: $Enchantment$Type): boolean
-public "getEnchantmentValue"(arg0: $ItemStack$Type): integer
 get "energyMax"(): integer
 get "energyCost"(): integer
 }
@@ -354,9 +354,9 @@ public "hashCode"(): integer
 public "stack"(): $ItemStack
 public "pos"(): $BlockPos
 public "level"(): $Level
+public "hitResult"(): $BlockHitResult
 public "player"(): $Player
 public "hand"(): $InteractionHand
-public "hitResult"(): $BlockHitResult
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -409,6 +409,7 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
 /**
  * 
  * @deprecated
@@ -418,7 +419,6 @@ public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2
 public "getShadeBrightness"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): float
 public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
-public "propagatesSkylightDown"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): boolean
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 }
 /**
@@ -486,12 +486,12 @@ static readonly "DESERIALIZER": $ParticleOptions$Deserializer<($FluidFlowParticl
 
 constructor(arg0: $FluidStack$Type, arg1: boolean, arg2: boolean)
 
-public "getFluidStack"(): $FluidStack
+public "writeToNetwork"(arg0: $FriendlyByteBuf$Type): void
 public "getType"(): $ParticleType<($FluidFlowParticleData)>
 public "writeToString"(): string
-public "writeToNetwork"(arg0: $FriendlyByteBuf$Type): void
-get "fluidStack"(): $FluidStack
+public "getFluidStack"(): $FluidStack
 get "type"(): $ParticleType<($FluidFlowParticleData)>
+get "fluidStack"(): $FluidStack
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -519,12 +519,12 @@ static readonly "DESERIALIZER": $ParticleOptions$Deserializer<($ItemFlowParticle
 
 constructor(arg0: $ItemStack$Type, arg1: boolean, arg2: boolean)
 
-public "getItemStack"(): $ItemStack
+public "writeToNetwork"(arg0: $FriendlyByteBuf$Type): void
 public "getType"(): $ParticleType<($ItemFlowParticleData)>
 public "writeToString"(): string
-public "writeToNetwork"(arg0: $FriendlyByteBuf$Type): void
-get "itemStack"(): $ItemStack
+public "getItemStack"(): $ItemStack
 get "type"(): $ParticleType<($ItemFlowParticleData)>
+get "itemStack"(): $ItemStack
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -608,10 +608,10 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
 public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
 }

@@ -12,8 +12,8 @@ export interface $ClickArea$Result {
  "executor"(arg0: $BooleanSupplier$Type): $ClickArea$Result
  "category"(arg0: $CategoryIdentifier$Type<(any)>): $ClickArea$Result
  "categories"(categories: $Iterable$Type<(any)>): $ClickArea$Result
- "getCategories"(): $Stream<($CategoryIdentifier<(any)>)>
  "isSuccessful"(): boolean
+ "getCategories"(): $Stream<($CategoryIdentifier<(any)>)>
  "getTooltips"(): ($Component)[]
  "tooltip"(arg0: $Supplier$Type<(($Component$Type)[])>): $ClickArea$Result
 }
@@ -46,10 +46,10 @@ import {$LongCollection, $LongCollection$Type} from "packages/it/unimi/dsi/fastu
 export interface $FilteringRule<Cache> {
 
  "getType"(): $FilteringRuleType<(any)>
- "isReloading"(): boolean
  "processFilteredStacks"(arg0: $FilteringContext$Type, arg1: $FilteringResultFactory$Type, arg2: Cache, arg3: boolean): $FilteringResult
- "markDirty"(stacks: $Collection$Type<($EntryStack$Type<(any)>)>, hashes: $LongCollection$Type): void
  "prepareCache"(async: boolean): Cache
+ "isReloading"(): boolean
+ "markDirty"(stacks: $Collection$Type<($EntryStack$Type<(any)>)>, hashes: $LongCollection$Type): void
 }
 
 export namespace $FilteringRule {
@@ -85,22 +85,22 @@ export interface $FavoriteEntryType$Registry extends $Reloadable<($REIClientPlug
  "register"(arg0: $ResourceLocation$Type, arg1: $FavoriteEntryType$Type<(any)>): void
  "getId"(arg0: $FavoriteEntryType$Type<(any)>): $ResourceLocation
  "sections"(): $Iterable<($FavoriteEntryType$Section)>
- "getOrCrateSection"(arg0: $Component$Type): $FavoriteEntryType$Section
 /**
  * 
  * @deprecated
  */
  "registerSystemFavorites"<A extends $FavoriteEntry>(arg0: $SystemFavoriteEntryProvider$Type<(A)>): void
+ "getOrCrateSection"(arg0: $Component$Type): $FavoriteEntryType$Section
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIClientPlugin$Type): void
- "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -130,11 +130,11 @@ import {$AbstractContainerScreen, $AbstractContainerScreen$Type} from "packages/
 
 export interface $TransferHandler$Context {
 
- "getMenu"(): $AbstractContainerMenu
  "isStackedCrafting"(): boolean
  "isActuallyCrafting"(): boolean
  "getDisplay"(): $Display
  "getContainerScreen"(): $AbstractContainerScreen<(any)>
+ "getMenu"(): $AbstractContainerMenu
  "getMinecraft"(): $Minecraft
 }
 
@@ -194,22 +194,22 @@ import {$Map, $Map$Type} from "packages/java/util/$Map"
 export interface $ViewSearchBuilder {
 
  "open"(): boolean
- "addAllCategories"(): $ViewSearchBuilder
- "addCategories"(arg0: $Collection$Type<($CategoryIdentifier$Type<(any)>)>): $ViewSearchBuilder
- "mergingDisplays"(arg0: boolean): $ViewSearchBuilder
- "streamDisplays"(): $Stream<($DisplaySpec)>
- "filterCategories"(arg0: $Collection$Type<($CategoryIdentifier$Type<(any)>)>): $ViewSearchBuilder
- "filterCategory"(arg0: $CategoryIdentifier$Type<(any)>): $ViewSearchBuilder
- "getUsagesFor"(): $List<($EntryStack<(any)>)>
- "getRecipesFor"(): $List<($EntryStack<(any)>)>
- "isMergingDisplays"(): boolean
- "addCategory"(arg0: $CategoryIdentifier$Type<(any)>): $ViewSearchBuilder
- "getCategories"(): $Set<($CategoryIdentifier<(any)>)>
+ "getFilteringCategories"(): $Set<($CategoryIdentifier<(any)>)>
+ "setPreferredOpenedCategory"(arg0: $CategoryIdentifier$Type<(any)>): $ViewSearchBuilder
  "isProcessingVisibilityHandlers"(): boolean
  "processingVisibilityHandlers"(arg0: boolean): $ViewSearchBuilder
  "getPreferredOpenedCategory"(): $CategoryIdentifier<(any)>
- "setPreferredOpenedCategory"(arg0: $CategoryIdentifier$Type<(any)>): $ViewSearchBuilder
- "getFilteringCategories"(): $Set<($CategoryIdentifier<(any)>)>
+ "addAllCategories"(): $ViewSearchBuilder
+ "filterCategory"(arg0: $CategoryIdentifier$Type<(any)>): $ViewSearchBuilder
+ "addCategories"(arg0: $Collection$Type<($CategoryIdentifier$Type<(any)>)>): $ViewSearchBuilder
+ "streamDisplays"(): $Stream<($DisplaySpec)>
+ "getRecipesFor"(): $List<($EntryStack<(any)>)>
+ "filterCategories"(arg0: $Collection$Type<($CategoryIdentifier$Type<(any)>)>): $ViewSearchBuilder
+ "mergingDisplays"(arg0: boolean): $ViewSearchBuilder
+ "isMergingDisplays"(): boolean
+ "getUsagesFor"(): $List<($EntryStack<(any)>)>
+ "addCategory"(arg0: $CategoryIdentifier$Type<(any)>): $ViewSearchBuilder
+ "getCategories"(): $Set<($CategoryIdentifier<(any)>)>
  "addRecipesFor"<T>(arg0: $EntryStack$Type<(T)>): $ViewSearchBuilder
  "addUsagesFor"<T>(arg0: $EntryStack$Type<(T)>): $ViewSearchBuilder
  "buildMapInternal"(): $Map<($DisplayCategory<(any)>), ($List<($DisplaySpec)>)>
@@ -250,9 +250,9 @@ export interface $DumpHandler<T extends $AbstractContainerMenu, D extends $Displ
 }
 
 export namespace $DumpHandler {
-function getEmptySlot(inventoryStacks: $Iterable$Type<($SlotAccessor$Type)>): $SlotAccessor
-function canStackAddMore(existingStack: $ItemStack$Type, stack: $ItemStack$Type): boolean
 function getOccupiedSlotWithRoomForStack(stack: $ItemStack$Type, inventoryStacks: $Iterable$Type<($SlotAccessor$Type)>): $SlotAccessor
+function canStackAddMore(existingStack: $ItemStack$Type, stack: $ItemStack$Type): boolean
+function getEmptySlot(inventoryStacks: $Iterable$Type<($SlotAccessor$Type)>): $SlotAccessor
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -275,17 +275,17 @@ import {$FluidStack, $FluidStack$Type} from "packages/dev/architectury/fluid/$Fl
 export interface $EntryComparator<T> {
 
  "hash"(arg0: $ComparisonContext$Type, arg1: T): long
- "onlyExact"(): $EntryComparator<(T)>
  "then"(other: $EntryComparator$Type<(T)>): $EntryComparator<(T)>
+ "onlyExact"(): $EntryComparator<(T)>
 
 (arg0: $ComparisonContext$Type, arg1: T): long
 }
 
 export namespace $EntryComparator {
-function itemNbt(): $EntryComparator<($ItemStack)>
-function fluidNbt(): $EntryComparator<($FluidStack)>
 function noop<T>(): $EntryComparator<(T)>
 function nbt(...ignoredKeys: (string)[]): $EntryComparator<($Tag)>
+function itemNbt(): $EntryComparator<($ItemStack)>
+function fluidNbt(): $EntryComparator<($FluidStack)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -312,8 +312,8 @@ import {$DraggableComponent, $DraggableComponent$Type} from "packages/me/shedani
 
 export interface $DraggableComponentVisitorWidget {
 
- "acceptDragged"(context: $DraggingContext$Type<($Screen$Type)>, component: $DraggableComponent$Type<(any)>): $DraggedAcceptorResult
  "getDraggableAcceptingBounds"(context: $DraggingContext$Type<($Screen$Type)>, component: $DraggableComponent$Type<(any)>): $Stream<($DraggableBoundsProvider)>
+ "acceptDragged"(context: $DraggingContext$Type<($Screen$Type)>, component: $DraggableComponent$Type<(any)>): $DraggedAcceptorResult
 }
 
 export namespace $DraggableComponentVisitorWidget {
@@ -340,9 +340,9 @@ import {$Class, $Class$Type} from "packages/java/lang/$Class"
 
 export interface $REIPluginProvider<P extends $REIPlugin<(any)>> {
 
- "getPluginProviderClass"(): $Class<(P)>
- "getPluginProviderName"(): string
  "provide"(): $Collection<(P)>
+ "getPluginProviderName"(): string
+ "getPluginProviderClass"(): $Class<(P)>
 }
 
 export namespace $REIPluginProvider {
@@ -367,15 +367,15 @@ import {$Component, $Component$Type} from "packages/net/minecraft/network/chat/$
 export interface $TransferHandler$ApplicabilityResult {
 
  "isSuccessful"(): boolean
- "getError"(): $TransferHandler$Result
  "isApplicable"(): boolean
+ "getError"(): $TransferHandler$Result
 }
 
 export namespace $TransferHandler$ApplicabilityResult {
 function createApplicable(): $TransferHandler$ApplicabilityResult
-function createNotApplicable(): $TransferHandler$ApplicabilityResult
 function createApplicableWithError(result: $TransferHandler$Result$Type): $TransferHandler$ApplicabilityResult
 function createApplicableWithError(error: $Component$Type): $TransferHandler$ApplicabilityResult
+function createNotApplicable(): $TransferHandler$ApplicabilityResult
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -430,16 +430,16 @@ export interface $InputMethodRegistry extends $Reloadable<($REIClientPlugin)> {
  "get"(arg0: $ResourceLocation$Type): $InputMethod<(any)>
  "getOrDefault"(arg0: $ResourceLocation$Type): $InputMethod<(any)>
  "getAll"(): $Map<($ResourceLocation), ($InputMethod<(any)>)>
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIClientPlugin$Type): void
- "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -506,10 +506,10 @@ import {$DraggableBoundsProvider, $DraggableBoundsProvider$Type} from "packages/
 
 export interface $DraggableStackVisitorWidget extends $DraggableComponentVisitorWidget {
 
- "acceptDragged"(context: $DraggingContext$Type<($Screen$Type)>, component: $DraggableComponent$Type<(any)>): $DraggedAcceptorResult
- "acceptDraggedStack"(context: $DraggingContext$Type<($Screen$Type)>, stack: $DraggableStack$Type): $DraggedAcceptorResult
- "getDraggableAcceptingBounds"(context: $DraggingContext$Type<($Screen$Type)>, component: $DraggableComponent$Type<(any)>): $Stream<($DraggableBoundsProvider)>
  "getDraggableAcceptingBounds"(context: $DraggingContext$Type<($Screen$Type)>, stack: $DraggableStack$Type): $Stream<($DraggableStackVisitor$BoundsProvider)>
+ "getDraggableAcceptingBounds"(context: $DraggingContext$Type<($Screen$Type)>, component: $DraggableComponent$Type<(any)>): $Stream<($DraggableBoundsProvider)>
+ "acceptDraggedStack"(context: $DraggingContext$Type<($Screen$Type)>, stack: $DraggableStack$Type): $DraggedAcceptorResult
+ "acceptDragged"(context: $DraggingContext$Type<($Screen$Type)>, component: $DraggableComponent$Type<(any)>): $DraggedAcceptorResult
 }
 
 export namespace $DraggableStackVisitorWidget {
@@ -537,10 +537,10 @@ import {$Component, $Component$Type} from "packages/net/minecraft/network/chat/$
 
 export interface $Tooltip$Entry {
 
- "getAsTooltipComponent"(): $TooltipComponent
  "isText"(): boolean
  "isTooltipComponent"(): boolean
  "getAsText"(): $Component
+ "getAsTooltipComponent"(): $TooltipComponent
 }
 
 export namespace $Tooltip$Entry {
@@ -571,9 +571,9 @@ export class $DisplayRenderer implements $Renderer {
 
 constructor()
 
-public "getTooltip"(mouse: $TooltipContext$Type): $Tooltip
 public "getWidth"(): integer
 public "getHeight"(): integer
+public "getTooltip"(mouse: $TooltipContext$Type): $Tooltip
 public "render"(arg0: $GuiGraphics$Type, arg1: $Rectangle$Type, arg2: integer, arg3: integer, arg4: float): void
 public "fillCrashReport"(report: $CrashReport$Type, category: $CrashReportCategory$Type): void
 get "width"(): integer
@@ -681,16 +681,16 @@ export interface $EntrySettingsAdapterRegistry extends $Reloadable<($REIPlugin<(
 
  "register"<T, S>(arg0: $EntryType$Type<(T)>, arg1: $EntryStack$Settings$Type<(S)>, arg2: $EntrySettingsAdapter$Type<(T), (S)>): void
  "adapt"<T, S>(arg0: $EntryStack$Type<(T)>, arg1: $EntryStack$Settings$Type<(S)>, arg2: S): S
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
+ "acceptPlugin"(plugin: $REIPlugin$Type<(any)>): void
+ "acceptPlugin"(plugin: $REIPlugin$Type<(any)>, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>, plugin: $REIPlugin$Type<(any)>): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>, plugin: $REIPlugin$Type<(any)>): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIPlugin$Type<(any)>): void
- "acceptPlugin"(plugin: $REIPlugin$Type<(any)>, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -741,16 +741,16 @@ export interface $ExclusionZones extends $OverlayDecider {
  "getExclusionZones"(arg0: $Class$Type<(any)>, arg1: boolean): $List<($Rectangle)>
  "compareTo"(o: $OverlayDecider$Type): integer
  "getPriority"(): double
- "isHandingScreen"<R extends $Screen>(arg0: $Class$Type<(R)>): boolean
- "isInZone"(mouseX: double, mouseY: double): $InteractionResult
+ "shouldRecalculateArea"(location: $DisplayPanelLocation$Type, rectangle: $Rectangle$Type): boolean
  "shouldScreenBeOverlaid"<R extends $Screen>(screen: R): $InteractionResult
 /**
  * 
  * @deprecated
  */
  "shouldScreenBeOverlaid"(screen: $Class$Type<(any)>): $InteractionResult
- "shouldRecalculateArea"(location: $DisplayPanelLocation$Type, rectangle: $Rectangle$Type): boolean
+ "isHandingScreen"<R extends $Screen>(arg0: $Class$Type<(R)>): boolean
  "getRendererProvider"(): $OverlayRendererProvider
+ "isInZone"(mouseX: double, mouseY: double): $InteractionResult
 }
 
 export namespace $ExclusionZones {
@@ -782,22 +782,22 @@ export interface $FluidComparatorRegistry extends $EntryComparatorRegistry<($Flu
 
  "registerNbt"(fluid: $Fluid$Type): void
  "registerNbt"(...fluids: ($Fluid$Type)[]): void
- "register"(arg0: $EntryComparator$Type<($FluidStack$Type)>, arg1: $Fluid$Type): void
- "register"(comparator: $EntryComparator$Type<($FluidStack$Type)>, ...entries: ($Fluid$Type)[]): void
  "containsComparator"(arg0: $Fluid$Type): boolean
- "registerGlobal"(arg0: $EntryComparator$Type<($FluidStack$Type)>): void
  "comparatorSize"(): integer
  "hashOf"(arg0: $ComparisonContext$Type, arg1: $FluidStack$Type): long
+ "registerGlobal"(arg0: $EntryComparator$Type<($FluidStack$Type)>): void
+ "register"(comparator: $EntryComparator$Type<($FluidStack$Type)>, ...entries: ($Fluid$Type)[]): void
+ "register"(arg0: $EntryComparator$Type<($FluidStack$Type)>, arg1: $Fluid$Type): void
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
+ "acceptPlugin"(plugin: $REIPlugin$Type<(any)>): void
+ "acceptPlugin"(plugin: $REIPlugin$Type<(any)>, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>, plugin: $REIPlugin$Type<(any)>): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>, plugin: $REIPlugin$Type<(any)>): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIPlugin$Type<(any)>): void
- "acceptPlugin"(plugin: $REIPlugin$Type<(any)>, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -839,14 +839,14 @@ public "clone"(): $FloatingPoint
 public "getLocation"(): $Point
 public "move"(arg0: double, arg1: double): void
 public "getY"(): double
-public "setLocation"(arg0: double, arg1: double): void
-public "getFloatingLocation"(): $FloatingPoint
 public "translate"(arg0: double, arg1: double): void
+public "setLocation"(arg0: double, arg1: double): void
 public "getX"(): double
+public "getFloatingLocation"(): $FloatingPoint
 get "location"(): $Point
 get "y"(): double
-get "floatingLocation"(): $FloatingPoint
 get "x"(): double
+get "floatingLocation"(): $FloatingPoint
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -888,8 +888,8 @@ declare global {
 export type $SlotAccessorRegistry$Serializer_ = $SlotAccessorRegistry$Serializer$Type;
 }}
 declare module "packages/me/shedaniel/rei/api/client/overlay/$ScreenOverlay" {
-import {$DraggingContext, $DraggingContext$Type} from "packages/me/shedaniel/rei/api/client/gui/drag/$DraggingContext"
 import {$OverlayListWidget, $OverlayListWidget$Type} from "packages/me/shedaniel/rei/api/client/overlay/$OverlayListWidget"
+import {$DraggingContext, $DraggingContext$Type} from "packages/me/shedaniel/rei/api/client/gui/drag/$DraggingContext"
 import {$WidgetWithBounds, $WidgetWithBounds$Type} from "packages/me/shedaniel/rei/api/client/gui/widgets/$WidgetWithBounds"
 import {$Optional, $Optional$Type} from "packages/java/util/$Optional"
 
@@ -897,15 +897,15 @@ export class $ScreenOverlay extends $WidgetWithBounds {
 
 constructor()
 
+public "queueReloadSearch"(): void
 public "isNotInExclusionZones"(arg0: double, arg1: double): boolean
+public "queueReloadOverlay"(): void
+public "getFavoritesList"(): $Optional<($OverlayListWidget)>
 public "getDraggingContext"(): $DraggingContext<(any)>
 public "getEntryList"(): $OverlayListWidget
-public "getFavoritesList"(): $Optional<($OverlayListWidget)>
-public "queueReloadSearch"(): void
-public "queueReloadOverlay"(): void
+get "favoritesList"(): $Optional<($OverlayListWidget)>
 get "draggingContext"(): $DraggingContext<(any)>
 get "entryList"(): $OverlayListWidget
-get "favoritesList"(): $Optional<($OverlayListWidget)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -944,8 +944,8 @@ export type $ReloadStage_ = $ReloadStage$Type;
 }}
 declare module "packages/me/shedaniel/rei/api/client/entry/filtering/$FilteringRuleType" {
 import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$CompoundTag"
-import {$Component, $Component$Type} from "packages/net/minecraft/network/chat/$Component"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Component, $Component$Type} from "packages/net/minecraft/network/chat/$Component"
 import {$FilteringRule, $FilteringRule$Type} from "packages/me/shedaniel/rei/api/client/entry/filtering/$FilteringRule"
 import {$Screen, $Screen$Type} from "packages/net/minecraft/client/gui/screens/$Screen"
 import {$ResourceLocation, $ResourceLocation$Type} from "packages/net/minecraft/resources/$ResourceLocation"
@@ -955,11 +955,11 @@ export interface $FilteringRuleType<T extends $FilteringRule<(any)>> {
  "getId"(): $ResourceLocation
  "readFrom"(arg0: $CompoundTag$Type): T
  "createNew"(): T
+ "createEntryScreen"(rule: T): $Function<($Screen), ($Screen)>
+ "isSingular"(): boolean
+ "saveTo"(arg0: T, arg1: $CompoundTag$Type): $CompoundTag
  "getTitle"(rule: T): $Component
  "getSubtitle"(rule: T): $Component
- "createEntryScreen"(rule: T): $Function<($Screen), ($Screen)>
- "saveTo"(arg0: T, arg1: $CompoundTag$Type): $CompoundTag
- "isSingular"(): boolean
 }
 
 export namespace $FilteringRuleType {
@@ -992,8 +992,8 @@ import {$FocusedStackProvider, $FocusedStackProvider$Type} from "packages/me/she
 import {$Reloadable, $Reloadable$Type} from "packages/me/shedaniel/rei/api/common/registry/$Reloadable"
 import {$DraggableStackVisitorWidget, $DraggableStackVisitorWidget$Type} from "packages/me/shedaniel/rei/api/client/gui/drag/$DraggableStackVisitorWidget"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$DraggableStackVisitor, $DraggableStackVisitor$Type} from "packages/me/shedaniel/rei/api/client/gui/drag/$DraggableStackVisitor"
 import {$DraggableComponentProviderWidget, $DraggableComponentProviderWidget$Type} from "packages/me/shedaniel/rei/api/client/gui/drag/component/$DraggableComponentProviderWidget"
+import {$DraggableStackVisitor, $DraggableStackVisitor$Type} from "packages/me/shedaniel/rei/api/client/gui/drag/$DraggableStackVisitor"
 import {$AbstractContainerMenu, $AbstractContainerMenu$Type} from "packages/net/minecraft/world/inventory/$AbstractContainerMenu"
 import {$ExclusionZones, $ExclusionZones$Type} from "packages/me/shedaniel/rei/api/client/registry/screen/$ExclusionZones"
 import {$Point, $Point$Type} from "packages/me/shedaniel/math/$Point"
@@ -1013,12 +1013,14 @@ import {$DraggableStackProvider, $DraggableStackProvider$Type} from "packages/me
 
 export interface $ScreenRegistry extends $Reloadable<($REIClientPlugin)> {
 
+ "getDeciders"(): $List<($OverlayDecider)>
+ "getDeciders"<R extends $Screen>(arg0: R): $List<($OverlayDecider)>
  "exclusionZones"(): $ExclusionZones
- "registerDecider"(arg0: $OverlayDecider$Type): void
  "getOverlayBounds"<T extends $Screen>(arg0: $DisplayPanelLocation$Type, arg1: T): $Rectangle
- "getFocusedStack"<T extends $Screen>(arg0: T, arg1: $Point$Type): $EntryStack<(any)>
  "registerClickArea"<T extends $Screen>(arg0: $Class$Type<(any)>, arg1: $ClickArea$Type<(T)>): void
  "registerClickArea"<T extends $Screen>(area: $SimpleClickArea$Type<(T)>, screenClass: $Class$Type<(any)>, ...categories: ($CategoryIdentifier$Type<(any)>)[]): void
+ "getFocusedStack"<T extends $Screen>(arg0: T, arg1: $Point$Type): $EntryStack<(any)>
+ "registerDecider"(arg0: $OverlayDecider$Type): void
  "evaluateClickArea"<T extends $Screen>(arg0: $Class$Type<(T)>, arg1: $ClickArea$ClickAreaContext$Type<(T)>): $List<($ClickArea$Result)>
  "executeClickArea"<T extends $Screen>(screenClass: $Class$Type<(T)>, context: $ClickArea$ClickAreaContext$Type<(T)>): boolean
 /**
@@ -1026,37 +1028,35 @@ export interface $ScreenRegistry extends $Reloadable<($REIClientPlugin)> {
  * @deprecated
  */
  "handleClickArea"<T extends $Screen>(screenClass: $Class$Type<(T)>, context: $ClickArea$ClickAreaContext$Type<(T)>): $Set<($CategoryIdentifier<(any)>)>
- "getDeciders"<R extends $Screen>(arg0: R): $List<($OverlayDecider)>
- "getDeciders"(): $List<($OverlayDecider)>
- "getClickAreaTooltips"<T extends $Screen>(screenClass: $Class$Type<(T)>, context: $ClickArea$ClickAreaContext$Type<(T)>): $List<($Component)>
- "registerDraggableStackVisitor"<T extends $Screen>(arg0: $DraggableStackVisitor$Type<(T)>): void
- "registerDraggableStackVisitor"<T extends $Screen>(visitor: $DraggableStackVisitorWidget$Type): void
- "registerDraggableStackVisitor"<T extends $Screen>(priority: double, visitor: $DraggableStackVisitorWidget$Type): void
+ "getScreenBounds"<T extends $Screen>(arg0: T): $Rectangle
  "registerFocusedStack"(arg0: $FocusedStackProvider$Type): void
+ "registerDraggableStackProvider"<T extends $Screen>(provider: $DraggableStackProviderWidget$Type): void
+ "registerDraggableStackProvider"<T extends $Screen>(priority: double, provider: $DraggableStackProviderWidget$Type): void
+ "registerDraggableStackProvider"<T extends $Screen>(arg0: $DraggableStackProvider$Type<(T)>): void
  "registerDraggableComponentProvider"<T extends $Screen, A>(arg0: $DraggableComponentProvider$Type<(T), (A)>): void
  "registerDraggableComponentProvider"<T extends $Screen, A>(provider: $DraggableComponentProviderWidget$Type<(A)>): void
  "registerDraggableComponentProvider"<T extends $Screen, A>(priority: double, provider: $DraggableComponentProviderWidget$Type<(A)>): void
- "registerDraggableStackProvider"<T extends $Screen>(arg0: $DraggableStackProvider$Type<(T)>): void
- "registerDraggableStackProvider"<T extends $Screen>(priority: double, provider: $DraggableStackProviderWidget$Type): void
- "registerDraggableStackProvider"<T extends $Screen>(provider: $DraggableStackProviderWidget$Type): void
- "getDraggableComponentProviders"(): $Iterable<($DraggableComponentProvider<($Screen), (any)>)>
  "registerContainerClickArea"<C extends $AbstractContainerMenu, T extends $AbstractContainerScreen<(C)>>(arg0: $SimpleClickArea$Type<(T)>, arg1: $Class$Type<(any)>, ...arg2: ($CategoryIdentifier$Type<(any)>)[]): void
  "registerContainerClickArea"<C extends $AbstractContainerMenu, T extends $AbstractContainerScreen<(C)>>(area: $Rectangle$Type, screenClass: $Class$Type<(any)>, ...categories: ($CategoryIdentifier$Type<(any)>)[]): void
- "registerDraggableComponentVisitor"<T extends $Screen>(visitor: $DraggableComponentVisitorWidget$Type): void
- "registerDraggableComponentVisitor"<T extends $Screen>(priority: double, visitor: $DraggableComponentVisitorWidget$Type): void
- "registerDraggableComponentVisitor"<T extends $Screen>(arg0: $DraggableComponentVisitor$Type<(T)>): void
+ "registerDraggableStackVisitor"<T extends $Screen>(arg0: $DraggableStackVisitor$Type<(T)>): void
+ "registerDraggableStackVisitor"<T extends $Screen>(visitor: $DraggableStackVisitorWidget$Type): void
+ "registerDraggableStackVisitor"<T extends $Screen>(priority: double, visitor: $DraggableStackVisitorWidget$Type): void
+ "getClickAreaTooltips"<T extends $Screen>(screenClass: $Class$Type<(T)>, context: $ClickArea$ClickAreaContext$Type<(T)>): $List<($Component)>
+ "getDraggableComponentProviders"(): $Iterable<($DraggableComponentProvider<($Screen), (any)>)>
  "getDraggableComponentVisitors"(): $Iterable<($DraggableComponentVisitor<($Screen)>)>
- "getScreenBounds"<T extends $Screen>(arg0: T): $Rectangle
+ "registerDraggableComponentVisitor"<T extends $Screen>(visitor: $DraggableComponentVisitorWidget$Type): void
+ "registerDraggableComponentVisitor"<T extends $Screen>(arg0: $DraggableComponentVisitor$Type<(T)>): void
+ "registerDraggableComponentVisitor"<T extends $Screen>(priority: double, visitor: $DraggableComponentVisitorWidget$Type): void
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIClientPlugin$Type): void
- "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -1100,15 +1100,15 @@ public "setSize"(arg0: $Dimension$Type): void
 public "setSize"(arg0: double, arg1: double): void
 public "setSize"(arg0: $FloatingDimension$Type): void
 public "setSize"(arg0: integer, arg1: integer): void
-public "getFloatingSize"(): $FloatingDimension
 public "getWidth"(): integer
 public "getHeight"(): integer
+public "getFloatingSize"(): $FloatingDimension
 get "size"(): $Dimension
 set "size"(value: $Dimension$Type)
 set "size"(value: $FloatingDimension$Type)
-get "floatingSize"(): $FloatingDimension
 get "width"(): integer
 get "height"(): integer
+get "floatingSize"(): $FloatingDimension
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1181,28 +1181,28 @@ public "getType"(): $ResourceLocation
 public "copy"(): $FavoriteEntry
 public static "delegate"(supplier: $Supplier$Type<($FavoriteEntry$Type)>, toJson: $Supplier$Type<($CompoundTag$Type)>): $FavoriteEntry
 public "isInvalid"(): boolean
-public static "delegateResult"(supplier: $Supplier$Type<($DataResult$Type<($FavoriteEntry$Type)>)>, toJson: $Supplier$Type<($CompoundTag$Type)>): $FavoriteEntry
-public "getMenuEntries"(): $Optional<($Supplier<($Collection<($FavoriteMenuEntry)>)>)>
-public "hashIgnoreAmount"(): long
-public "isSame"(arg0: $FavoriteEntry$Type): boolean
-public "asFavorite"(): $FavoriteEntry
-public static "fromDisplay"(display: $Display$Type): $FavoriteEntry
-public "getUnwrapped"(): $FavoriteEntry
-public static "readDelegated"(object: $CompoundTag$Type): $FavoriteEntry
-public static "readResult"(object: $CompoundTag$Type): $DataResult<($FavoriteEntry)>
-public "isEntryInvalid"(): boolean
-public "doAction"(arg0: integer): boolean
-public "getUuid"(): $UUID
-public "getRenderer"(arg0: boolean): $Renderer
 public "toStack"(): $EntryStack<(any)>
+public "getRenderer"(arg0: boolean): $Renderer
+public "doAction"(arg0: integer): boolean
 public static "fromEntryStack"(stack: $EntryStack$Type<(any)>): $FavoriteEntry
+public "getUuid"(): $UUID
+public static "readResult"(object: $CompoundTag$Type): $DataResult<($FavoriteEntry)>
+public static "readDelegated"(object: $CompoundTag$Type): $FavoriteEntry
+public static "delegateResult"(supplier: $Supplier$Type<($DataResult$Type<($FavoriteEntry$Type)>)>, toJson: $Supplier$Type<($CompoundTag$Type)>): $FavoriteEntry
+public static "fromDisplay"(display: $Display$Type): $FavoriteEntry
+public "getMenuEntries"(): $Optional<($Supplier<($Collection<($FavoriteMenuEntry)>)>)>
+public "asFavorite"(): $FavoriteEntry
+public "getUnwrapped"(): $FavoriteEntry
+public "hashIgnoreAmount"(): long
+public "isEntryInvalid"(): boolean
+public "isSame"(arg0: $FavoriteEntry$Type): boolean
 public "asDraggableComponent"(slot: $Slot$Type): $DraggableComponent<(any)>
 get "type"(): $ResourceLocation
 get "invalid"(): boolean
+get "uuid"(): $UUID
 get "menuEntries"(): $Optional<($Supplier<($Collection<($FavoriteMenuEntry)>)>)>
 get "unwrapped"(): $FavoriteEntry
 get "entryInvalid"(): boolean
-get "uuid"(): $UUID
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1252,18 +1252,18 @@ export interface $DraggingContext<S extends $Screen> {
 
  "cast"<T extends $Screen>(): $DraggingContext<(T)>
  "getScreen"(): S
- "renderBackToPosition"(stack: $DraggableStack$Type, initialPosition: $Point$Type, position: $Supplier$Type<($Point$Type)>): void
- "renderBackToPosition"(stack: $DraggableStack$Type, initialPosition: $Rectangle$Type, bounds: $Supplier$Type<($Rectangle$Type)>): void
- "isDraggingComponent"(): boolean
- "getCurrentBounds"(): $Rectangle
- "renderToVoid"(stack: $DraggableStack$Type): void
+ "getCurrentPosition"(): $Point
  "renderToVoid"(component: $DraggableComponent$Type<(any)>): void
+ "renderToVoid"(stack: $DraggableStack$Type): void
  "isDraggingStack"(): boolean
  "getCurrentStack"(): $DraggableStack
+ "getCurrentBounds"(): $Rectangle
  "renderBack"(arg0: $DraggableComponent$Type<(any)>, arg1: $Point$Type, arg2: $Supplier$Type<($Point$Type)>): void
  "renderBack"(arg0: $DraggableComponent$Type<(any)>, arg1: $Rectangle$Type, arg2: $Supplier$Type<($Rectangle$Type)>): void
  "getDragged"(): $DraggableComponent<(any)>
- "getCurrentPosition"(): $Point
+ "isDraggingComponent"(): boolean
+ "renderBackToPosition"(stack: $DraggableStack$Type, initialPosition: $Rectangle$Type, bounds: $Supplier$Type<($Rectangle$Type)>): void
+ "renderBackToPosition"(stack: $DraggableStack$Type, initialPosition: $Point$Type, position: $Supplier$Type<($Point$Type)>): void
 }
 
 export namespace $DraggingContext {
@@ -1348,18 +1348,18 @@ export class $WidgetWithBounds extends $Widget {
 constructor()
 
 public "getBounds"(): $Rectangle
+public "withPadding"(padX: integer, padY: integer): $WidgetWithBounds
+public "withPadding"(padding: integer): $WidgetWithBounds
+public "withPadding"(padLeft: integer, padRight: integer, padTop: integer, padBottom: integer): $WidgetWithBounds
 /**
  * 
  * @deprecated
  */
 public "render"(graphics: $GuiGraphics$Type, bounds: $Rectangle$Type, mouseX: integer, mouseY: integer, delta: float): void
+public "withScissors"(): $WidgetWithBounds
+public "containsMouse"(mouseX: double, mouseY: double): boolean
 public "withPaddingHorizontal"(padX: integer): $WidgetWithBounds
 public "withPaddingVertical"(padY: integer): $WidgetWithBounds
-public "withPadding"(padLeft: integer, padRight: integer, padTop: integer, padBottom: integer): $WidgetWithBounds
-public "withPadding"(padX: integer, padY: integer): $WidgetWithBounds
-public "withPadding"(padding: integer): $WidgetWithBounds
-public "containsMouse"(mouseX: double, mouseY: double): boolean
-public "withScissors"(): $WidgetWithBounds
 get "bounds"(): $Rectangle
 }
 /**
@@ -1395,35 +1395,35 @@ export interface $EntryRegistry extends $Reloadable<($REIClientPlugin)> {
  "addEntry"(stack: $EntryStack$Type<(any)>): void
  "removeEntryIf"(arg0: $Predicate$Type<(any)>): boolean
  "removeEntry"(arg0: $EntryStack$Type<(any)>): boolean
- "getPreFilteredList"(): $List<($EntryStack<(any)>)>
- "isReloading"(): boolean
  "markFilteringRuleDirty"<Cache>(arg0: $FilteringRule$Type<(Cache)>, arg1: $Collection$Type<($EntryStack$Type<(any)>)>, arg2: $LongCollection$Type): void
- "addEntries"(...stacks: ($EntryStack$Type<(any)>)[]): void
+ "getEntryStacks"(): $Stream<($EntryStack<(any)>)>
+ "isReloading"(): boolean
+ "refilter"(): void
+ "refilterNew"(arg0: boolean, arg1: $Collection$Type<($EntryStack$Type<(any)>)>): $Collection<($EntryStack<(any)>)>
+ "alreadyContain"(arg0: $EntryStack$Type<(any)>): boolean
+ "addEntriesAfter"(arg0: $EntryStack$Type<(any)>, arg1: $Collection$Type<(any)>): void
+ "addEntriesAfter"(afterStack: $EntryStack$Type<(any)>, ...stacks: ($EntryStack$Type<(any)>)[]): void
+ "addEntryAfter"(arg0: $EntryStack$Type<(any)>, arg1: $EntryStack$Type<(any)>): void
  "addEntries"(stacks: $Collection$Type<(any)>): void
- "removeEntryExactHashIf"(arg0: $LongPredicate$Type): boolean
- "removeEntryFuzzyHashIf"(arg0: $LongPredicate$Type): boolean
+ "addEntries"(...stacks: ($EntryStack$Type<(any)>)[]): void
+ "getPreFilteredList"(): $List<($EntryStack<(any)>)>
 /**
  * 
  * @deprecated
  */
  "appendStacksForItem"(arg0: $Item$Type): $List<($ItemStack)>
- "getEntryStacks"(): $Stream<($EntryStack<(any)>)>
- "refilter"(): void
- "addEntriesAfter"(arg0: $EntryStack$Type<(any)>, arg1: $Collection$Type<(any)>): void
- "addEntriesAfter"(afterStack: $EntryStack$Type<(any)>, ...stacks: ($EntryStack$Type<(any)>)[]): void
- "alreadyContain"(arg0: $EntryStack$Type<(any)>): boolean
- "refilterNew"(arg0: boolean, arg1: $Collection$Type<($EntryStack$Type<(any)>)>): $Collection<($EntryStack<(any)>)>
- "addEntryAfter"(arg0: $EntryStack$Type<(any)>, arg1: $EntryStack$Type<(any)>): void
+ "removeEntryFuzzyHashIf"(arg0: $LongPredicate$Type): boolean
+ "removeEntryExactHashIf"(arg0: $LongPredicate$Type): boolean
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIClientPlugin$Type): void
- "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -1460,8 +1460,8 @@ import {$Display, $Display$Type} from "packages/me/shedaniel/rei/api/common/disp
  */
 export interface $MenuInfoProvider<T extends $AbstractContainerMenu, D extends $Display> {
 
- "provideClient"(arg0: D, arg1: $MenuSerializationContext$Type<(T), (any), (D)>, arg2: T): $Optional<($MenuInfo<(T), (D)>)>
  "provide"(arg0: $CategoryIdentifier$Type<(D)>, arg1: T, arg2: $MenuSerializationContext$Type<(T), (any), (D)>, arg3: $CompoundTag$Type): $Optional<($MenuInfo<(T), (D)>)>
+ "provideClient"(arg0: D, arg1: $MenuSerializationContext$Type<(T), (any), (D)>, arg2: T): $Optional<($MenuInfo<(T), (D)>)>
 }
 
 export namespace $MenuInfoProvider {
@@ -1494,8 +1494,8 @@ export interface $DraggableBoundsProvider {
 export namespace $DraggableBoundsProvider {
 function concat(providers: $Iterable$Type<($DraggableBoundsProvider$Type)>): $DraggableBoundsProvider
 function empty(): $DraggableBoundsProvider
-function fromRectangle(bounds: $Rectangle$Type): $VoxelShape
 function ofShapes(shapes: $Iterable$Type<($VoxelShape$Type)>): $DraggableBoundsProvider
+function fromRectangle(bounds: $Rectangle$Type): $VoxelShape
 function ofShape(shape: $VoxelShape$Type): $DraggableBoundsProvider
 function ofRectangle(bounds: $Rectangle$Type): $DraggableBoundsProvider
 function ofRectangles(bounds: $Iterable$Type<($Rectangle$Type)>): $DraggableBoundsProvider
@@ -1544,8 +1544,8 @@ import {$Point, $Point$Type} from "packages/me/shedaniel/math/$Point"
 export interface $TooltipContext {
 
  "getFlag"(): $TooltipFlag
- "getPoint"(): $Point
  "isSearch"(): boolean
+ "getPoint"(): $Point
 }
 
 export namespace $TooltipContext {
@@ -1570,8 +1570,8 @@ export type $TooltipContext_ = $TooltipContext$Type;
 declare module "packages/me/shedaniel/rei/api/client/entry/region/$RegionEntry" {
 import {$EntryStack, $EntryStack$Type} from "packages/me/shedaniel/rei/api/common/entry/$EntryStack"
 import {$UUID, $UUID$Type} from "packages/java/util/$UUID"
-import {$Collection, $Collection$Type} from "packages/java/util/$Collection"
 import {$Slot, $Slot$Type} from "packages/me/shedaniel/rei/api/client/gui/widgets/$Slot"
+import {$Collection, $Collection$Type} from "packages/java/util/$Collection"
 import {$Optional, $Optional$Type} from "packages/java/util/$Optional"
 import {$FavoriteMenuEntry, $FavoriteMenuEntry$Type} from "packages/me/shedaniel/rei/api/client/favorites/$FavoriteMenuEntry"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
@@ -1581,13 +1581,13 @@ import {$DraggableComponent, $DraggableComponent$Type} from "packages/me/shedani
 export interface $RegionEntry<T extends $RegionEntry<(T)>> {
 
  "copy"(): T
+ "toStack"(): $EntryStack<(any)>
+ "doAction"(button: integer): boolean
+ "getUuid"(): $UUID
+ "asDraggableComponent"(slot: $Slot$Type): $DraggableComponent<(any)>
  "getMenuEntries"(): $Optional<($Supplier<($Collection<($FavoriteMenuEntry)>)>)>
  "asFavorite"(): $FavoriteEntry
  "isEntryInvalid"(): boolean
- "doAction"(button: integer): boolean
- "getUuid"(): $UUID
- "toStack"(): $EntryStack<(any)>
- "asDraggableComponent"(slot: $Slot$Type): $DraggableComponent<(any)>
 }
 
 export namespace $RegionEntry {
@@ -1619,16 +1619,16 @@ constructor()
 
 public "clear"(): void
 public "contains"(itemId: integer): boolean
-public static "getItemId"(stack: $ItemStack$Type): integer
+public "findRecipe"(ingredients: $NonNullList$Type<($Ingredient$Type)>, intList_1: $IntList$Type): boolean
+public "findRecipe"(ingredients: $NonNullList$Type<($Ingredient$Type)>, intList_1: $IntList$Type, maxCrafts: integer): boolean
 public "addNormalItem"(stack: $ItemStack$Type): void
+public static "getItemId"(stack: $ItemStack$Type): integer
 public "addItem"(stack: $ItemStack$Type, count: integer): void
 public "addItem"(stack: $ItemStack$Type): void
 public "take"(itemId: integer, amount: integer): integer
+public static "getStackFromId"(itemId: integer): $ItemStack
 public "countRecipeCrafts"(ingredients: $NonNullList$Type<($Ingredient$Type)>, intList_1: $IntList$Type): integer
 public "countRecipeCrafts"(ingredients: $NonNullList$Type<($Ingredient$Type)>, maxCrafts: integer, intList_1: $IntList$Type): integer
-public static "getStackFromId"(itemId: integer): $ItemStack
-public "findRecipe"(ingredients: $NonNullList$Type<($Ingredient$Type)>, intList_1: $IntList$Type, maxCrafts: integer): boolean
-public "findRecipe"(ingredients: $NonNullList$Type<($Ingredient$Type)>, intList_1: $IntList$Type): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1646,33 +1646,33 @@ declare module "packages/me/shedaniel/rei/api/common/entry/type/$EntryTypeRegist
 import {$EntryDefinition, $EntryDefinition$Type} from "packages/me/shedaniel/rei/api/common/entry/type/$EntryDefinition"
 import {$Reloadable, $Reloadable$Type} from "packages/me/shedaniel/rei/api/common/registry/$Reloadable"
 import {$REIPlugin, $REIPlugin$Type} from "packages/me/shedaniel/rei/api/common/plugins/$REIPlugin"
-import {$Set, $Set$Type} from "packages/java/util/$Set"
 import {$EntryTypeBridge, $EntryTypeBridge$Type} from "packages/me/shedaniel/rei/api/common/entry/type/$EntryTypeBridge"
+import {$Set, $Set$Type} from "packages/java/util/$Set"
 import {$ReloadStage, $ReloadStage$Type} from "packages/me/shedaniel/rei/api/common/registry/$ReloadStage"
 import {$EntryType, $EntryType$Type} from "packages/me/shedaniel/rei/api/common/entry/type/$EntryType"
-import {$ResourceLocation, $ResourceLocation$Type} from "packages/net/minecraft/resources/$ResourceLocation"
 import {$Iterable, $Iterable$Type} from "packages/java/lang/$Iterable"
+import {$ResourceLocation, $ResourceLocation$Type} from "packages/net/minecraft/resources/$ResourceLocation"
 
 export interface $EntryTypeRegistry extends $Reloadable<($REIPlugin<(any)>)> {
 
+ "registerBridge"<A, B>(arg0: $EntryType$Type<(A)>, arg1: $EntryType$Type<(B)>, arg2: $EntryTypeBridge$Type<(A), (B)>): void
+ "getBridgesFor"<A, B>(arg0: $EntryType$Type<(A)>, arg1: $EntryType$Type<(B)>): $Iterable<($EntryTypeBridge<(A), (B)>)>
  "get"<T>(type: $EntryType$Type<(T)>): $EntryDefinition<(T)>
  "get"(arg0: $ResourceLocation$Type): $EntryDefinition<(any)>
  "values"(): $Set<($EntryDefinition<(any)>)>
  "register"<T>(type: $EntryType$Type<(T)>, definition: $EntryDefinition$Type<(T)>): void
  "register"<T>(arg0: $ResourceLocation$Type, arg1: $EntryDefinition$Type<(T)>): void
  "keySet"(): $Set<($ResourceLocation)>
- "registerBridge"<A, B>(arg0: $EntryType$Type<(A)>, arg1: $EntryType$Type<(B)>, arg2: $EntryTypeBridge$Type<(A), (B)>): void
- "getBridgesFor"<A, B>(arg0: $EntryType$Type<(A)>, arg1: $EntryType$Type<(B)>): $Iterable<($EntryTypeBridge<(A), (B)>)>
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
+ "acceptPlugin"(plugin: $REIPlugin$Type<(any)>): void
+ "acceptPlugin"(plugin: $REIPlugin$Type<(any)>, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>, plugin: $REIPlugin$Type<(any)>): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>, plugin: $REIPlugin$Type<(any)>): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIPlugin$Type<(any)>): void
- "acceptPlugin"(plugin: $REIPlugin$Type<(any)>, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -1713,12 +1713,12 @@ export interface $Tooltip {
  "queue"(): void
  "entries"(): $List<($Tooltip$Entry)>
  "copy"(): $Tooltip
- "getY"(): integer
  "getContextStack"(): $EntryStack<(any)>
- "withContextStack"(arg0: $EntryStack$Type<(any)>): $Tooltip
- "addAllTooltipComponents"(text: $Iterable$Type<($TooltipComponent$Type)>): $Tooltip
- "addAllTexts"(text: $Iterable$Type<($Component$Type)>): $Tooltip
+ "getY"(): integer
  "getX"(): integer
+ "withContextStack"(arg0: $EntryStack$Type<(any)>): $Tooltip
+ "addAllTexts"(text: $Iterable$Type<($Component$Type)>): $Tooltip
+ "addAllTooltipComponents"(text: $Iterable$Type<($TooltipComponent$Type)>): $Tooltip
 }
 
 export namespace $Tooltip {
@@ -1728,10 +1728,10 @@ function from(point: $Point$Type, entries: $Collection$Type<($Tooltip$Entry$Type
 function from(...entries: ($Tooltip$Entry$Type)[]): $Tooltip
 function entry(text: $TooltipComponent$Type): $Tooltip$Entry
 function entry(text: $Component$Type): $Tooltip$Entry
+function create(texts: $Collection$Type<($Component$Type)>): $Tooltip
 function create(point: $Point$Type, ...texts: ($Component$Type)[]): $Tooltip
 function create(point: $Point$Type, texts: $Collection$Type<($Component$Type)>): $Tooltip
 function create(...texts: ($Component$Type)[]): $Tooltip
-function create(texts: $Collection$Type<($Component$Type)>): $Tooltip
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1746,8 +1746,8 @@ declare global {
 export type $Tooltip_ = $Tooltip$Type;
 }}
 declare module "packages/me/shedaniel/rei/api/client/registry/transfer/$TransferHandler$Result" {
-import {$TooltipComponent, $TooltipComponent$Type} from "packages/net/minecraft/world/inventory/tooltip/$TooltipComponent"
 import {$BiConsumer, $BiConsumer$Type} from "packages/java/util/function/$BiConsumer"
+import {$TooltipComponent, $TooltipComponent$Type} from "packages/net/minecraft/world/inventory/tooltip/$TooltipComponent"
 import {$Component, $Component$Type} from "packages/net/minecraft/network/chat/$Component"
 import {$TransferHandlerRenderer, $TransferHandlerRenderer$Type} from "packages/me/shedaniel/rei/api/client/registry/transfer/$TransferHandlerRenderer"
 import {$List, $List$Type} from "packages/java/util/$List"
@@ -1762,28 +1762,28 @@ export interface $TransferHandler$Result {
 
  "color"(arg0: integer): $TransferHandler$Result
  "isBlocking"(): boolean
- "tooltipMissing"(arg0: $List$Type<($EntryIngredient$Type)>): $TransferHandler$Result
  "isSuccessful"(): boolean
- "getRenderer"(arg0: $TransferHandler$Type, arg1: $TransferHandler$Context$Type): $TransferHandlerRenderer
- "isReturningToScreen"(): boolean
- "renderer"(arg0: $TransferHandlerRenderer$Type): $TransferHandler$Result
- "fillTooltip"(arg0: $List$Type<($Tooltip$Entry$Type)>): void
- "getError"(): $Component
- "tooltip"(arg0: $Component$Type): $TransferHandler$Result
- "tooltip"(arg0: $TooltipComponent$Type): $TransferHandler$Result
+ "tooltipMissing"(arg0: $List$Type<($EntryIngredient$Type)>): $TransferHandler$Result
  "isApplicable"(): boolean
+ "getError"(): $Component
+ "getRenderer"(arg0: $TransferHandler$Type, arg1: $TransferHandler$Context$Type): $TransferHandlerRenderer
+ "renderer"(arg0: $TransferHandlerRenderer$Type): $TransferHandler$Result
  "getColor"(): integer
  "getTooltipRenderer"(): $BiConsumer<($Point), ($TransferHandler$Result$TooltipSink)>
- "overrideTooltipRenderer"(arg0: $BiConsumer$Type<($Point$Type), ($TransferHandler$Result$TooltipSink$Type)>): $TransferHandler$Result
- "blocksFurtherHandling"(): $TransferHandler$Result
+ "tooltip"(arg0: $TooltipComponent$Type): $TransferHandler$Result
+ "tooltip"(arg0: $Component$Type): $TransferHandler$Result
+ "isReturningToScreen"(): boolean
  "blocksFurtherHandling"(arg0: boolean): $TransferHandler$Result
+ "blocksFurtherHandling"(): $TransferHandler$Result
+ "fillTooltip"(arg0: $List$Type<($Tooltip$Entry$Type)>): void
+ "overrideTooltipRenderer"(arg0: $BiConsumer$Type<($Point$Type), ($TransferHandler$Result$TooltipSink$Type)>): $TransferHandler$Result
 }
 
 export namespace $TransferHandler$Result {
 function createFailed(error: $Component$Type): $TransferHandler$Result
 function createSuccessful(): $TransferHandler$Result
-function createNotApplicable(): $TransferHandler$Result
 function createFailedCustomButtonColor(error: $Component$Type, color: integer): $TransferHandler$Result
+function createNotApplicable(): $TransferHandler$Result
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1803,10 +1803,10 @@ import {$Collection, $Collection$Type} from "packages/java/util/$Collection"
 
 export interface $FilteringResult {
 
+ "hide"(arg0: $EntryStack$Type<(any)>): $FilteringResult
+ "hide"(arg0: $Collection$Type<(any)>): $FilteringResult
  "show"(arg0: $Collection$Type<(any)>): $FilteringResult
  "show"(arg0: $EntryStack$Type<(any)>): $FilteringResult
- "hide"(arg0: $Collection$Type<(any)>): $FilteringResult
- "hide"(arg0: $EntryStack$Type<(any)>): $FilteringResult
 }
 
 export namespace $FilteringResult {
@@ -1870,16 +1870,16 @@ export interface $EntryRendererRegistry extends $Reloadable<($REIClientPlugin)> 
  "get"<T>(arg0: $EntryStack$Type<(T)>): $EntryRenderer<(T)>
  "register"<T>(arg0: $EntryType$Type<(T)>, arg1: $EntryRendererProvider$Type<(T)>): void
  "transformTooltip"<T>(type: $EntryType$Type<(T)>, transformer: $EntryRendererRegistry$TooltipTransformer$Type<(T)>): void
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIClientPlugin$Type): void
- "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -1909,8 +1909,8 @@ import {$Point, $Point$Type} from "packages/me/shedaniel/math/$Point"
 export interface $OverlayListWidget {
 
  "getEntries"(): $Stream<($EntryStack<(any)>)>
- "getFocusedStack"(): $EntryStack<(any)>
  "containsMouse"(arg0: $Point$Type): boolean
+ "getFocusedStack"(): $EntryStack<(any)>
 }
 
 export namespace $OverlayListWidget {
@@ -2027,8 +2027,8 @@ import {$TooltipContext, $TooltipContext$Type} from "packages/me/shedaniel/rei/a
 import {$Tooltip, $Tooltip$Type} from "packages/me/shedaniel/rei/api/client/gui/widgets/$Tooltip"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$ResourceLocation, $ResourceLocation$Type} from "packages/net/minecraft/resources/$ResourceLocation"
-import {$BiFunction, $BiFunction$Type} from "packages/java/util/function/$BiFunction"
 import {$TagKey, $TagKey$Type} from "packages/net/minecraft/tags/$TagKey"
+import {$BiFunction, $BiFunction$Type} from "packages/java/util/function/$BiFunction"
 import {$GuiGraphics, $GuiGraphics$Type} from "packages/net/minecraft/client/gui/$GuiGraphics"
 import {$Rectangle, $Rectangle$Type} from "packages/me/shedaniel/math/$Rectangle"
 import {$CrashReport, $CrashReport$Type} from "packages/net/minecraft/$CrashReport"
@@ -2068,27 +2068,27 @@ export interface $EntryStack<T> extends $TextRepresentable, $Renderer {
  "getDefinition"(): $EntryDefinition<(T)>
  "normalize"(): $EntryStack<(T)>
  "getIdentifier"(): $ResourceLocation
- "getContainingNamespace"(): string
+ "setting"<R>(arg0: $EntryStack$Settings$Type<(R)>, arg1: R): $EntryStack<(T)>
+ "getValueType"(): $Class<(T)>
+ "getRenderer"(): $EntryRenderer<(T)>
+ "getNullable"<R>(arg0: $EntryStack$Settings$Type<(R)>): R
  "cheatsAs"(): $EntryStack<($ItemStack)>
- "withRenderer"(renderer: $Function$Type<($EntryStack$Type<(T)>), ($EntryRenderer$Type<(any)>)>): $EntryStack<(T)>
- "withRenderer"(renderer: $EntryRenderer$Type<(any)>): $EntryStack<(T)>
+ "getContainingNamespace"(): string
  "getTooltip"(context: $TooltipContext$Type): $Tooltip
  "getTooltip"(arg0: $TooltipContext$Type, arg1: boolean): $Tooltip
- "getRenderer"(): $EntryRenderer<(T)>
- "clearSettings"(): $EntryStack<(T)>
- "removeSetting"<R>(arg0: $EntryStack$Settings$Type<(R)>): $EntryStack<(T)>
- "tooltipProcessor"(tooltipProcessor: $BiFunction$Type<($EntryStack$Type<(T)>), ($Tooltip$Type), ($Tooltip$Type)>): $EntryStack<(T)>
- "setting"<R>(arg0: $EntryStack$Settings$Type<(R)>, arg1: R): $EntryStack<(T)>
- "getNullable"<R>(arg0: $EntryStack$Settings$Type<(R)>): R
- "saveStack"(): $CompoundTag
- "supportSaving"(): boolean
- "tooltip"(tooltipProvider: $Function$Type<($EntryStack$Type<(any)>), ($List$Type<($Component$Type)>)>): $EntryStack<(T)>
- "tooltip"(...tooltips: ($Component$Type)[]): $EntryStack<(T)>
  "tooltip"(tooltips: $List$Type<($Component$Type)>): $EntryStack<(T)>
- "getValueType"(): $Class<(T)>
- "castValue"<R>(): R
+ "tooltip"(...tooltips: ($Component$Type)[]): $EntryStack<(T)>
+ "tooltip"(tooltipProvider: $Function$Type<($EntryStack$Type<(any)>), ($List$Type<($Component$Type)>)>): $EntryStack<(T)>
+ "supportSaving"(): boolean
+ "saveStack"(): $CompoundTag
+ "removeSetting"<R>(arg0: $EntryStack$Settings$Type<(R)>): $EntryStack<(T)>
  "rewrap"(): $EntryStack<(T)>
  "getTagsFor"(): $Stream<($TagKey<(any)>)>
+ "tooltipProcessor"(tooltipProcessor: $BiFunction$Type<($EntryStack$Type<(T)>), ($Tooltip$Type), ($Tooltip$Type)>): $EntryStack<(T)>
+ "withRenderer"(renderer: $Function$Type<($EntryStack$Type<(T)>), ($EntryRenderer$Type<(any)>)>): $EntryStack<(T)>
+ "withRenderer"(renderer: $EntryRenderer$Type<(any)>): $EntryStack<(T)>
+ "clearSettings"(): $EntryStack<(T)>
+ "castValue"<R>(): R
  "wildcard"(): $EntryStack<(T)>
  "asFormatStrippedText"(): $Component
  "asFormattedText"(context: $TooltipContext$Type): $Component
@@ -2134,10 +2134,10 @@ export interface $InputMethod<T> {
  "getDescription"(): $Component
  "dispose"(arg0: $Executor$Type): $CompletableFuture<(void)>
  "dispose"(executor: $Executor$Type, progressCallback: $InputMethod$ProgressCallback$Type): $CompletableFuture<(void)>
- "getMatchingLocales"(): $List<($InputMethod$Locale)>
- "expendFilter"(arg0: string): $Iterable<(T)>
- "getOptionsMenuEntries"(): $List<($FavoriteMenuEntry)>
  "suggestInputString"(str: string): string
+ "getOptionsMenuEntries"(): $List<($FavoriteMenuEntry)>
+ "expendFilter"(arg0: string): $Iterable<(T)>
+ "getMatchingLocales"(): $List<($InputMethod$Locale)>
 }
 
 export namespace $InputMethod {
@@ -2161,8 +2161,8 @@ import {$OverlayRendererProvider$Sink, $OverlayRendererProvider$Sink$Type} from 
 
 export interface $OverlayRendererProvider {
 
- "onApplied"(sink: $OverlayRendererProvider$Sink$Type): void
  "onRemoved"(): void
+ "onApplied"(sink: $OverlayRendererProvider$Sink$Type): void
 }
 
 export namespace $OverlayRendererProvider {
@@ -2189,13 +2189,13 @@ import {$DraggableComponentProviderWidget, $DraggableComponentProviderWidget$Typ
 import {$Screen, $Screen$Type} from "packages/net/minecraft/client/gui/screens/$Screen"
 import {$Iterable, $Iterable$Type} from "packages/java/lang/$Iterable"
 import {$DraggableComponentProvider, $DraggableComponentProvider$Type} from "packages/me/shedaniel/rei/api/client/gui/drag/component/$DraggableComponentProvider"
-import {$DraggableComponent, $DraggableComponent$Type} from "packages/me/shedaniel/rei/api/client/gui/drag/component/$DraggableComponent"
 import {$DraggableStackProvider, $DraggableStackProvider$Type} from "packages/me/shedaniel/rei/api/client/gui/drag/$DraggableStackProvider"
+import {$DraggableComponent, $DraggableComponent$Type} from "packages/me/shedaniel/rei/api/client/gui/drag/component/$DraggableComponent"
 
 export interface $DraggableStackProviderWidget extends $DraggableComponentProviderWidget<($EntryStack<(any)>)> {
 
- "getHovered"(context: $DraggingContext$Type<($Screen$Type)>, mouseX: double, mouseY: double): $DraggableComponent<($EntryStack<(any)>)>
  "getHoveredStack"(arg0: $DraggingContext$Type<($Screen$Type)>, arg1: double, arg2: double): $DraggableStack
+ "getHovered"(context: $DraggingContext$Type<($Screen$Type)>, mouseX: double, mouseY: double): $DraggableComponent<($EntryStack<(any)>)>
 
 (providers: $Function$Type<($DraggingContext$Type<($Screen$Type)>), ($Iterable$Type<($DraggableStackProviderWidget$Type)>)>): $DraggableStackProviderWidget
 }
@@ -2231,12 +2231,12 @@ export class $FavoriteMenuEntry extends $Widget {
 
 constructor()
 
-public "closeMenu"(): void
 public "updateInformation"(arg0: integer, arg1: integer, arg2: boolean, arg3: boolean, arg4: boolean, arg5: integer): void
-public static "createSubMenu"(text: $Component$Type, entries: $List$Type<($FavoriteMenuEntry$Type)>): $FavoriteMenuEntry
-public static "createToggle"(text: $Component$Type, value: $BooleanValue$Type): $FavoriteMenuEntry
 public "getEntryWidth"(): integer
+public static "createToggle"(text: $Component$Type, value: $BooleanValue$Type): $FavoriteMenuEntry
+public static "createSubMenu"(text: $Component$Type, entries: $List$Type<($FavoriteMenuEntry$Type)>): $FavoriteMenuEntry
 public "getEntryHeight"(): integer
+public "closeMenu"(): void
 get "entryWidth"(): integer
 get "entryHeight"(): integer
 }
@@ -2270,23 +2270,23 @@ import {$EntryIngredient, $EntryIngredient$Type} from "packages/me/shedaniel/rei
 export interface $Display extends $DisplaySpec {
 
  "getCategoryIdentifier"(): $CategoryIdentifier<(any)>
- "getOutputEntries"(): $List<($EntryIngredient)>
-/**
- * 
- * @deprecated
- */
- "getInputEntries"(context: $MenuSerializationContext$Type<(any), (any), (any)>, info: $MenuInfo$Type<(any), (any)>, fill: boolean): $List<($EntryIngredient)>
- "getInputEntries"(): $List<($EntryIngredient)>
- "getRequiredEntries"(): $List<($EntryIngredient)>
- "provideInternalDisplay"(): $Display
- "provideInternalDisplayIds"(): $Collection<($ResourceLocation)>
+ "getDisplayLocation"(): $Optional<($ResourceLocation)>
  "getInputIngredients"(menu: $AbstractContainerMenu$Type, player: $Player$Type): $List<($InputIngredient<($EntryStack<(any)>)>)>
 /**
  * 
  * @deprecated
  */
  "getInputIngredients"(context: $MenuSerializationContext$Type<(any), (any), (any)>, info: $MenuInfo$Type<(any), (any)>, fill: boolean): $List<($InputIngredient<($EntryStack<(any)>)>)>
- "getDisplayLocation"(): $Optional<($ResourceLocation)>
+ "provideInternalDisplay"(): $Display
+ "provideInternalDisplayIds"(): $Collection<($ResourceLocation)>
+/**
+ * 
+ * @deprecated
+ */
+ "getInputEntries"(context: $MenuSerializationContext$Type<(any), (any), (any)>, info: $MenuInfo$Type<(any), (any)>, fill: boolean): $List<($EntryIngredient)>
+ "getInputEntries"(): $List<($EntryIngredient)>
+ "getOutputEntries"(): $List<($EntryIngredient)>
+ "getRequiredEntries"(): $List<($EntryIngredient)>
 }
 
 export namespace $Display {
@@ -2329,16 +2329,16 @@ export interface $MenuInfoRegistry extends $Reloadable<($REIServerPlugin)> {
  "registerGeneric"<D extends $Display>(arg0: $Predicate$Type<($CategoryIdentifier$Type<(any)>)>, arg1: $MenuInfoProvider$Type<(any), (D)>): void
  "getClient"<C extends $AbstractContainerMenu, D extends $Display>(arg0: D, arg1: $MenuSerializationContext$Type<(C), (any), (D)>, arg2: C): $MenuInfo<(C), (D)>
  "infoSize"(): integer
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIServerPlugin$Type)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIServerPlugin$Type)>): void
+ "acceptPlugin"(plugin: $REIServerPlugin$Type): void
+ "acceptPlugin"(plugin: $REIServerPlugin$Type, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIServerPlugin$Type)>, plugin: $REIServerPlugin$Type): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIServerPlugin$Type)>, plugin: $REIServerPlugin$Type): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIServerPlugin$Type)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIServerPlugin$Type)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIServerPlugin$Type): void
- "acceptPlugin"(plugin: $REIServerPlugin$Type, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -2406,15 +2406,14 @@ import {$EntryIngredient, $EntryIngredient$Type} from "packages/me/shedaniel/rei
 
 export interface $CategoryRegistry$CategoryConfiguration<T extends $Display> extends $Identifiable {
 
- "getIdentifier"(): $ResourceLocation
  "getCategory"(): $DisplayCategory<(T)>
+ "getIdentifier"(): $ResourceLocation
  "registerExtension"(arg0: $CategoryExtensionProvider$Type<(T)>): void
  "getCategoryIdentifier"(): $CategoryIdentifier<(any)>
  "setQuickCraftingEnabledByDefault"(arg0: boolean): void
  "isQuickCraftingEnabledByDefault"(): boolean
- "getWorkstations"(): $List<($EntryIngredient)>
- "addWorkstations"(...arg0: ($EntryIngredient$Type)[]): void
  "addWorkstations"(...stations: ($EntryStack$Type<(any)>)[]): void
+ "addWorkstations"(...arg0: ($EntryIngredient$Type)[]): void
 /**
  * 
  * @deprecated
@@ -2423,6 +2422,7 @@ export interface $CategoryRegistry$CategoryConfiguration<T extends $Display> ext
  "setPlusButtonArea"(arg0: $ButtonArea$Type): void
  "getView"(arg0: T): $DisplayCategoryView<(T)>
  "getPlusButtonArea"(): $Optional<($ButtonArea)>
+ "getWorkstations"(): $List<($EntryIngredient)>
 }
 
 export namespace $CategoryRegistry$CategoryConfiguration {
@@ -2477,8 +2477,8 @@ export type $MenuSerializationContext_<T, P, D> = $MenuSerializationContext$Type
 declare module "packages/me/shedaniel/rei/api/client/registry/display/$DisplayRegistry" {
 import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$CompoundTag"
 import {$BiPredicate, $BiPredicate$Type} from "packages/java/util/function/$BiPredicate"
-import {$Collection, $Collection$Type} from "packages/java/util/$Collection"
 import {$Predicate, $Predicate$Type} from "packages/java/util/function/$Predicate"
+import {$Collection, $Collection$Type} from "packages/java/util/$Collection"
 import {$DynamicDisplayGenerator, $DynamicDisplayGenerator$Type} from "packages/me/shedaniel/rei/api/client/registry/display/$DynamicDisplayGenerator"
 import {$Class, $Class$Type} from "packages/java/lang/$Class"
 import {$CategoryIdentifier, $CategoryIdentifier$Type} from "packages/me/shedaniel/rei/api/common/category/$CategoryIdentifier"
@@ -2500,53 +2500,53 @@ import {$Map, $Map$Type} from "packages/java/util/$Map"
 
 export interface $DisplayRegistry extends $RecipeManagerContext<($REIClientPlugin)> {
 
- "add"(arg0: $Display$Type, arg1: any): void
- "add"(display: $Display$Type): void
  "add"(object: any): void
+ "add"(display: $Display$Type): void
+ "add"(arg0: $Display$Type, arg1: any): void
  "get"<D extends $Display>(categoryId: $CategoryIdentifier$Type<(D)>): $List<(D)>
  "getAll"(): $Map<($CategoryIdentifier<(any)>), ($List<($Display)>)>
- "getGlobalDisplayGenerators"(): $List<($DynamicDisplayGenerator<(any)>)>
- "getCategoryDisplayGenerators"(): $Map<($CategoryIdentifier<(any)>), ($List<($DynamicDisplayGenerator<(any)>)>)>
- "getCategoryDisplayGenerators"<D extends $Display>(categoryId: $CategoryIdentifier$Type<(D)>): $List<($DynamicDisplayGenerator<(any)>)>
- "registerVisibilityPredicate"(arg0: $DisplayVisibilityPredicate$Type): void
- "registerRecipesFiller"<T extends $Recipe<(any)>, D extends $Display>(typeClass: $Class$Type<(T)>, recipeType: $RecipeType$Type<(any)>, filler: $Function$Type<(any), ($Collection$Type<(any)>)>): void
- "registerRecipesFiller"<T extends $Recipe<(any)>, D extends $Display>(typeClass: $Class$Type<(T)>, recipeType: $Predicate$Type<($RecipeType$Type<(any)>)>, predicate: $Predicate$Type<(any)>, filler: $Function$Type<(any), ($Collection$Type<(any)>)>): void
- "registerRecipesFiller"<T extends $Recipe<(any)>, D extends $Display>(typeClass: $Class$Type<(T)>, recipeType: $Predicate$Type<($RecipeType$Type<(any)>)>, filler: $Function$Type<(any), ($Collection$Type<(any)>)>): void
- "registerDisplaysFiller"<T, D extends $Display>(arg0: $Class$Type<(T)>, arg1: $Predicate$Type<(any)>, arg2: $Function$Type<(any), ($Collection$Type<(any)>)>): void
- "registerDisplaysFiller"<T, D extends $Display>(typeClass: $Class$Type<(T)>, filler: $Function$Type<(any), ($Collection$Type<(any)>)>): void
- "registerDisplaysFiller"<T, D extends $Display>(arg0: $Class$Type<(T)>, arg1: $BiPredicate$Type<(any), ($DisplayAdditionReasons$Type)>, arg2: $Function$Type<(any), ($Collection$Type<(any)>)>): void
- "registerDisplaysFiller"<D extends $Display>(arg0: $Predicate$Type<(any)>, arg1: $Function$Type<(any), ($Collection$Type<(any)>)>): void
- "registerDisplayGenerator"<A extends $Display>(arg0: $CategoryIdentifier$Type<(A)>, arg1: $DynamicDisplayGenerator$Type<(A)>): void
  "getVisibilityPredicates"(): $List<($DisplayVisibilityPredicate)>
- "registerGlobalDisplayGenerator"<A extends $Display>(arg0: $DynamicDisplayGenerator$Type<(A)>): void
+ "registerDisplayGenerator"<A extends $Display>(arg0: $CategoryIdentifier$Type<(A)>, arg1: $DynamicDisplayGenerator$Type<(A)>): void
  "registerRecipeFiller"<T extends $Recipe<(any)>, D extends $Display>(typeClass: $Class$Type<(T)>, recipeType: $Predicate$Type<($RecipeType$Type<(any)>)>, filler: $Function$Type<(any), (D)>): void
  "registerRecipeFiller"<T extends $Recipe<(any)>, D extends $Display>(typeClass: $Class$Type<(T)>, recipeType: $RecipeType$Type<(any)>, filler: $Function$Type<(any), (D)>): void
  "registerRecipeFiller"<T extends $Recipe<(any)>, D extends $Display>(typeClass: $Class$Type<(T)>, recipeType: $Predicate$Type<($RecipeType$Type<(any)>)>, predicate: $Predicate$Type<(any)>, filler: $Function$Type<(any), (D)>): void
- "registerFiller"<D extends $Display>(arg0: $Predicate$Type<(any)>, arg1: $Function$Type<(any), (D)>): void
- "registerFiller"<T, D extends $Display>(typeClass: $Class$Type<(T)>, filler: $Function$Type<(any), (D)>): void
- "registerFiller"<T, D extends $Display>(arg0: $Class$Type<(T)>, arg1: $Predicate$Type<(any)>, arg2: $Function$Type<(any), (D)>): void
- "registerFiller"<T, D extends $Display>(arg0: $Class$Type<(T)>, arg1: $BiPredicate$Type<(any), ($DisplayAdditionReasons$Type)>, arg2: $Function$Type<(any), (D)>): void
+ "registerGlobalDisplayGenerator"<A extends $Display>(arg0: $DynamicDisplayGenerator$Type<(A)>): void
+ "registerDisplaysFiller"<T, D extends $Display>(arg0: $Class$Type<(T)>, arg1: $Predicate$Type<(any)>, arg2: $Function$Type<(any), ($Collection$Type<(any)>)>): void
+ "registerDisplaysFiller"<T, D extends $Display>(typeClass: $Class$Type<(T)>, filler: $Function$Type<(any), ($Collection$Type<(any)>)>): void
+ "registerDisplaysFiller"<D extends $Display>(arg0: $Predicate$Type<(any)>, arg1: $Function$Type<(any), ($Collection$Type<(any)>)>): void
+ "registerDisplaysFiller"<T, D extends $Display>(arg0: $Class$Type<(T)>, arg1: $BiPredicate$Type<(any), ($DisplayAdditionReasons$Type)>, arg2: $Function$Type<(any), ($Collection$Type<(any)>)>): void
+ "registerVisibilityPredicate"(arg0: $DisplayVisibilityPredicate$Type): void
+ "registerRecipesFiller"<T extends $Recipe<(any)>, D extends $Display>(typeClass: $Class$Type<(T)>, recipeType: $RecipeType$Type<(any)>, filler: $Function$Type<(any), ($Collection$Type<(any)>)>): void
+ "registerRecipesFiller"<T extends $Recipe<(any)>, D extends $Display>(typeClass: $Class$Type<(T)>, recipeType: $Predicate$Type<($RecipeType$Type<(any)>)>, filler: $Function$Type<(any), ($Collection$Type<(any)>)>): void
+ "registerRecipesFiller"<T extends $Recipe<(any)>, D extends $Display>(typeClass: $Class$Type<(T)>, recipeType: $Predicate$Type<($RecipeType$Type<(any)>)>, predicate: $Predicate$Type<(any)>, filler: $Function$Type<(any), ($Collection$Type<(any)>)>): void
+ "isDisplayVisible"(arg0: $Display$Type): boolean
+ "getCategoryDisplayGenerators"<D extends $Display>(categoryId: $CategoryIdentifier$Type<(D)>): $List<($DynamicDisplayGenerator<(any)>)>
+ "getCategoryDisplayGenerators"(): $Map<($CategoryIdentifier<(any)>), ($List<($DynamicDisplayGenerator<(any)>)>)>
+ "getGlobalDisplayGenerators"(): $List<($DynamicDisplayGenerator<(any)>)>
  "displaySize"(): integer
+ "registerFiller"<T, D extends $Display>(typeClass: $Class$Type<(T)>, filler: $Function$Type<(any), (D)>): void
+ "registerFiller"<T, D extends $Display>(arg0: $Class$Type<(T)>, arg1: $BiPredicate$Type<(any), ($DisplayAdditionReasons$Type)>, arg2: $Function$Type<(any), (D)>): void
+ "registerFiller"<T, D extends $Display>(arg0: $Class$Type<(T)>, arg1: $Predicate$Type<(any)>, arg2: $Function$Type<(any), (D)>): void
+ "registerFiller"<D extends $Display>(arg0: $Predicate$Type<(any)>, arg1: $Function$Type<(any), (D)>): void
+ "addWithReason"(object: any, ...reasons: ($DisplayAdditionReason$Type)[]): void
+ "tryFillDisplay"<T>(value: T): $Collection<($Display)>
+ "tryFillDisplay"<T>(arg0: T, ...arg1: ($DisplayAdditionReason$Type)[]): $Collection<($Display)>
  "isDisplayInvisible"(display: $Display$Type): boolean
  "getDisplayOrigin"(arg0: $Display$Type): any
- "tryFillDisplay"<T>(arg0: T, ...arg1: ($DisplayAdditionReason$Type)[]): $Collection<($Display)>
- "tryFillDisplay"<T>(value: T): $Collection<($Display)>
- "addWithReason"(object: any, ...reasons: ($DisplayAdditionReason$Type)[]): void
- "isDisplayVisible"(arg0: $Display$Type): boolean
  "getRecipeManager"(): $RecipeManager
  "byId"(tag: $CompoundTag$Type, key: string): $Recipe<(any)>
  "byId"(location: $ResourceLocation$Type): $Recipe<(any)>
  "getAllSortedRecipes"(): $List<($Recipe<(any)>)>
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIClientPlugin$Type): void
- "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -2577,16 +2577,16 @@ import {$REIClientPlugin, $REIClientPlugin$Type} from "packages/me/shedaniel/rei
 export interface $ConfigAddonRegistry extends $Reloadable<($REIClientPlugin)> {
 
  "register"(arg0: $ConfigAddon$Type): void
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIClientPlugin$Type): void
- "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -2627,14 +2627,14 @@ export interface $DisplayCategory<T extends $Display> extends $DisplayCategoryVi
  "getIdentifier"(): $ResourceLocation
  "getIcon"(): $Renderer
  "getTitle"(): $Component
- "getDisplayHeight"(): integer
- "getDisplayRenderer"(display: T): $DisplayRenderer
- "getDisplayWidth"(display: T): integer
  "getCategoryIdentifier"(): $CategoryIdentifier<(any)>
- "getDisplayMerger"(): $DisplayMerger<(T)>
+ "setupDisplay"(display: T, bounds: $Rectangle$Type): $List<($Widget)>
+ "getDisplayWidth"(display: T): integer
+ "getDisplayRenderer"(display: T): $DisplayRenderer
+ "getDisplayHeight"(): integer
  "getMaximumDisplaysPerPage"(): integer
  "getFixedDisplaysPerPage"(): integer
- "setupDisplay"(display: T, bounds: $Rectangle$Type): $List<($Widget)>
+ "getDisplayMerger"(): $DisplayMerger<(T)>
 }
 
 export namespace $DisplayCategory {
@@ -2665,15 +2665,15 @@ import {$Point, $Point$Type} from "packages/me/shedaniel/math/$Point"
 export interface $DraggableComponent<T> extends $Supplier<(T)> {
 
  "release"(result: $DraggedAcceptorResult$Type): void
- "getIf"<A>(...typeHack: (A)[]): $Optional<($DraggableComponent<(A)>)>
- "render"(graphics: $GuiGraphics$Type, position: $Point$Type, mouseX: integer, mouseY: integer, delta: float): void
- "render"(graphics: $GuiGraphics$Type, bounds: $Rectangle$Type, mouseX: integer, mouseY: integer, delta: float): void
- "ifMatches"<A>(consumer: $Consumer$Type<(A)>, ...typeHack: (A)[]): boolean
- "ifMatches"<A>(consumer: $Predicate$Type<(A)>, ...typeHack: (A)[]): boolean
  "getWidth"(): integer
  "getHeight"(): integer
+ "render"(graphics: $GuiGraphics$Type, bounds: $Rectangle$Type, mouseX: integer, mouseY: integer, delta: float): void
+ "render"(graphics: $GuiGraphics$Type, position: $Point$Type, mouseX: integer, mouseY: integer, delta: float): void
  "drag"(): void
  "getOriginBounds"(mouse: $Point$Type): $Rectangle
+ "ifMatches"<A>(consumer: $Predicate$Type<(A)>, ...typeHack: (A)[]): boolean
+ "ifMatches"<A>(consumer: $Consumer$Type<(A)>, ...typeHack: (A)[]): boolean
+ "getIf"<A>(...typeHack: (A)[]): $Optional<($DraggableComponent<(A)>)>
  "get"(): T
 }
 
@@ -2722,8 +2722,8 @@ import {$EntrySettingsAdapterRegistry, $EntrySettingsAdapterRegistry$Type} from 
 import {$Collection, $Collection$Type} from "packages/java/util/$Collection"
 import {$Class, $Class$Type} from "packages/java/lang/$Class"
 import {$EntryTypeRegistry, $EntryTypeRegistry$Type} from "packages/me/shedaniel/rei/api/common/entry/type/$EntryTypeRegistry"
-import {$ItemComparatorRegistry, $ItemComparatorRegistry$Type} from "packages/me/shedaniel/rei/api/common/entry/comparison/$ItemComparatorRegistry"
 import {$FluidSupportProvider, $FluidSupportProvider$Type} from "packages/me/shedaniel/rei/api/common/fluid/$FluidSupportProvider"
+import {$ItemComparatorRegistry, $ItemComparatorRegistry$Type} from "packages/me/shedaniel/rei/api/common/entry/comparison/$ItemComparatorRegistry"
 import {$MenuInfoRegistry, $MenuInfoRegistry$Type} from "packages/me/shedaniel/rei/api/common/transfer/info/$MenuInfoRegistry"
 import {$SlotAccessorRegistry, $SlotAccessorRegistry$Type} from "packages/me/shedaniel/rei/api/common/transfer/info/stack/$SlotAccessorRegistry"
 import {$FluidComparatorRegistry, $FluidComparatorRegistry$Type} from "packages/me/shedaniel/rei/api/common/entry/comparison/$FluidComparatorRegistry"
@@ -2735,21 +2735,21 @@ import {$DisplaySerializerRegistry, $DisplaySerializerRegistry$Type} from "packa
 
 export interface $REIServerPlugin extends $REIPlugin<($REIServerPlugin)> {
 
- "getPluginProviderClass"(): $Class<($REIServerPlugin)>
  "registerMenuInfo"(registry: $MenuInfoRegistry$Type): void
+ "getPluginProviderClass"(): $Class<($REIServerPlugin)>
  "compareTo"(o: $REIPlugin$Type<(any)>): integer
  "getPriority"(): double
- "registerItemComparators"(registry: $ItemComparatorRegistry$Type): void
- "shouldBeForcefullyDoneOnMainThread"(reloadable: $Reloadable$Type<(any)>): boolean
- "registerFluidSupport"(support: $FluidSupportProvider$Type): void
- "registerDisplaySerializer"(registry: $DisplaySerializerRegistry$Type): void
- "registerEntrySettingsAdapters"(registry: $EntrySettingsAdapterRegistry$Type): void
- "registerFluidComparators"(registry: $FluidComparatorRegistry$Type): void
- "registerSlotAccessors"(registry: $SlotAccessorRegistry$Type): void
- "postStage"(manager: $PluginManager$Type<($REIServerPlugin$Type)>, stage: $ReloadStage$Type): void
- "registerEntryTypes"(registry: $EntryTypeRegistry$Type): void
- "preStage"(manager: $PluginManager$Type<($REIServerPlugin$Type)>, stage: $ReloadStage$Type): void
  "provide"(): $Collection<($REIServerPlugin)>
+ "registerEntryTypes"(registry: $EntryTypeRegistry$Type): void
+ "postStage"(manager: $PluginManager$Type<($REIServerPlugin$Type)>, stage: $ReloadStage$Type): void
+ "preStage"(manager: $PluginManager$Type<($REIServerPlugin$Type)>, stage: $ReloadStage$Type): void
+ "registerFluidSupport"(support: $FluidSupportProvider$Type): void
+ "registerFluidComparators"(registry: $FluidComparatorRegistry$Type): void
+ "registerItemComparators"(registry: $ItemComparatorRegistry$Type): void
+ "registerEntrySettingsAdapters"(registry: $EntrySettingsAdapterRegistry$Type): void
+ "registerDisplaySerializer"(registry: $DisplaySerializerRegistry$Type): void
+ "registerSlotAccessors"(registry: $SlotAccessorRegistry$Type): void
+ "shouldBeForcefullyDoneOnMainThread"(reloadable: $Reloadable$Type<(any)>): boolean
  "getPluginProviderName"(): string
 }
 
@@ -2786,16 +2786,16 @@ export interface $SlotAccessorRegistry extends $Reloadable<($REIServerPlugin)> {
  "register"(arg0: $ResourceLocation$Type, arg1: $Predicate$Type<($SlotAccessor$Type)>, arg2: $SlotAccessorRegistry$Serializer$Type): void
  "read"(arg0: $AbstractContainerMenu$Type, arg1: $Player$Type, arg2: $CompoundTag$Type): $SlotAccessor
  "save"(arg0: $AbstractContainerMenu$Type, arg1: $Player$Type, arg2: $SlotAccessor$Type): $CompoundTag
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIServerPlugin$Type)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIServerPlugin$Type)>): void
+ "acceptPlugin"(plugin: $REIServerPlugin$Type): void
+ "acceptPlugin"(plugin: $REIServerPlugin$Type, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIServerPlugin$Type)>, plugin: $REIServerPlugin$Type): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIServerPlugin$Type)>, plugin: $REIServerPlugin$Type): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIServerPlugin$Type)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIServerPlugin$Type)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIServerPlugin$Type): void
- "acceptPlugin"(plugin: $REIServerPlugin$Type, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -2860,11 +2860,11 @@ export interface $DraggableStackVisitor<T extends $Screen> extends $DraggableCom
  "compareTo"(o: $DraggableStackVisitor$Type<(T)>): integer
  "getContext"(): $DraggingContext<(T)>
  "getPriority"(): double
- "isHandingScreen"<R extends $Screen>(arg0: R): boolean
- "acceptDragged"(context: $DraggingContext$Type<(T)>, component: $DraggableComponent$Type<(any)>): $DraggedAcceptorResult
- "acceptDraggedStack"(context: $DraggingContext$Type<(T)>, stack: $DraggableStack$Type): $DraggedAcceptorResult
  "getDraggableAcceptingBounds"(context: $DraggingContext$Type<(T)>, component: $DraggableComponent$Type<(any)>): $Stream<($DraggableBoundsProvider)>
  "getDraggableAcceptingBounds"(context: $DraggingContext$Type<(T)>, stack: $DraggableStack$Type): $Stream<($DraggableStackVisitor$BoundsProvider)>
+ "isHandingScreen"<R extends $Screen>(arg0: R): boolean
+ "acceptDraggedStack"(context: $DraggingContext$Type<(T)>, stack: $DraggableStack$Type): $DraggedAcceptorResult
+ "acceptDragged"(context: $DraggingContext$Type<(T)>, component: $DraggableComponent$Type<(any)>): $DraggedAcceptorResult
  "compareTo"(o: $DraggableComponentVisitor$Type<(T)>): integer
 
 (o: $DraggableStackVisitor$Type<(T)>): integer
@@ -2951,22 +2951,22 @@ import {$ComparisonContext, $ComparisonContext$Type} from "packages/me/shedaniel
 
 export interface $EntryComparatorRegistry<T, S> extends $Reloadable<($REIPlugin<(any)>)> {
 
- "register"(arg0: $EntryComparator$Type<(T)>, arg1: S): void
- "register"(comparator: $EntryComparator$Type<(T)>, ...entries: (S)[]): void
  "containsComparator"(arg0: S): boolean
- "registerGlobal"(arg0: $EntryComparator$Type<(T)>): void
  "comparatorSize"(): integer
  "hashOf"(arg0: $ComparisonContext$Type, arg1: T): long
+ "registerGlobal"(arg0: $EntryComparator$Type<(T)>): void
+ "register"(comparator: $EntryComparator$Type<(T)>, ...entries: (S)[]): void
+ "register"(arg0: $EntryComparator$Type<(T)>, arg1: S): void
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
+ "acceptPlugin"(plugin: $REIPlugin$Type<(any)>): void
+ "acceptPlugin"(plugin: $REIPlugin$Type<(any)>, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>, plugin: $REIPlugin$Type<(any)>): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>, plugin: $REIPlugin$Type<(any)>): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIPlugin$Type<(any)>): void
- "acceptPlugin"(plugin: $REIPlugin$Type<(any)>, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -3003,9 +3003,9 @@ export interface $DraggableStackProvider<T extends $Screen> extends $DraggableCo
  "compareTo"(o: $DraggableStackProvider$Type<(T)>): integer
  "getContext"(): $DraggingContext<(T)>
  "getPriority"(): double
+ "getHoveredStack"(arg0: $DraggingContext$Type<(T)>, arg1: double, arg2: double): $DraggableStack
  "getHovered"(context: $DraggingContext$Type<(T)>, mouseX: double, mouseY: double): $DraggableComponent<($EntryStack<(any)>)>
  "isHandingScreen"<R extends $Screen>(arg0: R): boolean
- "getHoveredStack"(arg0: $DraggingContext$Type<(T)>, arg1: double, arg2: double): $DraggableStack
  "compareTo"(o: $DraggableComponentProvider$Type<(T), ($EntryStack$Type<(any)>)>): integer
 }
 
@@ -3068,40 +3068,40 @@ constructor()
 public "entry"(arg0: $EntryStack$Type<(any)>): $Slot
 public "entries"(arg0: $Collection$Type<(any)>): $Slot
 public "getEntries"(): $List<($EntryStack<(any)>)>
-public "noFavoritesInteractable"(): $Slot
-public "setBackgroundEnabled"(arg0: boolean): void
-public "setInteractableFavorites"(arg0: boolean): void
-public "unmarkInputOrOutput"(): $Slot
-public "isBackgroundEnabled"(): boolean
-public "notFavoritesInteractable"(): $Slot
-public "isInteractableFavorites"(): boolean
-public "setHighlightEnabled"(arg0: boolean): void
-public "interactableFavorites"(interactableFavorites: boolean): $Slot
-public "disableHighlight"(): $Slot
-public "notInteractable"(): $Slot
-public "isTooltipsEnabled"(): boolean
-public "disableBackground"(): $Slot
-public "markInput"(): $Slot
-public "markOutput"(): $Slot
-public "setNoticeMark"(arg0: byte): void
-public "interactable"(interactable: boolean): $Slot
-public "isHighlightEnabled"(): boolean
-public "setInteractable"(arg0: boolean): void
-public "noInteractable"(): $Slot
-public "setTooltipsEnabled"(arg0: boolean): void
-public "highlightEnabled"(highlight: boolean): $Slot
-public "backgroundEnabled"(backgroundEnabled: boolean): $Slot
-public "getNoticeMark"(): byte
-public "isInteractable"(): boolean
-public "disableTooltips"(): $Slot
-public "tooltipsEnabled"(tooltipsEnabled: boolean): $Slot
 public "getCurrentTooltip"(context: $TooltipContext$Type): $Tooltip
-public "getInnerBounds"(): $Rectangle
-public "getCurrentEntry"(): $EntryStack<(any)>
+public "isHighlightEnabled"(): boolean
 public "clearEntries"(): $Slot
-set "noticeMark"(value: byte)
-get "noticeMark"(): byte
+public "getInnerBounds"(): $Rectangle
+public "setInteractable"(arg0: boolean): void
+public "markOutput"(): $Slot
+public "highlightEnabled"(highlight: boolean): $Slot
+public "setTooltipsEnabled"(arg0: boolean): void
+public "interactable"(interactable: boolean): $Slot
+public "disableTooltips"(): $Slot
+public "getNoticeMark"(): byte
+public "markInput"(): $Slot
+public "disableBackground"(): $Slot
+public "notInteractable"(): $Slot
+public "disableHighlight"(): $Slot
+public "tooltipsEnabled"(tooltipsEnabled: boolean): $Slot
+public "noInteractable"(): $Slot
+public "isTooltipsEnabled"(): boolean
+public "backgroundEnabled"(backgroundEnabled: boolean): $Slot
+public "setNoticeMark"(arg0: byte): void
+public "isInteractable"(): boolean
+public "getCurrentEntry"(): $EntryStack<(any)>
+public "isInteractableFavorites"(): boolean
+public "notFavoritesInteractable"(): $Slot
+public "noFavoritesInteractable"(): $Slot
+public "interactableFavorites"(interactableFavorites: boolean): $Slot
+public "isBackgroundEnabled"(): boolean
+public "unmarkInputOrOutput"(): $Slot
+public "setHighlightEnabled"(arg0: boolean): void
+public "setInteractableFavorites"(arg0: boolean): void
+public "setBackgroundEnabled"(arg0: boolean): void
 get "innerBounds"(): $Rectangle
+get "noticeMark"(): byte
+set "noticeMark"(value: byte)
 get "currentEntry"(): $EntryStack<(any)>
 }
 /**
@@ -3222,16 +3222,16 @@ export interface $FluidSupportProvider extends $Reloadable<($REIPlugin<(any)>)>,
 
  "register"(arg0: $FluidSupportProvider$Provider$Type): void
  "itemToFluids"(arg0: $EntryStack$Type<(any)>): $Optional<($Stream<($EntryStack<($FluidStack)>)>)>
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
+ "acceptPlugin"(plugin: $REIPlugin$Type<(any)>): void
+ "acceptPlugin"(plugin: $REIPlugin$Type<(any)>, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>, plugin: $REIPlugin$Type<(any)>): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>, plugin: $REIPlugin$Type<(any)>): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIPlugin$Type<(any)>): void
- "acceptPlugin"(plugin: $REIPlugin$Type<(any)>, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -3342,32 +3342,32 @@ export interface $PluginManager<P extends $REIPlugin<(any)>> extends $ParentRelo
 
  "get"<T extends $Reloadable<(any)>>(arg0: $Class$Type<(T)>): T
  "view"(): $PluginView<(P)>
- "getPlugins"(): $Iterable<(P)>
- "isReloading"(): boolean
  "getPluginProviders"(): $List<($REIPluginProvider<(P)>)>
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>): void
+ "isReloading"(): boolean
+ "getPlugins"(): $Iterable<(P)>
  "registerReloadable"(arg0: $Reloadable$Type<(any)>): void
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>): void
+ "endReload"(): void
+ "endReload"(stage: $ReloadStage$Type): void
  "getReloadables"(): $List<($Reloadable<(P)>)>
  "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
- "startReload"(stage: $ReloadStage$Type): void
  "startReload"(): void
- "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>, plugin: P): void
- "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>, plugin: P): void
- "getStage"(): $ReloadStage
+ "startReload"(stage: $ReloadStage$Type): void
  "isConcurrent"(): boolean
  "acceptPlugin"(plugin: P): void
  "acceptPlugin"(plugin: P, stage: $ReloadStage$Type): void
+ "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>, plugin: P): void
+ "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>, plugin: P): void
+ "getStage"(): $ReloadStage
 }
 
 export namespace $PluginManager {
 function getInstance(): $PluginManager<($REIPlugin<(any)>)>
-function areAnyReloading(): boolean
 function getClientInstance(): $PluginManager<($REIClientPlugin)>
 function getServerInstance(): $PluginManager<($REIServerPlugin)>
+function areAnyReloading(): boolean
 function getActiveInstances(): $List<($PluginManager<(any)>)>
 }
 /**
@@ -3481,8 +3481,8 @@ export type $ConfigAddon_ = $ConfigAddon$Type;
 }}
 declare module "packages/me/shedaniel/rei/api/client/registry/screen/$OverlayDecider" {
 import {$Comparable, $Comparable$Type} from "packages/java/lang/$Comparable"
-import {$Class, $Class$Type} from "packages/java/lang/$Class"
 import {$DisplayPanelLocation, $DisplayPanelLocation$Type} from "packages/me/shedaniel/rei/api/client/gui/config/$DisplayPanelLocation"
+import {$Class, $Class$Type} from "packages/java/lang/$Class"
 import {$InteractionResult, $InteractionResult$Type} from "packages/net/minecraft/world/$InteractionResult"
 import {$Screen, $Screen$Type} from "packages/net/minecraft/client/gui/screens/$Screen"
 import {$OverlayRendererProvider, $OverlayRendererProvider$Type} from "packages/me/shedaniel/rei/api/client/registry/screen/$OverlayRendererProvider"
@@ -3492,16 +3492,16 @@ export interface $OverlayDecider extends $Comparable<($OverlayDecider)> {
 
  "compareTo"(o: $OverlayDecider$Type): integer
  "getPriority"(): double
- "isHandingScreen"<R extends $Screen>(arg0: $Class$Type<(R)>): boolean
- "isInZone"(mouseX: double, mouseY: double): $InteractionResult
+ "shouldRecalculateArea"(location: $DisplayPanelLocation$Type, rectangle: $Rectangle$Type): boolean
  "shouldScreenBeOverlaid"<R extends $Screen>(screen: R): $InteractionResult
 /**
  * 
  * @deprecated
  */
  "shouldScreenBeOverlaid"(screen: $Class$Type<(any)>): $InteractionResult
- "shouldRecalculateArea"(location: $DisplayPanelLocation$Type, rectangle: $Rectangle$Type): boolean
+ "isHandingScreen"<R extends $Screen>(arg0: $Class$Type<(R)>): boolean
  "getRendererProvider"(): $OverlayRendererProvider
+ "isInZone"(mouseX: double, mouseY: double): $InteractionResult
 
 (o: $OverlayDecider$Type): integer
 }
@@ -3595,15 +3595,15 @@ export interface $DraggableStack extends $DraggableComponent<($EntryStack<(any)>
 
  "release"(result: $DraggedAcceptorResult$Type): void
  "getStack"(): $EntryStack<(any)>
- "render"(graphics: $GuiGraphics$Type, bounds: $Rectangle$Type, mouseX: integer, mouseY: integer, delta: float): void
  "getWidth"(): integer
  "getHeight"(): integer
+ "render"(graphics: $GuiGraphics$Type, bounds: $Rectangle$Type, mouseX: integer, mouseY: integer, delta: float): void
  "drag"(): void
- "getIf"<A>(...typeHack: (A)[]): $Optional<($DraggableComponent<(A)>)>
  "render"(graphics: $GuiGraphics$Type, position: $Point$Type, mouseX: integer, mouseY: integer, delta: float): void
- "ifMatches"<A>(consumer: $Consumer$Type<(A)>, ...typeHack: (A)[]): boolean
- "ifMatches"<A>(consumer: $Predicate$Type<(A)>, ...typeHack: (A)[]): boolean
  "getOriginBounds"(mouse: $Point$Type): $Rectangle
+ "ifMatches"<A>(consumer: $Predicate$Type<(A)>, ...typeHack: (A)[]): boolean
+ "ifMatches"<A>(consumer: $Consumer$Type<(A)>, ...typeHack: (A)[]): boolean
+ "getIf"<A>(...typeHack: (A)[]): $Optional<($DraggableComponent<(A)>)>
 }
 
 export namespace $DraggableStack {
@@ -3627,22 +3627,22 @@ import {$ReloadStage, $ReloadStage$Type} from "packages/me/shedaniel/rei/api/com
 
 export interface $Reloadable<P extends $REIPlugin<(any)>> {
 
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>): void
+ "acceptPlugin"(plugin: P): void
+ "acceptPlugin"(plugin: P, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>, plugin: P): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>, plugin: P): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: P): void
- "acceptPlugin"(plugin: P, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
  "startReload"(): void
 
-(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>, plugin: P): void
+(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>): void
 }
 
 export namespace $Reloadable {
@@ -3711,18 +3711,18 @@ public static "mouse"(): $Point
  * @deprecated
  */
 public "render"(graphics: $GuiGraphics$Type, bounds: $Rectangle$Type, mouseX: integer, mouseY: integer, delta: float): void
-public "getZRenderingPriority"(): double
-public "isMouseOver"(mouseX: double, mouseY: double): boolean
+public "containsMouse"(mouseX: integer, mouseY: integer): boolean
+public "containsMouse"(mouseX: double, mouseY: double): boolean
+public "containsMouse"(point: $Point$Type): boolean
 public static "pushMouse"(mouse: $Point$Type): $Point
+public static "popMouse"(): $Point
+public static "scissor"(graphics: $GuiGraphics$Type, bounds: $Rectangle$Type): $CloseableScissors
+public static "scissor"(matrix: $Matrix4f$Type, bounds: $Rectangle$Type): $CloseableScissors
 public static "translateMouse"(pose: $Matrix4f$Type): $Point
 public static "translateMouse"(poses: $PoseStack$Type): $Point
 public static "translateMouse"(x: double, y: double, z: double): $Point
-public "containsMouse"(mouseX: integer, mouseY: integer): boolean
-public "containsMouse"(point: $Point$Type): boolean
-public "containsMouse"(mouseX: double, mouseY: double): boolean
-public static "popMouse"(): $Point
-public static "scissor"(matrix: $Matrix4f$Type, bounds: $Rectangle$Type): $CloseableScissors
-public static "scissor"(graphics: $GuiGraphics$Type, bounds: $Rectangle$Type): $CloseableScissors
+public "isMouseOver"(mouseX: double, mouseY: double): boolean
+public "getZRenderingPriority"(): double
 public "render"(arg0: $GuiGraphics$Type, arg1: integer, arg2: integer, arg3: float): void
 public "getTooltip"(context: $TooltipContext$Type): $Tooltip
 public "fillCrashReport"(report: $CrashReport$Type, category: $CrashReportCategory$Type): void
@@ -3750,8 +3750,8 @@ export interface $FavoriteEntryType$Section {
  "add"(...entries: ($FavoriteEntry$Type)[]): void
  "add"(arg0: boolean, ...arg1: ($FavoriteEntry$Type)[]): void
  "getEntries"(): $List<($FavoriteEntry)>
- "getDefaultEntries"(): $List<($FavoriteEntry)>
  "getText"(): $Component
+ "getDefaultEntries"(): $List<($FavoriteEntry)>
 }
 
 export namespace $FavoriteEntryType$Section {
@@ -3798,8 +3798,8 @@ import {$Display, $Display$Type} from "packages/me/shedaniel/rei/api/common/disp
 
 export interface $DisplayMerger<T extends $Display> {
 
- "canMerge"(arg0: T, arg1: T): boolean
  "hashOf"(arg0: T): integer
+ "canMerge"(arg0: T, arg1: T): boolean
 }
 
 export namespace $DisplayMerger {
@@ -3819,17 +3819,17 @@ export type $DisplayMerger_<T> = $DisplayMerger$Type<(T)>;
 }}
 declare module "packages/me/shedaniel/rei/api/client/registry/screen/$SimpleClickArea" {
 import {$CategoryIdentifier, $CategoryIdentifier$Type} from "packages/me/shedaniel/rei/api/common/category/$CategoryIdentifier"
-import {$ClickArea, $ClickArea$Type} from "packages/me/shedaniel/rei/api/client/registry/screen/$ClickArea"
 import {$Screen, $Screen$Type} from "packages/net/minecraft/client/gui/screens/$Screen"
+import {$ClickArea, $ClickArea$Type} from "packages/me/shedaniel/rei/api/client/registry/screen/$ClickArea"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 import {$Rectangle, $Rectangle$Type} from "packages/me/shedaniel/math/$Rectangle"
 
 export interface $SimpleClickArea<T extends $Screen> {
 
- "toClickArea"(categories: $Supplier$Type<(($CategoryIdentifier$Type<(any)>)[])>): $ClickArea<(T)>
  "provide"(arg0: T): $Rectangle
+ "toClickArea"(categories: $Supplier$Type<(($CategoryIdentifier$Type<(any)>)[])>): $ClickArea<(T)>
 
-(categories: $Supplier$Type<(($CategoryIdentifier$Type<(any)>)[])>): $ClickArea<(T)>
+(arg0: T): $Rectangle
 }
 
 export namespace $SimpleClickArea {
@@ -4023,8 +4023,8 @@ import {$InputCleanHandler, $InputCleanHandler$Type} from "packages/me/shedaniel
 import {$MenuInfoContext, $MenuInfoContext$Type} from "packages/me/shedaniel/rei/api/common/transfer/info/$MenuInfoContext"
 import {$InputIngredient, $InputIngredient$Type} from "packages/me/shedaniel/rei/api/common/entry/$InputIngredient"
 import {$List, $List$Type} from "packages/java/util/$List"
-import {$IntList, $IntList$Type} from "packages/it/unimi/dsi/fastutil/ints/$IntList"
 import {$Widget, $Widget$Type} from "packages/me/shedaniel/rei/api/client/gui/widgets/$Widget"
+import {$IntList, $IntList$Type} from "packages/it/unimi/dsi/fastutil/ints/$IntList"
 import {$SlotAccessor, $SlotAccessor$Type} from "packages/me/shedaniel/rei/api/common/transfer/info/stack/$SlotAccessor"
 import {$RecipeFinderPopulator, $RecipeFinderPopulator$Type} from "packages/me/shedaniel/rei/api/common/transfer/$RecipeFinderPopulator"
 import {$AbstractContainerMenu, $AbstractContainerMenu$Type} from "packages/net/minecraft/world/inventory/$AbstractContainerMenu"
@@ -4042,20 +4042,20 @@ export interface $MenuInfo<T extends $AbstractContainerMenu, D extends $Display>
  * 
  * @deprecated
  */
- "renderMissingInput"(context: $MenuInfoContext$Type<(T), (any), (D)>, inputs: $List$Type<($List$Type<($ItemStack$Type)>)>, missingIndices: $IntList$Type, graphics: $GuiGraphics$Type, mouseX: integer, mouseY: integer, delta: float, widgets: $List$Type<($Widget$Type)>, bounds: $Rectangle$Type): void
+ "getInputs"(context: $MenuInfoContext$Type<(T), (any), (D)>, fill: boolean): $List<($List<($ItemStack)>)>
  "renderMissingInput"(context: $MenuInfoContext$Type<(T), (any), (D)>, inputs: $List$Type<($InputIngredient$Type<($ItemStack$Type)>)>, missing: $List$Type<($InputIngredient$Type<($ItemStack$Type)>)>, missingIndices: $IntSet$Type, graphics: $GuiGraphics$Type, mouseX: integer, mouseY: integer, delta: float, widgets: $List$Type<($Widget$Type)>, bounds: $Rectangle$Type): void
- "getInputCleanHandler"(): $InputCleanHandler<(T), (D)>
- "getInputSlots"(arg0: $MenuInfoContext$Type<(T), (any), (D)>): $Iterable<($SlotAccessor)>
 /**
  * 
  * @deprecated
  */
- "getInputs"(context: $MenuInfoContext$Type<(T), (any), (D)>, fill: boolean): $List<($List<($ItemStack)>)>
+ "renderMissingInput"(context: $MenuInfoContext$Type<(T), (any), (D)>, inputs: $List$Type<($List$Type<($ItemStack$Type)>)>, missingIndices: $IntList$Type, graphics: $GuiGraphics$Type, mouseX: integer, mouseY: integer, delta: float, widgets: $List$Type<($Widget$Type)>, bounds: $Rectangle$Type): void
  "markDirty"(context: $MenuInfoContext$Type<(T), (any), (D)>): void
  "getDisplay"(): D
  "getInventorySlots"(arg0: $MenuInfoContext$Type<(T), (any), (D)>): $Iterable<($SlotAccessor)>
- "getInputsIndexed"(context: $MenuInfoContext$Type<(T), (any), (D)>, fill: boolean): $List<($InputIngredient<($ItemStack)>)>
+ "getInputSlots"(arg0: $MenuInfoContext$Type<(T), (any), (D)>): $Iterable<($SlotAccessor)>
+ "getInputCleanHandler"(): $InputCleanHandler<(T), (D)>
  "getRecipeFinderPopulator"(): $RecipeFinderPopulator<(T), (D)>
+ "getInputsIndexed"(context: $MenuInfoContext$Type<(T), (any), (D)>, fill: boolean): $List<($InputIngredient<($ItemStack)>)>
 }
 
 export namespace $MenuInfo {
@@ -4117,16 +4117,16 @@ export interface $RecipeManagerContext<P extends $REIPlugin<(any)>> extends $Rel
  "byId"(tag: $CompoundTag$Type, key: string): $Recipe<(any)>
  "byId"(location: $ResourceLocation$Type): $Recipe<(any)>
  "getAllSortedRecipes"(): $List<($Recipe<(any)>)>
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>): void
+ "acceptPlugin"(plugin: P): void
+ "acceptPlugin"(plugin: P, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>, plugin: P): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>, plugin: P): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: P): void
- "acceptPlugin"(plugin: P, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -4162,18 +4162,18 @@ export interface $DisplaySerializerRegistry extends $Reloadable<($REIPlugin<(any
  "register"<D extends $Display>(arg0: $CategoryIdentifier$Type<(any)>, arg1: $DisplaySerializer$Type<(D)>): void
  "read"<D extends $Display>(arg0: $CategoryIdentifier$Type<(any)>, arg1: $CompoundTag$Type): D
  "save"<D extends $Display>(arg0: D, arg1: $CompoundTag$Type): $CompoundTag
- "hasSerializer"<D extends $Display>(arg0: $CategoryIdentifier$Type<(D)>): boolean
  "registerNotSerializable"<D extends $Display>(arg0: $CategoryIdentifier$Type<(D)>): void
+ "hasSerializer"<D extends $Display>(arg0: $CategoryIdentifier$Type<(D)>): boolean
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
+ "acceptPlugin"(plugin: $REIPlugin$Type<(any)>): void
+ "acceptPlugin"(plugin: $REIPlugin$Type<(any)>, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>, plugin: $REIPlugin$Type<(any)>): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>, plugin: $REIPlugin$Type<(any)>): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIPlugin$Type<(any)>): void
- "acceptPlugin"(plugin: $REIPlugin$Type<(any)>, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -4237,11 +4237,11 @@ import {$CrashReport, $CrashReport$Type} from "packages/net/minecraft/$CrashRepo
 
 export interface $Renderer {
 
- "getTooltip"(context: $TooltipContext$Type): $Tooltip
  "render"(arg0: $GuiGraphics$Type, arg1: $Rectangle$Type, arg2: integer, arg3: integer, arg4: float): void
+ "getTooltip"(context: $TooltipContext$Type): $Tooltip
  "fillCrashReport"(report: $CrashReport$Type, category: $CrashReportCategory$Type): void
 
-(context: $TooltipContext$Type): $Tooltip
+(arg0: $GuiGraphics$Type, arg1: $Rectangle$Type, arg2: integer, arg3: integer, arg4: float): void
 }
 
 export namespace $Renderer {
@@ -4276,31 +4276,31 @@ import {$LongCollection, $LongCollection$Type} from "packages/it/unimi/dsi/fastu
 
 export interface $BasicFilteringRule<Cache> extends $Reloadable<($REIClientPlugin)>, $FilteringRule<(Cache)>, $FilteringResult {
 
- "show"(arg0: $Supplier$Type<($Collection$Type<($EntryStack$Type<(any)>)>)>): $BasicFilteringRule$MarkDirty
  "hide"(arg0: $Supplier$Type<($Collection$Type<($EntryStack$Type<(any)>)>)>): $BasicFilteringRule$MarkDirty
+ "show"(arg0: $Supplier$Type<($Collection$Type<($EntryStack$Type<(any)>)>)>): $BasicFilteringRule$MarkDirty
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIClientPlugin$Type): void
- "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
  "startReload"(): void
  "getType"(): $FilteringRuleType<(any)>
- "isReloading"(): boolean
  "processFilteredStacks"(arg0: $FilteringContext$Type, arg1: $FilteringResultFactory$Type, arg2: Cache, arg3: boolean): $FilteringResult
- "markDirty"(stacks: $Collection$Type<($EntryStack$Type<(any)>)>, hashes: $LongCollection$Type): void
  "prepareCache"(async: boolean): Cache
+ "isReloading"(): boolean
+ "markDirty"(stacks: $Collection$Type<($EntryStack$Type<(any)>)>, hashes: $LongCollection$Type): void
+ "hide"(arg0: $EntryStack$Type<(any)>): $FilteringResult
+ "hide"(arg0: $Collection$Type<(any)>): $FilteringResult
  "show"(arg0: $Collection$Type<(any)>): $FilteringResult
  "show"(arg0: $EntryStack$Type<(any)>): $FilteringResult
- "hide"(arg0: $Collection$Type<(any)>): $FilteringResult
- "hide"(arg0: $EntryStack$Type<(any)>): $FilteringResult
 }
 
 export namespace $BasicFilteringRule {
@@ -4418,73 +4418,73 @@ public "equals"(arg0: any): boolean
 public "toString"(): string
 public "hashCode"(): integer
 public "isEmpty"(): boolean
-public "contains"(arg0: integer, arg1: integer): boolean
-public "contains"(arg0: integer, arg1: integer, arg2: integer, arg3: integer): boolean
-public "contains"(arg0: $Rectangle$Type): boolean
-public "contains"(arg0: $FloatingRectangle$Type): boolean
-public "contains"(arg0: $FloatingPoint$Type): boolean
 public "contains"(arg0: $Point$Type): boolean
+public "contains"(arg0: $Rectangle$Type): boolean
+public "contains"(arg0: integer, arg1: integer, arg2: integer, arg3: integer): boolean
 public "contains"(arg0: double, arg1: double): boolean
+public "contains"(arg0: integer, arg1: integer): boolean
+public "contains"(arg0: $FloatingPoint$Type): boolean
+public "contains"(arg0: $FloatingRectangle$Type): boolean
 public "getBounds"(): $Rectangle
 public "getLocation"(): $Point
 public "getSize"(): $Dimension
 public "grow"(arg0: integer, arg1: integer): void
 public "resize"(arg0: integer, arg1: integer): void
-public "union"(arg0: $Rectangle$Type): $Rectangle
 public "move"(arg0: integer, arg1: integer): void
-public "setSize"(arg0: $Dimension$Type): void
 public "setSize"(arg0: $FloatingDimension$Type): void
+public "setSize"(arg0: $Dimension$Type): void
 public "setSize"(arg0: double, arg1: double): void
 public "setSize"(arg0: integer, arg1: integer): void
+public "union"(arg0: $Rectangle$Type): $Rectangle
 public "getY"(): integer
-public "setLocation"(arg0: $Point$Type): void
-public "setLocation"(arg0: double, arg1: double): void
-public "setLocation"(arg0: integer, arg1: integer): void
-public "setLocation"(arg0: $FloatingPoint$Type): void
-public "intersects"(arg0: $Rectangle$Type): boolean
-public "reshape"(arg0: integer, arg1: integer, arg2: integer, arg3: integer): void
-public "getFloatingBounds"(): $FloatingRectangle
-public "getFloatingSize"(): $FloatingDimension
-public "getMaxY"(): integer
-public "getMinY"(): integer
-public "getFloatingLocation"(): $FloatingPoint
-public "getMinX"(): integer
-public "inside"(arg0: integer, arg1: integer): boolean
+public "intersection"(arg0: $Rectangle$Type): $Rectangle
 public "getWidth"(): integer
 public "getHeight"(): integer
+public "intersects"(arg0: $Rectangle$Type): boolean
 public "translate"(arg0: integer, arg1: integer): void
-public "intersection"(arg0: $Rectangle$Type): $Rectangle
+public "getMinX"(): integer
+public "getMinY"(): integer
+public "getMaxY"(): integer
+public "setLocation"(arg0: integer, arg1: integer): void
+public "setLocation"(arg0: $Point$Type): void
+public "setLocation"(arg0: $FloatingPoint$Type): void
+public "setLocation"(arg0: double, arg1: double): void
+public "getX"(): integer
+public "setBounds"(arg0: $Rectangle$Type): void
 public "setBounds"(arg0: $FloatingRectangle$Type): void
 public "setBounds"(arg0: double, arg1: double, arg2: double, arg3: double): void
 public "setBounds"(arg0: integer, arg1: integer, arg2: integer, arg3: integer): void
-public "setBounds"(arg0: $Rectangle$Type): void
-public "getCenterY"(): integer
 public "getCenterX"(): integer
+public "getCenterY"(): integer
 public "getMaxX"(): integer
-public "getX"(): integer
+public "getFloatingLocation"(): $FloatingPoint
+public "getFloatingBounds"(): $FloatingRectangle
+public "getFloatingSize"(): $FloatingDimension
+public "reshape"(arg0: integer, arg1: integer, arg2: integer, arg3: integer): void
+public "inside"(arg0: integer, arg1: integer): boolean
 get "empty"(): boolean
 get "bounds"(): $Rectangle
 get "location"(): $Point
 get "size"(): $Dimension
-set "size"(value: $Dimension$Type)
 set "size"(value: $FloatingDimension$Type)
+set "size"(value: $Dimension$Type)
 get "y"(): integer
-set "location"(value: $Point$Type)
-set "location"(value: $FloatingPoint$Type)
-get "floatingBounds"(): $FloatingRectangle
-get "floatingSize"(): $FloatingDimension
-get "maxY"(): integer
-get "minY"(): integer
-get "floatingLocation"(): $FloatingPoint
-get "minX"(): integer
 get "width"(): integer
 get "height"(): integer
-set "bounds"(value: $FloatingRectangle$Type)
-set "bounds"(value: $Rectangle$Type)
-get "centerY"(): integer
-get "centerX"(): integer
-get "maxX"(): integer
+get "minX"(): integer
+get "minY"(): integer
+get "maxY"(): integer
+set "location"(value: $Point$Type)
+set "location"(value: $FloatingPoint$Type)
 get "x"(): integer
+set "bounds"(value: $Rectangle$Type)
+set "bounds"(value: $FloatingRectangle$Type)
+get "centerX"(): integer
+get "centerY"(): integer
+get "maxX"(): integer
+get "floatingLocation"(): $FloatingPoint
+get "floatingBounds"(): $FloatingRectangle
+get "floatingSize"(): $FloatingDimension
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -4506,10 +4506,10 @@ import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$It
 
 export interface $SlotAccessor {
 
- "canPlace"(stack: $ItemStack$Type): boolean
  "getItemStack"(): $ItemStack
- "setItemStack"(arg0: $ItemStack$Type): void
+ "canPlace"(stack: $ItemStack$Type): boolean
  "allowModification"(player: $Player$Type): boolean
+ "setItemStack"(arg0: $ItemStack$Type): void
  "takeStack"(arg0: integer): $ItemStack
 }
 
@@ -4546,8 +4546,8 @@ export interface $DraggableStackVisitor$BoundsProvider extends $DraggableBoundsP
 export namespace $DraggableStackVisitor$BoundsProvider {
 function concat(providers: $Iterable$Type<($DraggableStackVisitor$BoundsProvider$Type)>): $DraggableStackVisitor$BoundsProvider
 function empty(): $DraggableStackVisitor$BoundsProvider
-function fromRectangle(bounds: $Rectangle$Type): $VoxelShape
 function ofShapes(shapes: $Iterable$Type<($VoxelShape$Type)>): $DraggableStackVisitor$BoundsProvider
+function fromRectangle(bounds: $Rectangle$Type): $VoxelShape
 function ofShape(shape: $VoxelShape$Type): $DraggableStackVisitor$BoundsProvider
 function ofRectangle(bounds: $Rectangle$Type): $DraggableStackVisitor$BoundsProvider
 function ofRectangles(bounds: $Iterable$Type<($Rectangle$Type)>): $DraggableStackVisitor$BoundsProvider
@@ -4578,22 +4578,22 @@ export interface $ItemComparatorRegistry extends $EntryComparatorRegistry<($Item
 
  "registerNbt"(item: $Item$Type): void
  "registerNbt"(...items: ($Item$Type)[]): void
- "register"(arg0: $EntryComparator$Type<($ItemStack$Type)>, arg1: $Item$Type): void
- "register"(comparator: $EntryComparator$Type<($ItemStack$Type)>, ...entries: ($Item$Type)[]): void
  "containsComparator"(arg0: $Item$Type): boolean
- "registerGlobal"(arg0: $EntryComparator$Type<($ItemStack$Type)>): void
  "comparatorSize"(): integer
  "hashOf"(arg0: $ComparisonContext$Type, arg1: $ItemStack$Type): long
+ "registerGlobal"(arg0: $EntryComparator$Type<($ItemStack$Type)>): void
+ "register"(comparator: $EntryComparator$Type<($ItemStack$Type)>, ...entries: ($Item$Type)[]): void
+ "register"(arg0: $EntryComparator$Type<($ItemStack$Type)>, arg1: $Item$Type): void
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
+ "acceptPlugin"(plugin: $REIPlugin$Type<(any)>): void
+ "acceptPlugin"(plugin: $REIPlugin$Type<(any)>, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>, plugin: $REIPlugin$Type<(any)>): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>, plugin: $REIPlugin$Type<(any)>): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIPlugin$Type<(any)>)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIPlugin$Type<(any)>): void
- "acceptPlugin"(plugin: $REIPlugin$Type<(any)>, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -4628,16 +4628,16 @@ import {$TransferHandler, $TransferHandler$Type} from "packages/me/shedaniel/rei
 export interface $TransferHandlerRegistry extends $Reloadable<($REIClientPlugin)>, $Iterable<($TransferHandler)> {
 
  "register"(arg0: $TransferHandler$Type): void
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIClientPlugin$Type): void
- "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -4678,22 +4678,22 @@ import {$REIClientPlugin, $REIClientPlugin$Type} from "packages/me/shedaniel/rei
 export interface $SubsetsRegistry extends $Reloadable<($REIClientPlugin)> {
 
  "getPaths"(): $Set<(string)>
- "getPathEntries"(arg0: string): $Set<($EntryStack<(any)>)>
- "getEntryPaths"(arg0: $EntryStack$Type<(any)>): $List<(string)>
- "registerPathEntry"(arg0: string, arg1: $EntryStack$Type<(any)>): void
- "getOrCreatePathEntries"(arg0: string): $Set<($EntryStack<(any)>)>
  "registerPathEntries"(arg0: string, arg1: $Collection$Type<(any)>): void
  "registerPathEntries"(path: string, ...stacks: ($EntryStack$Type<(any)>)[]): void
+ "getOrCreatePathEntries"(arg0: string): $Set<($EntryStack<(any)>)>
+ "registerPathEntry"(arg0: string, arg1: $EntryStack$Type<(any)>): void
+ "getPathEntries"(arg0: string): $Set<($EntryStack<(any)>)>
+ "getEntryPaths"(arg0: $EntryStack$Type<(any)>): $List<(string)>
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIClientPlugin$Type): void
- "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -4801,10 +4801,10 @@ export interface $EntryIngredient extends $List<($EntryStack<(any)>)> {
  * @deprecated
  */
  "save"(): $ListTag
- "getSetting"<T>(arg0: $EntryIngredientSetting$Type<(T)>): T
- "castAsList"<T>(): $List<($EntryStack<(T)>)>
- "saveIngredient"(): $ListTag
  "setting"<T>(arg0: $EntryIngredientSetting$Type<(T)>, arg1: T): $EntryIngredient
+ "castAsList"<T>(): $List<($EntryStack<(T)>)>
+ "getSetting"<T>(arg0: $EntryIngredientSetting$Type<(T)>): T
+ "saveIngredient"(): $ListTag
  "add"(arg0: integer, arg1: $EntryStack$Type<(any)>): void
  "add"(arg0: $EntryStack$Type<(any)>): boolean
  "remove"(arg0: any): boolean
@@ -4904,14 +4904,14 @@ export type $FilteringResultFactory_ = $FilteringResultFactory$Type;
 declare module "packages/me/shedaniel/rei/api/client/registry/display/$DisplayCategoryView" {
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$Widget, $Widget$Type} from "packages/me/shedaniel/rei/api/client/gui/widgets/$Widget"
-import {$DisplayRenderer, $DisplayRenderer$Type} from "packages/me/shedaniel/rei/api/client/gui/$DisplayRenderer"
 import {$Display, $Display$Type} from "packages/me/shedaniel/rei/api/common/display/$Display"
+import {$DisplayRenderer, $DisplayRenderer$Type} from "packages/me/shedaniel/rei/api/client/gui/$DisplayRenderer"
 import {$Rectangle, $Rectangle$Type} from "packages/me/shedaniel/math/$Rectangle"
 
 export interface $DisplayCategoryView<T extends $Display> {
 
- "getDisplayRenderer"(arg0: T): $DisplayRenderer
  "setupDisplay"(arg0: T, arg1: $Rectangle$Type): $List<($Widget)>
+ "getDisplayRenderer"(arg0: T): $DisplayRenderer
 }
 
 export namespace $DisplayCategoryView {
@@ -4994,37 +4994,37 @@ import {$DisplaySerializerRegistry, $DisplaySerializerRegistry$Type} from "packa
 
 export interface $REIClientPlugin extends $REIPlugin<($REIClientPlugin)> {
 
- "getPluginProviderClass"(): $Class<($REIClientPlugin)>
- "registerConfigAddons"(registry: $ConfigAddonRegistry$Type): void
  "registerTransferHandlers"(registry: $TransferHandlerRegistry$Type): void
- "registerBasicEntryFiltering"(rule: $BasicFilteringRule$Type<(any)>): void
+ "registerConfigAddons"(registry: $ConfigAddonRegistry$Type): void
  "registerInputMethods"(registry: $InputMethodRegistry$Type): void
+ "registerBasicEntryFiltering"(rule: $BasicFilteringRule$Type<(any)>): void
  "registerExclusionZones"(zones: $ExclusionZones$Type): void
  "registerCollapsibleEntries"(registry: $CollapsibleEntryRegistry$Type): void
  "registerEntryRenderers"(registry: $EntryRendererRegistry$Type): void
- "registerEntries"(registry: $EntryRegistry$Type): void
- "registerDisplays"(registry: $DisplayRegistry$Type): void
- "registerScreens"(registry: $ScreenRegistry$Type): void
  "registerFavorites"(registry: $FavoriteEntryType$Registry$Type): void
+ "registerScreens"(registry: $ScreenRegistry$Type): void
+ "registerDisplays"(registry: $DisplayRegistry$Type): void
+ "registerEntries"(registry: $EntryRegistry$Type): void
 /**
  * 
  * @deprecated
  */
  "registerSubsets"(registry: $SubsetsRegistry$Type): void
  "registerCategories"(registry: $CategoryRegistry$Type): void
+ "getPluginProviderClass"(): $Class<($REIClientPlugin)>
  "compareTo"(o: $REIPlugin$Type<(any)>): integer
  "getPriority"(): double
- "registerItemComparators"(registry: $ItemComparatorRegistry$Type): void
- "shouldBeForcefullyDoneOnMainThread"(reloadable: $Reloadable$Type<(any)>): boolean
- "registerFluidSupport"(support: $FluidSupportProvider$Type): void
- "registerDisplaySerializer"(registry: $DisplaySerializerRegistry$Type): void
- "registerEntrySettingsAdapters"(registry: $EntrySettingsAdapterRegistry$Type): void
- "registerFluidComparators"(registry: $FluidComparatorRegistry$Type): void
- "registerSlotAccessors"(registry: $SlotAccessorRegistry$Type): void
- "postStage"(manager: $PluginManager$Type<($REIClientPlugin$Type)>, stage: $ReloadStage$Type): void
- "registerEntryTypes"(registry: $EntryTypeRegistry$Type): void
- "preStage"(manager: $PluginManager$Type<($REIClientPlugin$Type)>, stage: $ReloadStage$Type): void
  "provide"(): $Collection<($REIClientPlugin)>
+ "registerEntryTypes"(registry: $EntryTypeRegistry$Type): void
+ "postStage"(manager: $PluginManager$Type<($REIClientPlugin$Type)>, stage: $ReloadStage$Type): void
+ "preStage"(manager: $PluginManager$Type<($REIClientPlugin$Type)>, stage: $ReloadStage$Type): void
+ "registerFluidSupport"(support: $FluidSupportProvider$Type): void
+ "registerFluidComparators"(registry: $FluidComparatorRegistry$Type): void
+ "registerItemComparators"(registry: $ItemComparatorRegistry$Type): void
+ "registerEntrySettingsAdapters"(registry: $EntrySettingsAdapterRegistry$Type): void
+ "registerDisplaySerializer"(registry: $DisplaySerializerRegistry$Type): void
+ "registerSlotAccessors"(registry: $SlotAccessorRegistry$Type): void
+ "shouldBeForcefullyDoneOnMainThread"(reloadable: $Reloadable$Type<(any)>): boolean
  "getPluginProviderName"(): string
 }
 
@@ -5065,37 +5065,37 @@ import {$EntryIngredient, $EntryIngredient$Type} from "packages/me/shedaniel/rei
 
 export interface $CategoryRegistry extends $Reloadable<($REIClientPlugin)>, $Iterable<($CategoryRegistry$CategoryConfiguration<(any)>)> {
 
- "add"<T extends $Display>(...categories: ($DisplayCategory$Type<(any)>)[]): void
+ "add"<T extends $Display>(categories: $Iterable$Type<($DisplayCategory$Type<(any)>)>): void
  "add"<T extends $Display>(arg0: $DisplayCategory$Type<(T)>, arg1: $Consumer$Type<($CategoryRegistry$CategoryConfiguration$Type<(T)>)>): void
  "add"<T extends $Display>(category: $DisplayCategory$Type<(T)>): void
- "add"<T extends $Display>(categories: $Iterable$Type<($DisplayCategory$Type<(any)>)>): void
+ "add"<T extends $Display>(...categories: ($DisplayCategory$Type<(any)>)[]): void
  "get"<T extends $Display>(arg0: $CategoryIdentifier$Type<(T)>): $CategoryRegistry$CategoryConfiguration<(T)>
  "size"(): integer
  "stream"(): $Stream<($CategoryRegistry$CategoryConfiguration<(any)>)>
  "configure"<T extends $Display>(arg0: $CategoryIdentifier$Type<(T)>, arg1: $Consumer$Type<($CategoryRegistry$CategoryConfiguration$Type<(T)>)>): void
  "tryGet"<T extends $Display>(arg0: $CategoryIdentifier$Type<(T)>): $Optional<($CategoryRegistry$CategoryConfiguration<(T)>)>
- "isCategoryInvisible"(category: $DisplayCategory$Type<(any)>): boolean
- "registerVisibilityPredicate"(arg0: $CategoryVisibilityPredicate$Type): void
  "getVisibilityPredicates"(): $List<($CategoryVisibilityPredicate)>
- "addWorkstations"<D extends $Display>(category: $CategoryIdentifier$Type<(D)>, ...stations: ($EntryStack$Type<(any)>)[]): void
+ "registerVisibilityPredicate"(arg0: $CategoryVisibilityPredicate$Type): void
+ "isCategoryInvisible"(category: $DisplayCategory$Type<(any)>): boolean
  "addWorkstations"<D extends $Display>(category: $CategoryIdentifier$Type<(D)>, ...stations: ($EntryIngredient$Type)[]): void
+ "addWorkstations"<D extends $Display>(category: $CategoryIdentifier$Type<(D)>, ...stations: ($EntryStack$Type<(any)>)[]): void
+ "isCategoryVisible"(arg0: $DisplayCategory$Type<(any)>): boolean
 /**
  * 
  * @deprecated
  */
  "removePlusButton"<D extends $Display>(category: $CategoryIdentifier$Type<(D)>): void
  "setPlusButtonArea"<D extends $Display>(category: $CategoryIdentifier$Type<(D)>, area: $ButtonArea$Type): void
- "isCategoryVisible"(arg0: $DisplayCategory$Type<(any)>): boolean
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIClientPlugin$Type): void
- "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -5141,14 +5141,14 @@ public "clone"(): $Point
 public "getLocation"(): $Point
 public "move"(arg0: integer, arg1: integer): void
 public "getY"(): integer
-public "setLocation"(arg0: double, arg1: double): void
-public "getFloatingLocation"(): $FloatingPoint
 public "translate"(arg0: integer, arg1: integer): void
+public "setLocation"(arg0: double, arg1: double): void
 public "getX"(): integer
+public "getFloatingLocation"(): $FloatingPoint
 get "location"(): $Point
 get "y"(): integer
-get "floatingLocation"(): $FloatingPoint
 get "x"(): integer
+get "floatingLocation"(): $FloatingPoint
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -5169,8 +5169,8 @@ import {$EntrySettingsAdapterRegistry, $EntrySettingsAdapterRegistry$Type} from 
 import {$Collection, $Collection$Type} from "packages/java/util/$Collection"
 import {$EntryTypeRegistry, $EntryTypeRegistry$Type} from "packages/me/shedaniel/rei/api/common/entry/type/$EntryTypeRegistry"
 import {$Class, $Class$Type} from "packages/java/lang/$Class"
-import {$ItemComparatorRegistry, $ItemComparatorRegistry$Type} from "packages/me/shedaniel/rei/api/common/entry/comparison/$ItemComparatorRegistry"
 import {$FluidSupportProvider, $FluidSupportProvider$Type} from "packages/me/shedaniel/rei/api/common/fluid/$FluidSupportProvider"
+import {$ItemComparatorRegistry, $ItemComparatorRegistry$Type} from "packages/me/shedaniel/rei/api/common/entry/comparison/$ItemComparatorRegistry"
 import {$SlotAccessorRegistry, $SlotAccessorRegistry$Type} from "packages/me/shedaniel/rei/api/common/transfer/info/stack/$SlotAccessorRegistry"
 import {$FluidComparatorRegistry, $FluidComparatorRegistry$Type} from "packages/me/shedaniel/rei/api/common/entry/comparison/$FluidComparatorRegistry"
 import {$Reloadable, $Reloadable$Type} from "packages/me/shedaniel/rei/api/common/registry/$Reloadable"
@@ -5182,19 +5182,19 @@ export interface $REIPlugin<P extends $REIPlugin<(any)>> extends $Comparable<($R
 
  "compareTo"(o: $REIPlugin$Type<(any)>): integer
  "getPriority"(): double
- "registerItemComparators"(registry: $ItemComparatorRegistry$Type): void
- "shouldBeForcefullyDoneOnMainThread"(reloadable: $Reloadable$Type<(any)>): boolean
- "registerFluidSupport"(support: $FluidSupportProvider$Type): void
- "registerDisplaySerializer"(registry: $DisplaySerializerRegistry$Type): void
- "registerEntrySettingsAdapters"(registry: $EntrySettingsAdapterRegistry$Type): void
- "registerFluidComparators"(registry: $FluidComparatorRegistry$Type): void
- "registerSlotAccessors"(registry: $SlotAccessorRegistry$Type): void
- "postStage"(manager: $PluginManager$Type<(P)>, stage: $ReloadStage$Type): void
- "registerEntryTypes"(registry: $EntryTypeRegistry$Type): void
- "preStage"(manager: $PluginManager$Type<(P)>, stage: $ReloadStage$Type): void
  "provide"(): $Collection<(P)>
- "getPluginProviderClass"(): $Class<(P)>
+ "registerEntryTypes"(registry: $EntryTypeRegistry$Type): void
+ "postStage"(manager: $PluginManager$Type<(P)>, stage: $ReloadStage$Type): void
+ "preStage"(manager: $PluginManager$Type<(P)>, stage: $ReloadStage$Type): void
+ "registerFluidSupport"(support: $FluidSupportProvider$Type): void
+ "registerFluidComparators"(registry: $FluidComparatorRegistry$Type): void
+ "registerItemComparators"(registry: $ItemComparatorRegistry$Type): void
+ "registerEntrySettingsAdapters"(registry: $EntrySettingsAdapterRegistry$Type): void
+ "registerDisplaySerializer"(registry: $DisplaySerializerRegistry$Type): void
+ "registerSlotAccessors"(registry: $SlotAccessorRegistry$Type): void
+ "shouldBeForcefullyDoneOnMainThread"(reloadable: $Reloadable$Type<(any)>): boolean
  "getPluginProviderName"(): string
+ "getPluginProviderClass"(): $Class<(P)>
 
 (o: $REIPlugin$Type<(any)>): integer
 }
@@ -5234,15 +5234,15 @@ public "getSize"(): $Dimension
 public "setSize"(arg0: $FloatingDimension$Type): void
 public "setSize"(arg0: double, arg1: double): void
 public "setSize"(arg0: $Dimension$Type): void
-public "getFloatingSize"(): $FloatingDimension
 public "getWidth"(): double
 public "getHeight"(): double
+public "getFloatingSize"(): $FloatingDimension
 get "size"(): $Dimension
 set "size"(value: $FloatingDimension$Type)
 set "size"(value: $Dimension$Type)
-get "floatingSize"(): $FloatingDimension
 get "width"(): double
 get "height"(): double
+get "floatingSize"(): $FloatingDimension
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -5273,16 +5273,16 @@ export interface $CollapsibleEntryRegistry extends $Reloadable<($REIClientPlugin
  "group"<T>(id: $ResourceLocation$Type, name: $Component$Type, ...stacks: ($EntryStack$Type<(any)>)[]): void
  "group"<T>(arg0: $ResourceLocation$Type, arg1: $Component$Type, arg2: $List$Type<(any)>): void
  "group"(arg0: $ResourceLocation$Type, arg1: $Component$Type, arg2: $Predicate$Type<(any)>): void
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "endReload"(stage: $ReloadStage$Type): void
+ "endReload"(): void
+ "isConcurrent"(): boolean
+ "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type): void
+ "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>, plugin: $REIClientPlugin$Type): void
  "getStage"(): $ReloadStage
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<($REIClientPlugin$Type)>): void
- "isConcurrent"(): boolean
- "acceptPlugin"(plugin: $REIClientPlugin$Type): void
- "acceptPlugin"(plugin: $REIClientPlugin$Type, stage: $ReloadStage$Type): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
  "startReload"(stage: $ReloadStage$Type): void
@@ -5330,16 +5330,16 @@ export interface $EntryDefinition<T> {
  "copy"(arg0: $EntryStack$Type<(T)>, arg1: T): T
  "normalize"(arg0: $EntryStack$Type<(T)>, arg1: T): T
  "getIdentifier"(arg0: $EntryStack$Type<(T)>, arg1: T): $ResourceLocation
- "getContainingNamespace"(entry: $EntryStack$Type<(T)>, value: T): string
+ "getValueType"(): $Class<(T)>
+ "getRenderer"(): $EntryRenderer<(T)>
  "getSerializer"(): $EntrySerializer<(T)>
  "cheatsAs"(entry: $EntryStack$Type<(T)>, value: T): $ItemStack
- "getRenderer"(): $EntryRenderer<(T)>
+ "getContainingNamespace"(entry: $EntryStack$Type<(T)>, value: T): string
+ "getTagsFor"(arg0: $EntryStack$Type<(T)>, arg1: T): $Stream<(any)>
  "asFormattedText"(entry: $EntryStack$Type<(T)>, value: T, context: $TooltipContext$Type): $Component
  "asFormattedText"(arg0: $EntryStack$Type<(T)>, arg1: T): $Component
  "fillCrashReport"(report: $CrashReport$Type, category: $CrashReportCategory$Type, entry: $EntryStack$Type<(T)>): void
  "acceptsNull"(): boolean
- "getValueType"(): $Class<(T)>
- "getTagsFor"(arg0: $EntryStack$Type<(T)>, arg1: T): $Stream<(any)>
  "wildcard"(arg0: $EntryStack$Type<(T)>, arg1: T): T
 }
 
@@ -5402,9 +5402,9 @@ export interface $DraggableComponentVisitor<T extends $Screen> extends $Comparab
  "compareTo"(o: $DraggableComponentVisitor$Type<(T)>): integer
  "getContext"(): $DraggingContext<(T)>
  "getPriority"(): double
+ "getDraggableAcceptingBounds"(context: $DraggingContext$Type<(T)>, component: $DraggableComponent$Type<(any)>): $Stream<($DraggableBoundsProvider)>
  "isHandingScreen"<R extends $Screen>(arg0: R): boolean
  "acceptDragged"(context: $DraggingContext$Type<(T)>, component: $DraggableComponent$Type<(any)>): $DraggedAcceptorResult
- "getDraggableAcceptingBounds"(context: $DraggingContext$Type<(T)>, component: $DraggableComponent$Type<(any)>): $Stream<($DraggableBoundsProvider)>
 
 (o: $DraggableComponentVisitor$Type<(T)>): integer
 }
@@ -5432,22 +5432,22 @@ import {$List, $List$Type} from "packages/java/util/$List"
 
 export interface $ParentReloadable<P extends $REIPlugin<(any)>> extends $Reloadable<(P)> {
 
- "endReload"(stage: $ReloadStage$Type): void
- "endReload"(): void
- "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>): void
  "registerReloadable"(arg0: $Reloadable$Type<(any)>): void
+ "afterReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>): void
+ "endReload"(): void
+ "endReload"(stage: $ReloadStage$Type): void
  "getReloadables"(): $List<($Reloadable<(P)>)>
  "beforeReloadable"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>): void
  "postStage"(stage: $ReloadStage$Type): void
  "preStage"(stage: $ReloadStage$Type): void
- "startReload"(stage: $ReloadStage$Type): void
  "startReload"(): void
- "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>, plugin: P): void
- "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>, plugin: P): void
- "getStage"(): $ReloadStage
+ "startReload"(stage: $ReloadStage$Type): void
  "isConcurrent"(): boolean
  "acceptPlugin"(plugin: P): void
  "acceptPlugin"(plugin: P, stage: $ReloadStage$Type): void
+ "afterReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>, plugin: P): void
+ "beforeReloadablePlugin"(stage: $ReloadStage$Type, other: $Reloadable$Type<(P)>, plugin: P): void
+ "getStage"(): $ReloadStage
 }
 
 export namespace $ParentReloadable {
@@ -5478,35 +5478,35 @@ export class $AbstractContainerEventHandler implements $ContainerEventHandler {
 
 constructor()
 
-public "isDragging"(): boolean
-public "setDragging"(isDragging: boolean): void
 public "getFocused"(): $GuiEventListener
 public "setFocused"(focused: $GuiEventListener$Type): void
-public "getChildAt"(arg0: double, arg1: double): $Optional<($GuiEventListener)>
+public "setDragging"(isDragging: boolean): void
+public "isDragging"(): boolean
+public "keyPressed"(arg0: integer, arg1: integer, arg2: integer): boolean
+public "getCurrentFocusPath"(): $ComponentPath
+public "nextFocusPath"(arg0: $FocusNavigationEvent$Type): $ComponentPath
+public "children"(): $List<(any)>
 public "setFocused"(arg0: boolean): void
-public "keyReleased"(arg0: integer, arg1: integer, arg2: integer): boolean
-public "charTyped"(arg0: character, arg1: integer): boolean
-public "mouseReleased"(arg0: double, arg1: double, arg2: integer): boolean
+public "getChildAt"(arg0: double, arg1: double): $Optional<($GuiEventListener)>
 public "mouseClicked"(arg0: double, arg1: double, arg2: integer): boolean
+public "mouseReleased"(arg0: double, arg1: double, arg2: integer): boolean
 public "mouseScrolled"(arg0: double, arg1: double, arg2: double): boolean
+public "charTyped"(arg0: character, arg1: integer): boolean
+public "keyReleased"(arg0: integer, arg1: integer, arg2: integer): boolean
 public "mouseDragged"(arg0: double, arg1: double, arg2: integer, arg3: double, arg4: double): boolean
 public "magicalSpecialHackyFocus"(arg0: $GuiEventListener$Type): void
 public "isFocused"(): boolean
-public "getCurrentFocusPath"(): $ComponentPath
-public "keyPressed"(arg0: integer, arg1: integer, arg2: integer): boolean
-public "nextFocusPath"(arg0: $FocusNavigationEvent$Type): $ComponentPath
-public "children"(): $List<(any)>
+public "isMouseOver"(arg0: double, arg1: double): boolean
 public "getRectangle"(): $ScreenRectangle
 public "mouseMoved"(arg0: double, arg1: double): void
-public "isMouseOver"(arg0: double, arg1: double): boolean
 public "getTabOrderGroup"(): integer
-get "dragging"(): boolean
-set "dragging"(value: boolean)
 get "focused"(): $GuiEventListener
 set "focused"(value: $GuiEventListener$Type)
+set "dragging"(value: boolean)
+get "dragging"(): boolean
+get "currentFocusPath"(): $ComponentPath
 set "focused"(value: boolean)
 get "focused"(): boolean
-get "currentFocusPath"(): $ComponentPath
 get "rectangle"(): $ScreenRectangle
 get "tabOrderGroup"(): integer
 }
@@ -5570,56 +5570,56 @@ public "getLocation"(): $Point
 public "getSize"(): $Dimension
 public "grow"(arg0: double, arg1: double): void
 public "resize"(arg0: double, arg1: double): void
-public "union"(arg0: $FloatingRectangle$Type): $FloatingRectangle
 public "move"(arg0: double, arg1: double): void
-public "setSize"(arg0: double, arg1: double): void
-public "setSize"(arg0: $Dimension$Type): void
 public "setSize"(arg0: $FloatingDimension$Type): void
+public "setSize"(arg0: $Dimension$Type): void
+public "setSize"(arg0: double, arg1: double): void
+public "union"(arg0: $FloatingRectangle$Type): $FloatingRectangle
 public "getY"(): double
-public "setLocation"(arg0: $Point$Type): void
-public "setLocation"(arg0: $FloatingPoint$Type): void
-public "setLocation"(arg0: double, arg1: double): void
-public "intersects"(arg0: $FloatingRectangle$Type): boolean
-public "reshape"(arg0: double, arg1: double, arg2: double, arg3: double): void
-public "getFloatingBounds"(): $FloatingRectangle
-public "getMaxY"(): double
-public "getMinY"(): double
-public "getFloatingLocation"(): $FloatingPoint
-public "getMinX"(): double
-public "inside"(arg0: double, arg1: double): boolean
+public "intersection"(arg0: $FloatingRectangle$Type): $FloatingRectangle
 public "getWidth"(): double
 public "getHeight"(): double
+public "intersects"(arg0: $FloatingRectangle$Type): boolean
 public "translate"(arg0: double, arg1: double): void
-public "intersection"(arg0: $FloatingRectangle$Type): $FloatingRectangle
+public "getMinX"(): double
+public "getMinY"(): double
+public "getMaxY"(): double
+public "setLocation"(arg0: double, arg1: double): void
+public "setLocation"(arg0: $FloatingPoint$Type): void
+public "setLocation"(arg0: $Point$Type): void
+public "getX"(): double
+public "setBounds"(arg0: $Rectangle$Type): void
 public "setBounds"(arg0: $FloatingRectangle$Type): void
 public "setBounds"(arg0: double, arg1: double, arg2: double, arg3: double): void
-public "setBounds"(arg0: $Rectangle$Type): void
-public "getCenterY"(): double
 public "getCenterX"(): double
+public "getCenterY"(): double
 public "getMaxX"(): double
-public "getX"(): double
+public "getFloatingLocation"(): $FloatingPoint
+public "getFloatingBounds"(): $FloatingRectangle
+public "reshape"(arg0: double, arg1: double, arg2: double, arg3: double): void
+public "inside"(arg0: double, arg1: double): boolean
 get "empty"(): boolean
 get "bounds"(): $Rectangle
 get "location"(): $Point
 get "size"(): $Dimension
-set "size"(value: $Dimension$Type)
 set "size"(value: $FloatingDimension$Type)
+set "size"(value: $Dimension$Type)
 get "y"(): double
-set "location"(value: $Point$Type)
-set "location"(value: $FloatingPoint$Type)
-get "floatingBounds"(): $FloatingRectangle
-get "maxY"(): double
-get "minY"(): double
-get "floatingLocation"(): $FloatingPoint
-get "minX"(): double
 get "width"(): double
 get "height"(): double
-set "bounds"(value: $FloatingRectangle$Type)
-set "bounds"(value: $Rectangle$Type)
-get "centerY"(): double
-get "centerX"(): double
-get "maxX"(): double
+get "minX"(): double
+get "minY"(): double
+get "maxY"(): double
+set "location"(value: $FloatingPoint$Type)
+set "location"(value: $Point$Type)
 get "x"(): double
+set "bounds"(value: $Rectangle$Type)
+set "bounds"(value: $FloatingRectangle$Type)
+get "centerX"(): double
+get "centerY"(): double
+get "maxX"(): double
+get "floatingLocation"(): $FloatingPoint
+get "floatingBounds"(): $FloatingRectangle
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -5641,10 +5641,10 @@ import {$LongCollection, $LongCollection$Type} from "packages/it/unimi/dsi/fastu
 export interface $FilteringContext {
 
  "getHiddenExactHashes"(): $LongCollection
- "getShownExactHashes"(): $LongCollection
  "getUnsetExactHashes"(): $LongCollection
- "getShownStacks"(): $Collection<($EntryStack<(any)>)>
+ "getShownExactHashes"(): $LongCollection
  "getUnsetStacks"(): $Collection<($EntryStack<(any)>)>
+ "getShownStacks"(): $Collection<($EntryStack<(any)>)>
  "getHiddenStacks"(): $Collection<($EntryStack<(any)>)>
 }
 
@@ -5674,9 +5674,9 @@ import {$Rectangle, $Rectangle$Type} from "packages/me/shedaniel/math/$Rectangle
 export interface $EntryRenderer<T> extends $EntryRendererProvider<(T)> {
 
  "cast"<O>(): $EntryRenderer<(O)>
- "getTooltip"(arg0: $EntryStack$Type<(T)>, arg1: $TooltipContext$Type): $Tooltip
  "render"(arg0: $EntryStack$Type<(T)>, arg1: $GuiGraphics$Type, arg2: $Rectangle$Type, arg3: integer, arg4: integer, arg5: float): void
  "provide"(entry: $EntryStack$Type<(T)>, last: $EntryRenderer$Type<(T)>): $EntryRenderer<(T)>
+ "getTooltip"(arg0: $EntryStack$Type<(T)>, arg1: $TooltipContext$Type): $Tooltip
 }
 
 export namespace $EntryRenderer {
@@ -5700,9 +5700,9 @@ import {$GuiGraphics, $GuiGraphics$Type} from "packages/net/minecraft/client/gui
 
 export interface $OverlayRendererProvider$Sink {
 
- "getOverlay"(): $ScreenOverlay
  "render"(arg0: $GuiGraphics$Type, arg1: integer, arg2: integer, arg3: float): void
  "lateRender"(arg0: $GuiGraphics$Type, arg1: integer, arg2: integer, arg3: float): void
+ "getOverlay"(): $ScreenOverlay
 }
 
 export namespace $OverlayRendererProvider$Sink {

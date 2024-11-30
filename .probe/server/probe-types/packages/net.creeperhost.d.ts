@@ -5,8 +5,8 @@ import {$RenderType, $RenderType$Type} from "packages/net/minecraft/client/rende
 
 export interface $AccessorMultiBufferSource {
 
- "getFallbackBuffer"(): $BufferBuilder
  "getFixedBuffers"(): $Map<($RenderType), ($BufferBuilder)>
+ "getFallbackBuffer"(): $BufferBuilder
 }
 
 export namespace $AccessorMultiBufferSource {

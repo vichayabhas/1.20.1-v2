@@ -173,8 +173,8 @@ export class $CopyNBTRecipe extends $AbstractRecipeAdaptor {
 
 constructor(arg0: $ShapedRecipe$Type)
 
-public "getSerializer"(): $RecipeSerializer<(any)>
 public "category"(): $CraftingBookCategory
+public "getSerializer"(): $RecipeSerializer<(any)>
 public "assemble"(arg0: $CraftingContainer$Type, arg1: $RegistryAccess$Type): $ItemStack
 public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
 get "serializer"(): $RecipeSerializer<(any)>
@@ -195,8 +195,8 @@ declare module "packages/mcjty/lib/blocks/$BaseBlock" {
 import {$LevelAccessor, $LevelAccessor$Type} from "packages/net/minecraft/world/level/$LevelAccessor"
 import {$TOPDriver, $TOPDriver$Type} from "packages/mcjty/lib/compat/theoneprobe/$TOPDriver"
 import {$EntityBlock, $EntityBlock$Type} from "packages/net/minecraft/world/level/block/$EntityBlock"
-import {$ManualEntry, $ManualEntry$Type} from "packages/mcjty/lib/gui/$ManualEntry"
 import {$Component, $Component$Type} from "packages/net/minecraft/network/chat/$Component"
+import {$ManualEntry, $ManualEntry$Type} from "packages/mcjty/lib/gui/$ManualEntry"
 import {$IPartBlock, $IPartBlock$Type} from "packages/mcjty/lib/multipart/$IPartBlock"
 import {$BlockBehaviour$Properties, $BlockBehaviour$Properties$Type} from "packages/net/minecraft/world/level/block/state/$BlockBehaviour$Properties"
 import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
@@ -258,37 +258,37 @@ constructor(arg0: $BlockBuilder$Type)
 
 public static "getProperties"(arg0: $RotationType$Type): ($Property<(any)>)[]
 public "rotate"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Rotation$Type): $BlockState
-public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
-public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
-public "triggerEvent"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: integer, arg4: integer): boolean
-public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
-public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
-public "getItemsForTab"(): $List<($ItemStack)>
-public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
-public "isInfusable"(): boolean
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "appendHoverText"(arg0: $ItemStack$Type, arg1: $BlockGetter$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public static "getInfused"(arg0: $ItemStack$Type): integer
 public static "setInfused"(arg0: $ItemStack$Type, arg1: integer): void
+public "isInfusable"(): boolean
 public "handleModule"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $ItemStack$Type, arg6: $BlockHitResult$Type): boolean
-public static "runTick"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockEntity$Type): void
-public "getSlotFromState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): $PartSlot
 public "getRotationType"(): $RotationType
+public "getLeftDirection"(arg0: $BlockState$Type): $Direction
 public static "getFrontDirection"(arg0: $RotationType$Type, arg1: $BlockState$Type): $Direction
 public "getFrontDirection"(arg0: $BlockState$Type): $Direction
-public "getLeftDirection"(arg0: $BlockState$Type): $Direction
-public "getProbeDriver"(): $TOPDriver
 public "getRightDirection"(arg0: $BlockState$Type): $Direction
-public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
+public "getSlotFromState"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type): $PartSlot
+public static "runTick"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockEntity$Type): void
+public "neighborChanged"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Block$Type, arg4: $BlockPos$Type, arg5: boolean): void
+public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
+public "triggerEvent"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: integer, arg4: integer): boolean
+public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
+public "rotate"(arg0: $BlockState$Type, arg1: $Rotation$Type): $BlockState
+public "getItemsForTab"(): $List<($ItemStack)>
 public "getManualEntry"(): $ManualEntry
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
-public "appendHoverText"(arg0: $ItemStack$Type, arg1: $BlockGetter$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
+public "newBlockEntity"(arg0: $BlockPos$Type, arg1: $BlockState$Type): $BlockEntity
+public "getTicker"<T extends $BlockEntity>(arg0: $Level$Type, arg1: $BlockState$Type, arg2: $BlockEntityType$Type<(T)>): $BlockEntityTicker<(T)>
+public "getProbeDriver"(): $TOPDriver
 public "getMaxWidth"(): integer
 public "getListener"<T extends $BlockEntity>(arg0: $ServerLevel$Type, arg1: T): $GameEventListener
-get "itemsForTab"(): $List<($ItemStack)>
 get "infusable"(): boolean
 get "rotationType"(): $RotationType
-get "probeDriver"(): $TOPDriver
+get "itemsForTab"(): $List<($ItemStack)>
 get "manualEntry"(): $ManualEntry
+get "probeDriver"(): $TOPDriver
 get "maxWidth"(): integer
 }
 /**
@@ -337,8 +337,8 @@ export type $ListCommand_<TE, T> = $ListCommand$Type<(TE), (T)>;
 declare module "packages/mcjty/lib/crafting/$CopyNBTRecipeSerializer" {
 import {$JsonObject, $JsonObject$Type} from "packages/com/google/gson/$JsonObject"
 import {$RecipeSerializer, $RecipeSerializer$Type} from "packages/net/minecraft/world/item/crafting/$RecipeSerializer"
-import {$FriendlyByteBuf, $FriendlyByteBuf$Type} from "packages/net/minecraft/network/$FriendlyByteBuf"
 import {$CopyNBTRecipe, $CopyNBTRecipe$Type} from "packages/mcjty/lib/crafting/$CopyNBTRecipe"
+import {$FriendlyByteBuf, $FriendlyByteBuf$Type} from "packages/net/minecraft/network/$FriendlyByteBuf"
 import {$ICondition$IContext, $ICondition$IContext$Type} from "packages/net/minecraftforge/common/crafting/conditions/$ICondition$IContext"
 import {$ResourceLocation, $ResourceLocation$Type} from "packages/net/minecraft/resources/$ResourceLocation"
 import {$Recipe, $Recipe$Type} from "packages/net/minecraft/world/item/crafting/$Recipe"
@@ -347,9 +347,9 @@ export class $CopyNBTRecipeSerializer implements $RecipeSerializer<($CopyNBTReci
 
 constructor()
 
-public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $CopyNBTRecipe$Type): void
-public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $CopyNBTRecipe
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type): $CopyNBTRecipe
+public "fromNetwork"(arg0: $ResourceLocation$Type, arg1: $FriendlyByteBuf$Type): $CopyNBTRecipe
+public "toNetwork"(arg0: $FriendlyByteBuf$Type, arg1: $CopyNBTRecipe$Type): void
 public static "register"<S extends $RecipeSerializer<(T)>, T extends $Recipe<(any)>>(arg0: string, arg1: S): S
 public "fromJson"(arg0: $ResourceLocation$Type, arg1: $JsonObject$Type, arg2: $ICondition$IContext$Type): $CopyNBTRecipe
 }
@@ -469,12 +469,12 @@ constructor(arg0: $BlockBuilder$Type)
 public static "rotateLeft"(arg0: $Direction$Type, arg1: $Direction$Type): $Direction
 public static "rotateRight"(arg0: $Direction$Type, arg1: $Direction$Type): $Direction
 public "rotate"(arg0: $BlockState$Type, arg1: $LevelAccessor$Type, arg2: $BlockPos$Type, arg3: $Rotation$Type): $BlockState
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 public "canConnectRedstone"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): boolean
+public "getRotationType"(): $RotationType
 public "isSignalSource"(arg0: $BlockState$Type): boolean
 public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
 public "getSignal"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "getRotationType"(): $RotationType
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
 get "rotationType"(): $RotationType
 }
 /**
@@ -550,19 +550,19 @@ static readonly "POS_LIST": $Type<($List<($BlockPos)>)>
 
 
 public "toString"(): string
-public "convert"(arg0: any): V
 public "convert"(arg0: $List$Type<(any)>): $List<(V)>
+public "convert"(arg0: any): V
 public "getType"(): $Class<(V)>
 public static "create"<V>(arg0: $Class$Type<(any)>, arg1: $BiConsumer$Type<(V), ($FriendlyByteBuf$Type)>, arg2: $Function$Type<($FriendlyByteBuf$Type), (V)>): $Type<(V)>
 public static "create"<V>(arg0: $Class$Type<(any)>): $Type<(V)>
+public "deserialize"<T extends $GenericTileEntity>(arg0: $FriendlyByteBuf$Type, arg1: $ValueHolder$Type<(T), (V)>, arg2: T): void
 public "isA"(arg0: any): boolean
 public "serialize"(arg0: $FriendlyByteBuf$Type, arg1: any): void
-public "getSerializer"(): $BiConsumer<(V), ($FriendlyByteBuf)>
-public "deserialize"<T extends $GenericTileEntity>(arg0: $FriendlyByteBuf$Type, arg1: $ValueHolder$Type<(T), (V)>, arg2: T): void
 public "getDeserializer"(): $Function<($FriendlyByteBuf), (V)>
+public "getSerializer"(): $BiConsumer<(V), ($FriendlyByteBuf)>
 get "type"(): $Class<(V)>
-get "serializer"(): $BiConsumer<(V), ($FriendlyByteBuf)>
 get "deserializer"(): $Function<($FriendlyByteBuf), (V)>
+get "serializer"(): $BiConsumer<(V), ($FriendlyByteBuf)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -580,8 +580,8 @@ declare module "packages/mcjty/lib/tileentity/$GenericTileEntity" {
 import {$IRunnable, $IRunnable$Type} from "packages/mcjty/lib/blockcommands/$IRunnable"
 import {$CompoundTag, $CompoundTag$Type} from "packages/net/minecraft/nbt/$CompoundTag"
 import {$LazyOptional, $LazyOptional$Type} from "packages/net/minecraftforge/common/util/$LazyOptional"
-import {$ValueHolder, $ValueHolder$Type} from "packages/mcjty/lib/tileentity/$ValueHolder"
 import {$Connection, $Connection$Type} from "packages/net/minecraft/network/$Connection"
+import {$ValueHolder, $ValueHolder$Type} from "packages/mcjty/lib/tileentity/$ValueHolder"
 import {$NonNullList, $NonNullList$Type} from "packages/net/minecraft/core/$NonNullList"
 import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
 import {$Key, $Key$Type} from "packages/mcjty/lib/typed/$Key"
@@ -620,64 +620,64 @@ constructor(arg0: $BlockEntityType$Type<(any)>, arg1: $BlockPos$Type, arg2: $Blo
 
 public "checkAccess"(arg0: $Player$Type): boolean
 public "setOwner"(arg0: $Player$Type): boolean
-public "getValueMap"(): $Map<(string), ($ValueHolder<(any), (any)>)>
+public "wrenchUse"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Direction$Type, arg3: $Player$Type): boolean
+public "onBlockPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "onBlockActivated"(arg0: $BlockState$Type, arg1: $Player$Type, arg2: $InteractionHand$Type, arg3: $BlockHitResult$Type): $InteractionResult
+public "rotateBlock"(arg0: $Rotation$Type): void
+public "onReplaced"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
+public "getDimension"(): $ResourceKey<($Level)>
 public "getDrops"(arg0: $NonNullList$Type<($ItemStack$Type)>, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: integer): void
-public "invalidateCaps"(): void
-public "onSlotChanged"(arg0: integer, arg1: $ItemStack$Type): void
-public "getRedstoneOutput"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
-public "setPowerInput"(arg0: integer): void
-public "saveClientDataToNBT"(arg0: $CompoundTag$Type): void
-public "loadClientDataFromNBT"(arg0: $CompoundTag$Type): void
-public "executeServerCommandList"<T>(arg0: string, arg1: $Player$Type, arg2: $TypedMap$Type, arg3: $Class$Type<(T)>): $List<(T)>
-public "executeClientCommand"(arg0: string, arg1: $Player$Type, arg2: $TypedMap$Type): boolean
-public "handleListFromServer"<T>(arg0: string, arg1: $Player$Type, arg2: $TypedMap$Type, arg3: $List$Type<(T)>): boolean
-public "executeServerCommandWR"(arg0: string, arg1: $Player$Type, arg2: $TypedMap$Type): $TypedMap
-public "executeServerCommand"(arg0: string, arg1: $Player$Type, arg2: $TypedMap$Type): boolean
 public "load"(arg0: $CompoundTag$Type): void
 public "m_183515_"(arg0: $CompoundTag$Type): void
 public "getUpdateTag"(): $CompoundTag
 public "onDataPacket"(arg0: $Connection$Type, arg1: $ClientboundBlockEntityDataPacket$Type): void
-public "getDimension"(): $ResourceKey<($Level)>
-public "onPartAdded"(arg0: $PartSlot$Type, arg1: $BlockState$Type, arg2: $BlockEntity$Type): void
+public "invalidateCaps"(): void
+public "getCapability"<T>(arg0: $Capability$Type<(T)>, arg1: $Direction$Type): $LazyOptional<(T)>
 public "getRSMode"(): $RedstoneMode
-public "findServerCommand"(arg0: string): $IRunnable<(any)>
-public "onBlockActivated"(arg0: $BlockState$Type, arg1: $Player$Type, arg2: $InteractionHand$Type, arg3: $BlockHitResult$Type): $InteractionResult
-public "wrenchUse"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Direction$Type, arg3: $Player$Type): boolean
-public "onReplaced"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $BlockState$Type): void
+public "getUpdatePacket"(): $ClientboundBlockEntityDataPacket
+public "getValueMap"(): $Map<(string), ($ValueHolder<(any), (any)>)>
+public "onPartAdded"(arg0: $PartSlot$Type, arg1: $BlockState$Type, arg2: $BlockEntity$Type): void
+public "setPowerInput"(arg0: integer): void
 public "checkRedstone"(arg0: $Level$Type, arg1: $BlockPos$Type): void
-public "onBlockPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "rotateBlock"(arg0: $Rotation$Type): void
+public "getRedstoneOutput"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $Direction$Type): integer
+public "getOwnerName"(): string
+public "onSlotChanged"(arg0: integer, arg1: $ItemStack$Type): void
+public "executeServerCommand"(arg0: string, arg1: $Player$Type, arg2: $TypedMap$Type): boolean
+public "handleListFromServer"<T>(arg0: string, arg1: $Player$Type, arg2: $TypedMap$Type, arg3: $List$Type<(T)>): boolean
+public "executeServerCommandList"<T>(arg0: string, arg1: $Player$Type, arg2: $TypedMap$Type, arg3: $Class$Type<(T)>): $List<(T)>
+public "saveClientDataToNBT"(arg0: $CompoundTag$Type): void
+public "executeClientCommand"(arg0: string, arg1: $Player$Type, arg2: $TypedMap$Type): boolean
+public "loadClientDataFromNBT"(arg0: $CompoundTag$Type): void
+public "executeServerCommandWR"(arg0: string, arg1: $Player$Type, arg2: $TypedMap$Type): $TypedMap
 public "canPlayerAccess"(arg0: $Player$Type): boolean
-public "markDirtyQuick"(): void
-public "setRSMode"(arg0: $RedstoneMode$Type): void
-public "getPowerLevel"(): integer
-public "setRSModeInt"(arg0: integer): void
-public "getRSModeInt"(): integer
 public "markDirtyClient"(): void
+public "markDirtyQuick"(): void
+public "getRSModeInt"(): integer
+public "setRSMode"(arg0: $RedstoneMode$Type): void
+public "setRSModeInt"(arg0: integer): void
+public "getPowerLevel"(): integer
 public "isMachineEnabled"(): boolean
 public "clearOwner"(): void
 public "setSecurityChannel"(arg0: integer): void
-public "getSecurityChannel"(): integer
 public "getOwnerUUID"(): $UUID
-public "getOwnerName"(): string
-public "getUpdatePacket"(): $ClientboundBlockEntityDataPacket
-public "getCapability"<T>(arg0: $Capability$Type<(T)>, arg1: $Direction$Type): $LazyOptional<(T)>
+public "findServerCommand"(arg0: string): $IRunnable<(any)>
+public "getSecurityChannel"(): integer
 set "owner"(value: $Player$Type)
+get "dimension"(): $ResourceKey<($Level)>
+get "updateTag"(): $CompoundTag
+get "rSMode"(): $RedstoneMode
+get "updatePacket"(): $ClientboundBlockEntityDataPacket
 get "valueMap"(): $Map<(string), ($ValueHolder<(any), (any)>)>
 set "powerInput"(value: integer)
-get "updateTag"(): $CompoundTag
-get "dimension"(): $ResourceKey<($Level)>
-get "rSMode"(): $RedstoneMode
-set "rSMode"(value: $RedstoneMode$Type)
-get "powerLevel"(): integer
-set "rSModeInt"(value: integer)
+get "ownerName"(): string
 get "rSModeInt"(): integer
+set "rSMode"(value: $RedstoneMode$Type)
+set "rSModeInt"(value: integer)
+get "powerLevel"(): integer
 get "machineEnabled"(): boolean
 set "securityChannel"(value: integer)
-get "securityChannel"(): integer
 get "ownerUUID"(): $UUID
-get "ownerName"(): string
-get "updatePacket"(): $ClientboundBlockEntityDataPacket
+get "securityChannel"(): integer
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -733,8 +733,8 @@ public "equals"(arg0: any): boolean
 public "toString"(): string
 public "hashCode"(): integer
 public "suffix"(): string
-public "styles"(): ($ChatFormatting)[]
 public "translationKey"(): string
+public "styles"(): ($ChatFormatting)[]
 public "informationGetter"(): $Function<($ItemStack), (string)>
 public "repeatingParameter"(): $Function<($ItemStack), ($Stream<(string)>)>
 public "condition"(): $Predicate<($ItemStack)>
@@ -774,8 +774,8 @@ export type $TOPDriver_ = $TOPDriver$Type;
 }}
 declare module "packages/mcjty/lib/crafting/$BaseRecipe" {
 import {$InputReplacement, $InputReplacement$Type} from "packages/dev/latvian/mods/kubejs/recipe/$InputReplacement"
-import {$NonNullList, $NonNullList$Type} from "packages/net/minecraft/core/$NonNullList"
 import {$RecipeSerializer, $RecipeSerializer$Type} from "packages/net/minecraft/world/item/crafting/$RecipeSerializer"
+import {$NonNullList, $NonNullList$Type} from "packages/net/minecraft/core/$NonNullList"
 import {$RecipeSchema, $RecipeSchema$Type} from "packages/dev/latvian/mods/kubejs/recipe/schema/$RecipeSchema"
 import {$Ingredient, $Ingredient$Type} from "packages/net/minecraft/world/item/crafting/$Ingredient"
 import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
@@ -792,25 +792,25 @@ export interface $BaseRecipe<C extends $Container> extends $Recipe<(C)> {
 
  "assemble"(arg0: C, arg1: $RegistryAccess$Type): $ItemStack
  "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
- "isSpecial"(): boolean
  "matches"(arg0: C, arg1: $Level$Type): boolean
- "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
- "getIngredients"(): $NonNullList<($Ingredient)>
- "showNotification"(): boolean
- "getSerializer"(): $RecipeSerializer<(any)>
- "getRemainingItems"(arg0: C): $NonNullList<($ItemStack)>
- "isIncomplete"(): boolean
- "getToastSymbol"(): $ItemStack
  "getId"(): $ResourceLocation
- "getGroup"(): string
- "getOrCreateId"(): $ResourceLocation
- "hasOutput"(match: $ReplacementMatch$Type): boolean
- "getSchema"(): $RecipeSchema
- "hasInput"(match: $ReplacementMatch$Type): boolean
- "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
- "setGroup"(group: string): void
- "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
+ "isSpecial"(): boolean
+ "getSerializer"(): $RecipeSerializer<(any)>
+ "isIncomplete"(): boolean
+ "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
+ "getRemainingItems"(arg0: C): $NonNullList<($ItemStack)>
+ "showNotification"(): boolean
+ "getToastSymbol"(): $ItemStack
+ "getIngredients"(): $NonNullList<($Ingredient)>
  "getMod"(): string
+ "getSchema"(): $RecipeSchema
+ "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
+ "hasInput"(match: $ReplacementMatch$Type): boolean
+ "hasOutput"(match: $ReplacementMatch$Type): boolean
+ "getOrCreateId"(): $ResourceLocation
+ "setGroup"(group: string): void
+ "getGroup"(): string
+ "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
  "getType"(): $ResourceLocation
 }
 
@@ -847,17 +847,17 @@ constructor()
 public "info"(...arg0: ($InfoLine$Type)[]): $BlockBuilder
 public "getProperties"(): $BlockBehaviour$Properties
 public "properties"(arg0: $BlockBehaviour$Properties$Type): $BlockBuilder
-public "getTileEntitySupplier"(): $BlockEntityType$BlockEntitySupplier<($BlockEntity)>
-public "infoAdvanced"(...arg0: ($InfoLine$Type)[]): $BlockBuilder
-public "isInfusable"(): boolean
-public "manualEntry"(arg0: $ManualEntry$Type): $BlockBuilder
-public "topDriver"(arg0: $TOPDriver$Type): $BlockBuilder
-public "getTooltipBuilder"(): $TooltipBuilder
-public "tileEntitySupplier"(arg0: $BlockEntityType$BlockEntitySupplier$Type<($BlockEntity$Type)>): $BlockBuilder
 public "getTopDriver"(): $TOPDriver
+public "topDriver"(arg0: $TOPDriver$Type): $BlockBuilder
+public "tileEntitySupplier"(arg0: $BlockEntityType$BlockEntitySupplier$Type<($BlockEntity$Type)>): $BlockBuilder
+public "isInfusable"(): boolean
 public "infusable"(): $BlockBuilder
+public "manualEntry"(arg0: $ManualEntry$Type): $BlockBuilder
+public "getTooltipBuilder"(): $TooltipBuilder
 public "getManualEntry"(): $ManualEntry
+public "getTileEntitySupplier"(): $BlockEntityType$BlockEntitySupplier<($BlockEntity)>
 public "infoShift"(...arg0: ($InfoLine$Type)[]): $BlockBuilder
+public "infoAdvanced"(...arg0: ($InfoLine$Type)[]): $BlockBuilder
 get "tooltipBuilder"(): $TooltipBuilder
 }
 /**
@@ -896,14 +896,14 @@ public "isActive"(): boolean
 public static "warning"(arg0: $Predicate$Type<($ItemStack$Type)>): $InfoLine
 public static "warning"(): $InfoLine
 public static "header"(): $InfoLine
-public static "gold"(): $InfoLine
-public static "gold"(arg0: $Predicate$Type<($ItemStack$Type)>): $InfoLine
-public static "general"(arg0: string, arg1: $Predicate$Type<($ItemStack$Type)>, ...arg2: ($ChatFormatting$Type)[]): $InfoLine
 public static "general"(arg0: string, ...arg1: ($ChatFormatting$Type)[]): $InfoLine
-public "infoAdvanced"(...arg0: ($InfoLine$Type)[]): $TooltipBuilder
+public static "general"(arg0: string, arg1: $Predicate$Type<($ItemStack$Type)>, ...arg2: ($ChatFormatting$Type)[]): $InfoLine
+public static "gold"(arg0: $Predicate$Type<($ItemStack$Type)>): $InfoLine
+public static "gold"(): $InfoLine
 public static "repeatingParameter"(arg0: string, arg1: $Function$Type<($ItemStack$Type), ($Stream$Type<(string)>)>): $InfoLine
 public "makeTooltip"(arg0: $ResourceLocation$Type, arg1: $ItemStack$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "infoShift"(...arg0: ($InfoLine$Type)[]): $TooltipBuilder
+public "infoAdvanced"(...arg0: ($InfoLine$Type)[]): $TooltipBuilder
 get "active"(): boolean
 }
 /**
@@ -1097,21 +1097,21 @@ public "out"(): $SlotDefinition
 public "in"(): $SlotDefinition
 public "getType"(): $SlotType
 public static "generic"(): $SlotDefinition
-public static "specific"(...arg0: ($ItemStack$Type)[]): $SlotDefinition
-public static "specific"(...arg0: ($Item$Type)[]): $SlotDefinition
-public static "specific"(arg0: $Predicate$Type<($ItemStack$Type)>): $SlotDefinition
-public "onCraft"(arg0: $TriConsumer$Type<($BlockEntity$Type), ($Player$Type), ($ItemStack$Type)>): $SlotDefinition
+public static "ghostOut"(): $SlotDefinition
+public "isOutput"(): boolean
+public static "craftResult"(): $SlotDefinition
+public static "ghost"(): $SlotDefinition
+public "isInput"(): boolean
 public "getOnCraft"(): $TriConsumer<($BlockEntity), ($Player), ($ItemStack)>
+public "onCraft"(arg0: $TriConsumer$Type<($BlockEntity$Type), ($Player$Type), ($ItemStack$Type)>): $SlotDefinition
 public "isSpecific"(): boolean
 public "itemStackMatches"(arg0: $ItemStack$Type): boolean
-public static "ghostOut"(): $SlotDefinition
-public static "craftResult"(): $SlotDefinition
-public "isInput"(): boolean
-public "isOutput"(): boolean
-public static "ghost"(): $SlotDefinition
+public static "specific"(...arg0: ($Item$Type)[]): $SlotDefinition
+public static "specific"(arg0: $Predicate$Type<($ItemStack$Type)>): $SlotDefinition
+public static "specific"(...arg0: ($ItemStack$Type)[]): $SlotDefinition
 get "type"(): $SlotType
-get "input"(): boolean
 get "output"(): boolean
+get "input"(): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1140,9 +1140,9 @@ public "toString"(): string
 public "hashCode"(): integer
 public "x"(): integer
 public "y"(): integer
-public "inventoryName"(): string
-public "slotDefinition"(): $SlotDefinition
 public "getSlotType"(): $SlotType
+public "slotDefinition"(): $SlotDefinition
+public "inventoryName"(): string
 get "slotType"(): $SlotType
 }
 /**
@@ -1160,8 +1160,8 @@ export type $SlotFactory_ = $SlotFactory$Type;
 declare module "packages/mcjty/lib/varia/$LogicFacing" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Direction, $Direction$Type} from "packages/net/minecraft/core/$Direction"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
@@ -1199,17 +1199,17 @@ public "toString"(): string
 public static "values"(): ($LogicFacing)[]
 public static "valueOf"(arg0: string): $LogicFacing
 public static "rotate"(arg0: $LogicFacing$Type): $LogicFacing
-public "getSerializedName"(): string
-public "getRotationStep"(): integer
-public "getInputSide"(): $Direction
 public "getSide"(): $Direction
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
+public "getSerializedName"(): string
+public "getInputSide"(): $Direction
+public "getRotationStep"(): integer
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
-get "serializedName"(): string
-get "rotationStep"(): integer
-get "inputSide"(): $Direction
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "side"(): $Direction
+get "serializedName"(): string
+get "inputSide"(): $Direction
+get "rotationStep"(): integer
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1469,9 +1469,9 @@ export type $Value_<T, V> = $Value$Type<(T), (V)>;
 }}
 declare module "packages/mcjty/lib/container/$ContainerFactory" {
 import {$Lazy, $Lazy$Type} from "packages/net/minecraftforge/common/util/$Lazy"
+import {$SlotFactory, $SlotFactory$Type} from "packages/mcjty/lib/container/$SlotFactory"
 import {$SlotRanges, $SlotRanges$Type} from "packages/mcjty/lib/container/$SlotRanges"
 import {$Predicate, $Predicate$Type} from "packages/java/util/function/$Predicate"
-import {$SlotFactory, $SlotFactory$Type} from "packages/mcjty/lib/container/$SlotFactory"
 import {$SlotDefinition, $SlotDefinition$Type} from "packages/mcjty/lib/container/$SlotDefinition"
 import {$Iterable, $Iterable$Type} from "packages/java/lang/$Iterable"
 import {$SlotType, $SlotType$Type} from "packages/mcjty/lib/container/$SlotType"
@@ -1485,28 +1485,28 @@ constructor(arg0: integer)
 
 public "slot"(arg0: $SlotDefinition$Type, arg1: integer, arg2: integer, arg3: integer): $ContainerFactory
 public "slot"(arg0: $SlotDefinition$Type, arg1: string, arg2: integer, arg3: integer, arg4: integer): $ContainerFactory
-public "box"(arg0: $SlotDefinition$Type, arg1: integer, arg2: integer, arg3: integer, arg4: integer, arg5: integer): $ContainerFactory
 public "box"(arg0: $SlotDefinition$Type, arg1: string, arg2: integer, arg3: integer, arg4: integer, arg5: integer, arg6: integer, arg7: integer, arg8: integer): $ContainerFactory
-public "box"(arg0: $SlotDefinition$Type, arg1: integer, arg2: integer, arg3: integer, arg4: integer, arg5: integer, arg6: integer, arg7: integer): $ContainerFactory
 public "box"(arg0: $SlotDefinition$Type, arg1: string, arg2: integer, arg3: integer, arg4: integer, arg5: integer, arg6: integer): $ContainerFactory
+public "box"(arg0: $SlotDefinition$Type, arg1: integer, arg2: integer, arg3: integer, arg4: integer, arg5: integer): $ContainerFactory
+public "box"(arg0: $SlotDefinition$Type, arg1: integer, arg2: integer, arg3: integer, arg4: integer, arg5: integer, arg6: integer, arg7: integer): $ContainerFactory
 public "range"(arg0: $SlotDefinition$Type, arg1: string, arg2: integer, arg3: integer, arg4: integer, arg5: integer, arg6: integer): $ContainerFactory
-public "playerSlots"(arg0: integer, arg1: integer): $ContainerFactory
-public "isGenericSlot"(arg0: integer): boolean
-public "isOutputSlot"(arg0: integer): boolean
-public "isGhostSlot"(arg0: integer): boolean
-public "isGhostOutputSlot"(arg0: integer): boolean
-public "isInputSlot"(arg0: integer): boolean
-public "getRanges"(arg0: $Predicate$Type<($SlotDefinition$Type)>): $SlotRanges
-public "isSpecificItemSlot"(arg0: integer): boolean
-public "isPlayerHotbarSlot"(arg0: integer): boolean
-public "getContainerSlots"(): integer
 public "isPlayerInventorySlot"(arg0: integer): boolean
 public "getSlots"(): $Iterable<($SlotFactory)>
-public "getSlotDefinition"(arg0: integer): $SlotDefinition
 public "isCraftResultSlot"(arg0: integer): boolean
+public "getSlotDefinition"(arg0: integer): $SlotDefinition
 public "getSlotType"(arg0: integer): $SlotType
-get "containerSlots"(): integer
+public "getRanges"(arg0: $Predicate$Type<($SlotDefinition$Type)>): $SlotRanges
+public "isSpecificItemSlot"(arg0: integer): boolean
+public "isGhostOutputSlot"(arg0: integer): boolean
+public "isOutputSlot"(arg0: integer): boolean
+public "isInputSlot"(arg0: integer): boolean
+public "isGhostSlot"(arg0: integer): boolean
+public "isPlayerHotbarSlot"(arg0: integer): boolean
+public "isGenericSlot"(arg0: integer): boolean
+public "playerSlots"(arg0: integer, arg1: integer): $ContainerFactory
+public "getContainerSlots"(): integer
 get "slots"(): $Iterable<($SlotFactory)>
+get "containerSlots"(): integer
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -1574,14 +1574,14 @@ import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$It
 
 export interface $IEnergyItem {
 
- "getMaxEnergyStoredL"(arg0: $ItemStack$Type): long
- "getEnergyStoredL"(arg0: $ItemStack$Type): long
- "extractEnergyL"(arg0: $ItemStack$Type, arg1: long, arg2: boolean): long
- "receiveEnergyL"(arg0: $ItemStack$Type, arg1: long, arg2: boolean): long
  "receiveEnergy"(arg0: $ItemStack$Type, arg1: integer, arg2: boolean): integer
+ "getEnergyStored"(arg0: $ItemStack$Type): integer
  "getMaxEnergyStored"(arg0: $ItemStack$Type): integer
  "extractEnergy"(arg0: $ItemStack$Type, arg1: integer, arg2: boolean): integer
- "getEnergyStored"(arg0: $ItemStack$Type): integer
+ "getEnergyStoredL"(arg0: $ItemStack$Type): long
+ "receiveEnergyL"(arg0: $ItemStack$Type, arg1: long, arg2: boolean): long
+ "extractEnergyL"(arg0: $ItemStack$Type, arg1: long, arg2: boolean): long
+ "getMaxEnergyStoredL"(arg0: $ItemStack$Type): long
 }
 
 export namespace $IEnergyItem {
@@ -1691,8 +1691,8 @@ static readonly "REDSTONE_ONREQUIRED": $RedstoneMode
 
 public static "values"(): ($RedstoneMode)[]
 public static "valueOf"(arg0: string): $RedstoneMode
-public "getDescription"(): string
 public static "getMode"(arg0: string): $RedstoneMode
+public "getDescription"(): string
 get "description"(): string
 }
 /**
@@ -1730,45 +1730,45 @@ export class $AbstractRecipeAdaptor implements $CraftingRecipe, $IShapedRecipe<(
 constructor(arg0: $ShapedRecipe$Type)
 
 public "matches"(arg0: $CraftingContainer$Type, arg1: $Level$Type): boolean
-public "isSpecial"(): boolean
-public "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
-public "getIngredients"(): $NonNullList<($Ingredient)>
-public "getToastSymbol"(): $ItemStack
 public "getId"(): $ResourceLocation
-public "getRemainingItems"(arg0: $CraftingContainer$Type): $NonNullList<($ItemStack)>
+public "isSpecial"(): boolean
 public "getRecipe"(): $ShapedRecipe
-public "getRecipeHeight"(): integer
+public "canCraftInDimensions"(arg0: integer, arg1: integer): boolean
+public "getToastSymbol"(): $ItemStack
+public "getIngredients"(): $NonNullList<($Ingredient)>
+public "getRemainingItems"(arg0: $CraftingContainer$Type): $NonNullList<($ItemStack)>
 public "getRecipeWidth"(): integer
+public "getRecipeHeight"(): integer
 public "category"(): $CraftingBookCategory
 public "assemble"(arg0: $CraftingContainer$Type, arg1: $RegistryAccess$Type): $ItemStack
-public "showNotification"(): boolean
 public "getSerializer"(): $RecipeSerializer<(any)>
 public "isIncomplete"(): boolean
+public "showNotification"(): boolean
 public "getResultItem"(arg0: $RegistryAccess$Type): $ItemStack
-public "getGroup"(): string
-public "getOrCreateId"(): $ResourceLocation
-public "hasOutput"(match: $ReplacementMatch$Type): boolean
-public "getSchema"(): $RecipeSchema
-public "hasInput"(match: $ReplacementMatch$Type): boolean
-public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
-public "setGroup"(group: string): void
-public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
 public "getMod"(): string
+public "getSchema"(): $RecipeSchema
+public "replaceInput"(match: $ReplacementMatch$Type, arg1: $InputReplacement$Type): boolean
+public "hasInput"(match: $ReplacementMatch$Type): boolean
+public "hasOutput"(match: $ReplacementMatch$Type): boolean
+public "getOrCreateId"(): $ResourceLocation
+public "setGroup"(group: string): void
+public "getGroup"(): string
+public "replaceOutput"(match: $ReplacementMatch$Type, arg1: $OutputReplacement$Type): boolean
 public "getType"(): $ResourceLocation
-get "special"(): boolean
-get "ingredients"(): $NonNullList<($Ingredient)>
-get "toastSymbol"(): $ItemStack
 get "id"(): $ResourceLocation
+get "special"(): boolean
 get "recipe"(): $ShapedRecipe
-get "recipeHeight"(): integer
+get "toastSymbol"(): $ItemStack
+get "ingredients"(): $NonNullList<($Ingredient)>
 get "recipeWidth"(): integer
+get "recipeHeight"(): integer
 get "serializer"(): $RecipeSerializer<(any)>
 get "incomplete"(): boolean
-get "group"(): string
-get "orCreateId"(): $ResourceLocation
-get "schema"(): $RecipeSchema
-set "group"(value: string)
 get "mod"(): string
+get "schema"(): $RecipeSchema
+get "orCreateId"(): $ResourceLocation
+set "group"(value: string)
+get "group"(): string
 get "type"(): $ResourceLocation
 }
 /**

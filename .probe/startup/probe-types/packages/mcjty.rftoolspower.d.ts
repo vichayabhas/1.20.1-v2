@@ -23,21 +23,21 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor()
 
-public static "getInfusionPercentage"(arg0: $ItemStack$Type): integer
+public static "getInfusionStepsLeft"(arg0: $ItemStack$Type): integer
 public static "getAgitationTimePercentage"(arg0: $ItemStack$Type): integer
 public static "getAgitationTimeLeft"(arg0: $ItemStack$Type): float
-public static "getInfusionStepsLeft"(arg0: $ItemStack$Type): integer
-public static "getRfPerTick"(arg0: $ItemStack$Type): integer
-public static "setPowerDuration"(arg0: $ItemStack$Type, arg1: float): void
-public static "getTotalTicks"(arg0: $ItemStack$Type): integer
-public static "setInfusionStepsLeft"(arg0: $ItemStack$Type, arg1: integer): void
 public static "setAgitationTimeLeft"(arg0: $ItemStack$Type, arg1: float): void
-public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
-public static "isInfused"(arg0: $ItemStack$Type): boolean
-public static "isCharging"(arg0: $ItemStack$Type): boolean
+public static "setInfusionStepsLeft"(arg0: $ItemStack$Type, arg1: integer): void
+public static "getInfusionPercentage"(arg0: $ItemStack$Type): integer
+public static "setPowerDuration"(arg0: $ItemStack$Type, arg1: float): void
+public static "getRfPerTick"(arg0: $ItemStack$Type): integer
+public static "getTotalTicks"(arg0: $ItemStack$Type): integer
 public static "getPowerQuality"(arg0: $ItemStack$Type): float
-public static "setPowerQuality"(arg0: $ItemStack$Type, arg1: float): void
 public static "getPowerDuration"(arg0: $ItemStack$Type): float
+public static "setPowerQuality"(arg0: $ItemStack$Type, arg1: float): void
+public static "isCharging"(arg0: $ItemStack$Type): boolean
+public static "isInfused"(arg0: $ItemStack$Type): boolean
+public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -54,8 +54,8 @@ export type $BlazingRod_ = $BlazingRod$Type;
 declare module "packages/mcjty/rftoolspower/modules/powercell/data/$Tier" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$List, $List$Type} from "packages/java/util/$List"
 import {$BlockEntityType, $BlockEntityType$Type} from "packages/net/minecraft/world/level/block/entity/$BlockEntityType"
@@ -73,9 +73,9 @@ public static "valueOf"(arg0: string): $Tier
 public "getType"(): $BlockEntityType<(any)>
 public "getSuffix"(): string
 public "getSerializedName"(): string
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "type"(): $BlockEntityType<(any)>
 get "suffix"(): string
 get "serializedName"(): string
@@ -140,14 +140,14 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor(arg0: $Tier$Type)
 
+public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "getRotationType"(): $RotationType
 public "updateShape"(arg0: $BlockState$Type, arg1: $Direction$Type, arg2: $BlockState$Type, arg3: $LevelAccessor$Type, arg4: $BlockPos$Type, arg5: $BlockPos$Type): $BlockState
 public "getRenderShape"(arg0: $BlockState$Type): $RenderShape
 public "getTagsToPreserve"(): $Collection<(string)>
-public "getRotationType"(): $RotationType
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
-public "getStateForPlacement"(arg0: $BlockPlaceContext$Type): $BlockState
-get "tagsToPreserve"(): $Collection<(string)>
 get "rotationType"(): $RotationType
+get "tagsToPreserve"(): $Collection<(string)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -237,8 +237,8 @@ export type $DimensionalCellType_ = $DimensionalCellType$Type;
 declare module "packages/mcjty/rftoolspower/modules/dimensionalcell/blocks/$DimensionalCellTileEntity$Mode" {
 import {$StringRepresentable$EnumCodec, $StringRepresentable$EnumCodec$Type} from "packages/net/minecraft/util/$StringRepresentable$EnumCodec"
 import {$StringRepresentable, $StringRepresentable$Type} from "packages/net/minecraft/util/$StringRepresentable"
-import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Function, $Function$Type} from "packages/java/util/function/$Function"
+import {$Keyable, $Keyable$Type} from "packages/com/mojang/serialization/$Keyable"
 import {$Enum, $Enum$Type} from "packages/java/lang/$Enum"
 import {$Supplier, $Supplier$Type} from "packages/java/util/function/$Supplier"
 
@@ -253,9 +253,9 @@ public static "values"(): ($DimensionalCellTileEntity$Mode)[]
 public static "valueOf"(arg0: string): $DimensionalCellTileEntity$Mode
 public "getSerializedName"(): string
 public "getOverlayName"(): string
-public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 public static "fromEnum"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>): $StringRepresentable$EnumCodec<(E)>
 public static "fromEnumWithMapping"<E extends ($Enum<(E)>) & ($StringRepresentable)>(arg0: $Supplier$Type<((E)[])>, arg1: $Function$Type<(string), (string)>): $StringRepresentable$EnumCodec<(E)>
+public static "keys"(arg0: ($StringRepresentable$Type)[]): $Keyable
 get "serializedName"(): string
 get "overlayName"(): string
 }
@@ -330,16 +330,16 @@ constructor(arg0: $DimensionalCellType$Type, arg1: $BlockEntityType$BlockEntityS
 
 public "getType"(): $DimensionalCellType
 public static "getType"(arg0: $Block$Type): $DimensionalCellType
+public "wasExploded"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Explosion$Type): void
+public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
+public "getRotationType"(): $RotationType
 public "onRemove"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $BlockState$Type, arg4: boolean): void
 public "getDrops"(arg0: $BlockState$Type, arg1: $LootParams$Builder$Type): $List<($ItemStack)>
 public "getOcclusionShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type): $VoxelShape
 public "getTagsToPreserve"(): $Collection<(string)>
-public "getRotationType"(): $RotationType
-public "wasExploded"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $Explosion$Type): void
-public "setPlacedBy"(arg0: $Level$Type, arg1: $BlockPos$Type, arg2: $BlockState$Type, arg3: $LivingEntity$Type, arg4: $ItemStack$Type): void
 get "type"(): $DimensionalCellType
-get "tagsToPreserve"(): $Collection<(string)>
 get "rotationType"(): $RotationType
+get "tagsToPreserve"(): $Collection<(string)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -378,8 +378,8 @@ constructor()
 
 public static "getId"(arg0: $ItemStack$Type): integer
 public static "setId"(arg0: $ItemStack$Type, arg1: integer): void
-public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public static "initOverrides"(arg0: $PowerCellCardItem$Type): void
+public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "getMaxWidth"(): integer
 public "getManualEntry"(): $ManualEntry
 get "maxWidth"(): integer

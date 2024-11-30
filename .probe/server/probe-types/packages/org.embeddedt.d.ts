@@ -77,9 +77,9 @@ export {} // Mark the file as a module, do not remove unless there are other imp
 export interface $ExtendedBiomeSpecialEffects {
 
  "embeddium$getCustomFoliage"(): integer
- "embeddium$hasCustomFoliage"(): boolean
  "embeddium$getCustomGrass"(): integer
  "embeddium$hasCustomGrass"(): boolean
+ "embeddium$hasCustomFoliage"(): boolean
 }
 
 export namespace $ExtendedBiomeSpecialEffects {
@@ -162,10 +162,10 @@ constructor()
 public static "load"(arg: $CompoundTag$Type): $StrongholdLocationCache
 public "save"(compoundTag: $CompoundTag$Type): $CompoundTag
 public static "getFileId"(dimensionType: $Holder$Type<($DimensionType$Type)>): string
-public "getChunkPosList"(): $List<($ChunkPos)>
 public "setChunkPosList"(positions: $List$Type<($ChunkPos$Type)>): void
-get "chunkPosList"(): $List<($ChunkPos)>
+public "getChunkPosList"(): $List<($ChunkPos)>
 set "chunkPosList"(value: $List$Type<($ChunkPos$Type)>)
+get "chunkPosList"(): $List<($ChunkPos)>
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -252,41 +252,41 @@ export class $SafeBlockGetter implements $BlockGetter {
 
 constructor(wrapped: $ServerLevel$Type)
 
+public "getFluidState"(pos: $BlockPos$Type): $FluidState
+public "getMaxLightLevel"(): integer
 public "getHeight"(): integer
 public "getMaxBuildHeight"(): integer
-public "getMaxLightLevel"(): integer
+public "getBlockState"(pos: $BlockPos$Type): $BlockState
+public "getBlockEntity"(pos: $BlockPos$Type): $BlockEntity
 public "shouldUse"(): boolean
 public "getMinBuildHeight"(): integer
-public "getBlockEntity"(pos: $BlockPos$Type): $BlockEntity
-public "getFluidState"(pos: $BlockPos$Type): $FluidState
-public "getBlockState"(pos: $BlockPos$Type): $BlockState
 public "getBlockEntity"<T extends $BlockEntity>(arg0: $BlockPos$Type, arg1: $BlockEntityType$Type<(T)>): $Optional<(T)>
 public "getBlockStates"(arg0: $AABB$Type): $Stream<($BlockState)>
-public static "traverseBlocks"<T, C>(arg0: $Vec3$Type, arg1: $Vec3$Type, arg2: C, arg3: $BiFunction$Type<(C), ($BlockPos$Type), (T)>, arg4: $Function$Type<(C), (T)>): T
-public "clipWithInteractionOverride"(arg0: $Vec3$Type, arg1: $Vec3$Type, arg2: $BlockPos$Type, arg3: $VoxelShape$Type, arg4: $BlockState$Type): $BlockHitResult
-public "clip"(arg0: $ClipContext$Type): $BlockHitResult
 public "getLightEmission"(arg0: $BlockPos$Type): integer
+public static "traverseBlocks"<T, C>(arg0: $Vec3$Type, arg1: $Vec3$Type, arg2: C, arg3: $BiFunction$Type<(C), ($BlockPos$Type), (T)>, arg4: $Function$Type<(C), (T)>): T
+public "clip"(arg0: $ClipContext$Type): $BlockHitResult
 public "isBlockInLine"(arg0: $ClipBlockStateContext$Type): $BlockHitResult
+public "clipWithInteractionOverride"(arg0: $Vec3$Type, arg1: $Vec3$Type, arg2: $BlockPos$Type, arg3: $VoxelShape$Type, arg4: $BlockState$Type): $BlockHitResult
 public "getBlockFloorHeight"(arg0: $BlockPos$Type): double
 public "getBlockFloorHeight"(arg0: $VoxelShape$Type, arg1: $Supplier$Type<($VoxelShape$Type)>): double
+public "isOutsideBuildHeight"(arg0: $BlockPos$Type): boolean
 public "getSectionsCount"(): integer
-public "getMaxSection"(): integer
 public "getSectionIndex"(arg0: integer): integer
-public "getSectionIndexFromSectionY"(arg0: integer): integer
+public static "create"(arg0: integer, arg1: integer): $LevelHeightAccessor
 public "isOutsideBuildHeight"(arg0: integer): boolean
 public "getMinSection"(): integer
+public "getSectionIndexFromSectionY"(arg0: integer): integer
+public "getMaxSection"(): integer
 public "getSectionYFromSectionIndex"(arg0: integer): integer
-public static "create"(arg0: integer, arg1: integer): $LevelHeightAccessor
-public "isOutsideBuildHeight"(arg0: $BlockPos$Type): boolean
 public "getExistingBlockEntity"(arg0: $BlockPos$Type): $BlockEntity
 public "getModelDataManager"(): $ModelDataManager
+get "maxLightLevel"(): integer
 get "height"(): integer
 get "maxBuildHeight"(): integer
-get "maxLightLevel"(): integer
 get "minBuildHeight"(): integer
 get "sectionsCount"(): integer
-get "maxSection"(): integer
 get "minSection"(): integer
+get "maxSection"(): integer
 get "modelDataManager"(): $ModelDataManager
 }
 /**

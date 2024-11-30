@@ -61,10 +61,10 @@ public static "constant"(arg0: any): $ParameterValue
 public static "function"(arg0: $Function$Type): $ParameterValue
 public "getFunction"(): $Function
 public "isVariable"(): boolean
-public "isFunction"(): boolean
-public static "variable"(arg0: integer): $ParameterValue
 public "isConstant"(): boolean
 public "getVariableIndex"(): integer
+public "isFunction"(): boolean
+public static "variable"(arg0: integer): $ParameterValue
 get "value"(): any
 get "variableIndex"(): integer
 }
@@ -87,8 +87,8 @@ import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$It
 
 export interface $ITabletSupport {
 
- "getInstalledTablet"(): $Item
  "openGui"(arg0: $Player$Type, arg1: $ItemStack$Type, arg2: $ItemStack$Type): void
+ "getInstalledTablet"(): $Item
 }
 
 export namespace $ITabletSupport {
@@ -188,9 +188,9 @@ export interface $ILevelRenderHelper {
  "format"(arg0: $FormatStyle$Type): $ILevelRenderHelper
  "color"(arg0: integer, arg1: integer): $ILevelRenderHelper
  "label"(arg0: string): $ILevelRenderHelper
- "gradient"(arg0: integer, arg1: integer): $ILevelRenderHelper
- "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: integer, arg3: integer, arg4: $IModuleDataContents$Type, arg5: $ModuleRenderInfo$Type): void
  "settings"(arg0: boolean, arg1: boolean, arg2: boolean, arg3: boolean): $ILevelRenderHelper
+ "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: integer, arg3: integer, arg4: $IModuleDataContents$Type, arg5: $ModuleRenderInfo$Type): void
+ "gradient"(arg0: integer, arg1: integer): $ILevelRenderHelper
 }
 
 export namespace $ILevelRenderHelper {
@@ -218,8 +218,8 @@ import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$IdMapper, $IdMapper$Type} from "packages/net/minecraft/core/$IdMapper"
 import {$BaseBlock, $BaseBlock$Type} from "packages/mcjty/lib/blocks/$BaseBlock"
 import {$BlockGetter, $BlockGetter$Type} from "packages/net/minecraft/world/level/$BlockGetter"
-import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$RotationType, $RotationType$Type} from "packages/mcjty/lib/blocks/$RotationType"
+import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
 import {$Property, $Property$Type} from "packages/net/minecraft/world/level/block/state/properties/$Property"
 import {$BlockHitResult, $BlockHitResult$Type} from "packages/net/minecraft/world/phys/$BlockHitResult"
@@ -256,10 +256,10 @@ readonly "properties": $BlockBehaviour$Properties
 
 constructor()
 
+public "getRotationType"(): $RotationType
 public "use"(arg0: $BlockState$Type, arg1: $Level$Type, arg2: $BlockPos$Type, arg3: $Player$Type, arg4: $InteractionHand$Type, arg5: $BlockHitResult$Type): $InteractionResult
 public "getRenderShape"(arg0: $BlockState$Type): $RenderShape
 public "getShape"(arg0: $BlockState$Type, arg1: $BlockGetter$Type, arg2: $BlockPos$Type, arg3: $CollisionContext$Type): $VoxelShape
-public "getRotationType"(): $RotationType
 get "rotationType"(): $RotationType
 }
 /**
@@ -304,14 +304,14 @@ import {$IParameter, $IParameter$Type} from "packages/mcjty/rftoolsbase/api/cont
 
 export interface $IProgram {
 
- "killMe"(): void
- "setDelay"(arg0: integer): void
- "getDelay"(): integer
  "isDead"(): boolean
+ "setLastValue"(arg0: $IParameter$Type): void
  "hasCraftTicket"(): boolean
  "getCraftTicket"(): string
- "setLastValue"(arg0: $IParameter$Type): void
  "getLastValue"(): $IParameter
+ "getDelay"(): integer
+ "setDelay"(arg0: integer): void
+ "killMe"(): void
 }
 
 export namespace $IProgram {
@@ -358,14 +358,14 @@ constructor(arg0: $Item$Properties$Type)
 
 public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "getModuleName"(): string
-public "getServerScreenModule"(): $Class<(any)>
-public "getClientScreenModule"(): $Class<(any)>
 public "createGui"(arg0: $IModuleGuiBuilder$Type): void
+public "getClientScreenModule"(): $Class<(any)>
+public "getServerScreenModule"(): $Class<(any)>
 public "getMaxWidth"(): integer
 public "getManualEntry"(): $ManualEntry
 get "moduleName"(): string
-get "serverScreenModule"(): $Class<(any)>
 get "clientScreenModule"(): $Class<(any)>
+get "serverScreenModule"(): $Class<(any)>
 get "maxWidth"(): integer
 get "manualEntry"(): $ManualEntry
 }
@@ -431,11 +431,11 @@ public "equals"(arg0: any): boolean
 public "hashCode"(): integer
 public static "builder"(): $Parameter$Builder
 public "isSet"(): boolean
-public "getParameterType"(): $ParameterType
 public "getParameterValue"(): $ParameterValue
+public "getParameterType"(): $ParameterType
 get "set"(): boolean
-get "parameterType"(): $ParameterType
 get "parameterValue"(): $ParameterValue
+get "parameterType"(): $ParameterType
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
@@ -457,16 +457,16 @@ import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$It
 export interface $IStorageScanner {
 
  "getItem"(arg0: $Predicate$Type<($ItemStack$Type)>, arg1: boolean): $ItemStack
- "insertItem"(arg0: $ItemStack$Type, arg1: boolean): $ItemStack
- "insertItem"(arg0: $ItemStack$Type): integer
+ "clearCachedCounts"(): void
+ "requestItem"(arg0: $ItemStack$Type, arg1: integer, arg2: boolean): $ItemStack
+ "requestItem"(arg0: $Predicate$Type<($ItemStack$Type)>, arg1: boolean, arg2: integer, arg3: boolean): $ItemStack
  "countItems"(arg0: $Predicate$Type<($ItemStack$Type)>, arg1: boolean, arg2: integer): integer
  "countItems"(arg0: $ItemStack$Type, arg1: boolean, arg2: integer): integer
  "countItems"(arg0: $ItemStack$Type, arg1: boolean): integer
- "clearCachedCounts"(): void
- "requestItem"(arg0: $Predicate$Type<($ItemStack$Type)>, arg1: boolean, arg2: integer, arg3: boolean): $ItemStack
- "requestItem"(arg0: $ItemStack$Type, arg1: integer, arg2: boolean): $ItemStack
- "injectStackFromScreen"(arg0: $ItemStack$Type, arg1: $Player$Type): $ItemStack
  "giveToPlayerFromScreen"(arg0: $ItemStack$Type, arg1: boolean, arg2: $Player$Type): void
+ "injectStackFromScreen"(arg0: $ItemStack$Type, arg1: $Player$Type): $ItemStack
+ "insertItem"(arg0: $ItemStack$Type, arg1: boolean): $ItemStack
+ "insertItem"(arg0: $ItemStack$Type): integer
 }
 
 export namespace $IStorageScanner {
@@ -493,8 +493,8 @@ import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$Block, $Block$Type} from "packages/net/minecraft/world/level/block/$Block"
 import {$Item, $Item$Type} from "packages/net/minecraft/world/item/$Item"
-import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
 import {$InteractionResultHolder, $InteractionResultHolder$Type} from "packages/net/minecraft/world/$InteractionResultHolder"
+import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
 import {$TooltipFlag, $TooltipFlag$Type} from "packages/net/minecraft/world/item/$TooltipFlag"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$GlobalPos, $GlobalPos$Type} from "packages/net/minecraft/core/$GlobalPos"
@@ -516,14 +516,14 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor(arg0: $SmartWrenchMode$Type)
 
-public "getMode"(arg0: $ItemStack$Type): $SmartWrenchMode
 public "getMode"(): $SmartWrenchMode
-public static "setCurrentBlock"(arg0: $ItemStack$Type, arg1: $GlobalPos$Type): void
-public static "getCurrentMode"(arg0: $ItemStack$Type): $SmartWrenchMode
-public "getUseDuration"(arg0: $ItemStack$Type): integer
+public "getMode"(arg0: $ItemStack$Type): $SmartWrenchMode
 public static "getCurrentBlock"(arg0: $ItemStack$Type): $Optional<($GlobalPos)>
-public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public static "getCurrentMode"(arg0: $ItemStack$Type): $SmartWrenchMode
+public static "setCurrentBlock"(arg0: $ItemStack$Type, arg1: $GlobalPos$Type): void
+public "getUseDuration"(arg0: $ItemStack$Type): integer
 public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
+public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
 public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "getMaxWidth"(): integer
 public "getManualEntry"(): $ManualEntry
@@ -609,8 +609,8 @@ import {$ModuleRenderInfo, $ModuleRenderInfo$Type} from "packages/mcjty/rftoolsb
 
 export interface $IClientScreenModule<T extends $IModuleData> {
 
- "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: T, arg6: $ModuleRenderInfo$Type): void
  "getHeight"(): integer
+ "render"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: $IModuleRenderHelper$Type, arg3: $Font$Type, arg4: integer, arg5: T, arg6: $ModuleRenderInfo$Type): void
  "getTransformMode"(): $IClientScreenModule$TransformMode
  "needsServerData"(): boolean
  "mouseClick"(arg0: $Level$Type, arg1: integer, arg2: integer, arg3: boolean): void
@@ -661,17 +661,17 @@ static readonly "MAX_BAR_WIDTH": integer
 
 constructor()
 
-public static "setCurrentSlot"(arg0: $Player$Type, arg1: $ItemStack$Type, arg2: integer): void
-public static "getContainingItem"(arg0: $ItemStack$Type, arg1: integer): $ItemStack
-public static "getCurrentSlot"(arg0: $ItemStack$Type): integer
-public static "setContainingItem"(arg0: $Player$Type, arg1: $InteractionHand$Type, arg2: integer, arg3: $ItemStack$Type): void
 public "cycle"(arg0: $Player$Type, arg1: $ItemStack$Type, arg2: boolean): void
-public static "getHand"(arg0: $Player$Type): $InteractionHand
 public "getItemsForTab"(): $List<($ItemStack)>
+public "shouldCauseReequipAnimation"(arg0: $ItemStack$Type, arg1: $ItemStack$Type, arg2: boolean): boolean
+public "getManualEntry"(): $ManualEntry
+public static "getHand"(arg0: $Player$Type): $InteractionHand
 public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
 public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
-public "getManualEntry"(): $ManualEntry
-public "shouldCauseReequipAnimation"(arg0: $ItemStack$Type, arg1: $ItemStack$Type, arg2: boolean): boolean
+public static "setContainingItem"(arg0: $Player$Type, arg1: $InteractionHand$Type, arg2: integer, arg3: $ItemStack$Type): void
+public static "getContainingItem"(arg0: $ItemStack$Type, arg1: integer): $ItemStack
+public static "getCurrentSlot"(arg0: $ItemStack$Type): integer
+public static "setCurrentSlot"(arg0: $Player$Type, arg1: $ItemStack$Type, arg2: integer): void
 public "getMaxWidth"(): integer
 get "itemsForTab"(): $List<($ItemStack)>
 get "manualEntry"(): $ManualEntry
@@ -784,13 +784,13 @@ public "equals"(arg0: any): boolean
 public "toString"(): string
 public "hashCode"(): integer
 public "compareTo"(arg0: $BlockSide$Type): integer
+public "getSide"(): $Direction
 public "getNodeName"(): string
 public "hasNodeName"(): boolean
-public "getSide"(): $Direction
 public "getStringRepresentation"(): string
 public "getNodeNameSafe"(): string
-get "nodeName"(): string
 get "side"(): $Direction
+get "nodeName"(): string
 get "stringRepresentation"(): string
 get "nodeNameSafe"(): string
 }
@@ -870,10 +870,10 @@ import {$BlockPos, $BlockPos$Type} from "packages/net/minecraft/core/$BlockPos"
 export interface $IHudSupport {
 
  "getLastUpdateTime"(): long
- "isBlockAboveAir"(): boolean
- "getHudPos"(): $BlockPos
  "getClientLog"(): $List<(string)>
  "setLastUpdateTime"(arg0: long): void
+ "isBlockAboveAir"(): boolean
+ "getHudPos"(): $BlockPos
  "getBlockOrientation"(): $Direction
 }
 
@@ -935,72 +935,72 @@ import {$IOpcodeRunnable$OpcodeResult, $IOpcodeRunnable$OpcodeResult$Type} from 
 
 export interface $IProcessor {
 
- "setVariable"(arg0: $IProgram$Type, arg1: integer): void
  "log"(arg0: string): void
  "signal"(arg0: string): integer
  "signal"(arg0: $Tuple$Type): integer
- "getVariable"(arg0: $IProgram$Type, arg1: integer): $IParameter
- "getMaxEnergy"(arg0: $Inventory$Type): integer
- "getEnergy"(arg0: $Inventory$Type): integer
- "setPowerOut"(arg0: $BlockSide$Type, arg1: integer): void
  "getItemHandlerAt"(arg0: $Inventory$Type): $LazyOptional<($IItemHandler)>
  "requestCraft"(arg0: $Ingredient$Type, arg1: $Inventory$Type): boolean
  "getCraftResult"(arg0: $IProgram$Type): $ItemStack
  "readRedstoneIn"(arg0: $BlockSide$Type): integer
  "getTileEntityAt"(arg0: $BlockSide$Type): $BlockEntity
  "findCraftingCard"(arg0: $IProgram$Type, arg1: $Inventory$Type, arg2: $ItemStack$Type): $ItemStack
- "placeLock"(arg0: string): $IOpcodeRunnable$OpcodeResult
  "testLock"(arg0: string): boolean
+ "placeLock"(arg0: string): $IOpcodeRunnable$OpcodeResult
  "getEnergyLong"(arg0: $Inventory$Type): long
- "getMaxEnergyLong"(arg0: $Inventory$Type): long
  "getLiquid"(arg0: $Inventory$Type): integer
- "getItemInternal"(arg0: $IProgram$Type, arg1: integer): $ItemStack
  "getFluidHandlerAt"(arg0: $Inventory$Type): $LazyOptional<($IFluidHandler)>
  "getMaxLiquid"(arg0: $Inventory$Type): integer
- "releaseLock"(arg0: string): void
- "evaluateInventoryParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $Inventory
- "evaluateIntParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): integer
- "evaluateSideParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $BlockSide
- "evaluateItemParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $ItemStack
- "evaluateStringParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): string
- "evaluateBoolParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): boolean
- "evaluateStringParameterNonNull"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): string
- "evaluateFluidParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $FluidStack
- "evaluateParameterNonNull"<T>(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): T
- "evaluateTupleParameterNonNull"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $Tuple
- "evaluateVectorParameterNonNull"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $List<($IParameter)>
- "evaluateFluidParameterNonNull"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $FluidStack
- "evaluateTupleParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $Tuple
- "evaluateNumberParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): number
- "evaluateItemParameterNonNull"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $ItemStack
- "evaluateIntegerParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): integer
- "evaluateLongParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): long
- "evaluateSideParameterNonNull"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $BlockSide
- "evaluateInventoryParameterNonNull"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $Inventory
- "evaluateLngParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): long
- "evaluateVectorParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $List<($IParameter)>
-/**
- * 
- * @deprecated
- */
- "gfxDrawBox"(arg0: $IProgram$Type, arg1: string, arg2: integer, arg3: integer, arg4: integer, arg5: integer, arg6: integer): void
- "gfxDrawBox"(arg0: $IProgram$Type, arg1: string, arg2: $Tuple$Type, arg3: $Tuple$Type, arg4: integer): void
-/**
- * 
- * @deprecated
- */
- "gfxDrawLine"(arg0: $IProgram$Type, arg1: string, arg2: integer, arg3: integer, arg4: integer, arg5: integer, arg6: integer): void
- "gfxDrawLine"(arg0: $IProgram$Type, arg1: string, arg2: $Tuple$Type, arg3: $Tuple$Type, arg4: integer): void
- "gfxClear"(arg0: $IProgram$Type, arg1: string): void
+ "getMaxEnergyLong"(arg0: $Inventory$Type): long
+ "getItemInternal"(arg0: $IProgram$Type, arg1: integer): $ItemStack
 /**
  * 
  * @deprecated
  */
  "gfxDrawText"(arg0: $IProgram$Type, arg1: string, arg2: integer, arg3: integer, arg4: string, arg5: integer): void
  "gfxDrawText"(arg0: $IProgram$Type, arg1: string, arg2: $Tuple$Type, arg3: string, arg4: integer): void
+ "gfxDrawBox"(arg0: $IProgram$Type, arg1: string, arg2: $Tuple$Type, arg3: $Tuple$Type, arg4: integer): void
+/**
+ * 
+ * @deprecated
+ */
+ "gfxDrawBox"(arg0: $IProgram$Type, arg1: string, arg2: integer, arg3: integer, arg4: integer, arg5: integer, arg6: integer): void
+ "gfxDrawLine"(arg0: $IProgram$Type, arg1: string, arg2: $Tuple$Type, arg3: $Tuple$Type, arg4: integer): void
+/**
+ * 
+ * @deprecated
+ */
+ "gfxDrawLine"(arg0: $IProgram$Type, arg1: string, arg2: integer, arg3: integer, arg4: integer, arg5: integer, arg6: integer): void
+ "gfxClear"(arg0: $IProgram$Type, arg1: string): void
  "evaluateParameter"<T>(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): T
  "getPositionAt"(arg0: $BlockSide$Type): $BlockPos
+ "getVariable"(arg0: $IProgram$Type, arg1: integer): $IParameter
+ "getEnergy"(arg0: $Inventory$Type): integer
+ "setPowerOut"(arg0: $BlockSide$Type, arg1: integer): void
+ "setVariable"(arg0: $IProgram$Type, arg1: integer): void
+ "releaseLock"(arg0: string): void
+ "evaluateStringParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): string
+ "evaluateSideParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $BlockSide
+ "evaluateIntParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): integer
+ "evaluateInventoryParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $Inventory
+ "evaluateItemParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $ItemStack
+ "evaluateNumberParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): number
+ "evaluateIntegerParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): integer
+ "evaluateFluidParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $FluidStack
+ "evaluateTupleParameterNonNull"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $Tuple
+ "evaluateBoolParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): boolean
+ "evaluateInventoryParameterNonNull"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $Inventory
+ "evaluateLngParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): long
+ "evaluateItemParameterNonNull"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $ItemStack
+ "evaluateVectorParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $List<($IParameter)>
+ "evaluateTupleParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $Tuple
+ "evaluateVectorParameterNonNull"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $List<($IParameter)>
+ "evaluateStringParameterNonNull"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): string
+ "evaluateLongParameter"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): long
+ "evaluateFluidParameterNonNull"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $FluidStack
+ "evaluateParameterNonNull"<T>(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): T
+ "evaluateSideParameterNonNull"(arg0: $ICompiledOpcode$Type, arg1: $IProgram$Type, arg2: integer): $BlockSide
  "sendMessage"(arg0: $IProgram$Type, arg1: integer, arg2: string, arg3: integer): void
+ "getMaxEnergy"(arg0: $Inventory$Type): integer
 }
 
 export namespace $IProcessor {
@@ -1028,13 +1028,13 @@ constructor(arg0: string, arg1: $Direction$Type, arg2: $Direction$Type)
 
 public "equals"(arg0: any): boolean
 public "hashCode"(): integer
-public "serialize"(): string
-public static "deserialize"(arg0: string): $Inventory
-public "getIntSide"(): $Direction
 public "getSide"(): $Direction
+public "getIntSide"(): $Direction
+public static "deserialize"(arg0: string): $Inventory
+public "serialize"(): string
 public "getStringRepresentation"(): string
-get "intSide"(): $Direction
 get "side"(): $Direction
+get "intSide"(): $Direction
 get "stringRepresentation"(): string
 }
 /**
@@ -1085,8 +1085,8 @@ import {$Level, $Level$Type} from "packages/net/minecraft/world/level/$Level"
 import {$ItemStack, $ItemStack$Type} from "packages/net/minecraft/world/item/$ItemStack"
 import {$Block, $Block$Type} from "packages/net/minecraft/world/level/block/$Block"
 import {$Item, $Item$Type} from "packages/net/minecraft/world/item/$Item"
-import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
 import {$InteractionResultHolder, $InteractionResultHolder$Type} from "packages/net/minecraft/world/$InteractionResultHolder"
+import {$UseOnContext, $UseOnContext$Type} from "packages/net/minecraft/world/item/context/$UseOnContext"
 import {$TooltipFlag, $TooltipFlag$Type} from "packages/net/minecraft/world/item/$TooltipFlag"
 import {$Player, $Player$Type} from "packages/net/minecraft/world/entity/player/$Player"
 import {$InteractionHand, $InteractionHand$Type} from "packages/net/minecraft/world/$InteractionHand"
@@ -1107,10 +1107,10 @@ constructor()
 
 public static "getCache"(arg0: $ItemStack$Type): $Predicate<($ItemStack)>
 public "getItems"(arg0: $ItemStack$Type): $List<($Pair<($ItemStack), (integer)>)>
-public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
-public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
-public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "getManualEntry"(): $ManualEntry
+public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
+public "useOn"(arg0: $UseOnContext$Type): $InteractionResult
+public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "getMaxWidth"(): integer
 get "manualEntry"(): $ManualEntry
 get "maxWidth"(): integer
@@ -1141,12 +1141,12 @@ export interface $IModuleGuiBuilder {
  "color"(arg0: string, ...arg1: (string)[]): $IModuleGuiBuilder
  "text"(arg0: string, ...arg1: (string)[]): $IModuleGuiBuilder
  "label"(arg0: string): $IModuleGuiBuilder
- "toggle"(arg0: string, arg1: string, ...arg2: (string)[]): $IModuleGuiBuilder
  "integer"(arg0: string, ...arg1: (string)[]): $IModuleGuiBuilder
- "getWorld"(): $Level
- "ghostStack"(arg0: string): $IModuleGuiBuilder
+ "toggle"(arg0: string, arg1: string, ...arg2: (string)[]): $IModuleGuiBuilder
  "getCurrentData"(): $CompoundTag
  "leftLabel"(arg0: string): $IModuleGuiBuilder
+ "ghostStack"(arg0: string): $IModuleGuiBuilder
+ "getWorld"(): $Level
  "choices"(arg0: string, ...arg1: ($IModuleGuiBuilder$Choice$Type)[]): $IModuleGuiBuilder
  "choices"(arg0: string, arg1: string, ...arg2: (string)[]): $IModuleGuiBuilder
  "toggleNegative"(arg0: string, arg1: string, ...arg2: (string)[]): $IModuleGuiBuilder
@@ -1229,15 +1229,15 @@ constructor()
 public static "getResult"(arg0: $ItemStack$Type): $ItemStack
 public static "findRecipe"(arg0: $Level$Type, arg1: $ItemStack$Type, arg2: $RecipeType$Type<(any)>): $Recipe<(any)>
 public static "getIngredientStacks"(arg0: $ItemStack$Type): $List<($ItemStack)>
-public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
-public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public static "getStacksFromItem"(arg0: $ItemStack$Type): $ItemStackList
+public static "fitsGrid"(arg0: $ItemStack$Type): boolean
+public static "putStacksInItem"(arg0: $ItemStack$Type, arg1: $ItemStackList$Type): void
 public static "testRecipe"(arg0: $Level$Type, arg1: $ItemStack$Type): void
 public "getManualEntry"(): $ManualEntry
-public static "getIngredients"(arg0: $ItemStack$Type): $List<($Ingredient)>
 public static "getIngredientsGrid"(arg0: $ItemStack$Type): $List<($Ingredient)>
-public static "putStacksInItem"(arg0: $ItemStack$Type, arg1: $ItemStackList$Type): void
-public static "fitsGrid"(arg0: $ItemStack$Type): boolean
+public static "getIngredients"(arg0: $ItemStack$Type): $List<($Ingredient)>
+public "use"(arg0: $Level$Type, arg1: $Player$Type, arg2: $InteractionHand$Type): $InteractionResultHolder<($ItemStack)>
+public "appendHoverText"(arg0: $ItemStack$Type, arg1: $Level$Type, arg2: $List$Type<($Component$Type)>, arg3: $TooltipFlag$Type): void
 public "getMaxWidth"(): integer
 get "manualEntry"(): $ManualEntry
 get "maxWidth"(): integer
@@ -1402,8 +1402,8 @@ export interface $IScreenDataHelper {
 
  "createString"(arg0: string): $IModuleDataString
  "createInteger"(arg0: integer): $IModuleDataInteger
- "createContents"(arg0: long, arg1: long, arg2: long): $IModuleDataContents
  "createBoolean"(arg0: boolean): $IModuleDataBoolean
+ "createContents"(arg0: long, arg1: long, arg2: long): $IModuleDataContents
 }
 
 export namespace $IScreenDataHelper {
@@ -1422,20 +1422,20 @@ declare global {
 export type $IScreenDataHelper_ = $IScreenDataHelper$Type;
 }}
 declare module "packages/mcjty/rftoolsbase/api/screens/$ITextRenderHelper" {
-import {$MultiBufferSource, $MultiBufferSource$Type} from "packages/net/minecraft/client/renderer/$MultiBufferSource"
 import {$TextAlign, $TextAlign$Type} from "packages/mcjty/rftoolsbase/api/screens/$TextAlign"
+import {$MultiBufferSource, $MultiBufferSource$Type} from "packages/net/minecraft/client/renderer/$MultiBufferSource"
 import {$GuiGraphics, $GuiGraphics$Type} from "packages/net/minecraft/client/gui/$GuiGraphics"
 import {$ModuleRenderInfo, $ModuleRenderInfo$Type} from "packages/mcjty/rftoolsbase/api/screens/$ModuleRenderInfo"
 
 export interface $ITextRenderHelper {
 
  "setup"(arg0: string, arg1: integer, arg2: $ModuleRenderInfo$Type): void
- "renderText"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: integer, arg3: integer, arg4: integer, arg5: $ModuleRenderInfo$Type): void
- "isLarge"(): boolean
- "getText"(): string
  "align"(arg0: $TextAlign$Type): $ITextRenderHelper
+ "renderText"(arg0: $GuiGraphics$Type, arg1: $MultiBufferSource$Type, arg2: integer, arg3: integer, arg4: integer, arg5: $ModuleRenderInfo$Type): void
+ "getText"(): string
  "getAlign"(): $TextAlign
  "large"(arg0: boolean): $ITextRenderHelper
+ "isLarge"(): boolean
  "setDirty"(): void
 }
 
@@ -1485,8 +1485,8 @@ import {$ParameterValue, $ParameterValue$Type} from "packages/mcjty/rftoolsbase/
 export interface $IParameter {
 
  "isSet"(): boolean
- "getParameterType"(): $ParameterType
  "getParameterValue"(): $ParameterValue
+ "getParameterType"(): $ParameterType
 }
 
 export namespace $IParameter {
@@ -1536,9 +1536,9 @@ import {$Capability, $Capability$Type} from "packages/net/minecraftforge/common/
 export interface $IModuleProvider {
 
  "getModuleName"(): string
- "getServerScreenModule"(): $Class<(any)>
- "getClientScreenModule"(): $Class<(any)>
  "createGui"(arg0: $IModuleGuiBuilder$Type): void
+ "getClientScreenModule"(): $Class<(any)>
+ "getServerScreenModule"(): $Class<(any)>
 }
 
 export namespace $IModuleProvider {

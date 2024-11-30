@@ -12,12 +12,12 @@ public "hashCode"(): integer
 public "check"(...types: ($ConnectionType$Type)[]): boolean
 public "getConnectionType"(side: $Direction$Type): $ConnectionType
 public "setConnectionData"(direction: $Direction$Type, connectionType: $ConnectionType$Type): void
+public "getHasColor"(): boolean
 public "getConnectionsMap"(): $Map<($Direction), ($ConnectionType)>
 public "setHasColor"(hasColor: boolean): void
-public "getHasColor"(): boolean
+get "hasColor"(): boolean
 get "connectionsMap"(): $Map<($Direction), ($ConnectionType)>
 set "hasColor"(value: boolean)
-get "hasColor"(): boolean
 }
 /**
  * Class-specific type exported by ProbeJS, use global Type_
