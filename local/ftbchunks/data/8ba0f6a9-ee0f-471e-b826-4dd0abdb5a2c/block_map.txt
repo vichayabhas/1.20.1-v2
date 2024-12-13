@@ -100,6 +100,7 @@
 #CFB4F8 gtceu:electrum_small_item_pipe
 #61C3E9 mekanism:elite_induction_cell
 #187B78 mekanism:elite_induction_provider
+#BABE2B mekanism:elite_logistical_transporter
 #A7BAFC mekanism:elite_pressurized_tube
 #09F503 mekanism:elite_smelting_factory
 #0691F4 ae2:energy_acceptor
@@ -109,6 +110,7 @@
 #4D789D gtceu:ev_air_scrubber
 #E28FDD gtceu:ev_battery_buffer_4x
 #F0EF1C gtceu:ev_energy_input_hatch
+#479FC5 gtceu:ev_energy_output_hatch
 #98F062 gtceu:ev_energy_output_hatch_16a
 #97072C gregiceng:ev_input_buffer
 #7D3DC0 gtceu:ev_input_hatch_4x
@@ -118,6 +120,7 @@
 #66818D gtceu:ev_output_hatch_4x
 #3F3FA2 gtceu:ev_transformer_16a
 #9DFCFE gtceu:ev_transformer_1a
+#9DFD1D gtceu:ev_transformer_2a
 #9DFD5B gtceu:ev_transformer_4a
 #95DBA8 gtceu:explosion_hazard_sign_block
 #009B14 minecraft:farmland
@@ -284,6 +287,7 @@
 #6631EF gtceu:mv_input_bus
 #9F4AD2 gtceu:mv_output_hatch
 #759FFE gtceu:mv_super_tank
+#ECED06 gtceu:mv_transformer_1a
 #ECED25 gtceu:mv_transformer_2a
 #ECED63 gtceu:mv_transformer_4a
 #2EDB35 gtceu:naquadah_coil_block
@@ -418,6 +422,7 @@
 #2C23E7 gtceu:uv_diode
 #80472C gtceu:uv_energy_input_hatch
 #D18C49 gtceu:uv_energy_input_hatch_16a
+#CBFFD4 gtceu:uv_energy_input_hatch_4a
 #A349B5 gtceu:uv_energy_output_hatch
 #2E2252 gtceu:uv_energy_output_hatch_16a
 #8F7B67 gtceu:uv_input_hatch

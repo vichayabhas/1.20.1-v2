@@ -42,7 +42,7 @@ ao:true
 prioritizeChunkUpdates:0
 biomeBlendRadius:2
 renderClouds:"true"
-resourcePacks:["vanilla","mod_resources","gtceu:dynamic_assets","file/ClassicMekTexutres.zip","file/Gregtech-CEu-Modern-Programmer-art.zip","file/Power of Sounds 1.1","file/Mek icon Compatibility1.20.1→1.19.2.zip"]
+resourcePacks:["vanilla","mod_resources","gtceu:dynamic_assets","file/ClassicMekTexutres.zip","file/Power of Sounds 1.1","file/Mek icon Compatibility1.20.1→1.19.2.zip","file/GTCEuM Indicators-1.1.0b.zip"]
 incompatibleResourcePacks:[]
 lastServer:
 lang:en_us
@@ -215,7 +215,7 @@ key_create.keyinfo.toolbelt:key.keyboard.left.alt
 key_key.integrateddynamics.logic_programmer_focus_search:key.keyboard.f:ALT
 key_key.integrateddynamics.logic_programmer_open_rename:key.keyboard.r:ALT
 key_shimmer.key.pickColor:key.keyboard.v
-key_key.buildinggadgets2.settings_menu:key.keyboard.g
+key_key.buildinggadgets2.settings_menu:key.keyboard.1
 key_key.buildinggadgets2.undo:key.keyboard.u
 key_key.buildinggadgets2.anchor:key.keyboard.h
 key_key.buildinggadgets2.range:key.keyboard.r

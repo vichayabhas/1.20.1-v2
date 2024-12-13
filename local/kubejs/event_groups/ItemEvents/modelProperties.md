@@ -19,27 +19,17 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 | Name | Parameters | Return type | Static? |
 | ---- | ---------- | ----------- | ------- |
-| registerAll | String, ClampedItemPropertyFunction |  | void | ✘ |
 | register | Ingredient, String, ClampedItemPropertyFunction |  | void | ✘ |
-| success |  |  | Object | ✘ |
-| success | Object |  | Object | ✘ |
-| cancel | Object |  | Object | ✘ |
-| cancel |  |  | Object | ✘ |
+| registerAll | String, ClampedItemPropertyFunction |  | void | ✘ |
 | exit | Object |  | Object | ✘ |
 | exit |  |  | Object | ✘ |
+| success | Object |  | Object | ✘ |
+| success |  |  | Object | ✘ |
+| cancel | Object |  | Object | ✘ |
+| cancel |  |  | Object | ✘ |
 
 
 ### Documented members:
-
-- `void registerAll(String var0, ClampedItemPropertyFunction var1)`
-
-  Parameters:
-  - var0: String
-  - var1: ClampedItemPropertyFunction
-
-```
-Register a model property for all items.
-```
 
 - `void register(Ingredient var0, String var1, ClampedItemPropertyFunction var2)`
 
@@ -54,11 +44,32 @@ Register a model property for an item. Model properties are used to change the a
 More about model properties: https://minecraft.fandom.com/wiki/Model#Item_predicates
 ```
 
-- `Object success()`
+- `void registerAll(String var0, ClampedItemPropertyFunction var1)`
+
+  Parameters:
+  - var0: String
+  - var1: ClampedItemPropertyFunction
+
+```
+Register a model property for all items.
+```
+
+- `Object exit(Object var0)`
+
+  Parameters:
+  - var0: Object
+
+```
+Stops the event with the given exit value. Execution will be stopped **immediately**.
+
+`exit` denotes a `default` outcome.
+```
+
+- `Object exit()`
 ```
 Stops the event with default exit value. Execution will be stopped **immediately**.
 
-`success` denotes a `true` outcome.
+`exit` denotes a `default` outcome.
 ```
 
 - `Object success(Object var0)`
@@ -68,6 +79,13 @@ Stops the event with default exit value. Execution will be stopped **immediately
 
 ```
 Stops the event with the given exit value. Execution will be stopped **immediately**.
+
+`success` denotes a `true` outcome.
+```
+
+- `Object success()`
+```
+Stops the event with default exit value. Execution will be stopped **immediately**.
 
 `success` denotes a `true` outcome.
 ```
@@ -88,24 +106,6 @@ Cancels the event with the given exit value. Execution will be stopped **immedia
 Cancels the event with default exit value. Execution will be stopped **immediately**.
 
 `cancel` denotes a `false` outcome.
-```
-
-- `Object exit(Object var0)`
-
-  Parameters:
-  - var0: Object
-
-```
-Stops the event with the given exit value. Execution will be stopped **immediately**.
-
-`exit` denotes a `default` outcome.
-```
-
-- `Object exit()`
-```
-Stops the event with default exit value. Execution will be stopped **immediately**.
-
-`exit` denotes a `default` outcome.
 ```
 
 

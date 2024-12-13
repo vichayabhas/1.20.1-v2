@@ -26,27 +26,32 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 | Name | Parameters | Return type | Static? |
 | ---- | ---------- | ----------- | ------- |
-| setMessage | Component |  | void | ✘ |
-| setComponent | Component |  | void | ✘ |
-| getEntity |  |  | Entity | ✘ |
-| getUsername |  |  | String | ✘ |
-| getComponent |  |  | Component | ✘ |
 | getMessage |  |  | String | ✘ |
+| setMessage | Component |  | void | ✘ |
+| getEntity |  |  | Player | ✘ |
+| getComponent |  |  | Component | ✘ |
+| getUsername |  |  | String | ✘ |
+| setComponent | Component |  | void | ✘ |
+| hasGameStage | String |  | boolean | ✘ |
 | removeGameStage | String |  | void | ✘ |
 | addGameStage | String |  | void | ✘ |
-| hasGameStage | String |  | boolean | ✘ |
 | getPlayer |  |  | Player | ✘ |
 | getLevel |  |  | Level | ✘ |
 | getServer |  |  | MinecraftServer | ✘ |
-| success |  |  | Object | ✘ |
-| success | Object |  | Object | ✘ |
-| cancel | Object |  | Object | ✘ |
-| cancel |  |  | Object | ✘ |
 | exit | Object |  | Object | ✘ |
 | exit |  |  | Object | ✘ |
+| success | Object |  | Object | ✘ |
+| success |  |  | Object | ✘ |
+| cancel | Object |  | Object | ✘ |
+| cancel |  |  | Object | ✘ |
 
 
 ### Documented members:
+
+- `String getMessage()`
+```
+Gets the message that the player sent.
+```
 
 - `void setMessage(Component var0)`
 
@@ -55,6 +60,21 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 ```
 Sets the message that the player sent.
+```
+
+- `Player getEntity()`
+```
+Gets the player that sent the message.
+```
+
+- `Component getComponent()`
+```
+Gets the message that the player sent.
+```
+
+- `String getUsername()`
+```
+Gets the username of the player that sent the message.
 ```
 
 - `void setComponent(Component var0)`
@@ -66,24 +86,13 @@ Sets the message that the player sent.
 Sets the message that the player sent.
 ```
 
-- `Entity getEntity()`
-```
-Gets the player that sent the message.
-```
+- `boolean hasGameStage(String var0)`
 
-- `String getUsername()`
-```
-Gets the username of the player that sent the message.
-```
+  Parameters:
+  - var0: String
 
-- `Component getComponent()`
 ```
-Gets the message that the player sent.
-```
-
-- `String getMessage()`
-```
-Gets the message that the player sent.
+Checks if the player has the specified game stage
 ```
 
 - `void removeGameStage(String var0)`
@@ -104,20 +113,22 @@ Removes the specified game stage from the player
 Adds the specified game stage to the player
 ```
 
-- `boolean hasGameStage(String var0)`
+- `Object exit(Object var0)`
 
   Parameters:
-  - var0: String
+  - var0: Object
 
 ```
-Checks if the player has the specified game stage
+Stops the event with the given exit value. Execution will be stopped **immediately**.
+
+`exit` denotes a `default` outcome.
 ```
 
-- `Object success()`
+- `Object exit()`
 ```
 Stops the event with default exit value. Execution will be stopped **immediately**.
 
-`success` denotes a `true` outcome.
+`exit` denotes a `default` outcome.
 ```
 
 - `Object success(Object var0)`
@@ -127,6 +138,13 @@ Stops the event with default exit value. Execution will be stopped **immediately
 
 ```
 Stops the event with the given exit value. Execution will be stopped **immediately**.
+
+`success` denotes a `true` outcome.
+```
+
+- `Object success()`
+```
+Stops the event with default exit value. Execution will be stopped **immediately**.
 
 `success` denotes a `true` outcome.
 ```
@@ -147,24 +165,6 @@ Cancels the event with the given exit value. Execution will be stopped **immedia
 Cancels the event with default exit value. Execution will be stopped **immediately**.
 
 `cancel` denotes a `false` outcome.
-```
-
-- `Object exit(Object var0)`
-
-  Parameters:
-  - var0: Object
-
-```
-Stops the event with the given exit value. Execution will be stopped **immediately**.
-
-`exit` denotes a `default` outcome.
-```
-
-- `Object exit()`
-```
-Stops the event with default exit value. Execution will be stopped **immediately**.
-
-`exit` denotes a `default` outcome.
 ```
 
 

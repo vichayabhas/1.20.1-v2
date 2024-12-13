@@ -19,33 +19,44 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 | Name | Parameters | Return type | Static? |
 | ---- | ---------- | ----------- | ------- |
+| create | Map<Number, Object> |  | Component | ✘ |
 | createTag | Map<Number, ResourceLocation> |  | Component | ✘ |
+| createItem | Map<Number, ItemStack> |  | Component | ✘ |
 | modify | Component, int, Object |  | void | ✘ |
 | modify | Component, Map<Number, Object> |  | void | ✘ |
-| createItem | Map<Number, ItemStack> |  | Component | ✘ |
-| modifyUnificationEntry | Component, Map<Number, UnificationEntry> |  | void | ✘ |
-| modifyUnificationEntry | Component, int, UnificationEntry |  | void | ✘ |
-| createUnificationEntry | Map<Number, UnificationEntry> |  | Component | ✘ |
-| modifyItem | Component, int, ItemStack |  | void | ✘ |
 | modifyItem | Component, Map<Number, ItemStack> |  | void | ✘ |
-| modifyTag | Component, int, ResourceLocation |  | void | ✘ |
+| modifyItem | Component, int, ItemStack |  | void | ✘ |
 | modifyTag | Component, Map<Number, ResourceLocation> |  | void | ✘ |
-| create | Map<Number, Object> |  | Component | ✘ |
-| success |  |  | Object | ✘ |
-| success | Object |  | Object | ✘ |
-| cancel | Object |  | Object | ✘ |
-| cancel |  |  | Object | ✘ |
+| modifyTag | Component, int, ResourceLocation |  | void | ✘ |
+| createUnificationEntry | Map<Number, UnificationEntry> |  | Component | ✘ |
+| modifyUnificationEntry | Component, int, UnificationEntry |  | void | ✘ |
+| modifyUnificationEntry | Component, Map<Number, UnificationEntry> |  | void | ✘ |
 | exit | Object |  | Object | ✘ |
 | exit |  |  | Object | ✘ |
+| success | Object |  | Object | ✘ |
+| success |  |  | Object | ✘ |
+| cancel | Object |  | Object | ✘ |
+| cancel |  |  | Object | ✘ |
 
 
 ### Documented members:
 
-- `Object success()`
+- `Object exit(Object var0)`
+
+  Parameters:
+  - var0: Object
+
+```
+Stops the event with the given exit value. Execution will be stopped **immediately**.
+
+`exit` denotes a `default` outcome.
+```
+
+- `Object exit()`
 ```
 Stops the event with default exit value. Execution will be stopped **immediately**.
 
-`success` denotes a `true` outcome.
+`exit` denotes a `default` outcome.
 ```
 
 - `Object success(Object var0)`
@@ -55,6 +66,13 @@ Stops the event with default exit value. Execution will be stopped **immediately
 
 ```
 Stops the event with the given exit value. Execution will be stopped **immediately**.
+
+`success` denotes a `true` outcome.
+```
+
+- `Object success()`
+```
+Stops the event with default exit value. Execution will be stopped **immediately**.
 
 `success` denotes a `true` outcome.
 ```
@@ -75,24 +93,6 @@ Cancels the event with the given exit value. Execution will be stopped **immedia
 Cancels the event with default exit value. Execution will be stopped **immediately**.
 
 `cancel` denotes a `false` outcome.
-```
-
-- `Object exit(Object var0)`
-
-  Parameters:
-  - var0: Object
-
-```
-Stops the event with the given exit value. Execution will be stopped **immediately**.
-
-`exit` denotes a `default` outcome.
-```
-
-- `Object exit()`
-```
-Stops the event with default exit value. Execution will be stopped **immediately**.
-
-`exit` denotes a `default` outcome.
 ```
 
 

@@ -25,22 +25,32 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 | Name | Parameters | Return type | Static? |
 | ---- | ---------- | ----------- | ------- |
+| add | Ingredient, Object |  | void | ✘ |
 | isShift |  |  | boolean | ✘ |
 | isCtrl |  |  | boolean | ✘ |
 | addAdvanced | Ingredient, StaticTooltipHandlerFromJS |  | void | ✘ |
 | isAlt |  |  | boolean | ✘ |
-| addToAll | Object |  | void | ✘ |
 | addAdvancedToAll | StaticTooltipHandlerFromJS |  | void | ✘ |
-| add | Ingredient, Object |  | void | ✘ |
-| success |  |  | Object | ✘ |
-| success | Object |  | Object | ✘ |
-| cancel | Object |  | Object | ✘ |
-| cancel |  |  | Object | ✘ |
+| addToAll | Object |  | void | ✘ |
 | exit | Object |  | Object | ✘ |
 | exit |  |  | Object | ✘ |
+| success | Object |  | Object | ✘ |
+| success |  |  | Object | ✘ |
+| cancel | Object |  | Object | ✘ |
+| cancel |  |  | Object | ✘ |
 
 
 ### Documented members:
+
+- `void add(Ingredient var0, Object var1)`
+
+  Parameters:
+  - var0: Ingredient
+  - var1: Object
+
+```
+Adds text to all items matching the ingredient.
+```
 
 - `boolean isShift()`
 ```
@@ -67,15 +77,6 @@ Adds a dynamic tooltip handler to all items matching the ingredient.
 Is alt key pressed.
 ```
 
-- `void addToAll(Object var0)`
-
-  Parameters:
-  - var0: Object
-
-```
-Adds text to all items.
-```
-
 - `void addAdvancedToAll(StaticTooltipHandlerFromJS var0)`
 
   Parameters:
@@ -85,21 +86,31 @@ Adds text to all items.
 Adds a dynamic tooltip handler to all items.
 ```
 
-- `void add(Ingredient var0, Object var1)`
+- `void addToAll(Object var0)`
 
   Parameters:
-  - var0: Ingredient
-  - var1: Object
+  - var0: Object
 
 ```
-Adds text to all items matching the ingredient.
+Adds text to all items.
 ```
 
-- `Object success()`
+- `Object exit(Object var0)`
+
+  Parameters:
+  - var0: Object
+
+```
+Stops the event with the given exit value. Execution will be stopped **immediately**.
+
+`exit` denotes a `default` outcome.
+```
+
+- `Object exit()`
 ```
 Stops the event with default exit value. Execution will be stopped **immediately**.
 
-`success` denotes a `true` outcome.
+`exit` denotes a `default` outcome.
 ```
 
 - `Object success(Object var0)`
@@ -109,6 +120,13 @@ Stops the event with default exit value. Execution will be stopped **immediately
 
 ```
 Stops the event with the given exit value. Execution will be stopped **immediately**.
+
+`success` denotes a `true` outcome.
+```
+
+- `Object success()`
+```
+Stops the event with default exit value. Execution will be stopped **immediately**.
 
 `success` denotes a `true` outcome.
 ```
@@ -129,24 +147,6 @@ Cancels the event with the given exit value. Execution will be stopped **immedia
 Cancels the event with default exit value. Execution will be stopped **immediately**.
 
 `cancel` denotes a `false` outcome.
-```
-
-- `Object exit(Object var0)`
-
-  Parameters:
-  - var0: Object
-
-```
-Stops the event with the given exit value. Execution will be stopped **immediately**.
-
-`exit` denotes a `default` outcome.
-```
-
-- `Object exit()`
-```
-Stops the event with default exit value. Execution will be stopped **immediately**.
-
-`exit` denotes a `default` outcome.
 ```
 
 
