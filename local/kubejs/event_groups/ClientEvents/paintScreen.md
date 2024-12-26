@@ -33,18 +33,24 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 | Name | Parameters | Return type | Static? |
 | ---- | ---------- | ----------- | ------- |
-| scale | float, float |  | void | ✘ |
+| alignY | float, float, AlignMode |  | float | ✘ |
+| rotateRad | float |  | void | ✘ |
+| rotateDeg | float |  | void | ✘ |
+| alignX | float, float, AlignMode |  | float | ✘ |
 | scale | float |  | void | ✘ |
+| scale | float, float |  | void | ✘ |
 | text | Component, int, int, int, boolean |  | void | ✘ |
-| translate | double, double |  | void | ✘ |
 | rectangle | float, float, float, float, float, int |  | void | ✘ |
 | rectangle | float, float, float, float, float, int, float, float, float, float |  | void | ✘ |
-| getVariables |  |  | VariableSet | ✘ |
+| translate | double, double |  | void | ✘ |
 | rawText | FormattedCharSequence, int, int, int, boolean |  | void | ✘ |
-| alignX | float, float, AlignMode |  | float | ✘ |
-| rotateRad | float |  | void | ✘ |
-| alignY | float, float, AlignMode |  | float | ✘ |
-| rotateDeg | float |  | void | ✘ |
+| getVariables |  |  | VariableSet | ✘ |
+| setShaderInstance | Supplier<ShaderInstance> |  | void | ✘ |
+| getMatrix |  |  | Matrix4f | ✘ |
+| beginQuads | VertexFormat |  | void | ✘ |
+| beginQuads | boolean |  | void | ✘ |
+| resetShaderColor |  |  | void | ✘ |
+| multiplyWithMatrix | Matrix4f |  | void | ✘ |
 | multiply | Quaternionf |  | void | ✘ |
 | blend | boolean |  | void | ✘ |
 | scale | float, float, float |  | void | ✘ |
@@ -52,24 +58,18 @@ Note: Even if no fields are listed above, some methods are still available as fi
 | begin | VertexFormat$Mode, VertexFormat |  | void | ✘ |
 | push |  |  | void | ✘ |
 | pop |  |  | void | ✘ |
-| setShaderColor | float, float, float, float |  | void | ✘ |
-| setShaderTexture | ResourceLocation |  | void | ✘ |
-| translate | double, double, double |  | void | ✘ |
-| bindTextureForSetup | ResourceLocation |  | void | ✘ |
-| vertex | Matrix4f, float, float, float, int |  | void | ✘ |
 | vertex | Matrix4f, float, float, float, int, float, float |  | void | ✘ |
+| vertex | Matrix4f, float, float, float, int |  | void | ✘ |
+| translate | double, double, double |  | void | ✘ |
+| setShaderTexture | ResourceLocation |  | void | ✘ |
+| setShaderColor | float, float, float, float |  | void | ✘ |
+| bindTextureForSetup | ResourceLocation |  | void | ✘ |
 | setPositionColorShader |  |  | void | ✘ |
 | setPositionColorTextureShader |  |  | void | ✘ |
-| resetShaderColor |  |  | void | ✘ |
-| getMatrix |  |  | Matrix4f | ✘ |
-| setShaderInstance | Supplier<ShaderInstance> |  | void | ✘ |
-| multiplyWithMatrix | Matrix4f |  | void | ✘ |
-| beginQuads | VertexFormat |  | void | ✘ |
-| beginQuads | boolean |  | void | ✘ |
 | getEntity |  |  | Entity | ✘ |
 | getPlayer |  |  | LocalPlayer | ✘ |
-| hasGameStage | String |  | boolean | ✘ |
 | removeGameStage | String |  | void | ✘ |
+| hasGameStage | String |  | boolean | ✘ |
 | addGameStage | String |  | void | ✘ |
 | getLevel |  |  | Level | ✘ |
 | getServer |  |  | MinecraftServer | ✘ |
@@ -83,15 +83,6 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 ### Documented members:
 
-- `boolean hasGameStage(String var0)`
-
-  Parameters:
-  - var0: String
-
-```
-Checks if the player has the specified game stage
-```
-
 - `void removeGameStage(String var0)`
 
   Parameters:
@@ -99,6 +90,15 @@ Checks if the player has the specified game stage
 
 ```
 Removes the specified game stage from the player
+```
+
+- `boolean hasGameStage(String var0)`
+
+  Parameters:
+  - var0: String
+
+```
+Checks if the player has the specified game stage
 ```
 
 - `void addGameStage(String var0)`

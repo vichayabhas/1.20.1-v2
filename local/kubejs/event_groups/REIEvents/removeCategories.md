@@ -19,11 +19,11 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 | Name | Parameters | Return type | Static? |
 | ---- | ---------- | ----------- | ------- |
+| getCategoryIds |  |  | Collection<ResourceLocation> | ✘ |
 | remove | ResourceLocation[] |  | void | ✘ |
 | removeIf | Predicate<CategoryRegistry.CategoryConfiguration<?>> |  | void | ✘ |
-| getRegistry |  |  | CategoryRegistry | ✘ |
 | getCategories |  |  | CategoryRegistry | ✘ |
-| getCategoryIds |  |  | Collection<ResourceLocation> | ✘ |
+| getRegistry |  |  | CategoryRegistry | ✘ |
 | exit | Object |  | Object | ✘ |
 | exit |  |  | Object | ✘ |
 | success | Object |  | Object | ✘ |

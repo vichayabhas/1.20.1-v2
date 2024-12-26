@@ -25,13 +25,13 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 | Name | Parameters | Return type | Static? |
 | ---- | ---------- | ----------- | ------- |
-| add | Ingredient, Object |  | void | ✘ |
-| isShift |  |  | boolean | ✘ |
-| isCtrl |  |  | boolean | ✘ |
-| addAdvanced | Ingredient, StaticTooltipHandlerFromJS |  | void | ✘ |
+| addToAll | Object |  | void | ✘ |
 | isAlt |  |  | boolean | ✘ |
 | addAdvancedToAll | StaticTooltipHandlerFromJS |  | void | ✘ |
-| addToAll | Object |  | void | ✘ |
+| addAdvanced | Ingredient, StaticTooltipHandlerFromJS |  | void | ✘ |
+| isCtrl |  |  | boolean | ✘ |
+| add | Ingredient, Object |  | void | ✘ |
+| isShift |  |  | boolean | ✘ |
 | exit | Object |  | Object | ✘ |
 | exit |  |  | Object | ✘ |
 | success | Object |  | Object | ✘ |
@@ -42,34 +42,13 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 ### Documented members:
 
-- `void add(Ingredient var0, Object var1)`
+- `void addToAll(Object var0)`
 
   Parameters:
-  - var0: Ingredient
-  - var1: Object
+  - var0: Object
 
 ```
-Adds text to all items matching the ingredient.
-```
-
-- `boolean isShift()`
-```
-Is shift key pressed.
-```
-
-- `boolean isCtrl()`
-```
-Is control key pressed.
-```
-
-- `void addAdvanced(Ingredient var0, StaticTooltipHandlerFromJS var1)`
-
-  Parameters:
-  - var0: Ingredient
-  - var1: StaticTooltipHandlerFromJS
-
-```
-Adds a dynamic tooltip handler to all items matching the ingredient.
+Adds text to all items.
 ```
 
 - `boolean isAlt()`
@@ -86,13 +65,34 @@ Is alt key pressed.
 Adds a dynamic tooltip handler to all items.
 ```
 
-- `void addToAll(Object var0)`
+- `void addAdvanced(Ingredient var0, StaticTooltipHandlerFromJS var1)`
 
   Parameters:
-  - var0: Object
+  - var0: Ingredient
+  - var1: StaticTooltipHandlerFromJS
 
 ```
-Adds text to all items.
+Adds a dynamic tooltip handler to all items matching the ingredient.
+```
+
+- `boolean isCtrl()`
+```
+Is control key pressed.
+```
+
+- `void add(Ingredient var0, Object var1)`
+
+  Parameters:
+  - var0: Ingredient
+  - var1: Object
+
+```
+Adds text to all items matching the ingredient.
+```
+
+- `boolean isShift()`
+```
+Is shift key pressed.
 ```
 
 - `Object exit(Object var0)`

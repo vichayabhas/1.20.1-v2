@@ -19,18 +19,18 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 | Name | Parameters | Return type | Static? |
 | ---- | ---------- | ----------- | ------- |
-| create | Map<Number, Object> |  | Component | ✘ |
-| createTag | Map<Number, ResourceLocation> |  | Component | ✘ |
-| createItem | Map<Number, ItemStack> |  | Component | ✘ |
-| modify | Component, int, Object |  | void | ✘ |
-| modify | Component, Map<Number, Object> |  | void | ✘ |
-| modifyItem | Component, Map<Number, ItemStack> |  | void | ✘ |
-| modifyItem | Component, int, ItemStack |  | void | ✘ |
 | modifyTag | Component, Map<Number, ResourceLocation> |  | void | ✘ |
 | modifyTag | Component, int, ResourceLocation |  | void | ✘ |
-| createUnificationEntry | Map<Number, UnificationEntry> |  | Component | ✘ |
-| modifyUnificationEntry | Component, int, UnificationEntry |  | void | ✘ |
+| modifyItem | Component, Map<Number, ItemStack> |  | void | ✘ |
+| modifyItem | Component, int, ItemStack |  | void | ✘ |
 | modifyUnificationEntry | Component, Map<Number, UnificationEntry> |  | void | ✘ |
+| modifyUnificationEntry | Component, int, UnificationEntry |  | void | ✘ |
+| createUnificationEntry | Map<Number, UnificationEntry> |  | Component | ✘ |
+| create | Map<Number, Object> |  | Component | ✘ |
+| createTag | Map<Number, ResourceLocation> |  | Component | ✘ |
+| modify | Component, int, Object |  | void | ✘ |
+| modify | Component, Map<Number, Object> |  | void | ✘ |
+| createItem | Map<Number, ItemStack> |  | Component | ✘ |
 | exit | Object |  | Object | ✘ |
 | exit |  |  | Object | ✘ |
 | success | Object |  | Object | ✘ |

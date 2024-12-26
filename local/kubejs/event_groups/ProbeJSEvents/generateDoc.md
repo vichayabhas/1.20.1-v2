@@ -19,15 +19,15 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 | Name | Parameters | Return type | Static? |
 | ---- | ---------- | ----------- | ------- |
-| getProperty | JsonObject |  | AbstractProperty<?> | ✘ |
-| addSnippet | String, List<Object> |  | DocGenerationEventJS | ✘ |
-| addSnippet | String, List<Object>, String |  | DocGenerationEventJS | ✘ |
 | transformDocument | Class<?>, Consumer<DocumentClass> |  | DocGenerationEventJS | ✘ |
 | transformByName | String, Consumer<DocumentClass> |  | DocGenerationEventJS | ✘ |
 | customSnippet | String, List<String>, List<Object> |  | DocGenerationEventJS | ✘ |
 | customSnippet | String, List<String>, List<Object>, String |  | DocGenerationEventJS | ✘ |
-| getJavaClass | Class<?> |  | DocumentClass | ✘ |
+| addSnippet | String, List<Object> |  | DocGenerationEventJS | ✘ |
+| addSnippet | String, List<Object>, String |  | DocGenerationEventJS | ✘ |
+| getProperty | JsonObject |  | AbstractProperty<?> | ✘ |
 | specialType | String, List<Object> |  | DocGenerationEventJS | ✘ |
+| getJavaClass | Class<?> |  | DocumentClass | ✘ |
 | exit | Object |  | Object | ✘ |
 | exit |  |  | Object | ✘ |
 | success | Object |  | Object | ✘ |

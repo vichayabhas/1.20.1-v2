@@ -20,11 +20,11 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 | Name | Parameters | Return type | Static? |
 | ---- | ---------- | ----------- | ------- |
-| setCheck | Check |  | void | ✘ |
-| setEnableButton | boolean |  | void | ✘ |
+| getTask |  |  | CustomTask | ✘ |
 | setMaxProgress | long |  | void | ✘ |
 | setCheckTimer | int |  | void | ✘ |
-| getTask |  |  | CustomTask | ✘ |
+| setCheck | Check |  | void | ✘ |
+| setEnableButton | boolean |  | void | ✘ |
 | exit | Object |  | Object | ✘ |
 | exit |  |  | Object | ✘ |
 | success | Object |  | Object | ✘ |

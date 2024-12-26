@@ -23,13 +23,13 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 | Name | Parameters | Return type | Static? |
 | ---- | ---------- | ----------- | ------- |
-| getItem |  |  | ItemStack | ✘ |
-| getEntity |  |  | Entity | ✘ |
 | getItemEntity |  |  | ItemEntity | ✘ |
-| hasGameStage | String |  | boolean | ✘ |
-| removeGameStage | String |  | void | ✘ |
-| addGameStage | String |  | void | ✘ |
+| getItem |  |  | ItemStack | ✘ |
+| getEntity |  |  | Player | ✘ |
 | getPlayer |  |  | Player | ✘ |
+| removeGameStage | String |  | void | ✘ |
+| hasGameStage | String |  | boolean | ✘ |
+| addGameStage | String |  | void | ✘ |
 | getLevel |  |  | Level | ✘ |
 | getServer |  |  | MinecraftServer | ✘ |
 | exit | Object |  | Object | ✘ |
@@ -42,28 +42,19 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 ### Documented members:
 
-- `ItemStack getItem()`
-```
-The item that was picked up.
-```
-
-- `Entity getEntity()`
-```
-The player that picked up the item.
-```
-
 - `ItemEntity getItemEntity()`
 ```
 The item entity that was picked up.
 ```
 
-- `boolean hasGameStage(String var0)`
-
-  Parameters:
-  - var0: String
-
+- `ItemStack getItem()`
 ```
-Checks if the player has the specified game stage
+The item that was picked up.
+```
+
+- `Player getEntity()`
+```
+The player that picked up the item.
 ```
 
 - `void removeGameStage(String var0)`
@@ -73,6 +64,15 @@ Checks if the player has the specified game stage
 
 ```
 Removes the specified game stage from the player
+```
+
+- `boolean hasGameStage(String var0)`
+
+  Parameters:
+  - var0: String
+
+```
+Checks if the player has the specified game stage
 ```
 
 - `void addGameStage(String var0)`

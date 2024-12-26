@@ -19,12 +19,12 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 | Name | Parameters | Return type | Static? |
 | ---- | ---------- | ----------- | ------- |
-| hide | Object |  | void | ✘ |
-| hide | Object, Object |  | void | ✘ |
+| hideNoFilter | Object |  | void | ✘ |
 | hideAll | Object |  | void | ✘ |
 | hideAll |  |  | void | ✘ |
 | getAllEntryValues |  |  | List<T> | ✘ |
-| hideNoFilter | Object |  | void | ✘ |
+| hide | Object |  | void | ✘ |
+| hide | Object, Object |  | void | ✘ |
 | exit | Object |  | Object | ✘ |
 | exit |  |  | Object | ✘ |
 | success | Object |  | Object | ✘ |

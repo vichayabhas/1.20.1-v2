@@ -19,10 +19,10 @@ Note: Even if no fields are listed above, some methods are still available as fi
 
 | Name | Parameters | Return type | Static? |
 | ---- | ---------- | ----------- | ------- |
+| getCategoryIds |  |  | Collection<ResourceLocation> | ✘ |
 | remove | ResourceLocation[] |  | void | ✘ |
 | removeIf | Predicate<IRecipeCategory<?>> |  | void | ✘ |
 | getCategories |  |  | Collection<IRecipeCategory<?>> | ✘ |
-| getCategoryIds |  |  | Collection<ResourceLocation> | ✘ |
 | exit | Object |  | Object | ✘ |
 | exit |  |  | Object | ✘ |
 | success | Object |  | Object | ✘ |
