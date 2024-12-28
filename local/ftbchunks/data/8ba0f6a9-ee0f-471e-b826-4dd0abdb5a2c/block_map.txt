@@ -3,6 +3,7 @@
 #399487 mekanism:advanced_bin
 #E277EE gtceu:advanced_computer_casing
 #A945B7 gtceu:advanced_data_access_hatch
+#2DA40C mekanism:advanced_energy_cube
 #A78799 mekanism:advanced_fluid_tank
 #C7227A mekanism:advanced_induction_cell
 #9A2989 mekanism:advanced_induction_provider
@@ -105,6 +106,7 @@
 #BABE2B mekanism:elite_logistical_transporter
 #A7BAFC mekanism:elite_pressurized_tube
 #09F503 mekanism:elite_smelting_factory
+#FFB97A mcwfences:end_brick_pillar_wall
 #0691F4 ae2:energy_acceptor
 #7A7B39 gtceu:enriched_naquadah_trinium_europium_duranide_octal_wire
 #66AA25 gtceu:enriched_naquadah_trinium_europium_duranide_quadruple_wire
@@ -136,6 +138,7 @@
 #895315 mekanismgenerators:fission_reactor_port
 #EFF841 mekanism:formulaic_assemblicator
 #D9FD28 framedblocks:framed_double_slope
+#C67E6F framedblocks:framed_double_threeway_corner_pillar
 #28F35F framedblocks:framed_fancy_rail_slope
 #41BC38 framedblocks:framed_mini_cube
 #6E1E24 framedblocks:framed_one_way_window
@@ -177,8 +180,10 @@
 #CCD281 gtceu:hv_1a_energy_converter
 #57DB31 gtceu:hv_battery_buffer_16x
 #C812FA gtceu:hv_battery_buffer_4x
+#BCDC94 gtceu:hv_diode
 #BBCF9F gtceu:hv_energy_input_hatch
 #D8CFA2 gtceu:hv_energy_output_hatch
+#EDF714 gtceu:hv_input_bus
 #4C3E54 gtceu:hv_input_hatch
 #322A74 gtceu:hv_item_passthrough_hatch
 #3BD212 gtceu:hv_mixer
@@ -255,6 +260,7 @@
 #4F6C76 gtceu:lv_battery_buffer_4x
 #E8309A gtceu:lv_canner
 #494B04 gtceu:lv_chemical_reactor
+#419010 gtceu:lv_diode
 #1FA5A3 gtceu:lv_energy_input_hatch
 #EFBA1E gtceu:lv_energy_output_hatch
 #DF4A29 gtceu:lv_extractor
@@ -459,6 +465,7 @@
 #88A5C6 minecraft:wet_sponge
 #B7775E minecraft:white_bed
 #BC20FE minecraft:white_wool
+#A4B5D5 gtceu:wood_frame
 #97FF93 minecraft:yellow_wool
 #8DE216 gtceu:zpm_energy_input_hatch
 #63A233 gtceu:zpm_energy_input_hatch_16a

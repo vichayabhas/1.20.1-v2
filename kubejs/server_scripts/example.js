@@ -182,7 +182,7 @@ ServerEvents.recipes(event => {
         .itemOutputs("gtceu:indium_dust")
         .itemOutputs("2x gtceu:calcium_phosphide_dust")
         .EUt(18)
-        .duration(127)//33
+        .duration(95)//33
     event.remove({ id: "gtceu:distillery/naquadria_waste_separation_to_naquadria_solution" })
     event.remove({ id: "gtceu:distillery/enriched_naquadah_waste_separation_to_naquadria_solution" })
     event.remove({ id: "gtceu:distillery/naquadria_waste_separation_to_enriched_naquadah_solution" })

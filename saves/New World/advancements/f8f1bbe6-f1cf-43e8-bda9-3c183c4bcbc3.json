@@ -2717,5 +2717,11 @@
     },
     "done": true
   },
+  "rftoolsbase:recipes/rftoolsbase/crafting_card": {
+    "criteria": {
+      "crafter": "2024-12-28 12:46:37 +0700"
+    },
+    "done": true
+  },
   "DataVersion": 3465
 }
