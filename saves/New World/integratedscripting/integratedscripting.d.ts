@@ -744,6 +744,10 @@ export interface Operations {
    */
   nbtAsLongList: (arg0: Record<string, any>) => any[];
   /**
+   * Throw a custom error
+   */
+  stringStringError: (arg0: string) => string;
+  /**
    * Create an NBT Long tag from the given Long value
    */
   longAsNbt: (arg0: number) => Record<string, any>;

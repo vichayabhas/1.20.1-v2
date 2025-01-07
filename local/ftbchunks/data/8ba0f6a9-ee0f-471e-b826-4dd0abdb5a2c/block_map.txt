@@ -234,6 +234,7 @@
 #4625DE gtceu:laser_hazard_sign_block
 #72D77D minecraft:lever
 #D4FF84 minecraft:light_blue_wool
+#5EA8D2 minecraft:lime_wool
 #9DA81C mekanism:logistical_sorter
 #C64EB8 gtceu:long_distance_fluid_pipeline
 #ACD6F0 gtceu:long_distance_fluid_pipeline_endpoint

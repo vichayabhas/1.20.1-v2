@@ -58,7 +58,7 @@ ServerEvents.recipes(event => {
         .itemOutputs('2x gtceu:sodium_dust')
         .outputFluids('gtceu:sulfuric_acid 1000')
         .duration(30)
-        .EUt(30)/*
+        .EUt(30)
     event.remove({ id: 'gtceu:large_chemical_reactor/rhodium_sulfate_to_solution' })
     event.remove({ id: 'gtceu:chemical_reactor/rhodium_sulfate_to_solution' })
     event.remove({ id: 'gtceu:large_chemical_reactor/rhodium_sulfate_to_solution_l' })
@@ -119,7 +119,7 @@ ServerEvents.recipes(event => {
         .outputFluids('gtceu:chlorine 36000')
         .outputFluids('minecraft:water 2000')
         .itemOutputs('gtceu:osmium_dust')
-    event.replaceOutput({ id: 'gtceu:electric_blast_furnace/rarest_metal_residue' }, Fluid.of('gtceu:steam', 1000), Fluid.of('gtceu:steam', 4500))*/
+    event.replaceOutput({ id: 'gtceu:electric_blast_furnace/rarest_metal_residue' }, Fluid.of('gtceu:steam', 1000), Fluid.of('gtceu:steam', 4500))
     event.remove({ id: 'gtceu:electrolyzer/decomposition_electrolyzing_rock_salt' })
     event.remove({ id: 'gtceu:electrolyzer/decomposition_electrolyzing_potassium_hydroxide' })
     event.remove({ id: 'gtceu:large_chemical_reactor/potassium_carbonate' })
@@ -153,7 +153,7 @@ ServerEvents.recipes(event => {
         .inputFluids(Fluid.of("gtceu:chlorine", 12000))
         .inputFluids(Fluid.of('gtceu:oxygen', 12000))
         .duration(2400)
-        .EUt(282720)
+        .EUt(282718)
     //["scannerResearch(java.util.function.UnaryOperator)"](b => b.researchStack(Item.of('minecraft:coal_block')).EUt(GTValues.VA[GTValues.IV]).duration(420)) //
     // event.remove({ id: "gtceu:large_chemical_reactor/titanium_tetrachloride" })
     // event.recipes.gtceu.large_chemical_reactor('titanium20s')
@@ -181,8 +181,8 @@ ServerEvents.recipes(event => {
         .itemInputs("gtceu:calcium_dust")
         .itemOutputs("gtceu:indium_dust")
         .itemOutputs("2x gtceu:calcium_phosphide_dust")
-        .EUt(18)
-        .duration(95)//33
+        .EUt(30)
+        .duration(9)//33
     event.remove({ id: "gtceu:distillery/naquadria_waste_separation_to_naquadria_solution" })
     event.remove({ id: "gtceu:distillery/enriched_naquadah_waste_separation_to_naquadria_solution" })
     event.remove({ id: "gtceu:distillery/naquadria_waste_separation_to_enriched_naquadah_solution" })
