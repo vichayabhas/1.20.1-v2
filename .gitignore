@@ -1,7 +1,0 @@
-backups/*
-logs/*
-XaeroWorldMap/*
-*.zip
-*.exe
-#saves/*
-minecraftinstance.json
