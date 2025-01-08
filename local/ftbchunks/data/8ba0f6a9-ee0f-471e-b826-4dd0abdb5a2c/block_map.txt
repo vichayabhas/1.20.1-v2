@@ -370,6 +370,7 @@
 #21C665 buildinggadgets2:render_block
 #487B7B minecraft:repeater
 #03F70A gtceu:research_station
+#BFD0EA gtceu:reservoir_hatch
 #74006B mekanism:resistive_heater
 #879B54 mekanism:rotary_condensentrator
 #10781F gtceu:rtm_alloy_coil_block
@@ -398,6 +399,7 @@
 #6A36D7 gtceu:tempered_glass
 #14CEA9 buildinggadgets2:template_manager
 #4F23E0 gtceu:test_generator
+#D85649 gtceu:test_use_t
 #B12AD5 mekanism:thermal_evaporation_block
 #C5F7D8 mekanism:thermal_evaporation_valve
 #2F02F6 gtceu:tin_small_item_pipe
@@ -423,6 +425,7 @@
 #89573B gtceu:uhv_machine_hull
 #D2C55A gtceu:uhv_substation_input_hatch_64a
 #51DF8F gtceu:uhv_substation_output_hatch_64a
+#89C1BB mekanism:ultimate_energy_cube
 #89780A mekanism:ultimate_fluid_tank
 #69726B mekanism:ultimate_induction_cell
 #C118FA mekanism:ultimate_induction_provider
@@ -455,6 +458,7 @@
 #CBFFD4 gtceu:uv_energy_input_hatch_4a
 #A349B5 gtceu:uv_energy_output_hatch
 #2E2252 gtceu:uv_energy_output_hatch_16a
+#F35CE7 gtceu:uv_input_bus
 #8F7B67 gtceu:uv_input_hatch
 #0BE28E gtceu:uv_muffler_hatch
 #E6D2DA gtceu:uv_scanner
