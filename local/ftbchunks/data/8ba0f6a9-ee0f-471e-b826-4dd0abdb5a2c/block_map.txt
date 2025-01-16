@@ -24,6 +24,7 @@
 #F03BD3 gtceu:basaltic_mineral_sand_indicator
 #B81A93 mekanism:basic_bin
 #0BDD20 mekanism:basic_crushing_factory
+#FB5E18 mekanism:basic_energy_cube
 #55BED4 mekanism:basic_enriching_factory
 #6C9CEE mekanism:basic_induction_cell
 #FE7EC8 mekanism:basic_injecting_factory
@@ -257,8 +258,10 @@
 #0436EE gtceu:luv_output_hatch
 #DDAEFA gtceu:luv_quantum_tank
 #CF5750 gtceu:luv_substation_input_hatch_64a
+#C74241 gtceu:luv_transformer_2a
 #C7427F gtceu:luv_transformer_4a
 #4F6C76 gtceu:lv_battery_buffer_4x
+#496D0F gtceu:lv_buffer
 #E8309A gtceu:lv_canner
 #494B04 gtceu:lv_chemical_reactor
 #419010 gtceu:lv_diode
@@ -355,6 +358,8 @@
 #5F0D54 mekanism:pressurized_reaction_chamber
 #6F3B9C gtceu:ptfe_pipe_casing
 #057101 mekanism:quantum_entangloporter
+#07E7D0 ae2:quantum_link
+#0AA206 ae2:quantum_ring
 #A70271 gtnn:radiation_proof_machine_casing
 #B10054 gtceu:radioactive_hazard_sign_block
 #46C364 gtceu:reaction_safe_mixing_casing
@@ -482,3 +487,4 @@
 #E92F44 gtceu:zpm_output_hatch
 #741D43 gtceu:zpm_substation_output_hatch_64a
 #4F7CF8 gtceu:zpm_transformer_1a
+#4F7D17 gtceu:zpm_transformer_2a
