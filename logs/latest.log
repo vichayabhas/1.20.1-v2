@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:51:49] [main/INFO]: ModLauncher running: args [--username, arifmini64, --version, forge-47.3.10, --gameDir, C:\Users\arifv\curseforge\minecraft\Instances\1.20.1 v2 good, --assetsDir, C:\Users\arifv\curseforge\minecraft\Install\assets, --assetIndex, 5, --uuid, f8f1bbe6f1cf43e8bda93c183c4bcbc3, --accessToken, ????????, --clientId, YzhhNDU5MTctNWViMS00MzdjLWIyNDItNWU4NWUzMmU2ZTUx, --xuid, 2535422421823277, --userType, msa, --versionType, release, --width, 1024, --height, 768, --quickPlayPath, C:\Users\arifv\curseforge\minecraft\Install\quickPlay\java\1737355907731.json, --launchTarget, forgeclient, --fml.forgeVersion, 47.3.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412]
 [13:51:49] [main/INFO]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.8 by Microsoft; OS Windows 11 arch amd64 version 10.0
 [13:51:51] [main/INFO]: Loading ImmediateWindowProvider fmlearlywindow
@@ -181,6 +182,8 @@
 [13:51:56] [main/INFO]: Loading 127 mods:
 	- ae2 15.3.3
 =======
+=======
+>>>>>>> parent of a58826d (8 time net 0)
 =======
 >>>>>>> parent of a58826d (8 time net 0)
 [09:17:05] [main/INFO]: ModLauncher running: args [--username, arifmini64, --version, forge-47.3.10, --gameDir, C:\Users\arifv\curseforge\minecraft\Instances\1.20.1 v2 good, --assetsDir, C:\Users\arifv\curseforge\minecraft\Install\assets, --assetIndex, 5, --uuid, f8f1bbe6f1cf43e8bda93c183c4bcbc3, --accessToken, ????????, --clientId, YzhhNDU5MTctNWViMS00MzdjLWIyNDItNWU4NWUzMmU2ZTUx, --xuid, 2535422421823277, --userType, msa, --versionType, release, --width, 1024, --height, 768, --quickPlayPath, C:\Users\arifv\curseforge\minecraft\Install\quickPlay\java\1736302623582.json, --launchTarget, forgeclient, --fml.forgeVersion, 47.3.10, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412]
@@ -495,6 +498,7 @@
 	- xnetgases 5.0.0
 	- xtonesreworked 1.0.1
 	- yeetusexperimentus 2.3.1-build.6+mc1.20.1
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 [13:51:56] [main/INFO]: Patching IForgeItemStack#getEnchantmentLevel
@@ -812,6 +816,82 @@
 [09:17:19] [Render thread/INFO]:       BeforeConstant found LdcInsn 
 
 >>>>>>> parent of a58826d (8 time net 0)
+=======
+[09:17:12] [main/INFO]: Patching IForgeItemStack#getEnchantmentLevel
+[09:17:12] [main/INFO]: Patching IForgeItemStack#getEnchantmentLevel
+[09:17:12] [main/INFO]: bre2el.fpsreducer.mixin.RenderSystemMixin will be applied.
+[09:17:12] [main/INFO]: bre2el.fpsreducer.mixin.WindowMixin will NOT be applied because OptiFine was NOT detected.
+[09:17:12] [main/WARN]: Inventory Profiles Next: Doing our own dependency resolving! Because Forge is being Forge....: https://github.com/MinecraftForge/MinecraftForge/issues/9088
+[09:17:12] [main/WARN]: Error loading class: de/maxhenkel/easyvillagers/blocks/tileentity/TraderTileentityBase (java.lang.ClassNotFoundException: de.maxhenkel.easyvillagers.blocks.tileentity.TraderTileentityBase)
+[09:17:12] [main/WARN]: @Mixin target de.maxhenkel.easyvillagers.blocks.tileentity.TraderTileentityBase was not found mixins.ipnext.json:MixinTraderTileEntityBase
+[09:17:12] [main/WARN]: Error loading class: mezz/modnametooltip/TooltipEventHandler (java.lang.ClassNotFoundException: mezz.modnametooltip.TooltipEventHandler)
+[09:17:13] [main/WARN]: Error loading class: mezz/jei/forge/platform/FluidHelper (java.lang.ClassNotFoundException: mezz.jei.forge.platform.FluidHelper)
+[09:17:13] [main/WARN]: @Mixin target mezz.jei.forge.platform.FluidHelper was not found gtceu.mixins.json:jei.FluidHelperMixin
+[09:17:13] [main/WARN]: Error loading class: journeymap/client/ui/fullscreen/Fullscreen (java.lang.ClassNotFoundException: journeymap.client.ui.fullscreen.Fullscreen)
+[09:17:13] [main/WARN]: @Mixin target journeymap.client.ui.fullscreen.Fullscreen was not found gtceu.mixins.json:journeymap.FullscreenMixin
+[09:17:13] [main/WARN]: Error loading class: xaero/map/gui/GuiMap (java.lang.ClassNotFoundException: xaero.map.gui.GuiMap)
+[09:17:13] [main/WARN]: @Mixin target xaero.map.gui.GuiMap was not found gtceu.mixins.json:xaeroworldmap.GuiMapMixin
+[09:17:13] [main/WARN]: Error loading class: xaero/map/element/MapElementRenderHandler$Builder (java.lang.ClassNotFoundException: xaero.map.element.MapElementRenderHandler$Builder)
+[09:17:13] [main/WARN]: @Mixin target xaero.map.element.MapElementRenderHandler$Builder was not found gtceu.mixins.json:xaeroworldmap.MapElementRenderHandlerBuilderMixin
+[09:17:13] [main/WARN]: Error loading class: xaero/common/minimap/highlight/HighlighterRegistry (java.lang.ClassNotFoundException: xaero.common.minimap.highlight.HighlighterRegistry)
+[09:17:13] [main/WARN]: @Mixin target xaero.common.minimap.highlight.HighlighterRegistry was not found gtceu.mixins.json:xaerominimap.HighlighterRegistryMixin
+[09:17:13] [main/WARN]: Error loading class: xaero/common/minimap/render/MinimapFBORenderer (java.lang.ClassNotFoundException: xaero.common.minimap.render.MinimapFBORenderer)
+[09:17:13] [main/WARN]: @Mixin target xaero.common.minimap.render.MinimapFBORenderer was not found gtceu.mixins.json:xaerominimap.MinimapFBORendererMixin
+[09:17:13] [main/WARN]: Error loading class: xaero/map/WorldMapSession (java.lang.ClassNotFoundException: xaero.map.WorldMapSession)
+[09:17:13] [main/WARN]: @Mixin target xaero.map.WorldMapSession was not found gtceu.mixins.json:xaeroworldmap.WorldMapSessionMixin
+[09:17:13] [main/WARN]: Error loading class: net/coderbot/iris/gl/buffer/ShaderStorageBuffer (java.lang.ClassNotFoundException: net.coderbot.iris.gl.buffer.ShaderStorageBuffer)
+[09:17:13] [main/WARN]: @Mixin target net.coderbot.iris.gl.buffer.ShaderStorageBuffer was not found shimmer.forge.mixins.json:rubidium.ShaderStorageBufferAccessor
+[09:17:13] [main/INFO]: Initializing MixinExtras via com.llamalad7.mixinextras.service.MixinExtrasServiceImpl(version=0.3.5).
+[09:17:13] [main/INFO]: Patching IForgeItemStack#getEnchantmentLevel
+[09:17:13] [main/INFO]: Patching IForgeItemStack#getEnchantmentLevel
+[09:17:13] [main/INFO]: Mixing client.MixinMinecraft from mixins/common/nochatreports.mixins.json into net.minecraft.client.Minecraft
+[09:17:13] [main/INFO]: Smooth Boot (Reloaded) config initialized
+[09:17:14] [main/WARN]: Static binding violation: PRIVATE @Overwrite method m_216202_ in modernfix-forge.mixins.json:perf.tag_id_caching.TagOrElementLocationMixin cannot reduce visibiliy of PUBLIC target method, visibility will be upgraded.
+[09:17:15] [pool-4-thread-1/INFO]: ModernFix reached bootstrap stage (11.65 s after launch)
+[09:17:15] [pool-4-thread-1/WARN]: @Final field delegatesByName:Ljava/util/Map; in modernfix-forge.mixins.json:perf.forge_registry_alloc.ForgeRegistryMixin should be final
+[09:17:15] [pool-4-thread-1/WARN]: @Final field delegatesByValue:Ljava/util/Map; in modernfix-forge.mixins.json:perf.forge_registry_alloc.ForgeRegistryMixin should be final
+[09:17:15] [pool-4-thread-1/INFO]: Injecting BlockStateBase cache population hook into getOpacityIfCached from ca.spottedleaf.starlight.mixin.common.blockstate.BlockStateBaseMixin
+[09:17:15] [pool-4-thread-1/INFO]: Injecting BlockStateBase cache population hook into isConditionallyFullOpaque from ca.spottedleaf.starlight.mixin.common.blockstate.BlockStateBaseMixin
+[09:17:16] [pool-4-thread-1/INFO]: Vanilla bootstrap took 1103 milliseconds
+[09:17:16] [pool-4-thread-1/INFO]: Mixing common.MixinFriendlyByteBuf from mixins/common/nochatreports.mixins.json into net.minecraft.network.FriendlyByteBuf
+[09:17:16] [pool-4-thread-1/INFO]: Renaming synthetic method lambda$onWriteJsonWithCodec$1(Ljava/lang/Object;Ljava/lang/String;)Lio/netty/handler/codec/EncoderException; to md1e6305$lambda$onWriteJsonWithCodec$1$0 in mixins/common/nochatreports.mixins.json:common.MixinFriendlyByteBuf
+[09:17:16] [pool-4-thread-1/INFO]: Renaming synthetic method lambda$onReadJsonWithCodec$0(Ljava/lang/String;)Lio/netty/handler/codec/DecoderException; to md1e6305$lambda$onReadJsonWithCodec$0$1 in mixins/common/nochatreports.mixins.json:common.MixinFriendlyByteBuf
+[09:17:16] [pool-4-thread-1/INFO]: Patching IForgeItemStack#getEnchantmentLevel
+[09:17:16] [pool-4-thread-1/INFO]: Patching IForgeItemStack#getEnchantmentLevel
+[09:17:17] [pool-4-thread-1/INFO]: Mixing server.MixinServerGamePacketListenerImpl from mixins/common/nochatreports.mixins.json into net.minecraft.server.network.ServerGamePacketListenerImpl
+[09:17:18] [pool-4-thread-1/WARN]: Static binding violation: PRIVATE @Overwrite method m_47505_ in modernfix-common.mixins.json:perf.remove_biome_temperature_cache.BiomeMixin cannot reduce visibiliy of PUBLIC target method, visibility will be upgraded.
+[09:17:18] [Render thread/WARN]: Static binding violation: PRIVATE @Overwrite method m_166786_ in embeddium.mixins.json:features.render.immediate.buffer_builder.sorting.BufferBuilderMixin cannot reduce visibiliy of PUBLIC target method, visibility will be upgraded.
+[09:17:19] [Render thread/INFO]: Mixing client.MixinTitleScreen from mixins/common/nochatreports.mixins.json into net.minecraft.client.gui.screens.TitleScreen
+[09:17:19] [Render thread/INFO]: Mixing client.MixinChatScreen from mixins/common/nochatreports.mixins.json into net.minecraft.client.gui.screens.ChatScreen
+[09:17:19] [Render thread/INFO]: Renaming synthetic method lambda$onInit$4()Lnet/minecraft/network/chat/Component; to md1e6305$lambda$onInit$4$0 in mixins/common/nochatreports.mixins.json:client.MixinChatScreen
+[09:17:19] [Render thread/INFO]: Renaming synthetic method lambda$onInit$3(Lnet/minecraft/client/gui/components/Button;)V to md1e6305$lambda$onInit$3$1 in mixins/common/nochatreports.mixins.json:client.MixinChatScreen
+[09:17:19] [Render thread/INFO]: Renaming synthetic method lambda$onInit$2()Lnet/minecraft/network/chat/Component; to md1e6305$lambda$onInit$2$2 in mixins/common/nochatreports.mixins.json:client.MixinChatScreen
+[09:17:19] [Render thread/INFO]: Renaming synthetic method lambda$onInit$1(Lnet/minecraft/client/gui/components/Button;)V to md1e6305$lambda$onInit$1$3 in mixins/common/nochatreports.mixins.json:client.MixinChatScreen
+[09:17:19] [Render thread/INFO]: Renaming synthetic method lambda$onBeforeMessage$0(Ljava/lang/String;Lorg/spongepowered/asm/mixin/injection/callback/CallbackInfoReturnable;Lcom/aizistral/nochatreports/common/encryption/Encryptor;)V to md1e6305$lambda$onBeforeMessage$0$4 in mixins/common/nochatreports.mixins.json:client.MixinChatScreen
+[09:17:19] [Render thread/WARN]: Assets URL 'union:/C:/Users/arifv/curseforge/minecraft/Install/libraries/net/minecraft/client/1.20.1-20230612.114412/client-1.20.1-20230612.114412-srg.jar%23396!/assets/.mcassetsroot' uses unexpected schema
+[09:17:19] [Render thread/WARN]: Assets URL 'union:/C:/Users/arifv/curseforge/minecraft/Install/libraries/net/minecraft/client/1.20.1-20230612.114412/client-1.20.1-20230612.114412-srg.jar%23396!/data/.mcassetsroot' uses unexpected schema
+[09:17:19] [Render thread/INFO]: Environment: authHost='https://authserver.mojang.com', accountsHost='https://api.mojang.com', sessionHost='https://sessionserver.mojang.com', servicesHost='https://api.minecraftservices.com', name='PROD'
+[09:17:19] [Render thread/INFO]: Setting user: arifmini64
+[09:17:19] [Render thread/INFO]: Bypassed Mojang DFU
+[09:17:19] [Render thread/INFO]: Mixing client.MixinToastComponent from mixins/common/nochatreports.mixins.json into net.minecraft.client.gui.components.toasts.ToastComponent
+[09:17:19] [Render thread/INFO]: Mixing client.MixinOptions from mixins/common/nochatreports.mixins.json into net.minecraft.client.Options
+[09:17:19] [Render thread/INFO]: Renaming synthetic method lambda$onlyShowSecureChat$0(Ljava/lang/Boolean;)V to md1e6305$lambda$onlyShowSecureChat$0$0 in mixins/common/nochatreports.mixins.json:client.MixinOptions
+[09:17:19] [Render thread/INFO]: Mixing client.MixinChatComponent from mixins/common/nochatreports.mixins.json into net.minecraft.client.gui.components.ChatComponent
+[09:17:19] [Render thread/INFO]: Renaming synthetic method lambda$modifyGUIMessage$1()V to md1e6305$lambda$modifyGUIMessage$1$0 in mixins/common/nochatreports.mixins.json:client.MixinChatComponent
+[09:17:19] [Render thread/INFO]: Renaming synthetic method lambda$modifyGUIMessage$0(Lnet/minecraft/network/chat/FormattedText;Lnet/minecraft/network/chat/Component;)V to md1e6305$lambda$modifyGUIMessage$0$1 in mixins/common/nochatreports.mixins.json:client.MixinChatComponent
+[09:17:19] [Render thread/INFO]: BeforeConstant is searching for constants in method with descriptor (Lnet/minecraft/network/chat/Component;Lnet/minecraft/client/GuiMessageTag;)V
+[09:17:19] [Render thread/INFO]:   BeforeConstant found STRING constant: value = , stringValue = null
+[09:17:19] [Render thread/INFO]:     BeforeConstant found a matching constant TYPE at ordinal 0
+[09:17:19] [Render thread/INFO]:       BeforeConstant found LdcInsn 
+[09:17:19] [Render thread/INFO]:   BeforeConstant found STRING constant: value = \\r, stringValue = null
+[09:17:19] [Render thread/INFO]:     BeforeConstant found a matching constant TYPE at ordinal 1
+[09:17:19] [Render thread/INFO]:       BeforeConstant found LdcInsn \\r
+[09:17:19] [Render thread/INFO]:   BeforeConstant found STRING constant: value = 
+, stringValue = null
+[09:17:19] [Render thread/INFO]:     BeforeConstant found a matching constant TYPE at ordinal 2
+[09:17:19] [Render thread/INFO]:       BeforeConstant found LdcInsn 
+
+>>>>>>> parent of a58826d (8 time net 0)
 [09:17:19] [Render thread/INFO]:   BeforeConstant found STRING constant: value = \\n, stringValue = null
 [09:17:19] [Render thread/INFO]:     BeforeConstant found a matching constant TYPE at ordinal 3
 [09:17:19] [Render thread/INFO]:       BeforeConstant found LdcInsn \\n
@@ -909,6 +989,9 @@
 [09:17:24] [modloading-worker-0/INFO]: RAMJobStore initialized.
 [09:17:24] [modloading-worker-0/INFO]: Scheduler meta-data: Quartz Scheduler (v2.0.2) 'ftbbackups2' with instanceId 'NON_CLUSTERED'
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)
 =======
 >>>>>>> parent of a58826d (8 time net 0)
@@ -919,6 +1002,7 @@
   Using thread pool 'net.creeperhost.ftbbackups.repack.org.quartz.simpl.SimpleThreadPool' - with 1 threads.
   Using job-store 'net.creeperhost.ftbbackups.repack.org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 [13:52:05] [modloading-worker-0/INFO]: Quartz scheduler 'ftbbackups2' initialized from an externally provided properties instance.
@@ -1169,6 +1253,8 @@
 =======
 =======
 >>>>>>> parent of a58826d (8 time net 0)
+=======
+>>>>>>> parent of a58826d (8 time net 0)
 [09:17:24] [modloading-worker-0/INFO]: Quartz scheduler 'ftbbackups2' initialized from an externally provided properties instance.
 [09:17:24] [modloading-worker-0/INFO]: Quartz scheduler version: 2.0.2
 [09:17:24] [modloading-worker-0/INFO]: Scheduler ftbbackups2_$_NON_CLUSTERED started.
@@ -1409,6 +1495,9 @@
 [09:17:32] [Worker-ResourceReload-7/INFO]: Found unifont_all_no_pua-15.0.06.hex, loading
 [09:17:32] [Worker-ResourceReload-0/WARN]: Unable to load font 'mtr:mtr' in fonts.json in resourcepack: 'mod_resources'
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)
 =======
 >>>>>>> parent of a58826d (8 time net 0)
@@ -1423,6 +1512,7 @@ com.google.gson.JsonParseException: Unknown element name:legacy_unicode
 	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) ~[?:?]
 	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) ~[?:?]
 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 [13:52:14] [Worker-ResourceReload-6/INFO]: Fake player readout: UUID = 46e82cd0-d480-3d48-800a-77431ede078e, name = [Mekanism]
@@ -1508,6 +1598,8 @@ com.google.gson.JsonParseException: Unknown element name:legacy_unicode
 =======
 =======
 >>>>>>> parent of a58826d (8 time net 0)
+=======
+>>>>>>> parent of a58826d (8 time net 0)
 [09:17:32] [Worker-ResourceReload-2/INFO]: Fake player readout: UUID = 46e82cd0-d480-3d48-800a-77431ede078e, name = [Mekanism]
 [09:17:32] [Worker-ResourceReload-2/INFO]: Mod loaded.
 [09:17:33] [Worker-ResourceReload-3/INFO]: Registered packet handler.
@@ -1581,6 +1673,9 @@ com.google.gson.JsonParseException: Unknown element name:legacy_unicode
 [09:17:34] [Worker-ResourceReload-13/INFO]: Registering S2C receiver with id mtr:packet_open_lift_customization_screen
 [09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.lift_menu registered after event
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)
 =======
 >>>>>>> parent of a58826d (8 time net 0)
@@ -1607,7 +1702,11 @@ java.lang.RuntimeException: null
 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:52:15] [Worker-ResourceReload-3/WARN]: Key mapping key.mtr.train_accelerate registered after event
+=======
+[09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.train_accelerate registered after event
+>>>>>>> parent of a58826d (8 time net 0)
 =======
 [09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.train_accelerate registered after event
 >>>>>>> parent of a58826d (8 time net 0)
@@ -1637,7 +1736,11 @@ java.lang.RuntimeException: null
 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:52:15] [Worker-ResourceReload-3/WARN]: Key mapping key.mtr.train_brake registered after event
+=======
+[09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.train_brake registered after event
+>>>>>>> parent of a58826d (8 time net 0)
 =======
 [09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.train_brake registered after event
 >>>>>>> parent of a58826d (8 time net 0)
@@ -1667,8 +1770,11 @@ java.lang.RuntimeException: null
 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:52:15] [Worker-ResourceReload-3/WARN]: Key mapping key.mtr.train_toggle_doors registered after event
 =======
+=======
+>>>>>>> parent of a58826d (8 time net 0)
 =======
 >>>>>>> parent of a58826d (8 time net 0)
 [09:17:34] [Worker-ResourceReload-11/WARN]: Invalid frame index on sprite gtceu:item/wetware_processor frame 0: 2
@@ -1682,6 +1788,9 @@ java.lang.RuntimeException: null
 [09:17:34] [Worker-ResourceReload-11/WARN]: Invalid frame index on sprite gtceu:item/wetware_processor frame 11: 3
 [09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.train_toggle_doors registered after event
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)
 =======
 >>>>>>> parent of a58826d (8 time net 0)
@@ -1708,7 +1817,11 @@ java.lang.RuntimeException: null
 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:52:15] [Worker-ResourceReload-3/WARN]: Key mapping key.mtr.debug_1_negative registered after event
+=======
+[09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.debug_1_negative registered after event
+>>>>>>> parent of a58826d (8 time net 0)
 =======
 [09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.debug_1_negative registered after event
 >>>>>>> parent of a58826d (8 time net 0)
@@ -1738,7 +1851,11 @@ java.lang.RuntimeException: null
 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:52:15] [Worker-ResourceReload-3/WARN]: Key mapping key.mtr.debug_2_negative registered after event
+=======
+[09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.debug_2_negative registered after event
+>>>>>>> parent of a58826d (8 time net 0)
 =======
 [09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.debug_2_negative registered after event
 >>>>>>> parent of a58826d (8 time net 0)
@@ -1768,7 +1885,11 @@ java.lang.RuntimeException: null
 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:52:15] [Worker-ResourceReload-3/WARN]: Key mapping key.mtr.debug_3_negative registered after event
+=======
+[09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.debug_3_negative registered after event
+>>>>>>> parent of a58826d (8 time net 0)
 =======
 [09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.debug_3_negative registered after event
 >>>>>>> parent of a58826d (8 time net 0)
@@ -1798,7 +1919,11 @@ java.lang.RuntimeException: null
 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:52:15] [Worker-ResourceReload-3/WARN]: Key mapping key.mtr.debug_1_positive registered after event
+=======
+[09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.debug_1_positive registered after event
+>>>>>>> parent of a58826d (8 time net 0)
 =======
 [09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.debug_1_positive registered after event
 >>>>>>> parent of a58826d (8 time net 0)
@@ -1828,7 +1953,11 @@ java.lang.RuntimeException: null
 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:52:15] [Worker-ResourceReload-3/WARN]: Key mapping key.mtr.debug_2_positive registered after event
+=======
+[09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.debug_2_positive registered after event
+>>>>>>> parent of a58826d (8 time net 0)
 =======
 [09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.debug_2_positive registered after event
 >>>>>>> parent of a58826d (8 time net 0)
@@ -1858,7 +1987,11 @@ java.lang.RuntimeException: null
 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:52:15] [Worker-ResourceReload-3/WARN]: Key mapping key.mtr.debug_3_positive registered after event
+=======
+[09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.debug_3_positive registered after event
+>>>>>>> parent of a58826d (8 time net 0)
 =======
 [09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.debug_3_positive registered after event
 >>>>>>> parent of a58826d (8 time net 0)
@@ -1888,7 +2021,11 @@ java.lang.RuntimeException: null
 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:52:15] [Worker-ResourceReload-3/WARN]: Key mapping key.mtr.debug_cycle_negative registered after event
+=======
+[09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.debug_cycle_negative registered after event
+>>>>>>> parent of a58826d (8 time net 0)
 =======
 [09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.debug_cycle_negative registered after event
 >>>>>>> parent of a58826d (8 time net 0)
@@ -1918,7 +2055,11 @@ java.lang.RuntimeException: null
 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:52:15] [Worker-ResourceReload-3/WARN]: Key mapping key.mtr.debug_cycle_positive registered after event
+=======
+[09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.debug_cycle_positive registered after event
+>>>>>>> parent of a58826d (8 time net 0)
 =======
 [09:17:34] [Worker-ResourceReload-13/WARN]: Key mapping key.mtr.debug_cycle_positive registered after event
 >>>>>>> parent of a58826d (8 time net 0)
@@ -1948,7 +2089,13 @@ java.lang.RuntimeException: null
 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:52:15] [Worker-ResourceReload-6/ERROR]: Using missing texture, unable to load kubejs:item/used_sulfur_trioxide_token
+=======
+[09:17:34] [Forge Version Check/INFO]: [controlling] Found status: BETA Current: 12.0.2 Target: 12.0.2
+[09:17:34] [Forge Version Check/INFO]: [integratedrest] Starting version check at https://raw.githubusercontent.com/CyclopsMC/Versions/master/forge_update/integrated-rest.json
+[09:17:34] [Worker-ResourceReload-11/ERROR]: Using missing texture, unable to load kubejs:item/used_sulfur_trioxide_token
+>>>>>>> parent of a58826d (8 time net 0)
 =======
 [09:17:34] [Forge Version Check/INFO]: [controlling] Found status: BETA Current: 12.0.2 Target: 12.0.2
 [09:17:34] [Forge Version Check/INFO]: [integratedrest] Starting version check at https://raw.githubusercontent.com/CyclopsMC/Versions/master/forge_update/integrated-rest.json
@@ -1972,6 +2119,7 @@ java.io.IOException: Could not load image: Image not of any known type, or corru
 	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) ~[?:?]
 	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) ~[?:?]
 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 [13:52:15] [Worker-ResourceReload-10/WARN]: Texture mtr:block/sign/door_overlay_a_train_tcl_right with size 380x320 limits mip level from 4 to 2
@@ -2015,6 +2163,8 @@ java.io.IOException: Could not load image: Image not of any known type, or corru
 =======
 =======
 >>>>>>> parent of a58826d (8 time net 0)
+=======
+>>>>>>> parent of a58826d (8 time net 0)
 [09:17:34] [Worker-ResourceReload-1/WARN]: Texture mtr:block/sign/door_overlay_a_train_tcl_right with size 380x320 limits mip level from 4 to 2
 [09:17:34] [Worker-ResourceReload-1/WARN]: Texture mtr:block/sign/door_overlay_sp1900_top with size 240x30 limits mip level from 2 to 1
 [09:17:34] [Worker-ResourceReload-1/WARN]: Texture gtceu:block/cover/cover_interface_machine_off_proxy with size 14x5 limits mip level from 1 to 0
@@ -2038,6 +2188,9 @@ java.io.IOException: Could not load image: Image not of any known type, or corru
 [09:17:35] [Forge Version Check/INFO]: [integratedscripting] Starting version check at https://raw.githubusercontent.com/CyclopsMC/Versions/master/forge_update/integrated-scripting.json
 [09:17:35] [Forge Version Check/WARN]: Failed to process update information
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)
 =======
 >>>>>>> parent of a58826d (8 time net 0)
@@ -2055,6 +2208,7 @@ Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was NUMBER
 	at com.google.gson.internal.bind.MapTypeAdapterFactory$Adapter.read(MapTypeAdapterFactory.java:144) ~[gson-2.10.jar%23107!/:?]
 	at com.google.gson.Gson.fromJson(Gson.java:1214) ~[gson-2.10.jar%23107!/:?]
 	... 6 more
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 [13:52:17] [Forge Version Check/INFO]: [searchables] Starting version check at https://updates.blamejared.com/get?n=searchables&gv=1.20.1
@@ -2317,6 +2471,66 @@ Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was NUMBER
 [09:17:40] [Worker-ResourceReload-0/WARN]: Missing textures in model kubejs:used_sulfur_trioxide_token#inventory:
     minecraft:textures/atlas/blocks.png:kubejs:item/used_sulfur_trioxide_token
 >>>>>>> parent of a58826d (8 time net 0)
+=======
+[09:17:35] [Forge Version Check/INFO]: [searchables] Starting version check at https://updates.blamejared.com/get?n=searchables&gv=1.20.1
+[09:17:35] [Forge Version Check/INFO]: [searchables] Found status: BETA Current: 1.0.3 Target: 1.0.3
+[09:17:35] [Forge Version Check/INFO]: [integratedtunnels] Starting version check at https://raw.githubusercontent.com/CyclopsMC/Versions/master/forge_update/integrated-tunnels.json
+[09:17:35] [Forge Version Check/INFO]: [integratedtunnels] Found status: UP_TO_DATE Current: 1.8.32 Target: null
+[09:17:35] [Forge Version Check/INFO]: [mcwroofs] Starting version check at https://raw.githubusercontent.com/sketchmacaw/macawsmods/master/roofs.json
+[09:17:36] [Worker-ResourceReload-0/WARN]: Exception loading blockstate definition: 'rftoolsbuilder:blockstates/invisible_mover.json' missing model for variant: 'rftoolsbuilder:invisible_mover#'
+[09:17:36] [Forge Version Check/INFO]: [mcwroofs] Found status: UP_TO_DATE Current: 2.3.1 Target: null
+[09:17:36] [Forge Version Check/INFO]: [mcwfurnitures] Starting version check at https://raw.githubusercontent.com/sketchmacaw/macawsmods/master/furniture.json
+[09:17:36] [Forge Version Check/INFO]: [mcwfurnitures] Found status: UP_TO_DATE Current: 3.3.0 Target: null
+[09:17:36] [Forge Version Check/INFO]: [mcwlights] Starting version check at https://raw.githubusercontent.com/sketchmacaw/macawsmods/master/lights.json
+[09:17:36] [Forge Version Check/INFO]: [mcwlights] Found status: UP_TO_DATE Current: 1.1.0 Target: null
+[09:17:36] [Forge Version Check/INFO]: [fastload] Starting version check at https://github.com/BumbleSoftware/Fastload/raw/Forge-1.20.1/updates.json
+[09:17:36] [Worker-ResourceReload-0/WARN]: Exception loading blockstate definition: 'storagedrawers:blockstates/meta_indicator.json' missing model for variant: 'storagedrawers:meta_indicator#facing=west,half=true,slots=3'
+[09:17:36] [Worker-ResourceReload-0/WARN]: Exception loading blockstate definition: 'storagedrawers:blockstates/meta_indicator.json' missing model for variant: 'storagedrawers:meta_indicator#facing=north,half=true,slots=3'
+[09:17:36] [Worker-ResourceReload-0/WARN]: Exception loading blockstate definition: 'storagedrawers:blockstates/meta_indicator.json' missing model for variant: 'storagedrawers:meta_indicator#facing=north,half=false,slots=3'
+[09:17:36] [Worker-ResourceReload-0/WARN]: Exception loading blockstate definition: 'storagedrawers:blockstates/meta_indicator.json' missing model for variant: 'storagedrawers:meta_indicator#facing=west,half=false,slots=3'
+[09:17:36] [Worker-ResourceReload-0/WARN]: Exception loading blockstate definition: 'storagedrawers:blockstates/meta_indicator.json' missing model for variant: 'storagedrawers:meta_indicator#facing=south,half=true,slots=3'
+[09:17:36] [Worker-ResourceReload-0/WARN]: Exception loading blockstate definition: 'storagedrawers:blockstates/meta_indicator.json' missing model for variant: 'storagedrawers:meta_indicator#facing=south,half=false,slots=3'
+[09:17:36] [Worker-ResourceReload-0/WARN]: Exception loading blockstate definition: 'storagedrawers:blockstates/meta_indicator.json' missing model for variant: 'storagedrawers:meta_indicator#facing=east,half=true,slots=3'
+[09:17:36] [Worker-ResourceReload-0/WARN]: Exception loading blockstate definition: 'storagedrawers:blockstates/meta_indicator.json' missing model for variant: 'storagedrawers:meta_indicator#facing=east,half=false,slots=3'
+[09:17:36] [Worker-ResourceReload-0/WARN]: Exception loading blockstate definition: 'storagedrawers:blockstates/meta_comp_indicator.json' missing model for variant: 'storagedrawers:meta_comp_indicator#facing=north,half=true'
+[09:17:36] [Worker-ResourceReload-0/WARN]: Exception loading blockstate definition: 'storagedrawers:blockstates/meta_comp_indicator.json' missing model for variant: 'storagedrawers:meta_comp_indicator#facing=south,half=true'
+[09:17:36] [Worker-ResourceReload-0/WARN]: Exception loading blockstate definition: 'storagedrawers:blockstates/meta_comp_indicator.json' missing model for variant: 'storagedrawers:meta_comp_indicator#facing=west,half=true'
+[09:17:36] [Worker-ResourceReload-0/WARN]: Exception loading blockstate definition: 'storagedrawers:blockstates/meta_comp_indicator.json' missing model for variant: 'storagedrawers:meta_comp_indicator#facing=east,half=true'
+[09:17:36] [Forge Version Check/INFO]: [fastload] Found status: UP_TO_DATE Current: 3.4.0 Target: null
+[09:17:36] [Forge Version Check/INFO]: [attributefix] Starting version check at https://updates.blamejared.com/get?n=attributefix&gv=1.20.1
+[09:17:36] [Forge Version Check/INFO]: [attributefix] Found status: BETA Current: 21.0.4 Target: 21.0.4
+[09:17:36] [Forge Version Check/INFO]: [travelanchors] Starting version check at https://assets.melanx.de/updates/travel-anchors.json
+[09:17:37] [Forge Version Check/INFO]: [travelanchors] Found status: UP_TO_DATE Current: 1.20.1-5.0.1 Target: null
+[09:17:37] [Forge Version Check/INFO]: [mcwholidays] Starting version check at https://raw.githubusercontent.com/sketchmacaw/macawsmods/master/holidays.json
+[09:17:37] [Forge Version Check/INFO]: [mcwholidays] Found status: UP_TO_DATE Current: 1.1.0 Target: null
+[09:17:37] [Forge Version Check/INFO]: [mcwpaintings] Starting version check at https://raw.githubusercontent.com/sketchmacaw/macawsmods/master/paintings.json
+[09:17:37] [Forge Version Check/INFO]: [mcwpaintings] Found status: UP_TO_DATE Current: 1.0.5 Target: null
+[09:17:37] [Forge Version Check/INFO]: [clumps] Starting version check at https://updates.blamejared.com/get?n=clumps&gv=1.20.1
+[09:17:37] [Forge Version Check/INFO]: [clumps] Found status: BETA Current: 12.0.0.4 Target: 12.0.0.4
+[09:17:37] [Forge Version Check/INFO]: [libx] Starting version check at https://assets.melanx.de/updates/libx.json
+[09:17:37] [Forge Version Check/INFO]: [libx] Found status: AHEAD Current: 1.20.1-5.0.14 Target: null
+[09:17:37] [Forge Version Check/INFO]: [puzzlesaccessapi] Starting version check at https://raw.githubusercontent.com/Fuzss/modresources/main/update/puzzlesaccessapi.json
+[09:17:37] [Forge Version Check/INFO]: [puzzlesaccessapi] Found status: BETA Current: 8.0.7 Target: null
+[09:17:37] [Forge Version Check/INFO]: [forge] Starting version check at https://files.minecraftforge.net/net/minecraftforge/forge/promotions_slim.json
+[09:17:38] [Forge Version Check/INFO]: [forge] Found status: OUTDATED Current: 47.3.10 Target: 47.3.22
+[09:17:38] [Forge Version Check/INFO]: [mcwpaths] Starting version check at https://raw.githubusercontent.com/sketchmacaw/macawsmods/master/paths.json
+[09:17:38] [Forge Version Check/INFO]: [mcwpaths] Found status: UP_TO_DATE Current: 1.0.5 Target: null
+[09:17:38] [Forge Version Check/INFO]: [integratedcrafting] Starting version check at https://raw.githubusercontent.com/CyclopsMC/Versions/master/forge_update/integrated-crafting.json
+[09:17:38] [Forge Version Check/INFO]: [integratedcrafting] Found status: UP_TO_DATE Current: 1.1.9 Target: null
+[09:17:38] [Forge Version Check/INFO]: [configuration] Starting version check at https://raw.githubusercontent.com/Toma1O6/UpdateSchemas/master/configuration-forge.json
+[09:17:38] [Forge Version Check/INFO]: [configuration] Found status: UP_TO_DATE Current: 2.2.1 Target: null
+[09:17:38] [Forge Version Check/INFO]: [smoothboot] Starting version check at https://github.com/AbdElAziz333/SmoothBoot-Reloaded/raw/mc1.20.1/dev/updates.json
+[09:17:38] [Forge Version Check/INFO]: [smoothboot] Found status: UP_TO_DATE Current: 0.0.4 Target: null
+[09:17:38] [Forge Version Check/INFO]: [iceberg] Starting version check at https://mc-update-check.anthonyhilyard.com/520110
+[09:17:40] [Worker-ResourceReload-0/WARN]: Missing textures in model createaddition:small_light_connector#facing=west,mode=push,powered=true,rotation=x_clockwise_180,variant=default:
+    minecraft:textures/atlas/blocks.png:create:block/chute_block
+[09:17:40] [Worker-ResourceReload-0/WARN]: Missing textures in model gtceu:invar_lighter#inventory:
+    minecraft:textures/atlas/blocks.png:gtceu:items/invar_lighter
+[09:17:40] [Worker-ResourceReload-0/WARN]: Missing textures in model gtceu:platinum_lighter#inventory:
+    minecraft:textures/atlas/blocks.png:gtceu:items/platinum_lighter
+[09:17:40] [Worker-ResourceReload-0/WARN]: Missing textures in model kubejs:used_sulfur_trioxide_token#inventory:
+    minecraft:textures/atlas/blocks.png:kubejs:item/used_sulfur_trioxide_token
+>>>>>>> parent of a58826d (8 time net 0)
 [09:17:41] [Forge Version Check/INFO]: [iceberg] Found status: UP_TO_DATE Current: 1.1.25 Target: null
 [09:17:41] [Forge Version Check/INFO]: [flywheel] Starting version check at https://api.modrinth.com/updates/flywheel/forge_updates.json
 [09:17:41] [Forge Version Check/INFO]: [flywheel] Found status: BETA Current: 0.6.10-7 Target: null
@@ -2400,6 +2614,9 @@ Caused by: java.lang.IllegalStateException: Expected BEGIN_OBJECT but was NUMBER
 [09:17:51] [Worker-ResourceReload-1/WARN]: Static binding violation: PRIVATE @Overwrite method m_215924_ in modernfix-forge.mixins.json:perf.tag_id_caching.TagEntryMixin cannot reduce visibiliy of PUBLIC target method, visibility will be upgraded.
 [09:17:51] [Worker-ResourceReload-8/ERROR]: Couldn't parse element loot_tables:expatternprovider:blocks/ex_emc_interface
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)
 =======
 >>>>>>> parent of a58826d (8 time net 0)
@@ -2454,6 +2671,7 @@ com.google.gson.JsonSyntaxException: Expected name to be an item, was unknown st
 	at java.util.concurrent.ForkJoinPool.scan(ForkJoinPool.java:1655) ~[?:?]
 	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622) ~[?:?]
 	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165) ~[?:?]
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 [13:54:48] [Render thread/INFO]: Processing recipes...
@@ -3157,6 +3375,242 @@ com.google.gson.JsonSyntaxException: Expected name to be an item, was unknown st
 		17: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@11a90b9d
 		18: ASM: class com.simibubi.create.foundation.events.CommonEvents attachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 >>>>>>> parent of a58826d (8 time net 0)
+=======
+[09:17:52] [Render thread/INFO]: Processing recipes...
+[09:17:53] [Render thread/INFO]: Found 47694 recipes in 825.0 ms
+[09:17:53] [Render thread/INFO]: Posted recipe events in 78.46 ms
+[09:17:53] [KubeJS Recipe Event Worker 0/WARN]: Error parsing recipe gtceu:shapeless/centrifuged_ore_to_dust_neutronium[minecraft:crafting_shapeless]: {"type":"minecraft:crafting_shapeless","ingredients":[{"tag":"forge:tools/hammers"},[]],"result":{"item":"gtceu:neutronium_mixture_dust"}}: Item array cannot be empty, at least one item must be defined
+[09:17:53] [KubeJS Recipe Event Worker 0/WARN]: Your custom createaddition:rolling/copper_plate recipe (createaddition:rolling/copper_plate) specified a duration. Durations have no impact on this type of recipe.
+[09:17:53] [KubeJS Recipe Event Worker 0/WARN]: Your custom createaddition:rolling/electrum_plate recipe (createaddition:rolling/electrum_plate) specified a duration. Durations have no impact on this type of recipe.
+[09:17:53] [KubeJS Recipe Event Worker 0/WARN]: Your custom createaddition:rolling/straw recipe (createaddition:rolling/straw) specified a duration. Durations have no impact on this type of recipe.
+[09:17:53] [KubeJS Recipe Event Worker 0/WARN]: Your custom createaddition:rolling/copper_ingot recipe (createaddition:rolling/copper_ingot) specified a duration. Durations have no impact on this type of recipe.
+[09:17:53] [KubeJS Recipe Event Worker 0/WARN]: Your custom createaddition:rolling/iron_plate recipe (createaddition:rolling/iron_plate) specified a duration. Durations have no impact on this type of recipe.
+[09:17:53] [KubeJS Recipe Event Worker 0/WARN]: Your custom createaddition:rolling/iron_ingot recipe (createaddition:rolling/iron_ingot) specified a duration. Durations have no impact on this type of recipe.
+[09:17:53] [KubeJS Recipe Event Worker 0/WARN]: Your custom createaddition:rolling/brass_ingot recipe (createaddition:rolling/brass_ingot) specified a duration. Durations have no impact on this type of recipe.
+[09:17:53] [KubeJS Recipe Event Worker 0/WARN]: Your custom createaddition:rolling/electrum_ingot recipe (createaddition:rolling/electrum_ingot) specified a duration. Durations have no impact on this type of recipe.
+[09:17:53] [KubeJS Recipe Event Worker 0/WARN]: Your custom createaddition:rolling/gold_plate recipe (createaddition:rolling/gold_plate) specified a duration. Durations have no impact on this type of recipe.
+[09:17:53] [KubeJS Recipe Event Worker 0/WARN]: Your custom createaddition:rolling/gold_ingot recipe (createaddition:rolling/gold_ingot) specified a duration. Durations have no impact on this type of recipe.
+[09:17:53] [KubeJS Recipe Event Worker 0/ERROR]: No key duration in MapLike[{"type":"gtceu:large_chemical_reactor","inputs":{"fluid":[{"content":{"amount":1000,"value":[{"fluid":"gtceu:osmium_tetroxide"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0},{"content":{"amount":6000,"value":[{"fluid":"gtceu:hydrochloric_acid"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0}]},"outputs":{"fluid":[{"content":{"amount":36000,"value":[{"fluid":"gtceu:chlorine"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0},{"content":{"amount":2000,"value":[{"fluid":"minecraft:water"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0}],"item":[{"content":{"type":"gtceu:sized","count":1,"ingredient":{"item":"gtceu:osmium_dust"}},"chance":10000,"maxChance":10000,"tierChanceBoost":0}]}}]
+[09:17:53] [KubeJS Recipe Event Worker 0/WARN]: Error parsing recipe gtceu:large_chemical_reactor/test13[gtceu:large_chemical_reactor]: {"type":"gtceu:large_chemical_reactor","inputs":{"fluid":[{"content":{"amount":1000,"value":[{"fluid":"gtceu:osmium_tetroxide"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0},{"content":{"amount":6000,"value":[{"fluid":"gtceu:hydrochloric_acid"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0}]},"outputs":{"fluid":[{"content":{"amount":36000,"value":[{"fluid":"gtceu:chlorine"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0},{"content":{"amount":2000,"value":[{"fluid":"minecraft:water"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0}],"item":[{"content":{"type":"gtceu:sized","count":1,"ingredient":{"item":"gtceu:osmium_dust"}},"chance":10000,"maxChance":10000,"tierChanceBoost":0}]}}: No key duration in MapLike[{"type":"gtceu:large_chemical_reactor","inputs":{"fluid":[{"content":{"amount":1000,"value":[{"fluid":"gtceu:osmium_tetroxide"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0},{"content":{"amount":6000,"value":[{"fluid":"gtceu:hydrochloric_acid"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0}]},"outputs":{"fluid":[{"content":{"amount":36000,"value":[{"fluid":"gtceu:chlorine"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0},{"content":{"amount":2000,"value":[{"fluid":"minecraft:water"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0}],"item":[{"content":{"type":"gtceu:sized","count":1,"ingredient":{"item":"gtceu:osmium_dust"}},"chance":10000,"maxChance":10000,"tierChanceBoost":0}]}}]
+[09:17:54] [Render thread/INFO]: Added 21 recipes, removed 59 recipes, modified 3 recipes, with 2 failed recipes in 1.017 s
+[09:17:54] [Render thread/INFO]: Clearing KubeJS recipe lists...
+[09:17:54] [Render thread/INFO]: Loaded 4205 advancements
+[09:17:54] [Render thread/INFO]: Registered 0 additional recipes.
+[09:17:54] [Render thread/INFO]: Loaded 11 curio slots
+[09:17:54] [Render thread/INFO]: Loaded 1 curio entities
+[09:17:54] [Render thread/INFO]: Registered 0 gear_sets.
+[09:17:54] [Render thread/ERROR]: ########## GL ERROR ##########
+[09:17:54] [Render thread/ERROR]: @ Render
+[09:17:54] [Render thread/ERROR]: 65539: Invalid mouse button 99
+[09:17:54] [Server thread/INFO]: Starting integrated minecraft server version 1.20.1
+[09:17:54] [Server thread/INFO]: Generating keypair
+[09:17:54] [Server thread/INFO]: Loading server config for hangglider
+[09:17:55] [Server thread/INFO]: loaded team data: 1 known players, 1 teams total
+[09:17:55] [Server thread/INFO]: Preparing start region for dimension minecraft:overworld
+[09:17:55] [Server thread/INFO]: Server resource reload complete!
+[09:17:57] [Render thread/INFO]: Time elapsed: 50669 ms
+[09:17:57] [Server thread/INFO]: Successfully initialized permission handler forge:default_handler
+[09:17:57] [Server thread/INFO]: jetty-9.4.52.v20230823; built: 2023-08-23T19:29:37.669Z; git: abdcda73818a1a2c705da276edb0bf6581e7997e; jvm 17.0.8+7-LTS
+[09:17:57] [Server thread/INFO]: Started m.l.o.e.j.s.ServletContextHandler@7117eb78{/,union:/C:/Users/arifv/curseforge/minecraft/Instances/1.20.1%20v2%20good/mods/MTR-forge-1.20.1-3.2.2-hotfix-2.jar%23362!/assets/mtr/website,AVAILABLE}
+[09:17:58] [Server thread/INFO]: Started ServerConnector@77e4914f{HTTP/1.1, (http/1.1)}{0.0.0.0:8888}
+[09:17:58] [Server thread/INFO]: Started @54303ms
+[09:17:58] [Server thread/INFO]: Scanning class appeng.server.testplots.TestPlots for plots
+[09:17:58] [Server thread/INFO]: Scanning class appeng.server.testplots.AutoCraftingTestPlots for plots
+[09:17:58] [Server thread/INFO]: Scanning class appeng.server.testplots.InscriberTestPlots for plots
+[09:17:58] [Server thread/INFO]: Scanning class appeng.server.testplots.P2PTestPlots for plots
+[09:17:58] [Server thread/INFO]: Scanning class appeng.server.testplots.ItemP2PTestPlots for plots
+[09:17:58] [Server thread/INFO]: Scanning class appeng.server.testplots.MemoryCardTestPlots for plots
+[09:17:58] [Server thread/INFO]: Scanning class appeng.server.testplots.PatternProviderLockModePlots for plots
+[09:17:58] [Server thread/INFO]: Scanning class appeng.server.testplots.PatternProviderPlots for plots
+[09:17:58] [Server thread/INFO]: Scanning class appeng.server.testplots.SpatialTestPlots for plots
+[09:17:58] [Server thread/INFO]: Scanning class appeng.server.testplots.QnbTestPlots for plots
+[09:17:58] [Server thread/INFO]: Scanning class appeng.server.testplots.GuidebookPlot for plots
+[09:17:58] [Server thread/INFO]: Scanning class appeng.server.testplots.SubnetPlots for plots
+[09:17:58] [Server thread/INFO]: Scanning class appeng.server.testplots.AnnihilationPlaneTests for plots
+[09:17:58] [Server thread/INFO]: Starting Integrated REST server...
+[09:17:58] [Server thread/WARN]: Unable to parse the boolean system property 'java.net.preferIPv6Addresses':system - using the default value: false
+[09:17:58] [Server thread/INFO]: Started Integrated REST server on http://localhost:3002/
+[09:17:59] [Server thread/INFO]: Changing view distance to 12, from 10
+[09:17:59] [Server thread/INFO]: Changing simulation distance to 12, from 0
+[09:17:59] [Render thread/INFO]: Mixing client.MixinClientHandshakePacketListenerImpl from mixins/forge/nochatreports-forge.mixins.json into net.minecraft.client.multiplayer.ClientHandshakePacketListenerImpl
+[09:17:59] [Netty Local Client IO #0/INFO]: Mixing server.MixinServerboundChatCommandPacket from mixins/common/nochatreports.mixins.json into net.minecraft.network.protocol.game.ServerboundChatCommandPacket
+[09:17:59] [Netty Local Client IO #0/INFO]: Mixing server.MixinServerboundChatPacket from mixins/common/nochatreports.mixins.json into net.minecraft.network.protocol.game.ServerboundChatPacket
+[09:17:59] [Netty Local Client IO #0/INFO]: Mixing server.MixinServerboundChatSessionUpdatePacket from mixins/common/nochatreports.mixins.json into net.minecraft.network.protocol.game.ServerboundChatSessionUpdatePacket
+[09:18:00] [Netty Local Client IO #0/INFO]: Connected to a modded server.
+[09:18:01] [Server thread/INFO]: arifmini64[local:E:795a2d02] logged in with entity id 13 at (-57.89007847761308, -49.378267216576326, -206.23372063815094)
+[09:18:01] [Server thread/INFO]: arifmini64 joined the game
+[09:18:01] [Render thread/INFO]: [Inventory Profiles Next] Loaded 0 external GUI hints
+[09:18:01] [Render thread/INFO]: [Inventory Profiles Next] Loaded 797 build-in GUI hints
+[09:18:01] [Render thread/INFO]: [Inventory Profiles Next] Effective GUI hints after merge: 797
+[09:18:01] [Render thread/INFO]: Started 10 worker threads
+[09:18:01] [Render thread/INFO]: Started 10 worker threads
+[09:18:01] [Netty Local Client IO #0/INFO]: Read 529 bytes, 1 objects
+[09:18:01] [Server thread/INFO]: Syncing config to arifmini64 (f8f1bbe6-f1cf-43e8-bda9-3c183c4bcbc3)
+[09:18:02] [Render thread/WARN]: Unknown recipe category: ae2:charger/ae2:charger/meteorite_compass
+[09:18:02] [Render thread/WARN]: Unknown recipe category: ae2:charger/ae2:charger/charged_certus_quartz_crystal
+[09:18:02] [Render thread/WARN]: Unknown recipe category: ae2:charger/ae2:charger/guide
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [integratedterminals, integratedterminalscompat]: org.cyclops.integratedterminalscompat.modcompat.jei.JEIIntegratedTerminalsConfig
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [architects_palette]: architectspalette.compat.JEIPlugin
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [sophisticatedcore]: net.p3pp3rf1y.sophisticatedcore.compat.jei.CorePlugin
+[09:18:02] [Render thread/WARN]: [REI] Found 1 existing reload task(s) after trying to terminate them!
+[09:18:02] [Render thread/INFO]: Loading infobook /data/cyclopscore/info/test.xml
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [modernfix]: org.embeddedt.modernfix.searchtree.JEIRuntimeCapturer
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [sophisticatedbackpacks]: net.p3pp3rf1y.sophisticatedbackpacks.compat.jei.SBPPlugin
+[09:18:02] [Render thread/INFO]: Loading infobook /data/integrateddynamics/info/on_the_dynamics_of_integration.xml
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [ldlib]: com.lowdragmc.lowdraglib.jei.JEIPlugin
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [jeresources]: jeresources.jei.JEIConfig
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [curios]: top.theillusivec4.curios.common.integration.jei.CuriosJeiPlugin
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [framedblocks] but IGNORED: xfacthd.framedblocks.common.compat.jei.FramedJeiPlugin
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [polylib]: net.creeperhost.polylib.compat.jei.PolyJEIPlugin
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [ftblibrary]: dev.ftb.mods.ftblibrary.integration.forge.JEIIntegration
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [craftingstation]: tfar.craftingstation.jei.JeiClientPlugin
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [mekanism]: mekanism.client.jei.MekanismJEI
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [mekanismgenerators]: mekanism.generators.client.jei.GeneratorsJEI
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [mekanismtools]: mekanism.tools.client.jei.ToolsJEI
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [mcjtylib]: mcjty.lib.compat.JeiCompatibility
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [rftoolsbase]: mcjty.rftoolsbase.compat.jei.RFToolsBaseJeiPlugin
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [xnet]: mcjty.xnet.compat.jei.JeiCompat
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [rftoolsstorage]: mcjty.rftoolsstorage.compat.jei.RFToolsStorageJeiPlugin
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [rftoolscontrol]: mcjty.rftoolscontrol.compat.jei.RFToolsControlJeiPlugin
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [rftoolsutility]: mcjty.rftoolsutility.compat.jei.RFToolsUtilityJeiPlugin
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [jade]: snownee.jade.compat.JEICompat
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [ae2]: appeng.integration.modules.jei.JEIPlugin
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [expatternprovider]: com.glodblock.github.extendedae.xmod.jei.JEIPlugin
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [kubejs]: dev.latvian.mods.kubejs.integration.forge.jei.JEIPlugin
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [ftbxmodcompat]: dev.ftb.mods.ftbxmodcompat.ftbquests.jei.FTBQuestsJEIIntegration
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [gtceu]: com.gregtechceu.gtceu.integration.jei.GTJEIPlugin
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [create]: com.simibubi.create.compat.jei.CreateJEI
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [integrateddynamics, integrateddynamicscompat]: org.cyclops.integrateddynamicscompat.modcompat.jei.JEIIntegratedDynamicsConfig
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [appmek]: me.ramidzkh.mekae2.integration.jei.AMJEIPlugin
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected JEI plugin from [createaddition]: com.mrh0.createaddition.compat.jei.CreateAdditionJEI
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Detected 30 JEI plugins
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] ########################################
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] REIPlugin starting main-reload for START.
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Plugins (48):
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (-100.00) DefaultClientPluginImpl of DefaultClientPluginImpl [roughlyenoughitems]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (-100.00) DefaultPluginImpl of DefaultPluginImpl [roughlyenoughitems]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) HideIngredientsFromTagsPlugin of HideIngredientsFromTagsPlugin [roughlyenoughitems]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) DefaultClientRuntimePlugin of DefaultClientRuntimePlugin [roughlyenoughitems]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) DefaultRuntimePlugin of DefaultRuntimePlugin [roughlyenoughitems]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [CreateAdditionJEI:createaddition:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [AMJEIPlugin:appmek:jei] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIIntegratedDynamicsConfig:integrateddynamicscompat:main] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [CreateJEI:create:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [GTJEIPlugin:gtceu:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [FTBQuestsJEIIntegration:ftbxmodcompat:ftbquests_jei] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIPlugin:kubejs:jei] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIPlugin:expatternprovider:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIPlugin:ae2:core] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEICompat:jade:main] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [RFToolsUtilityJeiPlugin:rftoolsutility:rftoolsutility] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [RFToolsControlJeiPlugin:rftoolscontrol:rftoolscontrol] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [RFToolsStorageJeiPlugin:rftoolsstorage:rftoolsstorage] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JeiCompat:mcjtylib:xnet] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [RFToolsBaseJeiPlugin:rftoolsbase:rftoolsbase] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JeiCompatibility:mcjtylib:mcjtylib] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [ToolsJEI:mekanismtools:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [GeneratorsJEI:mekanismgenerators:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [MekanismJEI:mekanism:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JeiClientPlugin:minecraft:craftingstation] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIIntegration:ftblibrary:jei] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [PolyJEIPlugin:polylib:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [CuriosJeiPlugin:curios:curios] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIConfig:minecraft:jeresources] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIPlugin:ldlib:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [SBPPlugin:sophisticatedbackpacks:default] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIRuntimeCapturer:modernfix:capturer] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [CorePlugin:sophisticatedcore:default] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIPlugin:architects_palette:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIIntegratedTerminalsConfig:integratedterminalscompat:main] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) ReiIntegratedDynamicsConfig of ReiIntegratedDynamicsConfig [integrateddynamics, integrateddynamicscompat]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) GTREIPlugin of GTREIPlugin [gtceu]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) FTBQuestsREIIntegrationForge of FTBQuestsREIIntegrationForge [ftbxmodcompat]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) ExtendedAE of ExtendedAE [expatternprovider]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) FramedReiPlugin of FramedReiPlugin [framedblocks]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) REIPluginImpl of REIPluginImpl [ldlib]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) REI Plugin Compatibilities Client Handler of REI Plugin Compatibilities Client Handler [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) ReiIntegratedTerminalsConfig of ReiIntegratedTerminalsConfig [integratedterminals, integratedterminalscompat]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) ReiClientPlugin of ReiClientPlugin [craftingstation]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) ReiPlugin of ReiPlugin [craftingstation]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) REIForgePluginStub of REIForgePluginStub [ftblibrary]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) AE2 of AE2 [ae2]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (10000000.00) REIForgePluginStub of REIForgePluginStub [kubejs]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] ########################################
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] ----------------------------------------
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] REIClientPlugin starting main-reload for START.
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] Plugins (45):
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (-100.00) DefaultClientPluginImpl of DefaultClientPluginImpl [roughlyenoughitems]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [CreateAdditionJEI:createaddition:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [AMJEIPlugin:appmek:jei] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIIntegratedDynamicsConfig:integrateddynamicscompat:main] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [CreateJEI:create:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [GTJEIPlugin:gtceu:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [FTBQuestsJEIIntegration:ftbxmodcompat:ftbquests_jei] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIPlugin:kubejs:jei] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIPlugin:expatternprovider:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIPlugin:ae2:core] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEICompat:jade:main] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [RFToolsUtilityJeiPlugin:rftoolsutility:rftoolsutility] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [RFToolsControlJeiPlugin:rftoolscontrol:rftoolscontrol] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [RFToolsStorageJeiPlugin:rftoolsstorage:rftoolsstorage] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JeiCompat:mcjtylib:xnet] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [RFToolsBaseJeiPlugin:rftoolsbase:rftoolsbase] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JeiCompatibility:mcjtylib:mcjtylib] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [ToolsJEI:mekanismtools:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [GeneratorsJEI:mekanismgenerators:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [MekanismJEI:mekanism:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JeiClientPlugin:minecraft:craftingstation] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIIntegration:ftblibrary:jei] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [PolyJEIPlugin:polylib:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [CuriosJeiPlugin:curios:curios] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIConfig:minecraft:jeresources] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIPlugin:ldlib:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [SBPPlugin:sophisticatedbackpacks:default] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIRuntimeCapturer:modernfix:capturer] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [CorePlugin:sophisticatedcore:default] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIPlugin:architects_palette:jei_plugin] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) JEI Plugin [JEIIntegratedTerminalsConfig:integratedterminalscompat:main] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) ReiIntegratedDynamicsConfig of ReiIntegratedDynamicsConfig [integrateddynamics, integrateddynamicscompat]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) GTREIPlugin of GTREIPlugin [gtceu]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) FTBQuestsREIIntegrationForge of FTBQuestsREIIntegrationForge [ftbxmodcompat]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) ExtendedAE of ExtendedAE [expatternprovider]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) FramedReiPlugin of FramedReiPlugin [framedblocks]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) REIPluginImpl of REIPluginImpl [ldlib]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) REI Plugin Compatibilities Client Handler of REI Plugin Compatibilities Client Handler [rei_plugin_compatibilities, jei]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) ReiIntegratedTerminalsConfig of ReiIntegratedTerminalsConfig [integratedterminals, integratedterminalscompat]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) ReiClientPlugin of ReiClientPlugin [craftingstation]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) REIForgePluginStub of REIForgePluginStub [ftblibrary]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) AE2 of AE2 [ae2]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) HideIngredientsFromTagsPlugin of HideIngredientsFromTagsPlugin [roughlyenoughitems]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (0.00) DefaultClientRuntimePlugin of DefaultClientRuntimePlugin [roughlyenoughitems]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI]  - (10000000.00) REIForgePluginStub of REIForgePluginStub [kubejs]
+[09:18:02] [REI-ReloadPlugins/INFO]: [REI] ----------------------------------------
+[09:18:03] [Render thread/INFO]: Loading FTB Chunks client data from world 8ba0f6a9-ee0f-471e-b826-4dd0abdb5a2c
+[09:18:03] [Render thread/INFO]: Received config from the server: 
+[09:18:03] [REI-ReloadPlugins/WARN]: [REI] Forcing plugin JEI Plugin [JEIConfig:minecraft:jeresources] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei] to run on the main thread for reloadable-plugin/DisplayRegistryImpl/! This is extremely dangerous, and have large performance implications.
+[09:18:04] [REI-Cache-0/ERROR]: Exception caught during firing event: Cannot invoke "net.minecraft.world.level.block.state.BlockState.m_60734_()" because the return value of "net.minecraft.world.level.block.entity.BlockEntity.m_58900_()" is null
+	Index: 1
+	Listeners:
+		0: NORMAL
+		1: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@5f61e9bb
+		2: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@461334fa
+		3: ASM: org.cyclops.cyclopscore.modcompat.capabilities.CapabilityConstructorRegistry$TileEventListener@72510e37 onTileLoad(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		4: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@2e389a8f
+		5: ASM: org.cyclops.cyclopscore.modcompat.capabilities.CapabilityConstructorRegistry$ItemStackEventListener@4c5fd28f onItemStackLoad(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		6: ASM: class net.xalcon.torchmaster.common.logic.entityblocking.EntityBlockingEventHandler onWorldAttachCapabilityEvent(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		7: ASM: org.cyclops.cyclopscore.modcompat.capabilities.CapabilityConstructorRegistry$EntityEventListener@25ddfcf6 onEntityLoad(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		8: ASM: fuzs.puzzleslib.impl.capability.ForgeCapabilityController@2f238415 onAttachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		9: ASM: class net.creeperhost.polylib.forge.ForgeEvents OnAttachCapabilitiesEvent(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		10: ASM: class net.creeperhost.polylib.forge.ForgeEvents attachItemCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		11: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@1e3e4c06
+		12: ASM: com.epimorphismmc.monomorphism.capability.CapabilityHandler@767c22c2 addCapabilitiesRaw(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		13: ASM: class com.gregtechceu.gtceu.forge.ForgeCommonEventListener registerItemStackCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		14: ASM: class com.gregtechceu.gtceu.forge.ForgeCommonEventListener registerEntityCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		15: ASM: class com.gregtechceu.gtceu.forge.ForgeCommonEventListener attachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		16: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@4e42424b
+		17: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@11a90b9d
+		18: ASM: class com.simibubi.create.foundation.events.CommonEvents attachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+>>>>>>> parent of a58826d (8 time net 0)
 		19: ASM: mekanism.common.CommonPlayerTracker@40342685 attachCaps(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 		20: ASM: top.theillusivec4.curios.common.event.CuriosEventHandler@32880207 attachEntitiesCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 		21: ASM: top.theillusivec4.curios.common.event.CuriosEventHandler@32880207 attachStackCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
@@ -3169,6 +3623,9 @@ com.google.gson.JsonSyntaxException: Expected name to be an item, was unknown st
 		28: ASM: com.illusivesoulworks.polymorph.common.CommonEventsListener@30f350d9 attachCapabilitiesPlayer(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 		29: ASM: com.illusivesoulworks.polymorph.common.CommonEventsListener@30f350d9 attachCapabilitiesStack(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)
 =======
 >>>>>>> parent of a58826d (8 time net 0)
@@ -3211,6 +3668,7 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.world.level.block.s
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:55:01] [REI-Cache-0/ERROR]: Exception caught during firing event: Cannot invoke "net.minecraft.world.level.block.state.BlockState.m_60734_()" because the return value of "net.minecraft.world.level.block.entity.BlockEntity.m_58900_()" is null
 	Index: 1
 	Listeners:
@@ -3291,6 +3749,30 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.world.level.block.s
 		17: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@11a90b9d
 		18: ASM: class com.simibubi.create.foundation.events.CommonEvents attachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 >>>>>>> parent of a58826d (8 time net 0)
+=======
+[09:18:04] [REI-Cache-0/ERROR]: Exception caught during firing event: Cannot invoke "net.minecraft.world.level.block.state.BlockState.m_60734_()" because the return value of "net.minecraft.world.level.block.entity.BlockEntity.m_58900_()" is null
+	Index: 1
+	Listeners:
+		0: NORMAL
+		1: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@5f61e9bb
+		2: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@461334fa
+		3: ASM: org.cyclops.cyclopscore.modcompat.capabilities.CapabilityConstructorRegistry$TileEventListener@72510e37 onTileLoad(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		4: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@2e389a8f
+		5: ASM: org.cyclops.cyclopscore.modcompat.capabilities.CapabilityConstructorRegistry$ItemStackEventListener@4c5fd28f onItemStackLoad(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		6: ASM: class net.xalcon.torchmaster.common.logic.entityblocking.EntityBlockingEventHandler onWorldAttachCapabilityEvent(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		7: ASM: org.cyclops.cyclopscore.modcompat.capabilities.CapabilityConstructorRegistry$EntityEventListener@25ddfcf6 onEntityLoad(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		8: ASM: fuzs.puzzleslib.impl.capability.ForgeCapabilityController@2f238415 onAttachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		9: ASM: class net.creeperhost.polylib.forge.ForgeEvents OnAttachCapabilitiesEvent(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		10: ASM: class net.creeperhost.polylib.forge.ForgeEvents attachItemCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		11: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@1e3e4c06
+		12: ASM: com.epimorphismmc.monomorphism.capability.CapabilityHandler@767c22c2 addCapabilitiesRaw(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		13: ASM: class com.gregtechceu.gtceu.forge.ForgeCommonEventListener registerItemStackCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		14: ASM: class com.gregtechceu.gtceu.forge.ForgeCommonEventListener registerEntityCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		15: ASM: class com.gregtechceu.gtceu.forge.ForgeCommonEventListener attachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		16: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@4e42424b
+		17: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@11a90b9d
+		18: ASM: class com.simibubi.create.foundation.events.CommonEvents attachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+>>>>>>> parent of a58826d (8 time net 0)
 		19: ASM: mekanism.common.CommonPlayerTracker@40342685 attachCaps(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 		20: ASM: top.theillusivec4.curios.common.event.CuriosEventHandler@32880207 attachEntitiesCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 		21: ASM: top.theillusivec4.curios.common.event.CuriosEventHandler@32880207 attachStackCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
@@ -3303,6 +3785,9 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.world.level.block.s
 		28: ASM: com.illusivesoulworks.polymorph.common.CommonEventsListener@30f350d9 attachCapabilitiesPlayer(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 		29: ASM: com.illusivesoulworks.polymorph.common.CommonEventsListener@30f350d9 attachCapabilitiesStack(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)
 =======
 >>>>>>> parent of a58826d (8 time net 0)
@@ -3345,6 +3830,7 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.world.level.block.s
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:55:01] [REI-Cache-0/ERROR]: Exception caught during firing event: Cannot invoke "net.minecraft.world.level.block.state.BlockState.m_60734_()" because the return value of "net.minecraft.world.level.block.entity.BlockEntity.m_58900_()" is null
 	Index: 1
 	Listeners:
@@ -3425,6 +3911,30 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.world.level.block.s
 		17: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@11a90b9d
 		18: ASM: class com.simibubi.create.foundation.events.CommonEvents attachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 >>>>>>> parent of a58826d (8 time net 0)
+=======
+[09:18:04] [REI-Cache-0/ERROR]: Exception caught during firing event: Cannot invoke "net.minecraft.world.level.block.state.BlockState.m_60734_()" because the return value of "net.minecraft.world.level.block.entity.BlockEntity.m_58900_()" is null
+	Index: 1
+	Listeners:
+		0: NORMAL
+		1: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@5f61e9bb
+		2: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@461334fa
+		3: ASM: org.cyclops.cyclopscore.modcompat.capabilities.CapabilityConstructorRegistry$TileEventListener@72510e37 onTileLoad(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		4: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@2e389a8f
+		5: ASM: org.cyclops.cyclopscore.modcompat.capabilities.CapabilityConstructorRegistry$ItemStackEventListener@4c5fd28f onItemStackLoad(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		6: ASM: class net.xalcon.torchmaster.common.logic.entityblocking.EntityBlockingEventHandler onWorldAttachCapabilityEvent(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		7: ASM: org.cyclops.cyclopscore.modcompat.capabilities.CapabilityConstructorRegistry$EntityEventListener@25ddfcf6 onEntityLoad(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		8: ASM: fuzs.puzzleslib.impl.capability.ForgeCapabilityController@2f238415 onAttachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		9: ASM: class net.creeperhost.polylib.forge.ForgeEvents OnAttachCapabilitiesEvent(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		10: ASM: class net.creeperhost.polylib.forge.ForgeEvents attachItemCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		11: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@1e3e4c06
+		12: ASM: com.epimorphismmc.monomorphism.capability.CapabilityHandler@767c22c2 addCapabilitiesRaw(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		13: ASM: class com.gregtechceu.gtceu.forge.ForgeCommonEventListener registerItemStackCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		14: ASM: class com.gregtechceu.gtceu.forge.ForgeCommonEventListener registerEntityCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		15: ASM: class com.gregtechceu.gtceu.forge.ForgeCommonEventListener attachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		16: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@4e42424b
+		17: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@11a90b9d
+		18: ASM: class com.simibubi.create.foundation.events.CommonEvents attachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+>>>>>>> parent of a58826d (8 time net 0)
 		19: ASM: mekanism.common.CommonPlayerTracker@40342685 attachCaps(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 		20: ASM: top.theillusivec4.curios.common.event.CuriosEventHandler@32880207 attachEntitiesCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 		21: ASM: top.theillusivec4.curios.common.event.CuriosEventHandler@32880207 attachStackCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
@@ -3437,6 +3947,9 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.world.level.block.s
 		28: ASM: com.illusivesoulworks.polymorph.common.CommonEventsListener@30f350d9 attachCapabilitiesPlayer(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 		29: ASM: com.illusivesoulworks.polymorph.common.CommonEventsListener@30f350d9 attachCapabilitiesStack(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)
 =======
 >>>>>>> parent of a58826d (8 time net 0)
@@ -3479,6 +3992,7 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.world.level.block.s
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:55:01] [REI-Cache-0/ERROR]: Exception caught during firing event: Cannot invoke "net.minecraft.world.level.block.state.BlockState.m_60734_()" because the return value of "net.minecraft.world.level.block.entity.BlockEntity.m_58900_()" is null
 	Index: 1
 	Listeners:
@@ -3559,6 +4073,30 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.world.level.block.s
 		17: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@11a90b9d
 		18: ASM: class com.simibubi.create.foundation.events.CommonEvents attachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 >>>>>>> parent of a58826d (8 time net 0)
+=======
+[09:18:04] [REI-Cache-0/ERROR]: Exception caught during firing event: Cannot invoke "net.minecraft.world.level.block.state.BlockState.m_60734_()" because the return value of "net.minecraft.world.level.block.entity.BlockEntity.m_58900_()" is null
+	Index: 1
+	Listeners:
+		0: NORMAL
+		1: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@5f61e9bb
+		2: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@461334fa
+		3: ASM: org.cyclops.cyclopscore.modcompat.capabilities.CapabilityConstructorRegistry$TileEventListener@72510e37 onTileLoad(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		4: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@2e389a8f
+		5: ASM: org.cyclops.cyclopscore.modcompat.capabilities.CapabilityConstructorRegistry$ItemStackEventListener@4c5fd28f onItemStackLoad(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		6: ASM: class net.xalcon.torchmaster.common.logic.entityblocking.EntityBlockingEventHandler onWorldAttachCapabilityEvent(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		7: ASM: org.cyclops.cyclopscore.modcompat.capabilities.CapabilityConstructorRegistry$EntityEventListener@25ddfcf6 onEntityLoad(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		8: ASM: fuzs.puzzleslib.impl.capability.ForgeCapabilityController@2f238415 onAttachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		9: ASM: class net.creeperhost.polylib.forge.ForgeEvents OnAttachCapabilitiesEvent(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		10: ASM: class net.creeperhost.polylib.forge.ForgeEvents attachItemCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		11: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@1e3e4c06
+		12: ASM: com.epimorphismmc.monomorphism.capability.CapabilityHandler@767c22c2 addCapabilitiesRaw(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		13: ASM: class com.gregtechceu.gtceu.forge.ForgeCommonEventListener registerItemStackCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		14: ASM: class com.gregtechceu.gtceu.forge.ForgeCommonEventListener registerEntityCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		15: ASM: class com.gregtechceu.gtceu.forge.ForgeCommonEventListener attachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		16: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@4e42424b
+		17: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@11a90b9d
+		18: ASM: class com.simibubi.create.foundation.events.CommonEvents attachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+>>>>>>> parent of a58826d (8 time net 0)
 		19: ASM: mekanism.common.CommonPlayerTracker@40342685 attachCaps(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 		20: ASM: top.theillusivec4.curios.common.event.CuriosEventHandler@32880207 attachEntitiesCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 		21: ASM: top.theillusivec4.curios.common.event.CuriosEventHandler@32880207 attachStackCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
@@ -3571,6 +4109,9 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.world.level.block.s
 		28: ASM: com.illusivesoulworks.polymorph.common.CommonEventsListener@30f350d9 attachCapabilitiesPlayer(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 		29: ASM: com.illusivesoulworks.polymorph.common.CommonEventsListener@30f350d9 attachCapabilitiesStack(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)
 =======
 >>>>>>> parent of a58826d (8 time net 0)
@@ -3613,6 +4154,7 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.world.level.block.s
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:55:01] [REI-Cache-0/ERROR]: Exception caught during firing event: Cannot invoke "net.minecraft.world.level.block.state.BlockState.m_60734_()" because the return value of "net.minecraft.world.level.block.entity.BlockEntity.m_58900_()" is null
 	Index: 1
 	Listeners:
@@ -3693,6 +4235,30 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.world.level.block.s
 		17: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@11a90b9d
 		18: ASM: class com.simibubi.create.foundation.events.CommonEvents attachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 >>>>>>> parent of a58826d (8 time net 0)
+=======
+[09:18:04] [REI-Cache-0/ERROR]: Exception caught during firing event: Cannot invoke "net.minecraft.world.level.block.state.BlockState.m_60734_()" because the return value of "net.minecraft.world.level.block.entity.BlockEntity.m_58900_()" is null
+	Index: 1
+	Listeners:
+		0: NORMAL
+		1: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@5f61e9bb
+		2: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@461334fa
+		3: ASM: org.cyclops.cyclopscore.modcompat.capabilities.CapabilityConstructorRegistry$TileEventListener@72510e37 onTileLoad(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		4: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@2e389a8f
+		5: ASM: org.cyclops.cyclopscore.modcompat.capabilities.CapabilityConstructorRegistry$ItemStackEventListener@4c5fd28f onItemStackLoad(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		6: ASM: class net.xalcon.torchmaster.common.logic.entityblocking.EntityBlockingEventHandler onWorldAttachCapabilityEvent(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		7: ASM: org.cyclops.cyclopscore.modcompat.capabilities.CapabilityConstructorRegistry$EntityEventListener@25ddfcf6 onEntityLoad(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		8: ASM: fuzs.puzzleslib.impl.capability.ForgeCapabilityController@2f238415 onAttachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		9: ASM: class net.creeperhost.polylib.forge.ForgeEvents OnAttachCapabilitiesEvent(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		10: ASM: class net.creeperhost.polylib.forge.ForgeEvents attachItemCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		11: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@1e3e4c06
+		12: ASM: com.epimorphismmc.monomorphism.capability.CapabilityHandler@767c22c2 addCapabilitiesRaw(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		13: ASM: class com.gregtechceu.gtceu.forge.ForgeCommonEventListener registerItemStackCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		14: ASM: class com.gregtechceu.gtceu.forge.ForgeCommonEventListener registerEntityCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		15: ASM: class com.gregtechceu.gtceu.forge.ForgeCommonEventListener attachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+		16: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@4e42424b
+		17: net.minecraftforge.eventbus.EventBus$$Lambda$1623/0x000000080080f140@11a90b9d
+		18: ASM: class com.simibubi.create.foundation.events.CommonEvents attachCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
+>>>>>>> parent of a58826d (8 time net 0)
 		19: ASM: mekanism.common.CommonPlayerTracker@40342685 attachCaps(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 		20: ASM: top.theillusivec4.curios.common.event.CuriosEventHandler@32880207 attachEntitiesCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 		21: ASM: top.theillusivec4.curios.common.event.CuriosEventHandler@32880207 attachStackCapabilities(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
@@ -3705,6 +4271,9 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.world.level.block.s
 		28: ASM: com.illusivesoulworks.polymorph.common.CommonEventsListener@30f350d9 attachCapabilitiesPlayer(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 		29: ASM: com.illusivesoulworks.polymorph.common.CommonEventsListener@30f350d9 attachCapabilitiesStack(Lnet/minecraftforge/event/AttachCapabilitiesEvent;)V
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)
 =======
 >>>>>>> parent of a58826d (8 time net 0)
@@ -3745,6 +4314,7 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.world.level.block.s
 	at java.base/java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1622)
 	at java.base/java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:165)
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 [13:55:01] [REI-ReloadPlugins/INFO]: [REI] ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3899,6 +4469,8 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.world.level.block.s
 =======
 =======
 >>>>>>> parent of a58826d (8 time net 0)
+=======
+>>>>>>> parent of a58826d (8 time net 0)
 [09:18:05] [REI-ReloadPlugins/INFO]: [REI] ++++++++++++++++++++++++++++++++++++++++
 [09:18:05] [REI-ReloadPlugins/INFO]: [REI] REIServerPlugin starting main-reload for START.
 [09:18:05] [REI-ReloadPlugins/INFO]: [REI] Plugins (3):
@@ -4049,6 +4621,9 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.world.level.block.s
 [09:18:08] [REI-ReloadPlugins/WARN]: Failed loading villager cartographer registered at cartographer
 [09:18:08] [REI-ReloadPlugins/WARN]: Exception caught when registering villager
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)
 =======
 >>>>>>> parent of a58826d (8 time net 0)
@@ -4083,6 +4658,7 @@ java.lang.NullPointerException: Cannot invoke "net.minecraft.world.entity.Entity
 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[?:?]
 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[?:?]
 	at java.lang.Thread.run(Thread.java:833) ~[?:?]
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 [13:55:10] [REI-ReloadPlugins/WARN]: [REI] Forcing plugin JEI Plugin [JEIConfig:minecraft:jeresources] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei] to run on the main thread for reloadable-plugin/DisplayRegistryImpl/! This is extremely dangerous, and have large performance implications.
@@ -4417,6 +4993,8 @@ java.lang.NullPointerException
 [14:36:45] [Render thread/INFO]: Stopping!
 [14:36:46] [Render thread/INFO]: Shutting down map thread
 =======
+=======
+>>>>>>> parent of a58826d (8 time net 0)
 =======
 >>>>>>> parent of a58826d (8 time net 0)
 [09:18:13] [REI-ReloadPlugins/WARN]: [REI] Forcing plugin JEI Plugin [JEIConfig:minecraft:jeresources] of REI Plugin Compatibilities Adapter [rei_plugin_compatibilities, jei] to run on the main thread for reloadable-plugin/DisplayRegistryImpl/! This is extremely dangerous, and have large performance implications.
@@ -4853,6 +5431,9 @@ java.lang.NullPointerException
 [11:06:45] [Render thread/INFO]: Stopping!
 [11:06:46] [Render thread/INFO]: Shutting down map thread
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)
 =======
 >>>>>>> parent of a58826d (8 time net 0)
