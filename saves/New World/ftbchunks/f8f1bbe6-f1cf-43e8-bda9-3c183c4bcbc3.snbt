@@ -1,7 +1,11 @@
 {
 	max_claim_chunks: 500
 	max_force_load_chunks: 25
+<<<<<<< HEAD
 	last_login_time: 1737356098204L
+=======
+	last_login_time: 1736302681443L
+>>>>>>> parent of a58826d (8 time net 0)
 	chunks: {
 		"minecraft:overworld": [
 			{ x: -6, z: -12, time: 1712205909406L }
