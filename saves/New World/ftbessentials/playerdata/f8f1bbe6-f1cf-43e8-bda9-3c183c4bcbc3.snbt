@@ -4,7 +4,11 @@
 	god: false
 	nick: ""
 <<<<<<< HEAD
+<<<<<<< HEAD
 	last_seen: { dim: "minecraft:overworld", x: -37, y: -53, z: -213, time: 1737358599650L, xRot: 36.90008f, yRot: -139.81973f }
+=======
+	last_seen: { dim: "minecraft:overworld", x: -34, y: -44, z: -244, time: 1736309200085L, xRot: 32.999016f, yRot: 19.645874f }
+>>>>>>> parent of a58826d (8 time net 0)
 =======
 	last_seen: { dim: "minecraft:overworld", x: -34, y: -44, z: -244, time: 1736309200085L, xRot: 32.999016f, yRot: 19.645874f }
 >>>>>>> parent of a58826d (8 time net 0)

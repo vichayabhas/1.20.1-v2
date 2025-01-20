@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:52:08] [INIT] KubeJS 2001.6.5-build.16; MC 2001 forge
 [13:52:08] [INIT] Loaded plugins:
 [13:52:08] [INIT] - dev.latvian.mods.kubejs.forge.BuiltinKubeJSForgePlugin
@@ -14,6 +15,8 @@
 [13:52:08] [INFO] Loaded 1/1 KubeJS client scripts in 0.015 s with 0 errors and 0 warnings
 [13:52:14] [INFO] Client resource reload complete!
 =======
+=======
+>>>>>>> parent of a58826d (8 time net 0)
 [09:17:26] [INIT] KubeJS 2001.6.5-build.16; MC 2001 forge
 [09:17:26] [INIT] Loaded plugins:
 [09:17:26] [INIT] - dev.latvian.mods.kubejs.forge.BuiltinKubeJSForgePlugin
@@ -28,4 +31,7 @@
 [09:17:26] [INFO] Loaded script client_scripts:example.js in 0.002 s
 [09:17:26] [INFO] Loaded 1/1 KubeJS client scripts in 0.023 s with 0 errors and 0 warnings
 [09:17:33] [INFO] Client resource reload complete!
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)

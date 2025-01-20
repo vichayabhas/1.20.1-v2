@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:54:45] [INIT] KubeJS 2001.6.5-build.16; MC 2001 forge
 [13:54:45] [INIT] Loaded plugins:
 [13:54:45] [INIT] - dev.latvian.mods.kubejs.forge.BuiltinKubeJSForgePlugin
@@ -22,6 +23,8 @@
 [13:54:50] [INFO] Added 21 recipes, removed 59 recipes, modified 3 recipes, with 2 failed recipes in 1.124 s
 [13:54:52] [INFO] Server resource reload complete!
 =======
+=======
+>>>>>>> parent of a58826d (8 time net 0)
 [09:17:49] [INIT] KubeJS 2001.6.5-build.16; MC 2001 forge
 [09:17:49] [INIT] Loaded plugins:
 [09:17:49] [INIT] - dev.latvian.mods.kubejs.forge.BuiltinKubeJSForgePlugin
@@ -44,4 +47,7 @@
 [09:17:53] [WARN] Error parsing recipe gtceu:large_chemical_reactor/test13[gtceu:large_chemical_reactor]: {"type":"gtceu:large_chemical_reactor","inputs":{"fluid":[{"content":{"amount":1000,"value":[{"fluid":"gtceu:osmium_tetroxide"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0},{"content":{"amount":6000,"value":[{"fluid":"gtceu:hydrochloric_acid"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0}]},"outputs":{"fluid":[{"content":{"amount":36000,"value":[{"fluid":"gtceu:chlorine"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0},{"content":{"amount":2000,"value":[{"fluid":"minecraft:water"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0}],"item":[{"content":{"type":"gtceu:sized","count":1,"ingredient":{"item":"gtceu:osmium_dust"}},"chance":10000,"maxChance":10000,"tierChanceBoost":0}]}}: No key duration in MapLike[{"type":"gtceu:large_chemical_reactor","inputs":{"fluid":[{"content":{"amount":1000,"value":[{"fluid":"gtceu:osmium_tetroxide"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0},{"content":{"amount":6000,"value":[{"fluid":"gtceu:hydrochloric_acid"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0}]},"outputs":{"fluid":[{"content":{"amount":36000,"value":[{"fluid":"gtceu:chlorine"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0},{"content":{"amount":2000,"value":[{"fluid":"minecraft:water"}]},"chance":10000,"maxChance":10000,"tierChanceBoost":0}],"item":[{"content":{"type":"gtceu:sized","count":1,"ingredient":{"item":"gtceu:osmium_dust"}},"chance":10000,"maxChance":10000,"tierChanceBoost":0}]}}]
 [09:17:54] [INFO] Added 21 recipes, removed 59 recipes, modified 3 recipes, with 2 failed recipes in 1.017 s
 [09:17:55] [INFO] Server resource reload complete!
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)

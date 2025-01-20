@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:52:05] [modloading-worker-0/INFO] ========================================
 [13:52:05] [modloading-worker-0/INFO] Minecraft: 1.20.1
 [13:52:05] [modloading-worker-0/INFO] Side: client
@@ -220,6 +221,8 @@
 [13:54:57] [Netty Local Client IO #0/DEBUG] [REI] Marking hidden ingredients from tag cache as dirty.
 [13:54:58] [Render thread/DEBUG] [REI] Starting Reload Plugins of stage START
 =======
+=======
+>>>>>>> parent of a58826d (8 time net 0)
 [09:17:24] [modloading-worker-0/INFO] ========================================
 [09:17:24] [modloading-worker-0/INFO] Minecraft: 1.20.1
 [09:17:24] [modloading-worker-0/INFO] Side: client
@@ -440,6 +443,9 @@
 [09:17:54] [Render thread/DEBUG] [REI] Did not fulfill the request of termination of REI reload tasks because there are no uninterrupted running tasks. This is not an error.
 [09:18:01] [Netty Local Client IO #0/DEBUG] [REI] Marking hidden ingredients from tag cache as dirty.
 [09:18:01] [Render thread/DEBUG] [REI] Starting Reload Plugins of stage START
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)
 java.lang.Throwable
 	at TRANSFORMER/roughlyenoughitems@12.1.785/me.shedaniel.rei.impl.common.plugins.ReloadManagerImpl.reloadPlugins(ReloadManagerImpl.java:110)
@@ -473,6 +479,7 @@ java.lang.Throwable
 	at MC-BOOTSTRAP/cpw.mods.modlauncher@10.0.9/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23)
 	at cpw.mods.bootstraplauncher@1.1.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:141)
 <<<<<<< HEAD
+<<<<<<< HEAD
 [13:54:58] [REI-ReloadPlugins/INFO] [REI] Detected JEI plugin from [integratedterminals, integratedterminalscompat]: org.cyclops.integratedterminalscompat.modcompat.jei.JEIIntegratedTerminalsConfig
 [13:54:58] [REI-ReloadPlugins/INFO] [REI] Detected JEI plugin from [architects_palette]: architectspalette.compat.JEIPlugin
 [13:54:58] [REI-ReloadPlugins/INFO] [REI] Detected JEI plugin from [sophisticatedcore]: net.p3pp3rf1y.sophisticatedcore.compat.jei.CorePlugin
@@ -491,10 +498,15 @@ java.lang.Throwable
 [13:54:58] [REI-ReloadPlugins/INFO] [REI] Detected JEI plugin from [mcjtylib]: mcjty.lib.compat.JeiCompatibility
 [13:54:58] [Render thread/DEBUG] [REI] Starting Reload Plugins of stage END
 =======
+=======
+>>>>>>> parent of a58826d (8 time net 0)
 [09:18:02] [REI-ReloadPlugins/INFO] [REI] Detected JEI plugin from [integratedterminals, integratedterminalscompat]: org.cyclops.integratedterminalscompat.modcompat.jei.JEIIntegratedTerminalsConfig
 [09:18:02] [REI-ReloadPlugins/INFO] [REI] Detected JEI plugin from [architects_palette]: architectspalette.compat.JEIPlugin
 [09:18:02] [REI-ReloadPlugins/INFO] [REI] Detected JEI plugin from [sophisticatedcore]: net.p3pp3rf1y.sophisticatedcore.compat.jei.CorePlugin
 [09:18:02] [Render thread/DEBUG] [REI] Starting Reload Plugins of stage END
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)
 java.lang.Throwable
 	at TRANSFORMER/roughlyenoughitems@12.1.785/me.shedaniel.rei.impl.common.plugins.ReloadManagerImpl.reloadPlugins(ReloadManagerImpl.java:110)
@@ -532,6 +544,7 @@ java.lang.Throwable
 	at MC-BOOTSTRAP/cpw.mods.modlauncher@10.0.9/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26)
 	at MC-BOOTSTRAP/cpw.mods.modlauncher@10.0.9/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23)
 	at cpw.mods.bootstraplauncher@1.1.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:141)
+<<<<<<< HEAD
 <<<<<<< HEAD
 [13:54:58] [Render thread/WARN] [REI] Found 1 existing reload task(s) after trying to terminate them!
 [13:54:58] [REI-ReloadPlugins/INFO] [REI] Detected JEI plugin from [rftoolsbase]: mcjty.rftoolsbase.compat.jei.RFToolsBaseJeiPlugin
@@ -8941,6 +8954,8 @@ java.lang.Throwable
 [14:36:45] [Render thread/DEBUG] [REI] Player quit, clearing reload tasks!
 [14:36:45] [Render thread/DEBUG] [REI] Did not fulfill the request of termination of REI reload tasks because there are no uninterrupted running tasks. This is not an error.
 =======
+=======
+>>>>>>> parent of a58826d (8 time net 0)
 [09:18:02] [Render thread/WARN] [REI] Found 1 existing reload task(s) after trying to terminate them!
 [09:18:02] [REI-ReloadPlugins/INFO] [REI] Detected JEI plugin from [modernfix]: org.embeddedt.modernfix.searchtree.JEIRuntimeCapturer
 [09:18:02] [REI-ReloadPlugins/INFO] [REI] Detected JEI plugin from [sophisticatedbackpacks]: net.p3pp3rf1y.sophisticatedbackpacks.compat.jei.SBPPlugin
@@ -17253,4 +17268,7 @@ java.lang.Throwable
 [11:06:40] [Render thread/DEBUG] [REI] Did not fulfill the request of termination of REI reload tasks because there are no uninterrupted running tasks. This is not an error.
 [11:06:45] [Render thread/DEBUG] [REI] Player quit, clearing reload tasks!
 [11:06:45] [Render thread/DEBUG] [REI] Did not fulfill the request of termination of REI reload tasks because there are no uninterrupted running tasks. This is not an error.
+<<<<<<< HEAD
+>>>>>>> parent of a58826d (8 time net 0)
+=======
 >>>>>>> parent of a58826d (8 time net 0)
