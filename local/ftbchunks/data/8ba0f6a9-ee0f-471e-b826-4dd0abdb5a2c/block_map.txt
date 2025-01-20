@@ -387,6 +387,7 @@
 #4B1575 gtceu:samarium_iron_arsenic_oxide_single_wire
 #59693F mekanismgenerators:saturating_condenser
 #5B6E65 gtceu:secure_maceration_casing
+#CB82F8 minecraft:smooth_stone_slab
 #7F6970 mekanism:solar_neutron_activator
 #80CB73 gtceu:solid_machine_casing
 #479613 gtceu:spatial_storage_hazard_sign_block
@@ -477,6 +478,7 @@
 #BC20FE minecraft:white_wool
 #A4B5D5 gtceu:wood_frame
 #97FF93 minecraft:yellow_wool
+#4B14BD gtceu:zpm_diode
 #8DE216 gtceu:zpm_energy_input_hatch
 #63A233 gtceu:zpm_energy_input_hatch_16a
 #0A84AA gtceu:zpm_energy_input_hatch_4a
